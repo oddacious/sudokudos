@@ -3,8 +3,6 @@ import streamlit as st
 def global_header():
     st.set_page_config(layout="wide")
     st.title("Sudokudos", anchor=False)
-    #st.markdown("##### A sudoku community dashboard")
-    #st.markdown("##### Sudoku competition results and visuals")
     st.markdown("#### Solvers, scores, and snazzy charts")
     cols = st.columns(6)
     with cols[0]:

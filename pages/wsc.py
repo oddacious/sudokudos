@@ -55,12 +55,6 @@ def present_wsc():
         fig_leaderboard = shared.plots.eventoriented.create_wsc_leaderboard_chart(
             wsc_unmapped, year=selected_year, top_n=selected_top_n)
         st.pyplot(fig_leaderboard, use_container_width=True)
-    #with cols[1]:
-    #    st.metric("", "")
-    #    st.metric("", "")
-    #    st.metric("Tantan Dai", "\U0001F947")
-    #    st.metric("Tantan Dai", "\U0001F948")
-    #    st.metric("Tantan Dai", "\U0001F949")
 
     st.subheader("Solver tracker")
     year_subset = wsc[wsc["year"] == selected_year]

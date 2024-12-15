@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 import matplotlib.patches
 import matplotlib.ticker
 
+import streamlit as st
+
 import shared.data
 import shared.utils
 
@@ -235,41 +237,8 @@ class PerformanceCollector():
         """Access the list of results for the solver."""
         return self._solver_results
 
-def create_rank_chart(
-        full_df,
-        solver,
-        included_events=("GP", "WSC"),
-        use_gp_playoffs=True,
-        colors=[matplotlib.cm.Set2(i) for i in range(8)]):
-    """This shows a solver's rank for each competition.
-    
-    This shows the years they participated in, and every year in between.
-    This adds stars for top-3 performance.
-        - Position for the WSC includes playoff results
-        - Position for the GP does not include playoffs, which I could not find
-    """
-    shared.utils.validate_events(included_events)
-    if len(included_events) == 0:
-        return None
-
-    years = shared.utils.applicable_years(full_df, [solver])
-
-    df = full_df.copy()
-    df["Points"] = pd.to_numeric(df["Points"], errors="coerce")
-
-    wsc_years = sorted(full_df[full_df["WSC_entry"] == 1]["year"].unique())
-    performances = PerformanceCollector(solver, included_events, wsc_years)
-
-    for year in years:
-        subset = df[df["year"] == year]
-
-        performances.gp_performance_by_solver_year(subset, year, use_playoffs=use_gp_playoffs)
-        performances.wsc_performance_by_solver_year(subset, year)
-
-    competition_labels = performances.solver_results.all_event_names()
-    event_results = performances.solver_results.all_event_results()
-    outcome_labels = performances.solver_results.all_event_outcome_descriptions()
-
+def rank_chart_figure(competition_labels, event_results, outcome_labels, years, colors, name):
+    """Generate the bar chart with ranks."""
     fig, ax = plt.subplots(figsize=(5, len(years) * 0.75))
     height = 0.75
     width = height / 10
@@ -306,10 +275,50 @@ def create_rank_chart(
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
 
-    name = shared.utils.ids_to_names(full_df, [solver])[solver]
     ax.set_title(f"Ranks for {name}")
 
     ax.set_xlim([0, 1])
     ax.set_yticks(competition_labels)
+
+    return fig
+
+@st.cache_data
+def create_rank_chart(
+        full_df,
+        solver,
+        included_events=("GP", "WSC"),
+        use_gp_playoffs=True,
+        colors=[matplotlib.cm.Set2(i) for i in range(8)]):
+    """This shows a solver's rank for each competition.
+
+    This shows the years they participated in, and every year in between.
+    This adds stars for top-3 performance.
+        - Position for the WSC includes playoff results
+        - Position for the GP does not include playoffs, which I could not find
+    """
+    shared.utils.validate_events(included_events)
+    if len(included_events) == 0:
+        return None
+
+    years = shared.utils.applicable_years(full_df, [solver])
+
+    df = full_df.copy()
+    df["Points"] = pd.to_numeric(df["Points"], errors="coerce")
+
+    wsc_years = sorted(full_df[full_df["WSC_entry"] == 1]["year"].unique())
+    performances = PerformanceCollector(solver, included_events, wsc_years)
+
+    for year in years:
+        subset = df[df["year"] == year]
+
+        performances.gp_performance_by_solver_year(subset, year, use_playoffs=use_gp_playoffs)
+        performances.wsc_performance_by_solver_year(subset, year)
+
+    competition_labels = performances.solver_results.all_event_names()
+    event_results = performances.solver_results.all_event_results()
+    outcome_labels = performances.solver_results.all_event_outcome_descriptions()
+
+    fig = rank_chart_figure(competition_labels, event_results, outcome_labels, years, colors, 
+                            shared.utils.ids_to_names(full_df, [solver])[solver])
 
     return fig
