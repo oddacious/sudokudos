@@ -1,0 +1,235 @@
+Pos,Name,Country,Team,Official,Rookie,Under 18,Over 50,Total,R 13,R 12,R 11,R 7,R 6,R 5,R 4,R 3,R 2,R 1
+1,Ken Endo,Japan,JPN A,1,,,,3805,320,280,460,420,330,540,520,360,400,175
+2,Kota Morinishi,Japan,JPN A,2,,,,3772,340,155,490,382,410,565,415,390,325,300
+3,Tantan Dai,China,CHN A,3,,,,3700,230,280,470,490,220,470,550,300,400,290
+4,Letian Ming,China,CHN A,4,,1,,3605,300,205,450,355,315,620,335,245,450,330
+5,Jakub Ondroušek,Czech Republic,CZE A,5,,,,3520,330,110,310,410,410,445,510,305,410,280
+6,Bastien Vial-Jaime,France,FRA A,6,,,,3495,210,115,425,385,360,505,465,390,350,290
+7,Tiit Vunk,Estonia,EST A,7,,,,3490,215,155,305,420,395,520,440,280,470,290
+8,Yuxuan Hu,China,CHN B,,,2,,3395,210,205,460,360,310,520,405,380,295,250
+9,Shiyu Chen,China,CHN A,8,,,,3355,265,205,290,345,390,515,335,390,310,310
+10,Jan Mrozowski,Poland,POL A,9,,,,3345,270,155,425,355,275,470,330,325,460,280
+11,Seungjae Kwak,"Korea, Republic of",KOR A,10,,,,3320,240,110,450,420,350,395,450,345,340,220
+12,Hideaki Jo,Japan,JPN A,11,,,,3255,210,165,380,415,350,420,470,295,335,215
+13,Mingrui Huang,China,CHN B,,,3,,3215,270,110,460,405,240,435,375,370,300,250
+14,Prasanna Seshadri,India,IND A,12,,,,3125,210,205,320,345,360,395,400,325,360,205
+15,Thomas Snyder,United States,USA A,13,,,,3095,200,205,365,380,315,410,340,305,360,215
+16,Jan Novotný,Czech Republic,CZE A,14,,,,3000,240,205,325,340,370,205,455,340,335,185
+17,Michael Ley,Germany,GER A,15,,,,2955,255,110,250,345,345,470,430,240,300,210
+17,Takuya Sugimoto,Japan,JPN B,,,,,2955,210,110,380,345,345,460,430,170,290,215
+19,Cheran Sun,China,CHN A,16,,,,2945,205,205,315,355,315,280,295,215,450,310
+20,Jakub Hrazdira,Czech Republic,CZE A,17,,,,2795,210,155,290,250,335,360,400,290,380,125
+21,David Jones,Canada,CAN A,18,,,,2760,210,155,390,225,220,425,290,345,320,180
+22,Jan Zvěřina,Czech Republic,CZE A,19,,,,2735,200,110,480,310,175,190,365,390,205,310
+22,Timothy Doyle,France,FRA A,19,,,,2735,255,165,215,385,240,300,345,325,285,220
+24,Jason Zuffranieri,United States,USA A,21,,,,2720,240,155,295,315,300,350,410,280,210,165
+25,David McNeill,United Kingdom,GBR A,22,,,1,2680,180,155,305,275,300,425,405,295,185,155
+26,Rohan Rao,India,IND A,23,,,,2655,170,110,235,295,250,425,350,270,380,170
+27,Hwangrae Lee,"Korea, Republic of",KOR A,24,,,,2585,210,155,275,330,285,390,295,225,205,215
+28,Matúš Demiger,Slovakia,SVK A,25,,,,2545,220,75,320,330,255,365,295,185,320,180
+29,Zoltán Gyimesi,Hungary,HUN A,26,,,,2535,175,110,335,235,300,400,355,255,205,165
+30,Bram de Laat,Netherlands,NED A,27,,,,2510,210,130,355,150,295,330,360,225,300,155
+31,Salih Alan,Turkey,TUR A,28,,,,2505,150,115,350,235,250,385,355,280,210,175
+32,Jana Novotná,Czech Republic,CZE B,,,,,2450,170,95,295,320,235,370,280,200,300,185
+33,Vincent Bertrand,Belgium,UN 6,29,,,,2390,185,165,310,250,265,375,275,135,235,195
+34,Pranav Kamesh Sivakumar,India,IND B,,,,,2380,180,70,320,305,250,280,275,220,230,250
+35,Tom Collyer,United Kingdom,GBR A,30,,,,2355,140,115,290,220,275,420,265,285,175,170
+36,Kishore Kumar Sridharan,India,IND A,31,,,,2305,210,115,275,260,230,330,300,185,185,215
+37,Tomoya Kimura,Japan,JPN B,,,,,2300,150,205,220,165,205,335,325,255,280,160
+37,Weifan Wang,China,CHN C,,,,,2300,190,75,215,235,265,375,275,205,280,185
+39,Byron Calver,Canada,CAN A,32,,,,2285,150,115,340,260,110,300,330,255,240,185
+40,Keisu Okuma,Japan,JPN A,33,,,,2240,175,70,285,210,240,285,280,160,320,215
+41,Suzhe Qiu,China,CHN B,,1,4,,2230,115,110,270,290,225,275,275,280,235,155
+42,Krystian Świderski,Poland,POL B,,,,,2200,150,110,260,270,210,295,320,200,275,110
+43,Yuki Kawabe,Japan,JPN C,,,,,2180,180,110,305,270,180,280,245,310,175,125
+44,Pavel Jaselský,Slovakia,SVK A,34,,,,2170,115,110,280,290,175,365,255,245,205,130
+45,Jonas Gleim,Germany,GER A,35,,,,2130,190,75,230,235,240,250,300,215,280,115
+46,Peter Hudák,Slovakia,SVK A,36,,,,2075,210,110,225,305,170,335,275,135,220,90
+47,Natália Chanová,Slovakia,SVK A,37,,5,,2065,150,110,225,265,185,315,280,120,245,170
+48,Yinchen Qian,China,CHN B,,2,6,,2060,115,70,245,250,105,410,220,125,270,250
+49,Eva-Maria Schuckert,Austria,AUT A,38,,,,2050,205,95,325,85,210,340,285,240,165,100
+50,Pavel Kadlečík,Czech Republic,CZE B,,,,,2025,180,115,285,270,235,235,240,130,140,195
+51,Hatice Esra Aydemir,Turkey,TUR A,39,,,,2020,130,35,210,275,230,335,300,210,155,140
+52,Sam Cappleman-Lynes,United Kingdom,GBR A,40,,,,2000,150,165,220,210,205,280,125,215,295,135
+53,Karin Griffioen,Netherlands,NED A,41,,,,1995,150,130,285,225,125,305,300,70,270,135
+54,Yannick Meyapin,France,FRA A,42,,,,1990,150,70,265,290,145,325,310,40,170,225
+55,Kazuya Yamamoto,Japan,JPN C,,,,,1985,150,75,260,235,200,290,285,200,170,120
+56,Amit Sowani,India,IND B,,,,,1955,110,95,135,200,260,260,315,200,235,145
+57,Robert Vollmert,Germany,GER A,43,,,,1950,160,110,275,220,155,225,235,205,245,120
+58,Philipp Weiß,Germany,GER A,44,,,,1930,160,95,290,290,205,325,275,0,195,95
+59,Will Blatt,United States,USA B,,,,,1925,220,155,265,245,160,185,190,160,190,155
+60,Anne Limoges,France,FRA A,45,,,,1920,150,130,230,200,200,230,185,160,265,170
+61,Annick Weyzig,Netherlands,NED A,46,,,,1890,150,110,195,210,275,230,165,140,285,130
+62,Xiaowei Huang,China,CHN C,,,,,1865,160,40,225,235,165,250,220,240,240,90
+63,Piotr Gdowski,Poland,POL A,47,,,,1860,170,165,235,275,300,200,265,0,80,170
+63,Neil Zussman,United Kingdom,GBR A,47,,,,1860,115,75,160,290,265,190,260,165,210,130
+65,Torsten Rogoll,Germany,GER B,,,,,1845,150,70,120,265,215,255,265,220,130,155
+66,Tomasz Skalski,Poland,POL B,,,,,1835,165,75,260,160,240,300,150,205,210,70
+67,Zoran Tanasić,Serbia,SRB A,49,,,2,1830,140,110,285,105,205,315,245,170,140,115
+68,Tomasz Stróżak,Poland,POL A,50,,,,1820,170,70,310,240,250,160,150,40,250,180
+69,Denis Auroux,France,FRA B,,,,,1810,150,110,260,210,215,230,265,145,135,90
+69,Chris Narrikkattu,United States,USA A,51,,,,1810,150,70,175,185,105,245,275,200,230,175
+71,Wei-Hwa Huang,United States,USA A,52,,,,1780,100,110,255,225,95,280,275,225,185,30
+71,Sunghwa Hong,"Korea, Republic of",KOR A,52,,,,1780,150,110,240,230,190,280,220,100,165,95
+73,Maria Graber,Germany,GER B,,,,,1750,140,130,205,220,195,205,220,185,135,115
+74,Jan Češka,Czech Republic,CZE B,,,,,1730,80,110,225,210,155,275,250,170,145,110
+75,Joshua Zucker,United States,USA B,,,,3,1700,150,110,70,180,165,230,305,255,155,80
+76,Olivier Rubio,France,FRA B,,,,,1675,80,110,130,225,230,220,260,225,85,110
+77,György Herke,Hungary,HUN A,54,,,,1650,110,115,175,140,240,190,190,190,185,115
+78,Michael Mosshammer,Austria,AUT A,55,,,,1580,130,110,220,125,195,250,260,85,140,65
+78,Taner Karabulut,Turkey,TUR A,55,,,,1580,150,110,190,170,150,240,150,195,135,90
+80,Zbigniew Laskowski,Poland,POL A,57,3,,,1575,75,110,210,180,95,120,250,200,220,115
+81,Taro Arimatsu,Japan,JPN B,,,,4,1570,130,40,205,175,145,270,250,145,155,55
+82,Yuki Kajihara,Japan,JPN B,,4,,,1560,95,70,140,160,140,290,195,170,205,95
+82,Dennis Keetman,Netherlands,NED A,58,,,,1560,115,70,305,70,190,180,230,110,105,185
+84,Jaakko Kangasharju,Finland,UN 1,59,,,,1555,150,70,210,165,160,220,195,150,135,100
+85,Lenka Chaloupková,Czech Republic,CZE C,,5,,,1545,110,70,230,185,130,190,235,160,145,90
+86,Kerstin Wöge,Germany,GER B,,,,,1535,140,70,200,105,0,205,260,150,220,185
+87,Philippe Meyer,France,FRA B,,,,,1530,150,70,190,195,95,120,235,190,220,65
+88,Swaroop Srinivasrao Guggilam,India,IND B,,,,,1525,70,110,190,150,105,230,190,175,180,125
+89,Nicole Schädel,Germany,GER B,,,,,1500,110,110,235,145,0,230,165,150,195,160
+89,Jaipal Redy Mogiligundla,India,UN 4,,,,,1500,110,35,125,160,225,205,210,165,145,120
+91,Rishi Puri,India,IND A,60,,,,1480,150,70,155,150,130,275,120,130,115,185
+92,Tom Groot Kormelink,Netherlands,NED B,,,,,1470,150,75,190,115,150,195,210,115,175,95
+93,Zoltán Horváth,Hungary,HUN A,61,,,,1460,150,0,210,230,155,285,65,185,135,45
+94,Ryotaro Chiba,Japan,JPN C,,6,7,,1445,75,40,260,260,85,250,205,40,140,90
+95,Anna Szymańska,Poland,POL C,,,,,1425,90,70,225,145,190,225,170,100,145,65
+96,Claudine Thiry,Luxembourg,UN 6,62,,,,1395,140,70,145,225,190,180,135,15,175,120
+97,Édouard Lebeau,France,FRA C,,7,,,1390,70,75,120,150,170,215,295,85,145,65
+97,Rick Uppelschoten,Netherlands,NED C,,,,,1390,110,110,175,145,100,155,205,165,150,75
+99,Jakub Majewski,Poland,POL B,,8,,,1385,110,70,220,100,45,220,140,170,120,190
+100,Matthias Reichmayr,Austria,AUT A,63,,,,1380,140,70,150,105,130,200,180,200,115,90
+101,Karel Štěrba,Czech Republic,CZE C,,,,,1375,70,70,95,210,140,240,100,205,120,125
+101,Gaurav Kumar Jain,India,IND B,,,,,1375,0,35,205,170,105,150,185,240,130,155
+103,Jana Hanzelková,Czech Republic,CZE B,,,,,1360,115,115,175,160,95,175,180,30,165,150
+104,Magdalena Bernacik,Poland,POL C,,,,,1355,100,70,125,145,145,205,145,205,140,75
+104,Michal Matyska,Czech Republic,UN 9,,9,,5,1355,130,70,195,180,140,205,185,55,90,105
+106,Matteo Testa,Italy,ITA B,,,,,1330,110,70,175,140,95,220,235,100,90,95
+107,Vasso Kalaitzidou,Greece,GRE A,64,,,,1325,120,110,180,115,50,170,150,160,165,105
+108,Svilen Dyakovski,Bulgaria,BUL A,65,,,,1320,90,70,130,135,130,145,175,120,175,150
+108,Shambo Debnath,India,UN 4,,10,8,,1320,115,0,160,185,95,155,235,130,130,115
+110,Minyoung Joo,"Korea, Republic of",KOR B,,,,,1310,110,35,130,170,130,215,165,100,165,90
+111,Vittorio Schiavone,Italy,ITA A,66,,,,1305,80,70,95,150,190,205,140,125,155,95
+112,Pal Madarassy,Hungary,HUN A,67,,,,1300,150,70,130,135,95,215,190,145,100,70
+113,Stefano Forcolin,Italy,ITA C,,,,6,1285,100,70,135,135,135,165,180,155,140,70
+114,Ulla Elsilä,Finland,UN 1,68,,,,1275,70,70,165,130,95,170,190,140,180,65
+115,Laura Tarchetti,Italy,ITA A,69,,,7,1260,30,70,155,135,95,255,55,170,180,115
+116,Aaron Chan,Canada,CAN A,70,,,,1255,35,70,220,85,140,155,190,165,130,65
+117,Vesna Jovanović,Serbia,SRB A,71,,,,1250,80,70,120,170,50,185,205,190,110,70
+117,Agnieszka Buczma,Poland,POL B,,,,,1250,60,70,130,135,180,165,175,90,125,120
+119,Valeria Losasso,Italy,ITA B,,,,,1240,80,70,120,250,60,135,180,90,160,95
+120,Vladimir Portugalov,Belarus,UN 6,72,,,,1235,80,70,130,145,110,215,145,140,125,75
+121,Anna-Brigita Topkin,Estonia,EST A,73,,9,,1220,100,35,185,215,95,75,25,100,205,185
+122,Margit Scheler,Estonia,EST B,,,,,1215,60,35,105,185,200,185,150,110,105,80
+122,Veronika Koľveková,Slovakia,SVK B,,,,,1215,110,35,130,175,105,165,155,110,135,95
+122,Mehmet Durmuş,Turkey,TUR A,74,,,,1215,120,80,165,145,50,205,110,120,140,80
+125,Roger Kohler,Switzerland,SUI A,75,,,,1205,40,95,155,150,95,155,90,175,160,90
+125,Niels Roest,Netherlands,NED C,,,,,1205,45,70,140,150,130,190,175,120,135,50
+125,Olga Shut,Belarus,UN 6,75,,,,1205,80,110,185,110,120,215,120,40,160,65
+128,Chiara Nuzio,Italy,ITA A,77,,,,1200,140,70,55,180,50,185,175,55,195,95
+129,Deyan Razsadov,Bulgaria,BUL A,78,,,,1190,90,70,135,130,145,155,145,155,85,80
+129,Thomas Dimopoulos,Greece,GRE A,78,,,,1190,95,70,110,135,140,165,120,100,175,80
+131,Hyunmo Kang,"Korea, Republic of",KOR B,,,,,1185,80,70,125,195,105,155,205,75,105,70
+132,Tauri Purk,Estonia,EST A,80,,,,1175,100,70,155,165,0,170,80,130,90,215
+132,Kosei Yoshimori,Japan,JPN C,,,,,1175,80,135,65,125,180,110,225,100,105,50
+132,Giulia Cossutti,Italy,ITA A,80,,10,,1175,100,75,55,55,130,160,195,165,155,85
+135,Jaan Laks,Estonia,EST B,,,,8,1165,80,75,155,145,95,145,135,105,145,85
+136,Tomáš Krejčí,Czech Republic,UN 9,,11,,,1160,100,70,130,140,45,150,175,55,160,135
+137,Michaël Genier,Switzerland,SUI A,82,,,,1140,65,75,105,140,155,195,95,145,105,60
+138,Robert Beärda,Netherlands,NED B,,,,9,1135,80,70,155,150,45,205,25,165,175,65
+138,Elena Aivazopoulou,Greece,GRE A,83,,,,1135,110,35,105,105,175,145,120,100,145,95
+140,Raul Kačírek,Czech Republic,UN 9,,,,10,1130,70,70,160,160,0,185,150,130,80,125
+141,Michele Bongiorno,Italy,ITA B,,,,,1110,40,70,125,180,95,95,160,55,200,90
+142,Lucie Klimešová,Czech Republic,CZE C,,,,,1105,70,130,145,150,130,110,85,85,80,120
+143,Qianyu Hu,China,CHN C,,,11,,1100,130,70,80,145,85,190,100,90,60,150
+144,Geoffroy Hermelin,France,FRA B,,12,,11,1095,110,70,145,180,50,135,55,100,120,130
+144,Fanni Pipó,Hungary,UN 7,,,12,,1095,90,70,100,150,50,145,125,95,140,130
+146,Pavlos Zacharopoulos,Greece,GRE A,84,13,,,1065,80,0,140,165,45,220,100,130,120,65
+147,Louis Nebout,France,FRA C,,,,,1045,140,40,165,40,85,145,110,105,125,90
+148,François Blecon,France,UN 10,,,,,1025,70,75,140,130,60,185,120,100,80,65
+149,Svetlozar Stefanov,Bulgaria,BUL A,85,,,,1020,70,40,110,185,175,210,25,90,40,75
+150,Martin Kubík,Czech Republic,CZE C,,14,,12,1015,30,70,190,150,35,145,180,85,40,90
+151,Tomasz Stańczak,Poland,POL C,,,,,1005,40,75,125,130,105,135,145,80,75,95
+152,Allar Padari,Estonia,EST B,,,,13,1000,40,70,105,120,95,160,130,150,95,35
+153,Daniele Colnaghi,Italy,ITA C,,,,,995,80,70,155,175,0,125,70,85,135,100
+154,Miroslav Šalaga,Slovakia,SVK B,,,,,975,60,70,90,60,95,135,145,100,150,70
+155,Delia Keetman,Netherlands,NED C,,,,,970,115,70,110,70,45,135,175,45,115,90
+156,Olga Diaz Moruno,Spain,UN 2,86,,,,965,60,70,145,125,45,70,55,160,135,100
+157,Jiwon Seo,"Korea, Republic of",KOR A,87,,13,,960,80,70,60,115,50,170,125,60,140,90
+158,Lars Slofstra,Netherlands,NED B,,,,,955,35,70,110,115,155,95,85,140,105,45
+158,Larissa Rudolph,Germany,UN 5,,,,,955,60,35,110,115,50,160,100,130,110,85
+160,Diana Grigoreva,Russian Federation,RUS A,88,,,,950,70,70,160,130,130,185,45,0,65,95
+161,Nathalie Catinot,France,FRA C,,,,,945,110,35,190,135,0,125,125,70,90,65
+162,Murat Can Tonta,Turkey,TUR B,,,,,920,40,70,90,145,35,165,130,85,115,45
+163,Jinbo Xie,China,CHN C,,,,,910,0,0,140,170,45,160,80,205,50,60
+164,Kertu Luht,Estonia,EST A,89,,,,880,40,35,105,140,0,195,85,55,95,130
+164,Radoslav Bochev,Bulgaria,BUL A,89,,,,880,0,70,90,210,50,110,200,30,100,20
+164,Mladen Meštrović,Croatia (Hrvatska),CRO A,89,,,14,880,35,35,145,35,95,170,55,100,90,120
+164,Gabriela Jaselská,Slovakia,SVK B,,15,,,880,60,70,125,115,130,95,100,45,80,60
+164,Poonam Gandhi,India,UN 4,,15,,14,880,80,35,80,140,0,135,25,130,125,130
+164,Carolyn Duke,Canada,UN 7,,,,14,880,60,35,95,75,125,130,100,100,120,40
+170,Martijn van Brink,Netherlands,NED B,,17,,,875,30,70,120,130,95,130,140,30,75,55
+170,Blanka Lehotská,Slovakia,SVK C,,,,,875,60,70,110,100,140,70,155,70,70,30
+172,Henning Kalsgaard Poulsen,Denmark,UN 1,92,,,17,870,0,0,125,140,0,125,110,130,120,120
+173,Marek Oja,Estonia,EST B,,,,,840,115,75,150,100,145,70,0,135,0,50
+173,Ján Farkaš,Slovakia,UN 4,,,,18,840,40,75,145,30,35,120,175,130,70,20
+173,Franziska Thiele,Germany,UN 5,,18,,,840,80,40,110,70,85,75,110,110,50,110
+176,Paolo Tivano,Italy,ITA C,,,,19,830,0,35,145,110,50,145,95,60,130,60
+177,Ivan Laptiev,Russian Federation,RUS A,93,,,,810,40,35,105,110,100,155,55,110,60,40
+178,Natalie Grabowsky,Germany,UN 5,,19,14,,790,30,70,150,90,0,135,55,70,105,85
+179,Marko Tanasić,Serbia,SRB A,94,,,,780,40,35,155,30,130,80,55,140,50,65
+180,Iliana-Eleftheria Gounalaki,Greece,UN 3,,,,,775,80,35,85,130,100,100,55,110,60,20
+181,Boglár Major,Hungary,UN 7,,,,,770,80,35,130,60,50,60,30,95,165,65
+181,Peter Hornák,Slovakia,SVK B,,,,,770,100,0,145,110,0,125,65,60,60,105
+183,Christof Bruetsch,Switzerland,SUI A,95,,,,750,40,70,80,60,50,130,120,15,90,95
+184,Saskia Benedictus,Netherlands,NED C,,20,,,745,0,35,85,75,80,135,120,85,90,40
+184,Zeynep Şengül,Turkey,TUR B,,20,15,,745,80,35,30,100,35,95,110,70,125,65
+186,Pierdante Lanzavecchia,Italy,ITA B,,,,20,730,45,70,125,110,0,125,110,30,50,65
+187,Helena Kelava,Croatia (Hrvatska),CRO A,96,22,16,,710,80,70,110,105,60,70,25,30,90,70
+188,Hanjun Kang,"Korea, Republic of",KOR C,,,17,,705,40,70,110,60,80,135,110,15,20,65
+189,Martin Fundárek,Slovakia,SVK C,,,,21,695,80,40,125,80,60,60,0,120,70,60
+189,Liane Robinson,United Kingdom,UN 10,,,,21,695,30,70,85,75,35,170,95,55,80,0
+191,Pang-Yen Hsu,Taiwan,UN 2,97,23,,23,690,60,35,145,40,60,70,55,15,120,90
+192,Craig Kasper,Canada,CAN A,98,24,,,680,0,0,60,105,105,75,110,60,95,70
+193,Alberto Filippini,Italy,ITA C,,,,24,655,0,35,50,100,60,110,25,100,90,85
+194,Jeļena Balanova,Latvia,LAT A,99,25,,25,650,0,70,110,135,0,135,55,30,50,65
+195,Jouni Särkijärvi,Finland,UN 1,100,,,26,635,40,35,115,40,0,110,110,60,60,65
+196,Angelika Schobesberger,Austria,AUT A,101,,,,625,40,35,125,40,0,75,55,100,90,65
+197,Yunus Emre Büyükkale,Turkey,TUR C,,,18,,615,80,70,140,30,60,35,25,30,110,35
+198,Helen Arnold,Australia,UN 2,102,,,,610,40,70,105,70,35,70,45,85,70,20
+198,Wojciech Nadara,Poland,POL C,,,,,610,80,70,60,40,45,110,0,120,45,40
+198,Sungeon Kwon,"Korea, Republic of",KOR B,,,19,,610,60,35,50,70,35,60,55,70,110,65
+201,Veronika Hrubjáková,Slovakia,SVK C,,26,,,605,60,35,85,0,45,95,55,60,120,50
+202,Antonis Lalatsas,Greece,UN 3,,,,,600,60,70,110,95,0,40,0,100,80,45
+203,Hyuksun Kwon,"Korea, Republic of",UN 8,,,,27,595,30,70,80,70,80,35,100,45,60,25
+204,Walker Anderson,United States,USA B,,,20,,560,0,0,0,0,0,0,230,130,115,85
+205,Jeannette Fries,Switzerland,SUI A,103,27,,28,540,40,0,110,65,0,110,100,45,30,40
+205,Sein Kim,"Korea, Republic of",KOR C,,,21,,540,60,70,50,0,60,60,55,70,70,45
+207,Parisis Ovelidis,Greece,UN 3,,,,,535,40,35,60,0,100,85,80,40,50,45
+208,Nick Baxter,United States,USA B,,,,29,520,40,35,80,65,35,70,85,55,30,25
+209,Aleš Založnik,Slovenia,UN 2,104,,,30,515,40,35,90,85,50,0,25,95,75,20
+209,Siniša Hrga,Croatia (Hrvatska),CRO A,104,,,30,515,35,35,80,30,50,60,75,15,90,45
+211,Heungchul (John) Park,"Korea, Republic of",UN 8,,,,32,500,45,70,50,75,0,95,55,15,30,65
+212,Tina Bratim,Croatia (Hrvatska),CRO A,106,,22,,485,40,35,80,60,0,60,55,70,20,65
+213,Isabelle Hermelin,France,UN 10,,28,,,475,30,0,110,65,0,35,25,55,90,65
+214,Ekaterina Nuzhdina,Russian Federation,RUS A,107,,,,470,0,35,75,105,0,25,70,70,90,0
+215,Ľuboš Hyžák,Slovakia,SVK C,,,,33,465,60,35,100,75,35,0,55,65,20,20
+216,Sunseong Kwon,"Korea, Republic of",KOR C,,,23,,445,0,0,125,60,0,95,25,30,20,90
+217,Diana Paskhina,Russian Federation,RUS A,108,,,34,440,40,0,65,75,50,125,65,0,0,20
+218,Bersu Berker,Turkey,TUR B,,29,24,,390,40,35,55,30,45,60,55,15,30,25
+219,Nadine Brioual,France,FRA C,,30,,35,365,0,35,95,70,95,70,0,0,0,0
+220,Marta Sondare,Latvia,LAT A,109,31,,,335,0,35,25,35,0,100,55,15,50,20
+221,Esther Naef,Switzerland,UN 5,,,,36,305,0,0,60,85,60,25,0,55,0,20
+222,Tímea Pipó,Hungary,UN 7,,32,,37,300,0,35,80,65,0,35,25,15,0,45
+222,Hyerin Hwang,"Korea, Republic of",UN 8,,32,25,,300,0,35,80,40,0,60,55,30,0,0
+224,Aypars Ateş Hazantekin,Turkey,TUR B,,34,26,,265,0,70,60,30,0,25,30,0,30,20
+225,Geonwoo Kang,"Korea, Republic of",KOR C,,35,27,,255,0,0,0,0,60,95,25,30,0,45
+226,Hacer Yeşim Özkaya,Turkey,TUR C,,36,,,165,0,0,30,0,0,25,70,15,0,25
+226,Fatma Yudum Özer Akuüz,Turkey,TUR C,,36,,,165,0,35,0,30,0,40,0,0,60,0
+228,Stipe Bratim,Croatia (Hrvatska),UN 3,,38,,38,155,0,35,50,35,0,0,0,15,20,0
+229,Juris Jansons,Latvia,LAT A,110,39,,39,145,0,0,50,0,0,40,0,30,0,25
+229,Līga Vaska,Latvia,LAT A,110,,,,145,0,0,50,0,0,25,0,30,20,20
+231,Pınar Ertok,Turkey,TUR C,,40,,,45,0,0,0,45,0,0,0,0,0,0
+232,Palmer Mebane,United States,UN 10,,,,,0,0,0,0,0,0,0,0,0,0,0
+232,Stelian-Radu Cacuci,Romania,UN 8,112,,,40,0,0,0,0,0,0,0,0,0,0,0
+232,Saejoon Jang,"Korea, Republic of",KOR B,,,,,0,0,0,0,0,0,0,0,0,0,0
