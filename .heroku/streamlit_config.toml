@@ -5,6 +5,9 @@ toolbarMode = "minimal"
 [theme]
 primaryColor = "green"
 
+[ui]
+hideTopBar = true
+
 [server]
 headless=true
 port=PLACEHOLDER
