@@ -9,7 +9,7 @@ import shared.utils
 
 def present_wsc():
     """Create the WSC page."""
-    shared.presentation.global_header()
+    shared.presentation.global_setup_and_display()
 
     wsc_unmapped = shared.data.loaders.wsc.load_wsc()
     gp = shared.data.loaders.gp.load_gp()

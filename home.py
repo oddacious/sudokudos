@@ -4,7 +4,7 @@ import shared.presentation
 
 def present_homepage():
     """Create the homepage."""
-    shared.presentation.global_header()
+    shared.presentation.global_setup_and_display()
 
     st.markdown(
         """

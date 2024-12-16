@@ -8,7 +8,7 @@ import shared.presentation
 
 def present_gp():
     """Create the GP page."""
-    shared.presentation.global_header()
+    shared.presentation.global_setup_and_display()
 
     combined_df = shared.data.loaders.gp.load_gp()
 

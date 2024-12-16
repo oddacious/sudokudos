@@ -8,7 +8,7 @@ import shared.presentation
 
 def present_solver():
     """Create the solver page."""
-    shared.presentation.global_header()
+    shared.presentation.global_setup_and_display()
 
     wsc_unmapped = shared.data.loaders.wsc.load_wsc()
     gp = shared.data.loaders.gp.load_gp()

@@ -1,7 +1,16 @@
+import matplotlib.pyplot as plt
+
 import streamlit as st
+import streamlit_theme
+
+def configure_matplotlib():
+    theme = streamlit_theme.st_theme()
+    if theme and theme['base'] == 'dark':
+        plt.style.use('dark_background')
+    else:
+        plt.style.use('default')
 
 def global_header():
-    st.set_page_config(layout="wide")
     st.title("Sudokudos", anchor=False)
     st.markdown("#### Solvers, scores, and snazzy charts")
     cols = st.columns(6)
@@ -18,3 +27,8 @@ def global_header():
     with cols[4]:
         st.page_link("pages/about.py", label="About")
     st.divider()
+
+def global_setup_and_display():
+    st.set_page_config(layout="wide")
+    configure_matplotlib()
+    global_header()

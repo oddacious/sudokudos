@@ -7,8 +7,6 @@ import matplotlib.pyplot as plt
 import matplotlib.patches
 import matplotlib.ticker
 
-import streamlit as st
-
 import shared.data
 import shared.utils
 
@@ -282,7 +280,6 @@ def rank_chart_figure(competition_labels, event_results, outcome_labels, years, 
 
     return fig
 
-@st.cache_data
 def create_rank_chart(
         full_df,
         solver,
