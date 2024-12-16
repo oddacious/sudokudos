@@ -1,0 +1,10 @@
+[client]
+showSidebarNavigation = false
+toolbarMode = "minimal"
+
+[theme]
+primaryColor = "green"
+
+[server]
+headless=true
+port=PLACEHOLDER
