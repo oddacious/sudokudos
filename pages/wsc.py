@@ -23,15 +23,21 @@ def present_wsc():
         # 0 will be the most recent year
         chosen_index = 0
 
-    st.markdown("""
-        The [World Sudoku Championship](https://en.wikipedia.org/wiki/World_Sudoku_Championship) is
-        typically the culminating event of the
-        [sudoku year](https://worldpuzzle.org/events/calendar), where many of the most dedicated
-        solvers come together in some host city for the competion and festivities. Overseen by the
-        [World Puzzle Federation](https://worldpuzzle.org/) and run together with the World Puzzle
-        Championship, the WSC involves multiple individual and team rounds of excellent and
-        challenging sudoku puzzles.
-    """)
+    with st.expander("Background", expanded=True):
+        st.markdown("""
+            The [World Sudoku Championship](https://en.wikipedia.org/wiki/World_Sudoku_Championship)
+            is typically the culminating event of the
+            [sudoku year](https://worldpuzzle.org/events/calendar), where many of the most
+            dedicated solvers come together in some host city for the competion and festivities.
+            Overseen by the [World Puzzle Federation](https://worldpuzzle.org/) and hosted together
+            with the World Puzzle Championship, the WSC involves multiple individual and team
+            rounds of excellent and challenging sudoku puzzles.
+                    
+            The WSC makes the distinction between *official* and *unofficial* competitors, where
+            official competitors are limited to four per nation who typically form their country's
+            "A" team in the team competition, or are parts of "UN" teams if their country could not
+            form a full team.
+        """)
 
     selected_year = st.selectbox(
         "Year",
