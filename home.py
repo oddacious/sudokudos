@@ -8,11 +8,12 @@ def present_homepage():
 
     st.markdown(
         """
-    \U0001F44B Welcome to Sudokudos, a website in celebration of the sudoku community
-    and sudoku competitions.
+    \U0001F44B Welcome to Sudokudos, a website in celebration of the sudoku world.
+    Here you will find results and statistics for (select) major sudoku competitions.
 
     Use the menu headings or the buttons below to navigate to pages for the World
-    Sudoku Championship, Sudoku Grand Prix, or individual solver statistics.
+    Sudoku Championship, Sudoku Grand Prix, or for statistics and comparisons of
+    individual solvers.
         """)
 
     st.subheader("Competitions")

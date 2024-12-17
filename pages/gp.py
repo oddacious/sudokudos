@@ -20,6 +20,15 @@ def present_gp():
         # 0 will be the most recent year
         chosen_index = 0
 
+    st.markdown("""
+        The [Sudoku Grand Prix (GP)](https://gp.worldpuzzle.org/) is the largest annual sudoku
+        competition by number of participants. The eight rounds are held online, each four weeks
+        apart covering more than half of the year. Each round is crafted by a different nation.
+        Solvers are ranked by the sum of their top 6 rounds, and typically the top finishers are
+        invited to compete in an in-person playoff for final ranking held during the World Sudoku
+        Championship (WSC).
+    """)
+
     selected_year = st.selectbox(
         "Year",
         years,
