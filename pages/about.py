@@ -74,6 +74,8 @@ def present_about():
 
         Authoritative results, and the official presentation of those results, belongs to those
         organizations. I apologize for any errors in my calculations or representations.
+                
+        The favicon was created by [smalllikeart](https://www.flaticon.com/authors/smalllikeart).
     """)
 
 if __name__ == "__main__":

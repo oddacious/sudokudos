@@ -29,6 +29,6 @@ def global_header():
     st.divider()
 
 def global_setup_and_display():
-    st.set_page_config(page_title="Sudokudos", layout="wide")
+    st.set_page_config(page_title="Sudokudos", page_icon="images/sudoku-icon-pastime.png", layout="wide")
     configure_matplotlib()
     global_header()
