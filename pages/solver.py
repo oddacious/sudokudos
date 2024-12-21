@@ -106,7 +106,6 @@ def present_solver():
             ''')
 
     with cols[1]:
-
         fig_rank = shared.plots.solveroriented.create_rank_chart(
             combined_with_wsc, selected_solver, included_events=events_lower)
         if fig_rank is not None:
