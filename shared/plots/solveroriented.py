@@ -29,7 +29,7 @@ def create_trend_chart(full_df, selected_solvers, metric="points", window_size=8
     if as_percent_of_max:
         together = shared.utils.convert_columns_to_max_pct(together)
 
-    subset = together[together["user_pseudo_id"].isin(selected_solvers)].copy()
+    subset = together[together.index.isin(selected_solvers)].copy()
 
     year_subset = shared.utils.applicable_years(full_df, selected_solvers)
     years_with_data = []
@@ -57,7 +57,7 @@ def create_trend_chart(full_df, selected_solvers, metric="points", window_size=8
     rolling = {}
 
     for solver in selected_solvers:
-        solver_row = subset[subset["user_pseudo_id"] == solver]
+        solver_row = subset[subset.index == solver]
         if len(solver_row) < 1:
             raise ValueError(f"Expected 1 row for solver \"{solver}\", found {len(solver_row)}")
         record = solver_row.iloc[0]
@@ -159,7 +159,7 @@ class PerformanceCollector():
                 ranks = subset["Points"].rank(ascending=False)
             total = sum(subset["Total GPs"].notna())
 
-            solver_rows = subset[subset['user_pseudo_id'] == self.solver]
+            solver_rows = subset[subset.index == self.solver]
             row_index = solver_rows.index
 
             played_gp = sum(solver_rows["Total GPs"].isna()) == 0
@@ -185,7 +185,7 @@ class PerformanceCollector():
         if year not in self.wsc_years or "wsc" not in self.included_events:
             return
 
-        solver_record = subset[subset['user_pseudo_id'] == self.solver]
+        solver_record = subset[subset.index == self.solver]
 
         # The row won't exist if they didn't do any event. But if they did any
         # event, the row would exist even if the solver did not participate in the WSC.
@@ -206,9 +206,9 @@ class PerformanceCollector():
         percentiles = pd.to_numeric(applicable_subset[rank_column]).rank(pct=True, ascending=False)
         total = len(applicable_subset)
 
-        criteria = (subset['user_pseudo_id'] == self.solver) & (subset['Official'] == 0)
+        criteria = (subset.index == self.solver) & (subset['Official'] == 0)
         row_index_unofficial = subset[criteria].index
-        row_index = applicable_subset[applicable_subset['user_pseudo_id'] == self.solver].index
+        row_index = applicable_subset[applicable_subset.index == self.solver].index
 
         if not participated or (row_index_unofficial == -1 and row_index == -1):
             pctile = 0
@@ -216,7 +216,7 @@ class PerformanceCollector():
         else:
             total = sum(subset["WSC_entry"].notna())
             pctile = percentiles[row_index].iloc[0]
-            solver_rows = applicable_subset['user_pseudo_id'] == self.solver
+            solver_rows = applicable_subset.index == self.solver
             rank = applicable_subset[solver_rows][rank_column].iloc[0]
             ordinal_pctile = shared.utils.ordinal_suffix(math.floor(pctile * 100))
             ordinal_rank = shared.utils.ordinal_suffix(int(rank))

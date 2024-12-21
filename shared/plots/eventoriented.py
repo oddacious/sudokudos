@@ -19,7 +19,7 @@ def create_participant_volume_chart(
 
     Currently only supports the GP.
     """
-    ids_prior_years = full_df[full_df["year"] < year]["user_pseudo_id"].unique()
+    ids_prior_years = full_df[full_df["year"] < year].index.unique()
 
     this_year = full_df[full_df["year"] == year]
 
@@ -33,7 +33,7 @@ def create_participant_volume_chart(
     previously_seen_this_year = None
     for gp_round in range(1, num_rounds + 1):
         played = this_year[this_year[f"GP_t{gp_round} position"].notna()]
-        played_ids = played["user_pseudo_id"]
+        played_ids = played.index
 
         veterans = played_ids.isin(ids_prior_years)
         non_veterans = ~veterans
@@ -193,7 +193,7 @@ def create_violin_chart(full_df, selected_solvers, year_subset=(2024,),
 
         color_cycle = itertools.cycle(plt.cycler('color', colors).by_key()['color'])
         for solver in selected_solvers:
-            solver_row = flattened[flattened["user_pseudo_id"] == solver][column]
+            solver_row = flattened[flattened.index == solver][column]
             num_rows = len(solver_row)
             if num_rows < 1:
                 raise ValueError(f"Expected 1 row for solver \"{solver}\", found {num_rows}")
@@ -222,7 +222,7 @@ def create_point_trend_chart(full_df, selected_solvers, year=2024, competition="
                              colors=[matplotlib.cm.Set2(i) for i in range(8)]):
     """This creates a step chart with cumulative points for solvers."""
     year_df = full_df[full_df["year"] == year]
-    subset = year_df[year_df["user_pseudo_id"].isin(selected_solvers)].copy()
+    subset = year_df[year_df.index.isin(selected_solvers)].copy()
     num_rounds = shared.utils.get_max_round(year, competition=competition)
 
     labels = subset["Name"]

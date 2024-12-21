@@ -92,15 +92,16 @@ def applicable_years(full_df, selected_solvers):
 
     # Restrict to years since at least one of the users started and up until the last
     # year with any of them, and include every year in between
-    first_year = full_df[full_df["user_pseudo_id"].isin(selected_solvers)]["year"].min()
-    final_year = full_df[full_df["user_pseudo_id"].isin(selected_solvers)]["year"].max()
+    first_year = full_df.loc[full_df.index.isin(selected_solvers), "year"].min()
+    final_year = full_df.loc[full_df.index.isin(selected_solvers), "year"].max()
     return [year for year in years if first_year <= year <= final_year]
 
 def ids_to_names(df_with_names, selected_solvers, name_column="Name"):
     """Return the name for an identifier, using the first matched row."""
     names = {}
     for solver_id in selected_solvers:
-        matching_rows = df_with_names[df_with_names["user_pseudo_id"] == solver_id][name_column]
+        matching_rows = df_with_names[df_with_names.index == solver_id][name_column]
+        #matching_rows = df_with_names[df_with_names["user_pseudo_id"] == solver_id][name_column]
         if len(matching_rows) == 0:
             raise ValueError(f"Found 0 matching rows for id {solver_id}")
         names[solver_id] = matching_rows.iloc[0]

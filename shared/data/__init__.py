@@ -11,11 +11,10 @@ def create_flat_dataset(full_df, metric="points", competition="GP"):
     up the column size since not all solvers competed in all competitions.
     """
     if competition == "GP":
-        kept_columns = ["user_pseudo_id", "#", "Name", "Country", "Nick", "year"]
+        kept_columns = ["#", "Name", "Country", "Nick", "year"]
         columns_to_drop = ["#", "year"]
     elif competition == "WSC":
-        kept_columns = ["user_pseudo_id", "year", "Name", "Official", "Official_rank",
-                        "Unofficial_rank", "WSC_total"]
+        kept_columns = ["year", "Name", "Official", "Official_rank", "Unofficial_rank", "WSC_total"]
         columns_to_drop = ["year"]
     else:
         raise ValueError(f"Observed unexpected competition \"{competition}\"")
@@ -25,7 +24,7 @@ def create_flat_dataset(full_df, metric="points", competition="GP"):
         if colname in full_df.columns:
             kept_columns.append(colname)
 
-    subset = full_df[kept_columns]
+    subset = full_df[kept_columns].reset_index()
 
     flattened = None
 
@@ -73,12 +72,13 @@ def create_flat_dataset(full_df, metric="points", competition="GP"):
                     flattened.drop(columns=[left_col, right_col], inplace=True)
 
     flattened.drop(columns=columns_to_drop, inplace=True)
+    flattened.set_index("user_pseudo_id", inplace=True)
 
     return flattened
 
 def merge_unflat_datasets(gp_dataset, wsc_dataset):
     """Combine solver-year level datasets from the GP and WSC."""
-    kept_columns = ["user_pseudo_id", "WSC_entry", "year", "Official", "Official_rank",
+    kept_columns = ["WSC_entry", "year", "Official", "Official_rank",
                     "Unofficial_rank", "WSC_total", "Name"]
     for competition_round in range(1, shared.constants.MAXIMUM_ROUND + 1):
         round_name = f"WSC_t{competition_round} points"
@@ -122,13 +122,15 @@ def merge_flat_datasets(datasets, suffixes=("_gp", "_wsc")):
     merged = pd.merge(datasets[0], datasets[1], on="user_pseudo_id", how="outer")
     merged.rename(columns={"Name_x": "Name"}, inplace=True)
     merged.drop(columns=["Name_y"], inplace=True)
+    #merged.set_index("user_pseudo_id", inplace=True)
 
     return merged
 
 def attemped_mapping(wsc_df, gp_df):
     """Update a WSC dataset with identifiers from a GP dataset."""
     wsc_mapped = wsc_df.copy()
-    gp_index = gp_df[["Name", "Country", "Nick", "user_pseudo_id"]].drop_duplicates().copy()
+    gp_df2 = gp_df.copy().reset_index()
+    gp_index = gp_df2[["Name", "Country", "Nick", "user_pseudo_id"]].drop_duplicates()
     gp_index["name_lc"] = gp_index["Name"].str.lower()
 
     wsc_mapped["Name"] = wsc_mapped["Name"].str.replace(",", "")
@@ -163,6 +165,7 @@ def attemped_mapping(wsc_df, gp_df):
 
     # TODO: Add in country
     wsc_and_gp["user_pseudo_id"] = wsc_and_gp["user_pseudo_id"].fillna(wsc_and_gp["Name"])
+    wsc_and_gp.set_index("user_pseudo_id", inplace=True)
 
     return wsc_and_gp
 

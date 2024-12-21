@@ -75,7 +75,7 @@ def present_wsc():
     st.subheader("Solver tracker")
     year_subset = wsc[wsc["year"] == selected_year]
 
-    available = list(year_subset["user_pseudo_id"].unique())
+    available = list(year_subset.index.unique())
     num_default = 3
 
     chosen_solvers = shared.utils.extract_query_param_list(
@@ -103,7 +103,7 @@ def present_wsc():
 
     # Generate a clean dataset of the selected users
     year_data_mapped = wsc[wsc["year"] == selected_year]
-    kept_columns = ["user_pseudo_id", "Name", "Official", "Official_rank", "WSC_total"]
+    kept_columns = ["Name", "Official", "Official_rank", "WSC_total"]
     for wsc_round in range(1, shared.constants.MAXIMUM_ROUND + 1):
         colname = f"WSC_t{wsc_round} points"
         if colname in year_data_mapped:
@@ -114,9 +114,9 @@ def present_wsc():
                 kept_columns.append(colname)
 
     year_data_mapped = year_data_mapped[kept_columns]
-    matching_user_rows = year_data_mapped["user_pseudo_id"].isin(selected_solvers)
+    matching_user_rows = year_data_mapped.index.isin(selected_solvers)
     matching_users = year_data_mapped[matching_user_rows].copy()
-    matching_users.drop(columns=["user_pseudo_id"], inplace=True)
+    #matching_users.drop(columns=["user_pseudo_id"], inplace=True)
     st.dataframe(matching_users.sort_values(by="Official_rank"), hide_index=True)
 
     st.subheader("All competitors")

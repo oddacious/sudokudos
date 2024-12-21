@@ -109,7 +109,7 @@ def manual_adjustements(df):
     return df
 
 @st.cache_data
-def load_gp(csv_directory="data/processed/gp", verbose=False, output_csv="data/combined_data.csv"):
+def load_gp(csv_directory="data/processed/gp", verbose=False, output_csv=None):
     """Import GP CSV files and return a single dataset.
     
     This creates a dataset covering all years with one row per
@@ -174,6 +174,7 @@ def load_gp(csv_directory="data/processed/gp", verbose=False, output_csv="data/c
     # Create a ranking within each year that first uses `Playoff_rank`` and then descending `Points``
     with_playoff_rank = with_playoff_rank.sort_values(by=["year", "Playoff_rank", "Points"], ascending=[False, True, False])
     with_playoff_rank["Rank"] = with_playoff_rank.groupby("year").cumcount() + 1
+    with_playoff_rank.set_index("user_pseudo_id", inplace=True)
 
     return with_playoff_rank
 

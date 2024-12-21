@@ -78,7 +78,7 @@ def present_gp():
 
     st.subheader("Solver tracker")
 
-    available = list(year_subset.sort_values(by="Rank")["user_pseudo_id"].unique())
+    available = list(year_subset.sort_values(by="Rank").index.unique())
     num_default = 3
 
     chosen_solvers = shared.utils.extract_query_param_list(
@@ -106,9 +106,9 @@ def present_gp():
     subset = combined_df[combined_df["year"] == selected_year].drop(
         columns=["year", "source_file"])
 
-    subset_selected = subset[subset["user_pseudo_id"].isin(selected_solvers)]
+    subset_selected = subset[subset.index.isin(selected_solvers)]
 
-    unshown_columns = ["user_pseudo_id", "#"]
+    unshown_columns = ["#"]
 
     if len(subset_selected) > 0:
         st.dataframe(subset_selected.drop(columns=unshown_columns), hide_index=True)
