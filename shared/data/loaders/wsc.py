@@ -370,6 +370,15 @@ def load_wsc(csv_directory="data/raw/wsc/"):
         else:
             multiyear = pd.concat([multiyear, processed], ignore_index=True)
 
+    # Change string values (particularly with comma separators) to floag (see: 2016)
+    round_columns = []
+    for wsc_round in range(1, shared.constants.MAXIMUM_ROUND):
+        colname = f"WSC_t{wsc_round} points"
+        print(multiyear[colname].dtype)
+        if colname in multiyear and multiyear[colname].dtype == 'object':
+            multiyear[colname] = pd.to_numeric(
+                multiyear[colname].str.replace(',', ''), errors="coerce")
+
     # Ensure a consistent ordering of the round columns
     round_columns = []
     for wsc_round in range(1, shared.constants.MAXIMUM_ROUND):
