@@ -374,7 +374,6 @@ def load_wsc(csv_directory="data/raw/wsc/"):
     round_columns = []
     for wsc_round in range(1, shared.constants.MAXIMUM_ROUND):
         colname = f"WSC_t{wsc_round} points"
-        print(multiyear[colname].dtype)
         if colname in multiyear and multiyear[colname].dtype == 'object':
             multiyear[colname] = pd.to_numeric(
                 multiyear[colname].str.replace(',', ''), errors="coerce")
