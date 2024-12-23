@@ -197,7 +197,14 @@ GP_PLAYOFF_RESULTS = {
     2014: {
         1: "Tiit Vunk (TiiT) - Estonia",
         2: "Kota Morinishi (Kota) - Japan",
-        3: "Bastien Vial-Jaime (Nickless) - France"
+        3: "Bastien Vial-Jaime (Nickless) - France",
+        4: "Seungjae Kwak (Kwaka) - Korea, South",
+        5: "Hideaki Jo (Nickless) - Japan",
+        6: "Michael Ley (misko) - Germany",
+        7: "Nikola Zivanovic (NikolaZ) - Serbia",
+        8: "Ulrich Voigt (uvo) - Germany",
+        9: "Rishi Puri (purifire) - India",
+        10: "Timothy Doyle (Timothy) - France",
     },
     2015: {
         1: "Kota Morinishi (Kota) - Japan",
