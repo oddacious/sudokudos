@@ -178,3 +178,28 @@ def ids_by_total_points(combined):
     aggregate = df.groupby("user_pseudo_id")["total points"].sum()
 
     return aggregate.sort_values(ascending=False).index.to_list()
+
+def wsc_rounds_by_year():
+    """Return the list of rounds (as integers) for each WSC year.
+
+    Note that the WSC often has a gap in between rounds, with a first set of rounds from 1 to N and
+    then another set from 10 or 11 onwards.
+    """
+    return {
+        2024: [1, 2, 3, 4, 5, 6, 7, 10, 11],
+        2023: range(1, 11),
+        2022: [1, 2, 3, 4, 5, 6, 7, 10, 11, 12],
+        # No event in 2021 or 2020, although I may later on support the 2021 World Sudoku
+        # "Competition"
+        2019: [1, 2, 3, 4, 5, 6, 7, 11, 12, 13],
+        2018: range(1, 11),
+        2017: [1, 2, 3, 4, 5, 6, 7, 11, 12, 13, 14, 15, 16],
+        2016: [1, 2, 3, 4, 5, 6, 7, 10, 11, 12],
+        2015: [1, 2, 3, 4, 5, 6, 8, 9],
+        2014: [1, 2, 3, 4, 5, 6, 9, 10],
+        # No data currently for the 2013 WSC
+        2012: range(1, 8),
+        2011: range(1, 11),
+        2010: range(1, 11), # These did not originally have numeric names
+        # Missing data for 2006-2009 competitions.
+    }
