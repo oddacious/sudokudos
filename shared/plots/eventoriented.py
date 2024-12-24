@@ -229,6 +229,7 @@ def create_point_trend_chart(full_df, selected_solvers, year=2024, competition="
 
     labels = subset["Name"]
     cumulative = [[] for _ in labels]
+    round_columns = []
     round_labels = []
 
     counter = 0
@@ -240,12 +241,13 @@ def create_point_trend_chart(full_df, selected_solvers, year=2024, competition="
         # because of non-existent round numbers in many WSC years.
         counter += 1
         round_labels.append(f"{year}_{competition_round}")
+        round_columns.append(f"{competition}_t{competition_round} points")
         if competition == "GP":
             round_limit = 6
         else:
-            round_limit = competition_round
+            round_limit = counter
         top_k_sums = shared.utils.sum_top_k_of_n_rounds(
-            subset, counter, round_limit, competition)
+            subset, counter, round_limit, round_columns, competition)
         for index, row in enumerate(top_k_sums):
             cumulative[index].append(row)
 

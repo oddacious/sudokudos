@@ -118,14 +118,14 @@ def known_playoff_results(year):
 
     raise ValueError(f"Unknown GP year \"{year}\"")
 
-def sum_top_k_of_n_rounds(full_df, n, k, competition="GP"):
+def sum_top_k_of_n_rounds(full_df, n, k, round_columns, competition="GP"):
     """Calculate the sum of the best `k` of `n` rounds."""
     subset = full_df.copy()
     round_point_columns = []
     found_rounds = 0
     for competition_round in range(1, shared.constants.MAXIMUM_ROUND + 1):
         col_name = f"{competition}_t{competition_round} points"
-        if col_name not in subset:
+        if col_name not in subset or col_name not in round_columns:
             continue
         found_rounds += 1
         round_point_columns.append(col_name)
