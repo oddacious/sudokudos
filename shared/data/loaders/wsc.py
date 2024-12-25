@@ -385,7 +385,7 @@ def load_wsc(csv_directory="data/raw/wsc/"):
 
     # Ensure a consistent ordering of the round columns
     round_columns = []
-    for wsc_round in range(1, shared.constants.MAXIMUM_ROUND):
+    for wsc_round in range(1, shared.constants.MAXIMUM_ROUND + 1):
         colname = f"WSC_t{wsc_round} points"
         if colname in multiyear:
             round_columns.append(colname)
