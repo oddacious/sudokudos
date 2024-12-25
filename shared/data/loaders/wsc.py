@@ -283,7 +283,7 @@ def process_wsc_2011(df):
     # Validated that "Playoff" supercedes "Official" by looking at Wikipedia.
     df["Official_rank"] = pd.to_numeric(
         df["Playoff"].combine_first(df["Official"]), errors="coerce")
-    
+
     # Original field didn't reflect playoffs for the top 10 competitors
     playoff = df["Official_rank"] <= 10
     df.loc[playoff, "Unofficial_rank"] = df[playoff]["Official_rank"]
@@ -333,6 +333,18 @@ def filter_wsc_fields(df):
     return df[kept_columns]
 
 @st.cache_data
+def numberize_round_columns(df):
+    """Convert every column to numeric, including stripping commas if necessary."""
+    for wsc_round in range(1, shared.constants.MAXIMUM_ROUND + 1):
+        round_name = f"WSC_t{wsc_round} points"
+        # Change string values (particularly with comma separators) to floag (see: 2016)
+        if round_name in df.columns and df[round_name].dtype == 'object':
+            df[round_name] = pd.to_numeric(
+                df[round_name].str.replace(',', ''), errors="coerce")
+
+    return df
+
+@st.cache_data
 def load_wsc(csv_directory="data/raw/wsc/"):
     """Load all WSC CSV files"""
     year_to_function = {
@@ -365,18 +377,11 @@ def load_wsc(csv_directory="data/raw/wsc/"):
         processed["WSC_entry"] = True
         processed["WSC_total"] = pd.to_numeric(processed["WSC_total"], errors="coerce").astype(int)
         processed = filter_wsc_fields(processed)
+        processed = numberize_round_columns(processed)
         if multiyear is None:
             multiyear = processed.copy()
         else:
             multiyear = pd.concat([multiyear, processed], ignore_index=True)
-
-    # Change string values (particularly with comma separators) to floag (see: 2016)
-    round_columns = []
-    for wsc_round in range(1, shared.constants.MAXIMUM_ROUND):
-        colname = f"WSC_t{wsc_round} points"
-        if colname in multiyear and multiyear[colname].dtype == 'object':
-            multiyear[colname] = pd.to_numeric(
-                multiyear[colname].str.replace(',', ''), errors="coerce")
 
     # Ensure a consistent ordering of the round columns
     round_columns = []
