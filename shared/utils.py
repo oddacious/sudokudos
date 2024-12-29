@@ -1,6 +1,8 @@
 import re
 import streamlit as st
-import pandas as pd
+#import pandas as pd
+import numpy as np
+import polars as pl
 
 import shared.constants
 
@@ -88,23 +90,28 @@ def applicable_years(full_df, selected_solvers):
     This uses the first and last years from any solver, and includes any years
     in between.
     """
-    years = sorted(full_df["year"].unique())
+    #years = sorted(full_df["year"].unique())
+    years = sorted(full_df.get_column("year").unique())
 
     # Restrict to years since at least one of the users started and up until the last
     # year with any of them, and include every year in between
-    first_year = full_df.loc[full_df.index.isin(selected_solvers), "year"].min()
-    final_year = full_df.loc[full_df.index.isin(selected_solvers), "year"].max()
+    #first_year = full_df.loc[full_df.index.isin(selected_solvers), "year"].min()
+    matching_users = pl.col("user_pseudo_id").is_in(selected_solvers)
+    first_year = full_df.filter(matching_users).get_column("year").min()
+    #final_year = full_df.loc[full_df.index.isin(selected_solvers), "year"].max()
+    final_year = full_df.filter(matching_users).get_column("year").max()
     return [year for year in years if first_year <= year <= final_year]
 
 def ids_to_names(df_with_names, selected_solvers, name_column="Name"):
     """Return the name for an identifier, using the first matched row."""
     names = {}
     for solver_id in selected_solvers:
-        matching_rows = df_with_names[df_with_names.index == solver_id][name_column]
-        #matching_rows = df_with_names[df_with_names["user_pseudo_id"] == solver_id][name_column]
+        #matching_rows = df_with_names[df_with_names.index == solver_id][name_column]
+        matching_rows = df_with_names.filter(pl.col("user_pseudo_id") == solver_id).get_column(name_column)
         if len(matching_rows) == 0:
             raise ValueError(f"Found 0 matching rows for id {solver_id}")
-        names[solver_id] = matching_rows.iloc[0]
+        #names[solver_id] = matching_rows.iloc[0]
+        names[solver_id] = matching_rows.first()
 
     return names
 
@@ -120,7 +127,8 @@ def known_playoff_results(year):
 
 def sum_top_k_of_n_rounds(full_df, n, k, round_columns, competition="GP"):
     """Calculate the sum of the best `k` of `n` rounds."""
-    subset = full_df.copy()
+    #subset = full_df.copy()
+    subset = full_df
     round_point_columns = []
     found_rounds = 0
     for competition_round in range(1, shared.constants.MAXIMUM_ROUND + 1):
@@ -129,14 +137,21 @@ def sum_top_k_of_n_rounds(full_df, n, k, round_columns, competition="GP"):
             continue
         found_rounds += 1
         round_point_columns.append(col_name)
-        subset[col_name] = pd.to_numeric(subset[col_name], errors="coerce")
+        #subset[col_name] = pd.to_numeric(subset[col_name], errors="coerce")
+        subset = subset.with_columns(pl.col(col_name).cast(pl.Float32))
         if found_rounds == n:
             break
 
-    cols = round_point_columns
-    applicable_point_df = subset[cols]
+    #cols = round_point_columns
+    #applicable_point_df = subset[cols]
+    applicable_point_df = subset.select(round_point_columns)
 
-    row_top_k_sum = applicable_point_df.apply(lambda row: row.nlargest(k).sum(), axis=1)
+    #row_top_k_sum = applicable_point_df.apply(lambda row: row.nlargest(k).sum(), axis=1)
+    row_top_k_sum = (
+        applicable_point_df
+        .to_numpy()
+        .apply(lambda row: row[np.argsort(row)[-k:]].sum(), axis=1)
+    )
 
     return row_top_k_sum
 
@@ -165,7 +180,11 @@ def convert_columns_to_max_pct(df, pattern=r"^\d{4}_\d+"):
     """Convert all columns to a percentage of the column max."""
     for column in df.columns:
         if re.match(pattern, column):
-            df[column] = pd.to_numeric(df[column])
+            #df[column] = pd.to_numeric(df[column])
+            subset = subset.with_columns(pl.col(column).cast(pl.Float32))
             as_pct = df[column] / df[column].max()
-            df[column] = as_pct
+            #df[column] = as_pct
+            df = df.with_columns(
+                pl.lit(as_pct).alias(column)
+            )
     return df
