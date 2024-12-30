@@ -47,7 +47,8 @@ def extract_query_param_list(param, allowed_items, default=None):
 
 def all_available_years(full_df):
     """Return all years that are represented in a dataframe."""
-    return sorted(full_df["year"].unique())
+    #return sorted(full_df["year"].unique())
+    return full_df.select(pl.col("year")).unique().sort(by="year").get_column("year").to_list()
 
 def get_max_round(year, competition="GP"):
     """Return the maximum round for a given competition and year.
@@ -128,32 +129,47 @@ def known_playoff_results(year):
 def sum_top_k_of_n_rounds(full_df, n, k, round_columns, competition="GP"):
     """Calculate the sum of the best `k` of `n` rounds."""
     #subset = full_df.copy()
-    subset = full_df
     round_point_columns = []
     found_rounds = 0
     for competition_round in range(1, shared.constants.MAXIMUM_ROUND + 1):
         col_name = f"{competition}_t{competition_round} points"
-        if col_name not in subset or col_name not in round_columns:
+        if col_name not in full_df or col_name not in round_columns:
             continue
         found_rounds += 1
         round_point_columns.append(col_name)
         #subset[col_name] = pd.to_numeric(subset[col_name], errors="coerce")
-        subset = subset.with_columns(pl.col(col_name).cast(pl.Float32))
+        subset = full_df.with_columns(pl.col(col_name).cast(pl.Float32))
         if found_rounds == n:
             break
 
     #cols = round_point_columns
     #applicable_point_df = subset[cols]
-    applicable_point_df = subset.select(round_point_columns)
+    applicable_point_df = full_df.select(round_point_columns)
 
     #row_top_k_sum = applicable_point_df.apply(lambda row: row.nlargest(k).sum(), axis=1)
-    row_top_k_sum = (
-        applicable_point_df
-        .to_numpy()
-        .apply(lambda row: row[np.argsort(row)[-k:]].sum(), axis=1)
-    )
+    # row_top_k_sum = (
+    #     applicable_point_df
+    #     .to_numpy()
+    #     .apply(lambda row: row[np.argsort(row)[-k:]].sum(), axis=1)
+    # )
+    #row_top_k_sum = applicable_point_df.select([
+    #    pl.col(col).sort(descending=True).head(k).sum().alias(f"top_{k}_sum")
+    #    for col in applicable_point_df.columns
+    #])
+    # row_top_k_sum = applicable_point_df.select([
+    #     pl.concat_list([pl.col(col).sort(descending=True).head(k) for col in applicable_point_df.columns]).arr.get(0).sum().alias("row_top_k_sum")
+    # ])
+    transposed_df = applicable_point_df.transpose()
 
-    return row_top_k_sum
+    # Use top_k on the transposed DataFrame and sum the top k values for each row (which are now columns)
+    row_top_k_sum = transposed_df.select([
+        pl.col(c).top_k(k).sum().alias(c) for c in transposed_df.columns
+    ])
+
+    # Optional: transpose back if you want it in the same structure as the original DataFrame
+    row_top_k_sum_transposed = row_top_k_sum.transpose()
+
+    return row_top_k_sum_transposed
 
 def ordinal_suffix(n):
     """Format numbers as 1st, 2nd, etcetera.

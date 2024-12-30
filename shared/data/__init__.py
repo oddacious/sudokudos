@@ -1,5 +1,6 @@
 import re
 import pandas as pd
+import polars as pl
 
 import shared.constants
 import shared.utils
@@ -73,6 +74,92 @@ def create_flat_dataset(full_df, metric="points", competition="GP"):
 
     flattened.drop(columns=columns_to_drop, inplace=True)
     flattened.set_index("user_pseudo_id", inplace=True)
+
+    return flattened
+
+def create_flat_dataset_polars(full_df, metric="points", competition="GP"):
+    """Flatten a solver-year dataframe to a solver dataframe.
+    
+    Results by year will be represented in their own columns, so this does blow
+    up the column size since not all solvers competed in all competitions.
+    """
+    if competition == "GP":
+        kept_columns = ["user_pseudo_id", "#", "Name", "Country", "Nick", "year"]
+        columns_to_drop = ["#", "year"]
+    elif competition == "WSC":
+        kept_columns = ["user_pseudo_id", "year", "Name", "Official", "Official_rank", "Unofficial_rank", "WSC_total"]
+        columns_to_drop = ["year"]
+    else:
+        raise ValueError(f"Observed unexpected competition \"{competition}\"")
+
+    for competition_round in range(1, shared.constants.MAXIMUM_ROUND + 1):
+        colname = f"{competition}_t{competition_round} {metric}"
+        if colname in full_df.columns:
+            kept_columns.append(colname)
+
+    #subset = full_df[kept_columns].reset_index()
+    subset = full_df.select(kept_columns)
+
+    flattened = None
+
+    #years = sorted(full_df["year"].unique())
+    years = sorted(full_df.get_column("year").unique())
+
+    for year in years:
+        #single_year = subset[subset["year"] == year].copy()
+        single_year = subset.filter(pl.col("year") == year)
+        max_round_in_year = shared.utils.get_max_round(year, competition)
+
+        rename = {}
+
+        # Years that don't exist shouldn't be included for anyone
+        if max_round_in_year is None:
+            continue
+
+        # Need to do this for the largest rounds available, because the columns
+        # will exist for each and otherwise we'll have column name problems in
+        # the join
+        for competition_round in range(1, shared.constants.MAXIMUM_ROUND + 1):
+            colname = f"{competition}_t{competition_round} {metric}"
+            if colname in single_year:
+                # Some rounds don't exist in all years, but they still have columns because
+                # all years are represented in one large table that contains a column for
+                # every possible round.
+                #if sum(single_year[colname].isna()) == len(single_year):
+                if sum(single_year.get_column(colname).is_null()) == len(single_year):
+                    #single_year.drop(columns=[colname], inplace=True)
+                    single_year = single_year.drop(colname)
+                else:
+                    rename[colname] = f"{year}_{competition_round}"
+
+        #single_year.rename(columns=rename, inplace=True)
+        single_year = single_year.rename(rename)
+
+        if flattened is None:
+            flattened = single_year
+        else:
+            #single_year.drop(columns=columns_to_drop, inplace=True)
+            single_year = single_year.drop(columns_to_drop)
+            #flattened = pd.merge(flattened, single_year, on="user_pseudo_id",
+            #                    how="outer", suffixes=("_left", "_right"))
+            flattened = flattened.join(single_year, on="user_pseudo_id",
+                                how="outer", suffix=("_right"))
+
+            for column in ("Name", "Nick", "Country", "Official", "Official_rank",
+                           "Unofficial_rank", "WSC_total", "user_pseudo_id"):
+                #left_col = f"{column}_left"
+                right_col = f"{column}_right"
+                if right_col in flattened.columns:
+                    #flattened[column] = flattened[left_col].combine_first(flattened[right_col])
+                    flattened = flattened.with_columns(
+                        pl.col(column).fill_null(pl.col(right_col)).alias(column)
+                    )
+                    #flattened.drop(columns=[left_col, right_col], inplace=True)
+                    flattened = flattened.drop(right_col)
+
+    #flattened.drop(columns=columns_to_drop, inplace=True)
+    flattened = flattened.drop(columns_to_drop)
+    #flattened.set_index("user_pseudo_id", inplace=True)
 
     return flattened
 

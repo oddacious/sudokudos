@@ -1,5 +1,5 @@
 import os
-#import pandas as pd
+import pandas as pd
 import polars as pl
 
 import streamlit as st
@@ -212,7 +212,6 @@ def load_gp(csv_directory="data/processed/gp", verbose=False, output_csv=None):
     the Name, Country, and Nick fields.
     """
     dataframes = []
-    all_columns = set()
 
     for filename in os.listdir(csv_directory):
         if filename.endswith(".csv"):
@@ -220,24 +219,17 @@ def load_gp(csv_directory="data/processed/gp", verbose=False, output_csv=None):
                 print(f"Parsing file {filename}")
             file_path = os.path.join(csv_directory, filename)
 
-            df = pl.read_csv(file_path)
+            #df = pl.read_csv(file_path)
+            df = pd.read_csv(file_path)
             df['source_file'] = filename
             #df = df.with_columns(
             #    pl.lit(filename).alias("source_file")
             #)
             dataframes.append(df)
-            all_columns.update(df.columns)
 
-    aligned_dfs = []
-    for df in dataframes:
-        missing_columns = all_columns - set(df.columns)
-        for col in missing_columns:
-            df = df.with_columns([pl.lit(None).alias(col)])
-        aligned_dfs.append(df.select(sorted(all_columns)))
+    #combined_df = pl.concat(aligned_dfs, how="vertical")
+    combined_df = pd.concat(dataframes, ignore_index=True)
 
-    combined_df = pl.concat(aligned_dfs, how="vertical")
-
-    print(combined_df.columns)
     combined_df = manual_adjustements(combined_df)
 
     # Save the combined DataFrame to a new CSV (optional)
@@ -249,13 +241,14 @@ def load_gp(csv_directory="data/processed/gp", verbose=False, output_csv=None):
     combined_df = combined_df[~((combined_df["Name"] == "Name") &
                                 (combined_df["Country"] == "Country") &
                                 (combined_df["Nick"] == "Nick"))]
+    # Was the below wrong? Not pl.col?
     # combined_df = combined_df.filter(~((combined_df["Name"] == "Name") &
     #                             (combined_df["Country"] == "Country") &
     #                             (combined_df["Nick"] == "Nick")))
 
     # In the absence of true identifiers, using the intersection of these
     # three fields to identify users. This, unfortunately, drops five rows
-    (through the 2024 GP, that is).
+    # (through the 2024 GP, that is).
     combined_df.drop_duplicates(
        subset=("Name", "Country", "Nick", "source_file"), keep="first", inplace=True)
     # combined_df = combined_df.unique(
@@ -328,3 +321,54 @@ def load_gp(csv_directory="data/processed/gp", verbose=False, output_csv=None):
 
     return with_playoff_rank
 
+def polarize_gp(gp_as_pandas):
+    column_types = {
+        # Integer columns
+        'GP_t1 position': 'float64',
+        'GP_t2 position': 'float64',
+        'GP_t3 position': 'float64',
+        'GP_t4 position': 'float64',
+        'GP_t5 position': 'float64',
+        'GP_t6 position': 'float64',
+        'GP_t7 position': 'float64',
+        'GP_t8 position': 'float64',
+        'Played GPs': 'int64',
+        'Total GPs': 'int64',
+        'Rank_before_playoffs': 'int64',
+        'Playoff_rank': 'float64',
+        'Rank': 'int64',
+
+        # Float columns
+        'GP_t1 points': 'float64',
+        'GP_t1 rank. points': 'float64',
+        'GP_t2 points': 'float64',
+        'GP_t2 rank. points': 'float64',
+        'GP_t3 points': 'float64',
+        'GP_t3 rank. points': 'float64',
+        'GP_t4 points': 'float64',
+        'GP_t4 rank. points': 'float64',
+        'GP_t5 points': 'float64',
+        'GP_t5 rank. points': 'float64',
+        'GP_t6 points': 'float64',
+        'GP_t6 rank. points': 'float64',
+        'GP_t7 points': 'float64',
+        'GP_t7 rank. points': 'float64',
+        'GP_t8 points': 'float64',
+        'GP_t8 rank. points': 'float64',
+        'Points': 'float64',
+
+        # Other types (default as-is or left unspecified)
+        '#': 'string',  # Identifier, keep as object
+        'Name': 'string',
+        'Country': 'string',
+        'Nick': 'string',
+        'year': 'int64',  # If `year` is numeric
+        'source_file': 'string'
+    }
+
+    gp_simple_type = gp_as_pandas.astype(column_types)
+    for col in ['#', 'Name', 'Country', 'Nick', 'source_file']:
+        gp_simple_type[col] = gp_simple_type[col].astype(str)
+    gp_polars = pl.from_pandas(gp_simple_type.reset_index())
+
+    return gp_polars
