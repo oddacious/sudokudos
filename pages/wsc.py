@@ -145,7 +145,7 @@ def present_wsc():
     for wsc_round in range(1, shared.constants.MAXIMUM_ROUND + 1):
         colname = f"WSC_t{wsc_round} points"
         if colname in year_data:
-            if year_data.get_column(colname).is_null().sum() != len(year_data):
+            if year_data.get_column(colname).is_null().sum() == len(year_data):
             #if sum(year_data[colname].isna()) == len(year_data):
                 #year_data.drop(columns=[colname], inplace=True)
                 year_data = year_data.drop(colname)
