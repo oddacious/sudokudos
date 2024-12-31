@@ -160,7 +160,7 @@ class PerformanceCollector():
             if use_playoffs:
                 #percentiles = subset["Rank"].rank(pct=True, ascending=False)
                 subset = subset.with_columns(
-                    (pl.col("Rank").rank(descending=True) / pl.count()).alias("percentile")
+                    (pl.col("Rank").rank(descending=True) / pl.col("Rank").is_not_null().sum()).alias("percentile")
                 )
                 #ranks = subset["Rank"].rank()
                 subset = subset.with_columns(pl.col("Rank").rank().alias("rank"))
@@ -223,7 +223,8 @@ class PerformanceCollector():
             applicable_subset = subset.filter(pl.col('Official') == 1)
         else:
             rank_column = "Unofficial_rank"
-            applicable_subset = subset
+            #applicable_subset = subset
+            applicable_subset = subset.filter(pl.col("WSC_entry") == 1)
 
         #percentiles = pd.to_numeric(applicable_subset[rank_column]).rank(pct=True, ascending=False)
         applicable_subset = applicable_subset.with_columns(
@@ -241,13 +242,14 @@ class PerformanceCollector():
             pctile = 0
             outcome_label = self.LABEL_NO_RECORD
         else:
+            row_in_applicable_subset = applicable_subset.filter(pl.col("user_pseudo_id") == self.solver)
             #total = sum(subset["WSC_entry"].notna())
             total = subset.get_column("WSC_entry").is_not_null().sum()
             #pctile = percentiles[row_index].iloc[0]
-            pctile = applicable_subset.get_column("percentile").first()
+            pctile = row_in_applicable_subset.get_column("percentile").first()
             #solver_rows = applicable_subset.index == self.solver
             #rank = applicable_subset[solver_rows][rank_column].iloc[0]
-            rank = applicable_subset.filter(pl.col("user_pseudo_id") == self.solver).get_column(rank_column).first()
+            rank = row_in_applicable_subset.get_column(rank_column).first()
             ordinal_pctile = shared.utils.ordinal_suffix(math.floor(pctile * 100))
             ordinal_rank = shared.utils.ordinal_suffix(int(rank))
             label_prefix = "\U00002606" if rank <= 3 else "   "

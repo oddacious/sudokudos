@@ -214,9 +214,6 @@ def merge_unflat_datasets_polars(gp_dataset, wsc_dataset):
             #     .over("year")
             #     .alias(position_name)
             # )
-            #print(wsc_dataset.columns)
-            #print(round_name)
-            #print(round_name in wsc_dataset.columns)
             wsc_dataset = wsc_dataset.with_columns(
                 pl.col(round_name)
                 .rank(descending=True, method="min")
