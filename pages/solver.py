@@ -28,9 +28,6 @@ def present_solver():
 
     # List solvers by total points in all competitions
     available = shared.data.ids_by_total_points(combined_with_wsc)
-    #print(type(available))
-    #print(len(available))
-    #print(available[1])
 
     chosen_index = None
     if "solver" in st.query_params and st.query_params["solver"] in available:

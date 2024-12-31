@@ -235,17 +235,19 @@ def merge_unflat_datasets_polars(gp_dataset, wsc_dataset):
     # people change it) and we have overrides to make it consistent in such
     # cases anyways.
     #merged = pd.merge(gp_dataset, minimal, on=["user_pseudo_id", "year"], how="outer")
-    merged = gp_dataset.join(minimal, how="outer", on=["user_pseudo_id", "year"])
+    merged = gp_dataset.join(minimal, how="full", on=["user_pseudo_id", "year"])
     merged = merged.with_columns(
         pl.coalesce([pl.col("user_pseudo_id"), pl.col("user_pseudo_id_right")]).alias("user_pseudo_id")
     )
     #merged["Name"] = merged["Name_x"].combine_first(merged["Name_y"])
     merged = merged.with_columns(
-        pl.coalesce([pl.col("Name"), pl.col("Name_right")]).alias("Name")
+        pl.coalesce([pl.col("Name"), pl.col("Name_right")]).alias("Name"),
+        pl.coalesce([pl.col("user_pseudo_id"), pl.col("user_pseudo_id_right")]).alias("user_pseudo_id"),
+        pl.coalesce([pl.col("year"), pl.col("year_right")]).alias("year")
     )
 
     #merged.drop(columns=["Name_x", "Name_y"], inplace=True)
-    merged = merged.drop("Name_right")
+    merged = merged.drop(["Name_right", "user_pseudo_id_right", "year_right"])
 
     return merged
 
