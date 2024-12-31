@@ -204,7 +204,7 @@ def merge_unflat_datasets_polars(gp_dataset, wsc_dataset):
             #wsc_dataset[round_name] = pd.to_numeric(
             #    wsc_dataset[round_name], errors="coerce").fillna(0)
             wsc_dataset = wsc_dataset.with_columns(
-                        pl.col(round_name).cast(pl.Float64).fill_null(0).alias(round_name)
+                        pl.col(round_name).cast(pl.Float32).fill_null(0).alias(round_name)
                     )
             # wsc_dataset[position_name] = wsc_dataset.groupby("year")[round_name].rank(
             #     ascending=False, method="min")
@@ -323,8 +323,8 @@ def ids_by_total_points(combined):
     #df["total points"] = (pd.to_numeric(df["Points"]).fillna(0) +
     #                      pd.to_numeric(df["WSC_total"]).fillna(0))
     df = df.with_columns(
-        (pl.col("Points").cast(pl.Float64).fill_null(0) +
-        pl.col("WSC_total").cast(pl.Float64).fill_null(0)).alias("total points"),
+        (pl.col("Points").cast(pl.Float32).fill_null(0) +
+        pl.col("WSC_total").cast(pl.Float32).fill_null(0)).alias("total points"),
     )
 
     #aggregate = df.groupby("user_pseudo_id")["total points"].sum()

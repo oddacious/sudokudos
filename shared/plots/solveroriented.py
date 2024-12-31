@@ -331,7 +331,7 @@ def create_rank_chart(
 
     df = full_df
     #df["Points"] = pd.to_numeric(df["Points"], errors="coerce")
-    df = df.with_columns(pl.col("Points").cast(pl.Float64).alias("Points"))
+    df = df.with_columns(pl.col("Points").cast(pl.Float32).alias("Points"))
 
     #wsc_years = sorted(full_df[full_df["WSC_entry"] == 1]["year"].unique())
     wsc_years = sorted(full_df.filter((pl.col("WSC_entry") == 1) & pl.col("year").is_not_null()).get_column("year").unique().to_list())

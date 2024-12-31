@@ -142,19 +142,26 @@ def create_leaderboard_chart(full_df, year=2024, top_n=10,
 def create_wsc_leaderboard_chart(full_df, year=2024, top_n=10,
                                  colors=[matplotlib.cm.Set2(i) for i in range(8)]):
     """This creates a horizontal bar chart of the top scores for a WSC year."""
-    year_df = full_df[full_df["year"] == year].copy()
-    year_df["WSC_total"] = pd.to_numeric(year_df["WSC_total"], errors="coerce")
+    #year_df = full_df[full_df["year"] == year].copy()
+    year_df = full_df.filter(pl.col("year") == year)
+    #year_df["WSC_total"] = pd.to_numeric(year_df["WSC_total"], errors="coerce")
+    year_df = year_df.with_columns(
+        pl.col("WSC_total").cast(pl.Float32).alias("WSC_total")
+    )
 
     # Reseting the index is important because we will use iterrows() later.
-    subset = year_df.reset_index().nlargest(top_n, "WSC_total").reset_index()
+    #subset = year_df.reset_index().nlargest(top_n, "WSC_total").reset_index()
+    subset = year_df.sort("WSC_total", descending=True).head(top_n)
 
-    labels = subset["Name"]
-    points = subset["WSC_total"]
+    #labels = subset["Name"]
+    labels = subset.get_column("Name")
+    #points = subset["WSC_total"]
+    points = subset.get_column("WSC_total")
 
     fig, ax = plt.subplots(figsize=(6.4, 10))
 
     bar_colors = [colors[0] for _ in range(len(labels))]
-    for index, row in subset.iterrows():
+    for index, row in enumerate(subset.iter_rows(named=True)):
         if not row['Official']:
             bar_colors[index] = colors[1]
 
@@ -201,7 +208,7 @@ def create_violin_chart(full_df, selected_solvers, year_subset=(2024,),
 
     for idx, column in enumerate(rounds):
         #data = pd.to_numeric(flattened[column], errors='coerce').dropna()
-        data = flattened.select(pl.col(column).cast(pl.Float64).drop_nulls())
+        data = flattened.select(pl.col(column).cast(pl.Float32).drop_nulls())
 
         if len(data) == 0:
             continue
