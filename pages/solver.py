@@ -11,6 +11,8 @@ import psutil
 import os
 import sys
 
+import polars as pl
+
 def present_solver():
     """Create the solver page."""
     shared.presentation.global_setup_and_display()
@@ -19,10 +21,16 @@ def present_solver():
     gp = shared.data.loaders.gp.load_gp()
     wsc = shared.data.attemped_mapping(wsc_unmapped, gp)
 
-    combined_with_wsc = shared.data.merge_unflat_datasets(gp, wsc)
+    gp_polars = shared.data.loaders.gp.polarize_gp(gp)
+    wsc_polars = shared.data.loaders.wsc.polarize_wsc(wsc)
+
+    combined_with_wsc = shared.data.merge_unflat_datasets_polars(gp_polars, wsc_polars)
 
     # List solvers by total points in all competitions
     available = shared.data.ids_by_total_points(combined_with_wsc)
+    #print(type(available))
+    #print(len(available))
+    #print(available[1])
 
     chosen_index = None
     if "solver" in st.query_params and st.query_params["solver"] in available:
@@ -137,6 +145,11 @@ def present_solver():
     st.write(f"Filesize for combined_with_wsc: {sys.getsizeof(combined_with_wsc) / 1024 / 1024:.2f} mb")
     st.write(f"Filesize for gp: {sys.getsizeof(gp) / 1024 / 1024:.2f} mb")
     st.write(f"Filesize for wsc: {sys.getsizeof(wsc) / 1024 / 1024:.2f} mb")
+
+    #st.write(f"Filesize for wsc_unammped: {wsc_unmapped.estimated_size() / 1024 / 1024:.2f} mb")
+    st.write(f"Filesize for combined_with_wsc: {combined_with_wsc.estimated_size() / 1024 / 1024:.2f} mb")
+    #st.write(f"Filesize for gp: {gp.estimated_size() / 1024 / 1024:.2f} mb")
+    #st.write(f"Filesize for wsc: {wsc.estimated_size() / 1024 / 1024:.2f} mb")
 
 #if __name__ == "__main__":
 #    present_solver()

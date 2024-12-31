@@ -1,4 +1,5 @@
 import pandas as pd
+import polars as pl
 
 import streamlit as st
 
@@ -393,3 +394,8 @@ def load_wsc(csv_directory="data/raw/wsc/"):
     multiyear = multiyear[all_columns]
 
     return multiyear
+
+def polarize_wsc(wsc):
+    wsc_polars = pl.from_pandas(wsc.reset_index())
+
+    return wsc_polars

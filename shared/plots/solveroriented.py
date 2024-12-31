@@ -1,6 +1,7 @@
 import math
 import itertools
 import pandas as pd
+import polars as pl
 import matplotlib
 import matplotlib.lines
 import matplotlib.pyplot as plt
@@ -22,14 +23,15 @@ def create_trend_chart(full_df, selected_solvers, metric="points", window_size=8
     if len(included_events) == 0:
         return None
 
-    flattened_gp = shared.data.create_flat_dataset(full_df, metric=metric)
-    flattened_wsc = shared.data.create_flat_dataset(full_df, metric=metric, competition="WSC")
+    flattened_gp = shared.data.create_flat_dataset_polars(full_df, metric=metric)
+    flattened_wsc = shared.data.create_flat_dataset_polars(full_df, metric=metric, competition="WSC")
     together = shared.data.merge_flat_datasets([flattened_gp, flattened_wsc])
 
     if as_percent_of_max:
         together = shared.utils.convert_columns_to_max_pct(together)
 
-    subset = together[together.index.isin(selected_solvers)].copy()
+    #subset = together[together.index.isin(selected_solvers)]
+    subset = together.filter(pl.col("user_pseudo_id").is_in(selected_solvers))
 
     year_subset = shared.utils.applicable_years(full_df, selected_solvers)
     years_with_data = []
@@ -51,19 +53,23 @@ def create_trend_chart(full_df, selected_solvers, metric="points", window_size=8
                     column = f"{year}_{competition_round}_{competition}"
                     if column in subset:
                         rounds.append(column)
-                        subset[column] = pd.to_numeric(subset[column], errors='coerce')
+                        #subset[column] = pd.to_numeric(subset[column], errors='coerce')
+                        subset = subset.with_columns(pl.col(column).cast(pl.Float32).alias(column))
 
     data = { "Round": rounds }
     rolling = {}
 
     for solver in selected_solvers:
-        solver_row = subset[subset.index == solver]
+        #solver_row = subset[subset.index == solver]
+        solver_row = subset.filter(pl.col("user_pseudo_id") == solver)
         if len(solver_row) < 1:
             raise ValueError(f"Expected 1 row for solver \"{solver}\", found {len(solver_row)}")
-        record = solver_row.iloc[0]
-        outcomes = record[rounds]
-        data[record["Name"]] = outcomes
-        rolling[record["Name"]] = outcomes.rolling(window=window_size, min_periods=1).mean()
+        #record = solver_row.iloc[0]
+        record = solver_row[0]
+        outcomes = record.select(rounds).row(0)
+        name = record.get_column("Name").first()
+        data[name] = outcomes
+        rolling[name] = pd.Series(outcomes).rolling(window=window_size, min_periods=1).mean()
 
     xticks = year_starts
     xlabels = years_with_data
@@ -152,24 +158,36 @@ class PerformanceCollector():
         """Calculate the outcomes in the GP for the solver in `year`."""
         if "gp" in self.included_events and year >= 2014:
             if use_playoffs:
-                percentiles = subset["Rank"].rank(pct=True, ascending=False)
-                ranks = subset["Rank"].rank()
+                #percentiles = subset["Rank"].rank(pct=True, ascending=False)
+                subset = subset.with_columns(
+                    (pl.col("Rank").rank(descending=True) / pl.count()).alias("percentile")
+                )
+                #ranks = subset["Rank"].rank()
+                subset = subset.with_columns(pl.col("Rank").rank().alias("rank"))
             else:
-                percentiles = subset["Points"].rank(pct=True)
-                ranks = subset["Points"].rank(ascending=False)
-            total = sum(subset["Total GPs"].notna())
+                #percentiles = subset["Points"].rank(pct=True)
+                subset = subset.with_columns(
+                    (pl.col("Points").rank() / pl.count()).alias("percentile")
+                )
+                #ranks = subset["Points"].rank(ascending=False)
+                #ranks = subset.get_column("Points").rank(ascending=False)
+                subset = subset.with_columns(pl.col("Points").rank(ascending=False).alias("rank"))
+            #total = sum(subset["Total GPs"].notna())
+            total = sum(subset.get_column("Total GPs").is_not_null())
 
-            solver_rows = subset[subset.index == self.solver]
-            row_index = solver_rows.index
+            #solver_rows = subset[subset.index == self.solver]
+            solver_rows = subset.filter(pl.col("user_pseudo_id") == self.solver)
+            #row_index = solver_rows.index
 
-            played_gp = sum(solver_rows["Total GPs"].isna()) == 0
+            #played_gp = sum(solver_rows["Total GPs"].isna()) == 0
+            played_gp = solver_rows.get_column("Total GPs").is_null().sum() == 0
 
-            if len(row_index) < 1 or not played_gp:
+            if len(solver_rows) < 1 or not played_gp:
                 pctile = 0
                 outcome_label = self.LABEL_NO_RECORD
             else:
-                pctile = percentiles[row_index].iloc[0]
-                rank = int(ranks[row_index].iloc[0])
+                pctile = solver_rows.get_column("percentile").first()
+                rank = int(solver_rows.get_column("rank").first())
                 ordinal_pctile = shared.utils.ordinal_suffix(math.floor(pctile * 100))
                 ordinal_rank = shared.utils.ordinal_suffix(rank)
                 label_prefix = "\U00002606" if rank <= 3 else "   "
@@ -185,39 +203,51 @@ class PerformanceCollector():
         if year not in self.wsc_years or "wsc" not in self.included_events:
             return
 
-        solver_record = subset[subset.index == self.solver]
+        #solver_record = subset[subset.index == self.solver]
+        solver_record = subset.filter(pl.col("user_pseudo_id") == self.solver)
 
         # The row won't exist if they didn't do any event. But if they did any
         # event, the row would exist even if the solver did not participate in the WSC.
-        participated = len(solver_record) > 0 and solver_record["WSC_entry"].iloc[0] is True
+        #participated = len(solver_record) > 0 and solver_record["WSC_entry"].iloc[0] is True
+        participated = len(solver_record) > 0 and solver_record.get_column("WSC_entry").first() is True
 
         if len(solver_record) > 0:
-            is_official = solver_record["Official"].iloc[0] is True
+            #is_official = solver_record["Official"].iloc[0] is True
+            is_official = solver_record.get_column("Official").first() is True
         else:
             is_official = True
 
         if is_official is True:
             rank_column = "Official_rank"
-            applicable_subset = subset[subset['Official'] == 1]
+            #applicable_subset = subset[subset['Official'] == 1]
+            applicable_subset = subset.filter(pl.col('Official') == 1)
         else:
             rank_column = "Unofficial_rank"
             applicable_subset = subset
 
-        percentiles = pd.to_numeric(applicable_subset[rank_column]).rank(pct=True, ascending=False)
+        #percentiles = pd.to_numeric(applicable_subset[rank_column]).rank(pct=True, ascending=False)
+        applicable_subset = applicable_subset.with_columns(
+            (pl.col(rank_column).rank(descending=True) / pl.count()).alias("percentile")
+        )
+
         total = len(applicable_subset)
 
-        criteria = (subset.index == self.solver) & (subset['Official'] == 0)
-        row_index_unofficial = subset[criteria].index
-        row_index = applicable_subset[applicable_subset.index == self.solver].index
+        #criteria = (subset.index == self.solver) & (subset['Official'] == 0)
+        #row_index_unofficial = subset[criteria].index
+        #row_index = applicable_subset[applicable_subset.index == self.solver].index
 
-        if not participated or (row_index_unofficial == -1 and row_index == -1):
+        #if not participated or (row_index_unofficial == -1 and row_index == -1):
+        if not participated or (len(applicable_subset) == 0 and len(subset) == 0):
             pctile = 0
             outcome_label = self.LABEL_NO_RECORD
         else:
-            total = sum(subset["WSC_entry"].notna())
-            pctile = percentiles[row_index].iloc[0]
-            solver_rows = applicable_subset.index == self.solver
-            rank = applicable_subset[solver_rows][rank_column].iloc[0]
+            #total = sum(subset["WSC_entry"].notna())
+            total = subset.get_column("WSC_entry").is_not_null().sum()
+            #pctile = percentiles[row_index].iloc[0]
+            pctile = applicable_subset.get_column("percentile").first()
+            #solver_rows = applicable_subset.index == self.solver
+            #rank = applicable_subset[solver_rows][rank_column].iloc[0]
+            rank = applicable_subset.get_column(rank_column).first()
             ordinal_pctile = shared.utils.ordinal_suffix(math.floor(pctile * 100))
             ordinal_rank = shared.utils.ordinal_suffix(int(rank))
             label_prefix = "\U00002606" if rank <= 3 else "   "
@@ -299,14 +329,17 @@ def create_rank_chart(
 
     years = shared.utils.applicable_years(full_df, [solver])
 
-    df = full_df.copy()
-    df["Points"] = pd.to_numeric(df["Points"], errors="coerce")
+    df = full_df
+    #df["Points"] = pd.to_numeric(df["Points"], errors="coerce")
+    df = df.with_columns(pl.col("Points").cast(pl.Float64).alias("Points"))
 
-    wsc_years = sorted(full_df[full_df["WSC_entry"] == 1]["year"].unique())
+    #wsc_years = sorted(full_df[full_df["WSC_entry"] == 1]["year"].unique())
+    wsc_years = sorted(full_df.filter((pl.col("WSC_entry") == 1) & pl.col("year").is_not_null()).get_column("year").unique().to_list())
     performances = PerformanceCollector(solver, included_events, wsc_years)
 
     for year in years:
-        subset = df[df["year"] == year]
+        #subset = df[df["year"] == year]
+        subset = df.filter(pl.col("year") == year)
 
         performances.gp_performance_by_solver_year(subset, year, use_playoffs=use_gp_playoffs)
         performances.wsc_performance_by_solver_year(subset, year)

@@ -92,15 +92,17 @@ def applicable_years(full_df, selected_solvers):
     in between.
     """
     #years = sorted(full_df["year"].unique())
-    years = sorted(full_df.get_column("year").unique())
+    years = sorted(full_df.filter(pl.col("year").is_not_null()).get_column("year").unique().to_list())
 
     # Restrict to years since at least one of the users started and up until the last
     # year with any of them, and include every year in between
     #first_year = full_df.loc[full_df.index.isin(selected_solvers), "year"].min()
-    matching_users = pl.col("user_pseudo_id").is_in(selected_solvers)
-    first_year = full_df.filter(matching_users).get_column("year").min()
+    filtered = full_df.filter(pl.col("user_pseudo_id").is_in(selected_solvers))
+    if len(filtered) == 0:
+        return []
+    first_year = filtered.get_column("year").min()
     #final_year = full_df.loc[full_df.index.isin(selected_solvers), "year"].max()
-    final_year = full_df.filter(matching_users).get_column("year").max()
+    final_year = filtered.get_column("year").max()
     return [year for year in years if first_year <= year <= final_year]
 
 def ids_to_names(df_with_names, selected_solvers, name_column="Name"):
@@ -197,7 +199,7 @@ def convert_columns_to_max_pct(df, pattern=r"^\d{4}_\d+"):
     for column in df.columns:
         if re.match(pattern, column):
             #df[column] = pd.to_numeric(df[column])
-            subset = subset.with_columns(pl.col(column).cast(pl.Float32))
+            df = df.with_columns(pl.col(column).cast(pl.Float32))
             as_pct = df[column] / df[column].max()
             #df[column] = as_pct
             df = df.with_columns(

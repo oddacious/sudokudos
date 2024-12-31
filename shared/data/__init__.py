@@ -102,8 +102,8 @@ def create_flat_dataset_polars(full_df, metric="points", competition="GP"):
 
     flattened = None
 
-    #years = sorted(full_df["year"].unique())
-    years = sorted(full_df.get_column("year").unique())
+    #years = sorted(full_df.get_column("year").unique().to_list())
+    years = full_df.filter(pl.col("year").is_not_null()).get_column("year").unique()
 
     for year in years:
         #single_year = subset[subset["year"] == year].copy()
@@ -192,6 +192,63 @@ def merge_unflat_datasets(gp_dataset, wsc_dataset):
 
     return merged
 
+def merge_unflat_datasets_polars(gp_dataset, wsc_dataset):
+    """Combine solver-year level datasets from the GP and WSC."""
+    kept_columns = ["WSC_entry", "year", "Official", "Official_rank",
+                    "Unofficial_rank", "WSC_total", "Name", "user_pseudo_id"]
+    for competition_round in range(1, shared.constants.MAXIMUM_ROUND + 1):
+        round_name = f"WSC_t{competition_round} points"
+        if round_name in wsc_dataset.columns:
+            # Also calculate the round position at this time
+            position_name = f"WSC_t{competition_round} position"
+            #wsc_dataset[round_name] = pd.to_numeric(
+            #    wsc_dataset[round_name], errors="coerce").fillna(0)
+            wsc_dataset = wsc_dataset.with_columns(
+                        pl.col(round_name).cast(pl.Float64).fill_null(0).alias(round_name)
+                    )
+            # wsc_dataset[position_name] = wsc_dataset.groupby("year")[round_name].rank(
+            #     ascending=False, method="min")
+            # wsc_dataset = wsc_dataset.with_columns(
+            #     pl.col(pl.struct("round_name", "year"))
+            #     .rank(descending=True, method="min")
+            #     .over("year")
+            #     .alias(position_name)
+            # )
+            #print(wsc_dataset.columns)
+            #print(round_name)
+            #print(round_name in wsc_dataset.columns)
+            wsc_dataset = wsc_dataset.with_columns(
+                pl.col(round_name)
+                .rank(descending=True, method="min")
+                .over("year")
+                .alias(position_name)
+            )
+
+            kept_columns.append(round_name)
+            kept_columns.append(position_name)
+
+    #minimal = wsc_dataset[kept_columns]
+    minimal = wsc_dataset.select(kept_columns)
+
+    # Either the GP or WSC migth be missing, so take name from either.
+    # Preferring GP, because it is naturally more consistent (except when
+    # people change it) and we have overrides to make it consistent in such
+    # cases anyways.
+    #merged = pd.merge(gp_dataset, minimal, on=["user_pseudo_id", "year"], how="outer")
+    merged = gp_dataset.join(minimal, how="outer", on=["user_pseudo_id", "year"])
+    merged = merged.with_columns(
+        pl.coalesce([pl.col("user_pseudo_id"), pl.col("user_pseudo_id_right")]).alias("user_pseudo_id")
+    )
+    #merged["Name"] = merged["Name_x"].combine_first(merged["Name_y"])
+    merged = merged.with_columns(
+        pl.coalesce([pl.col("Name"), pl.col("Name_right")]).alias("Name")
+    )
+
+    #merged.drop(columns=["Name_x", "Name_y"], inplace=True)
+    merged = merged.drop("Name_right")
+
+    return merged
+
 def merge_flat_datasets(datasets, suffixes=("_gp", "_wsc")):
     """Combine solver level datasets from the GP and WSC."""
     if len(datasets) != len(suffixes):
@@ -204,11 +261,14 @@ def merge_flat_datasets(datasets, suffixes=("_gp", "_wsc")):
         for column in dataset.columns:
             if re.fullmatch(r"\d{4}_\d+", column):
                 rename[column] = column + suffixes[index]
-        dataset.rename(columns=rename, inplace=True)
+        #dataset.rename(columns=rename, inplace=True)
+        datasets[index] = datasets[index].rename(rename)
 
-    merged = pd.merge(datasets[0], datasets[1], on="user_pseudo_id", how="outer")
-    merged.rename(columns={"Name_x": "Name"}, inplace=True)
-    merged.drop(columns=["Name_y"], inplace=True)
+    #merged = pd.merge(datasets[0], datasets[1], on="user_pseudo_id", how="outer")
+    merged = datasets[0].join(datasets[1], on="user_pseudo_id", how="outer")
+    #merged.rename(columns={"Name_x": "Name"}, inplace=True)
+    #merged.drop(columns=["Name_y"], inplace=True)
+    merged = merged.drop("Name_right")
     #merged.set_index("user_pseudo_id", inplace=True)
 
     return merged
@@ -258,13 +318,26 @@ def attemped_mapping(wsc_df, gp_df):
 
 def ids_by_total_points(combined):
     """Return identifiers ordered by total points across all competitions."""
-    df = combined.copy()
-    df["total points"] = (pd.to_numeric(df["Points"]).fillna(0) +
-                          pd.to_numeric(df["WSC_total"]).fillna(0))
+    #df = combined.copy()
+    df = combined.filter(pl.col("user_pseudo_id").is_not_null())
+    #df["total points"] = (pd.to_numeric(df["Points"]).fillna(0) +
+    #                      pd.to_numeric(df["WSC_total"]).fillna(0))
+    df = df.with_columns(
+        (pl.col("Points").cast(pl.Float64).fill_null(0) +
+        pl.col("WSC_total").cast(pl.Float64).fill_null(0)).alias("total points"),
+    )
 
-    aggregate = df.groupby("user_pseudo_id")["total points"].sum()
+    #aggregate = df.groupby("user_pseudo_id")["total points"].sum()
+    aggregate = (
+        df.group_by("user_pseudo_id")
+        .agg(pl.col("total points").sum().alias("total points"))
+    )
 
-    return aggregate.sort_values(ascending=False).index.to_list()
+    #return aggregate.sort_values(ascending=False).index.to_list()
+    return (aggregate.sort("total points", descending=True)
+        .get_column("user_pseudo_id")
+        .to_list()
+    )
 
 def wsc_rounds_by_year():
     """Return the list of rounds (as integers) for each WSC year.
