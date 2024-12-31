@@ -166,35 +166,6 @@ def create_flat_dataset_polars(full_df, metric="points", competition="GP"):
 def merge_unflat_datasets(gp_dataset, wsc_dataset):
     """Combine solver-year level datasets from the GP and WSC."""
     kept_columns = ["WSC_entry", "year", "Official", "Official_rank",
-                    "Unofficial_rank", "WSC_total", "Name"]
-    for competition_round in range(1, shared.constants.MAXIMUM_ROUND + 1):
-        round_name = f"WSC_t{competition_round} points"
-        if round_name in wsc_dataset.columns:
-            # Also calculate the round position at this time
-            position_name = f"WSC_t{competition_round} position"
-            wsc_dataset[round_name] = pd.to_numeric(
-                wsc_dataset[round_name], errors="coerce").fillna(0)
-            wsc_dataset[position_name] = wsc_dataset.groupby("year")[round_name].rank(
-                ascending=False, method="min")
-
-            kept_columns.append(round_name)
-            kept_columns.append(position_name)
-
-    minimal = wsc_dataset[kept_columns]
-
-    # Either the GP or WSC migth be missing, so take name from either.
-    # Preferring GP, because it is naturally more consistent (except when
-    # people change it) and we have overrides to make it consistent in such
-    # cases anyways.
-    merged = pd.merge(gp_dataset, minimal, on=["user_pseudo_id", "year"], how="outer")
-    merged["Name"] = merged["Name_x"].combine_first(merged["Name_y"])
-    merged.drop(columns=["Name_x", "Name_y"], inplace=True)
-
-    return merged
-
-def merge_unflat_datasets_polars(gp_dataset, wsc_dataset):
-    """Combine solver-year level datasets from the GP and WSC."""
-    kept_columns = ["WSC_entry", "year", "Official", "Official_rank",
                     "Unofficial_rank", "WSC_total", "Name", "user_pseudo_id"]
     for competition_round in range(1, shared.constants.MAXIMUM_ROUND + 1):
         round_name = f"WSC_t{competition_round} points"
