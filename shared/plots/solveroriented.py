@@ -247,7 +247,7 @@ class PerformanceCollector():
             pctile = applicable_subset.get_column("percentile").first()
             #solver_rows = applicable_subset.index == self.solver
             #rank = applicable_subset[solver_rows][rank_column].iloc[0]
-            rank = applicable_subset.get_column(rank_column).first()
+            rank = applicable_subset.filter(pl.col("user_pseudo_id") == self.solver).get_column(rank_column).first()
             ordinal_pctile = shared.utils.ordinal_suffix(math.floor(pctile * 100))
             ordinal_rank = shared.utils.ordinal_suffix(int(rank))
             label_prefix = "\U00002606" if rank <= 3 else "   "
