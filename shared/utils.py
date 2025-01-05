@@ -140,7 +140,7 @@ def sum_top_k_of_n_rounds(full_df, n, k, round_columns, competition="GP"):
         found_rounds += 1
         round_point_columns.append(col_name)
         #subset[col_name] = pd.to_numeric(subset[col_name], errors="coerce")
-        subset = full_df.with_columns(pl.col(col_name).cast(pl.Float32))
+        #subset = full_df.with_columns(pl.col(col_name).cast(pl.Float32))
         if found_rounds == n:
             break
 

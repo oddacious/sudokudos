@@ -15,10 +15,12 @@ def present_wsc():
 
     gp = shared.data.loaders.gp.load_gp()
     wsc_unmapped = shared.data.loaders.wsc.load_wsc()
+    #st.dataframe(wsc_unmapped)
     wsc = shared.data.attemped_mapping(wsc_unmapped, gp)
+    #st.dataframe(wsc)
 
-    wsc_unmapped = shared.data.loaders.wsc.polarize_wsc(wsc_unmapped)
-    wsc = shared.data.loaders.wsc.polarize_wsc(wsc)
+    #wsc_unmapped = shared.data.loaders.wsc.polarize_wsc(wsc_unmapped)
+    #wsc = shared.data.loaders.wsc.polarize_wsc(wsc)
 
     years = list(reversed(shared.utils.all_available_years(wsc)))
 
@@ -56,6 +58,7 @@ def present_wsc():
 
     #wsc_unmapped_subset = wsc_unmapped[wsc_unmapped["year"] == selected_year]
     wsc_unmapped_subset = wsc_unmapped.filter(pl.col("year") == selected_year)
+    st.dataframe(wsc_unmapped_subset)
 
     cols = st.columns([0.1, 0.1, 0.1, 0.7])
 
@@ -87,6 +90,7 @@ def present_wsc():
     #available = list(year_subset.index.unique())
     available = list(year_subset.sort(by=["Unofficial_rank"], descending=False).get_column("user_pseudo_id").unique(maintain_order=True))
     num_default = 3
+    st.write(available[:10])
 
     chosen_solvers = shared.utils.extract_query_param_list(
         "solvers", available, default=available[:num_default])
@@ -140,7 +144,7 @@ def present_wsc():
 
     #year_data = wsc_unmapped[wsc_unmapped["year"] == selected_year].drop(
     #    columns=["year", "WSC_entry"])
-    year_data = wsc_unmapped.filter(pl.col("year") == selected_year).drop(["year", "WSC_entry", "index"])
+    year_data = wsc_unmapped.filter(pl.col("year") == selected_year).drop(["year", "WSC_entry"])
 
     for wsc_round in range(1, shared.constants.MAXIMUM_ROUND + 1):
         colname = f"WSC_t{wsc_round} points"

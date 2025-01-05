@@ -229,11 +229,13 @@ def create_violin_chart(full_df, selected_solvers, year_subset=(2024,),
             if solver_row.height < 1:
                 raise ValueError(f"Expected 1 row for solver \"{solver}\", found {solver_row.height}")
             #score = pd.to_numeric(solver_row.iloc[0], errors="coerce")
-            score = solver_row.get_column(column)
+            score = solver_row.get_column(column).cast(pl.Float64).fill_null(0).item()
+            # Only want the labels added to the legend once, so do it in the first round
             if idx == 0:
                 label = names[solver]
             else:
                 label=None
+            print(f"Solver {solver}: score={score}, label={label}")
             ax[idx].plot(1, score, color=next(color_cycle), marker='o', markersize=10,
                          markerfacecolor='white', label=label)
 

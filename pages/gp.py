@@ -12,8 +12,13 @@ def present_gp():
     """Create the GP page."""
     shared.presentation.global_setup_and_display()
 
+    #old = shared.data.loaders.gp.load_gp_pandas()
+    #st.dataframe(old.sort_values(by=["year", "#"], ascending=True))
+
     combined_df = shared.data.loaders.gp.load_gp()
-    combined_df = shared.data.loaders.gp.polarize_gp(combined_df)
+    #st.dataframe(combined_df.sort(["year", "#"], descending=False))
+    #st.dataframe(combined_df.filter(pl.col("Rank") <= 10).sort(["year", "#"], descending=False))
+    #combined_df = shared.data.loaders.gp.polarize_gp(combined_df)
 
     years = list(reversed(shared.utils.all_available_years(combined_df)))
 
@@ -111,12 +116,12 @@ def present_gp():
 
     #subset = combined_df[combined_df["year"] == selected_year].drop(
     #    columns=["year", "source_file"])
-    subset = combined_df.filter(pl.col("year") == selected_year).drop(["year", "source_file"])
+    subset = combined_df.filter(pl.col("year") == selected_year).drop(["year", "source_file"]).sort("Rank")
 
     #subset_selected = subset[subset.index.isin(selected_solvers)]
     subset_selected = subset.filter(pl.col("user_pseudo_id").is_in(selected_solvers))
 
-    unshown_columns = ["#", "index", "user_pseudo_id"]
+    unshown_columns = ["#", "user_pseudo_id"]
 
     if len(subset_selected) > 0:
         #st.dataframe(subset_selected.drop(columns=unshown_columns), hide_index=True)

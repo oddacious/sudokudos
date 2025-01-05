@@ -245,44 +245,104 @@ def merge_flat_datasets(datasets, suffixes=("_gp", "_wsc")):
 
 def attemped_mapping(wsc_df, gp_df):
     """Update a WSC dataset with identifiers from a GP dataset."""
-    wsc_mapped = wsc_df.copy()
-    gp_df2 = gp_df.copy().reset_index()
-    gp_index = gp_df2[["Name", "Country", "Nick", "user_pseudo_id"]].drop_duplicates()
-    gp_index["name_lc"] = gp_index["Name"].str.lower()
+    #wsc_mapped = wsc_df.copy()
+    #gp_df2 = gp_df.copy().reset_index()
+    #gp_index = gp_df2[["Name", "Country", "Nick", "user_pseudo_id"]].drop_duplicates()
+    gp_index = gp_df.select(["Name", "Country", "Nick", "user_pseudo_id"]).unique()
+    #gp_index["name_lc"] = gp_index["Name"].str.lower()
+    gp_index = gp_index.with_columns(pl.col("Name").str.to_lowercase().alias("name_lc"))
 
-    wsc_mapped["Name"] = wsc_mapped["Name"].str.replace(",", "")
-    wsc_mapped["Name"] = wsc_mapped["Name"].str.title()
-    wsc_mapped["name_lc"] = wsc_mapped["Name"].str.lower()
+    # wsc_mapped["Name"] = wsc_mapped["Name"].str.replace(",", "")
+    # wsc_mapped["Name"] = wsc_mapped["Name"].str.title()
+    # wsc_mapped["name_lc"] = wsc_mapped["Name"].str.lower()
+    wsc_mapped = wsc_df.with_columns(
+        pl.col("Name").str.to_titlecase().replace(",", "").alias("Name"),
+        pl.col("Name").str.to_lowercase().alias("name_lc")
+    )
 
-    parts = wsc_mapped["Name"].str.split()
-    wsc_mapped["flipped_name"] = parts.apply(
-        lambda x: " ".join(reversed(x)) if isinstance(x, list) else "")
+    
+    #parts = wsc_mapped["Name"].str.split()
+    #parts = wsc_mapped.get_column("Name").str.split()
+    #wsc_mapped["flipped_name"] = parts.apply(
+    #    lambda x: " ".join(reversed(x)) if isinstance(x, list) else "")
+    wsc_mapped = wsc_mapped.with_columns(
+        pl.col("Name")
+        .str.split(" ")
+        .list.reverse()
+        .list.join(" ")
+        .alias("flipped_name")
+    )
 
-    joined = pd.merge(wsc_mapped, gp_index, on="Name", how="left")
-    joined_flipped = pd.merge(joined, gp_index, left_on="flipped_name", right_on="Name", how="left")
-    wsc_and_gp = pd.merge(joined_flipped, gp_index, on="name_lc", how="left")
+    #joined = pd.merge(wsc_mapped, gp_index, on="Name", how="left")
+    joined = (
+        wsc_mapped
+        .join(gp_index, on="Name", how="left").drop("name_lc_right")
+        #.rename({"user_pseudo_id_right": "user_pseudo_id_name"})
+    )
+    # #print(joined)
+    # print("joined columns:")
+    # print(joined.columns)
+    #joined_flipped = pd.merge(joined, gp_index, left_on="flipped_name", right_on="Name", how="left")
+    joined_flipped = (
+        joined
+        .join(gp_index, left_on="flipped_name", right_on="Name", how="left")
+        .drop(["Country_right", "Nick_right"])
+        .rename({"user_pseudo_id_right": "user_pseudo_id_flipped_name"})
+    )
+    #wsc_and_gp = pd.merge(joined_flipped, gp_index, on="name_lc", how="left")
+    #print(joined_flipped.columns)
+    #print(gp_index.columns)
+    wsc_and_gp = (
+        joined_flipped
+        .join(gp_index, on="name_lc", how="left")
+        .rename(({"user_pseudo_id_right": "user_pseudo_id_name_lc"}))
+    )
 
     # Otherwise the "Name" column comes from `gp_index` in the last join
-    wsc_and_gp.drop(columns=["Name"], inplace=True)
-    wsc_and_gp.rename(columns={"Name_x": "Name"}, inplace=True)
+    #wsc_and_gp.drop(columns=["Name"], inplace=True)
+    #wsc_and_gp = wsc_and_gp.drop("Name")
+    #wsc_and_gp.rename(columns={"Name_x": "Name"}, inplace=True)
+    #wsc_and_gp = wsc_and_gp.rename({"Name_left": "Name"})
 
     # Use our attempted identifiers in a hierarchy by name, then flipped name, then lowercase name
-    wsc_and_gp["matched_id"] = wsc_and_gp["user_pseudo_id_x"].combine_first(
-        wsc_and_gp["user_pseudo_id_y"]).combine_first(wsc_and_gp["user_pseudo_id"])
+    #wsc_and_gp["matched_id"] = wsc_and_gp["user_pseudo_id_flipped_name"].combine_first(
+    #    wsc_and_gp["user_pseudo_id_name_lc"]).combine_first(wsc_and_gp["user_pseudo_id"])
+    
+    wsc_and_gp = wsc_and_gp.with_columns(
+        pl.col("user_pseudo_id_name_lc")
+        .fill_null(pl.col("user_pseudo_id_flipped_name"))
+        .fill_null(pl.col("user_pseudo_id"))
+        .alias("matched_id")
+    )
 
     manual_map = shared.constants.WSC_NAME_TO_GP_ID_OVERRIDE
-    wsc_and_gp["matched_id"] = wsc_and_gp.apply(
-        lambda row: (manual_map[row['flipped_name']] if row['flipped_name'] in manual_map
-                     else row['matched_id']), axis=1)
-    wsc_and_gp["matched_id"] = wsc_and_gp.apply(
-        lambda row: (manual_map[row['Name']] if row['Name'] in manual_map
-                     else row['matched_id']), axis=1)
+    # wsc_and_gp["matched_id"] = wsc_and_gp.apply(
+    #     lambda row: (manual_map[row['flipped_name']] if row['flipped_name'] in manual_map
+    #                  else row['matched_id']), axis=1)
 
-    wsc_and_gp["user_pseudo_id"] = wsc_and_gp["matched_id"]
+    # HERE, need to fix map_dict
+    #After getting this function, might just need to re-add the pre-2024 WSC years,
+    # # and then also replace that one usage for window functions
+
+    expr = None
+    for key in manual_map:
+        if expr is None:
+            expr = pl.when(pl.col("Name") == key).then(pl.lit(manual_map[key]))
+        else:
+            expr = expr.when(pl.col("Name") == key).then(pl.lit(manual_map[key]))
+            expr = expr.when(pl.col("flipped_name") == key).then(pl.lit(manual_map[key]))
+    expr = expr.otherwise(pl.col("matched_id")).alias("matched_id")
+
+    wsc_and_gp = wsc_and_gp.with_columns(expr).drop("user_pseudo_id").rename({"matched_id": "user_pseudo_id"})
+
+    #wsc_and_gp["user_pseudo_id"] = wsc_and_gp["matched_id"]
 
     # TODO: Add in country
-    wsc_and_gp["user_pseudo_id"] = wsc_and_gp["user_pseudo_id"].fillna(wsc_and_gp["Name"])
-    wsc_and_gp.set_index("user_pseudo_id", inplace=True)
+    #wsc_and_gp["user_pseudo_id"] = wsc_and_gp["user_pseudo_id"].fillna(wsc_and_gp["Name"])
+    wsc_and_gp = wsc_and_gp.with_columns(
+        pl.col("user_pseudo_id").fill_null(pl.col("Name"))
+    )
+    #wsc_and_gp.set_index("user_pseudo_id", inplace=True)
 
     return wsc_and_gp
 
