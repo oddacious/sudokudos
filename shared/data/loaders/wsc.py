@@ -1,11 +1,10 @@
-#import pandas as pd
 import polars as pl
 
 import streamlit as st
 
 import shared.constants
 
-#@st.cache_data
+@st.cache_data
 def process_wsc_2024(_df):
     """Process a CSV in the format used for the 2024 WSC."""
     df = _df.rename({
@@ -23,15 +22,13 @@ def process_wsc_2024(_df):
         "R11": "WSC_t11 points",
     })
 
-    #df["Official"] = df["Official"] == "Y"
     df = df.with_columns(
         (pl.col("Official") == "Y").alias("Official"),
-        #pl.col("Unofficial_rank").cast(pl.Int32).alias("Unofficial_rank")
     )
 
     return df
 
-#@st.cache_data
+@st.cache_data
 def process_wsc_2023(_df):
     """Process a CSV in the format used for the 2023 WSC."""
     df = _df.rename({
@@ -50,11 +47,8 @@ def process_wsc_2023(_df):
         "Rd. 10": "WSC_t10 points",
     })
 
-    #df["Official"] = df["Official Comp."] == "Y"
-    #df["Unofficial_rank"] = df["WSC_total"].rank(ascending=False)
     df = df.with_columns(
         (pl.col("Official Comp.") == "Y").alias("Official"),
-        #pl.col("WSC_total").str.replace(",", "").alias("WSC_total")
     )
     df = df.with_columns(
         pl.col("WSC_total").rank(descending=True).cast(pl.Int64).alias("Unofficial_rank")
@@ -62,7 +56,7 @@ def process_wsc_2023(_df):
 
     return df
 
-#@st.cache_data
+@st.cache_data
 def process_wsc_2022(_df):
     """Process a CSV in the format used for the 2022 WSC."""
     df = _df.rename({
@@ -80,10 +74,6 @@ def process_wsc_2022(_df):
         "Round 12": "WSC_t12 points",
     })
 
-    # df["Name"] = (df["First name"] + " " + df["Last name"]).astype(str)
-    # df["Official"] = df["Official"] == 1
-    # df.loc[df["Official"], "Official_rank"] = df.loc[df["Official"], "Unofficial_rank"].rank()
-
     df = df.with_columns(
         (pl.col("First name") + pl.lit(" ") + pl.col("Last name")).alias("Name"),
         (pl.col("Official") == 1).alias("Official"),
@@ -92,7 +82,7 @@ def process_wsc_2022(_df):
 
     return df
 
-#@st.cache_data
+@st.cache_data
 def process_wsc_2019(_df):
     """Process a CSV in the format used for the 2019 WSC."""
     df = _df.rename({
@@ -111,14 +101,13 @@ def process_wsc_2019(_df):
         "R 13": "WSC_t13 points",
     })
 
-    #df["Official"] = ~df["Official_rank"].isna()
     df = df.with_columns(
         pl.col("Official_rank").is_not_null().alias("Official")
     )
 
     return df
 
-#@st.cache_data
+@st.cache_data
 def process_wsc_2018(_df):
     """Process a CSV in the format used for the 2018 WSC.
     
@@ -145,7 +134,6 @@ def process_wsc_2018(_df):
         "round10": "WSC_t10 points",
     })
 
-    #df["Official"] = ~df["Official_rank"].isna()
     df = df.with_columns(
         pl.col("Official_rank").is_not_null().alias("Official"),
         pl.col("Unofficial_rank").cast(pl.Int64).alias("Unofficial_rank")
@@ -153,7 +141,7 @@ def process_wsc_2018(_df):
 
     return df
 
-#@st.cache_data
+@st.cache_data
 def process_wsc_2017(_df):
     """Process a CSV in the format used for the 2017 WSC."""
     df = _df.rename({
@@ -175,14 +163,13 @@ def process_wsc_2017(_df):
         "R16": "WSC_t16 points",
     })
 
-    #df["Official"] = ~df["Official_rank"].isna()
     df = df.with_columns(
         pl.col("Official_rank").is_not_null().alias("Official")
     )
 
     return df
 
-#@st.cache_data
+@st.cache_data
 def process_wsc_2016(_df):
     """Process a CSV in the format used for the 2016 WSC."""
     df = _df.rename({
@@ -200,12 +187,6 @@ def process_wsc_2016(_df):
         "R12": "WSC_t12 points",
     })
 
-    # df["Name"] = (df["First name"] + " " + df["Last name"]).astype(str)
-    # df["Official_rank"] = pd.to_numeric(
-    #     df["Fin."].combine_first(df["Off."]), errors="coerce")
-    # df["WSC_total"] = pd.to_numeric(df["WSC_total"].str.replace(",", ""), errors="coerce")
-    # df["Official"] = ~df["Official_rank"].isna()
-
     df = df.with_columns(
         (pl.col("First name") + pl.lit(" ") + pl.col("Last name")).alias("Name"),
         pl.col("Fin.").fill_null(pl.col("Off.")).alias("Official_rank"),
@@ -213,13 +194,14 @@ def process_wsc_2016(_df):
         pl.col("WSC_t11 points").str.replace(",", "").alias("WSC_t11 points"),
         pl.col("WSC_t12 points").alias("WSC_t12 points")
     )
+
     df = df.with_columns(
         pl.col("Official_rank").is_not_null().alias("Official")
     )
 
     return df
 
-#@st.cache_data
+@st.cache_data
 def process_wsc_2015(_df):
     """Process a CSV in the format used for the 2015 WSC."""
     df = _df.rename({
@@ -235,19 +217,18 @@ def process_wsc_2015(_df):
         "Round 9": "WSC_t9 points",
     })
 
-    # df["Official_rank"] = pd.to_numeric(
-    #     df["Play-off"].combine_first(df["Off. rank"]), errors="coerce")
-
-    # df["Official"] = df["Off. rank"] != "---"
-
     df = df.with_columns(
-        pl.col("Play-off").fill_null(pl.col("Off. rank")).replace("---", pl.lit(None)).cast(pl.Int64).alias("Official_rank"),
+        pl.col("Play-off")
+            .fill_null(pl.col("Off. rank"))
+            .replace("---", pl.lit(None))
+            .cast(pl.Int64)
+            .alias("Official_rank"),
         (pl.col("Off. rank") != "---").alias("Official")
     )
 
     return df
 
-#@st.cache_data
+@st.cache_data
 def process_wsc_2014(_df):
     """Process a CSV in the format used for the 2014 WSC."""
     df = _df.rename({
@@ -262,17 +243,6 @@ def process_wsc_2014(_df):
         "R9": "WSC_t9 points",
         "R10": "WSC_t10 points",
     })
-
-    # # Third place tie.
-    # df["Final"] = df["Final"].replace("3=", "3")
-
-    # df["Official_rank"] = pd.to_numeric(df["Final"], errors="coerce")
-
-    # # Original field didn't reflect playoffs for the top 10 competitors
-    # playoff = df["Official_rank"] <= 10
-    # df.loc[playoff, "Unofficial_rank"] = df[playoff]["Official_rank"]
-
-    # df["Official"] = ~df["Official"].isna()
 
     df = df.with_columns(
         pl.col("Official").is_not_null().alias("Official"),
@@ -294,7 +264,7 @@ def process_wsc_2014(_df):
 
     return df
 
-#@st.cache_data
+@st.cache_data
 def process_wsc_2012(_df):
     """Process a CSV in the format used for the 2012 WSC."""
     df = _df.rename({
@@ -309,14 +279,6 @@ def process_wsc_2012(_df):
         "Part 6": "WSC_t6 points",
         "Part 7": "WSC_t7 points",
     })
-
-    #df["Official_rank"] = pd.to_numeric(df["Off."], errors="coerce")
-
-    # # Original field didn't reflect playoffs for the top 8 competitors
-    # playoff = df["Official_rank"] <= 8
-    # df.loc[playoff, "Unofficial_rank"] = df[playoff]["Official_rank"]
-
-    # df["Official"] = ~df["Official_rank"].isna()
 
     df = df.with_columns(
         pl.col("Off.").cast(pl.Int64).alias("Official_rank"),
@@ -333,7 +295,7 @@ def process_wsc_2012(_df):
 
     return df
 
-#@st.cache_data
+@st.cache_data
 def process_wsc_2011(_df):
     """Process a CSV in the format used for the 2011 WSC."""
     df = _df.rename({
@@ -351,17 +313,6 @@ def process_wsc_2011(_df):
         "Part 10": "WSC_t10 points",
     })
 
-    # df["Name"] = (df["Name 1"] + " " + df["Name 2"]).astype(str)
-    # # Validated that "Playoff" supercedes "Official" by looking at Wikipedia.
-    # df["Official_rank"] = pd.to_numeric(
-    #     df["Playoff"].combine_first(df["Official"]), errors="coerce")
-
-    # # Original field didn't reflect playoffs for the top 10 competitors
-    # playoff = df["Official_rank"] <= 10
-    # df.loc[playoff, "Unofficial_rank"] = df[playoff]["Official_rank"]
-
-    #df["Official"] = ~df["Official_rank"].isna()
-
     df = df.with_columns(
         (pl.col("Name 1") + pl.lit(" ") + pl.col("Name 2")).alias("Name"),
         pl.col("Official").is_not_null().alias("Official"),
@@ -378,7 +329,7 @@ def process_wsc_2011(_df):
 
     return df
 
-#@st.cache_data
+@st.cache_data
 def process_wsc_2010(_df):
     """Process a CSV in the format used for the 2010 WSC."""
     df = _df.rename({
@@ -396,14 +347,6 @@ def process_wsc_2010(_df):
         "1500m": "WSC_t10 points",
     })
 
-    # df['Name'] = df['Name'].str.rstrip('\n')
-
-    # df["Official_rank"] = pd.to_numeric(df["Official_rank"], errors="coerce")
-    # df["Unofficial_rank"] = df["Official_rank"]
-
-    # # No indication of a disctinction between official and unoffical.
-    # df["Official"] = True
-
     df = df.with_columns(
         pl.col("Name").str.replace_all("[\n]+$", "").alias("Name"),
         pl.col("Official_rank").cast(pl.Int64).alias("Official_rank"),
@@ -415,7 +358,6 @@ def process_wsc_2010(_df):
 
     return df
 
-#@st.cache_data
 def filter_wsc_fields(_df):
     df = _df
 
@@ -427,21 +369,14 @@ def filter_wsc_fields(_df):
         if round_name in df.columns:
             kept_columns.append(round_name)
 
-    #return df[kept_columns]
     return df.select(kept_columns)
 
-#@st.cache_data
 def numberize_round_columns(_df):
     """Convert every column to numeric, including stripping commas if necessary."""
     df = _df
     for wsc_round in range(1, shared.constants.MAXIMUM_ROUND + 1):
         round_name = f"WSC_t{wsc_round} points"
-        # Change string values (particularly with comma separators) to floag (see: 2016)
-        #if round_name in df.columns and df[round_name].dtype == 'object':
-        #    df[round_name] = pd.to_numeric(
-        #        df[round_name].str.replace(',', ''), errors="coerce")
-        #if round_name in df.columns:
-        #    print(f"Round {round_name} has type {df.get_column(round_name).dtype}")
+        # Change string values (particularly with comma separators) to float (see: 2016)
         if round_name in df.columns:
             if df.get_column(round_name).dtype == 'object':
                 df = df.with_columns(pl.col(round_name).str.replace(',', '').cast(pl.Float64).alias(round_name))
@@ -452,7 +387,25 @@ def numberize_round_columns(_df):
 
     return df
 
-#@st.cache_data
+def append_new_dataframe(base, addition):
+    """Align columns and vertically append `addition` to `base`"""
+    if base is None:
+        base = addition
+    else:
+        base_schema = base.schema
+        addition_schema = addition.schema
+        for col in base.columns:
+            if col not in addition.columns:
+                addition = addition.with_columns(pl.lit(None).cast(base_schema[col]).alias(col))
+        for col in addition.columns:
+            if col not in base.columns:
+                base = base.with_columns(pl.lit(None).cast(addition_schema[col]).alias(col))
+        addition = addition.select(base.columns)
+        base = pl.concat([base, addition], how="vertical")
+
+    return base
+
+@st.cache_data
 def load_wsc(csv_directory="data/raw/wsc/"):
     """Load all WSC CSV files"""
     year_to_function = {
@@ -479,12 +432,8 @@ def load_wsc(csv_directory="data/raw/wsc/"):
 
     multiyear = None
     for year in reversed(sorted(year_to_function)):
-        #data = pd.read_csv(f"{csv_directory}/wsc_{year}.csv")
         data = pl.read_csv(f"{csv_directory}/wsc_{year}.csv")
         processed = year_to_function[year](data)
-        # processed["year"] = year
-        # processed["WSC_entry"] = True
-        # processed["WSC_total"] = pd.to_numeric(processed["WSC_total"], errors="coerce").astype(int)
         processed = processed.with_columns(
             pl.lit(year).alias("year"),
             pl.lit(True).alias("WSC_entry"),
@@ -492,28 +441,8 @@ def load_wsc(csv_directory="data/raw/wsc/"):
         )
         processed = filter_wsc_fields(processed)
         processed = numberize_round_columns(processed)
-        if multiyear is None:
-            #multiyear = processed.copy()
-            multiyear = processed
-        else:
-            #multiyear = pd.concat([multiyear, processed], ignore_index=True)
-            min_year = 0
-            if year <= min_year:
-                st.write(year)
-            multiyear_schema = multiyear.schema
-            processed_schema = processed.schema
-            for col in multiyear.columns:
-                if col not in processed.columns:
-                    processed = processed.with_columns(pl.lit(None).cast(multiyear_schema[col]).alias(col))
-            for col in processed.columns:
-                if col not in multiyear.columns:
-                    multiyear = multiyear.with_columns(pl.lit(None).cast(processed_schema[col]).alias(col))
-            processed = processed.select(multiyear.columns)
-            if year <= min_year:
-                st.write(list(zip(processed.columns, multiyear.dtypes, processed.dtypes)))
-            #st.write(multiyear.dtypes)
-            #st.write(processed.dtypes)
-            multiyear = pl.concat([multiyear, processed], how="vertical")
+
+        multiyear = append_new_dataframe(multiyear, processed)
 
     # Ensure a consistent ordering of the round columns
     round_columns = []
@@ -522,7 +451,6 @@ def load_wsc(csv_directory="data/raw/wsc/"):
         if colname in multiyear:
             round_columns.append(colname)
     all_columns = [col for col in multiyear.columns if col not in round_columns] + round_columns
-    #multiyear = multiyear[all_columns]
     multiyear = multiyear.select(all_columns)
 
     return multiyear
