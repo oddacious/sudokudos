@@ -235,7 +235,6 @@ def create_violin_chart(full_df, selected_solvers, year_subset=(2024,),
                 label = names[solver]
             else:
                 label=None
-            print(f"Solver {solver}: score={score}, label={label}")
             ax[idx].plot(1, score, color=next(color_cycle), marker='o', markersize=10,
                          markerfacecolor='white', label=label)
 

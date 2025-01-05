@@ -15,12 +15,7 @@ def present_wsc():
 
     gp = shared.data.loaders.gp.load_gp()
     wsc_unmapped = shared.data.loaders.wsc.load_wsc()
-    #st.dataframe(wsc_unmapped)
     wsc = shared.data.attemped_mapping(wsc_unmapped, gp)
-    #st.dataframe(wsc)
-
-    #wsc_unmapped = shared.data.loaders.wsc.polarize_wsc(wsc_unmapped)
-    #wsc = shared.data.loaders.wsc.polarize_wsc(wsc)
 
     years = list(reversed(shared.utils.all_available_years(wsc)))
 
@@ -56,9 +51,7 @@ def present_wsc():
 
     st.subheader("Summary")
 
-    #wsc_unmapped_subset = wsc_unmapped[wsc_unmapped["year"] == selected_year]
     wsc_unmapped_subset = wsc_unmapped.filter(pl.col("year") == selected_year)
-    st.dataframe(wsc_unmapped_subset)
 
     cols = st.columns([0.1, 0.1, 0.1, 0.7])
 
@@ -66,9 +59,7 @@ def present_wsc():
     medal_symbols = ["\U0001F947", "\U0001F948", "\U0001F949"]
     for column in range(3):
         with cols[column]:
-            #winners = wsc_unmapped_subset[wsc_unmapped_subset["Official_rank"] == column + 1]
             winners = wsc_unmapped_subset.filter(pl.col("Official_rank") == column + 1)
-            #for _, value in winners.iterrows():
             for row in winners.iter_rows(named=True):
                 st.metric(row["Name"], medal_symbols[column])
 
@@ -86,11 +77,15 @@ def present_wsc():
     st.subheader("Solver tracker")
     #year_subset = wsc[wsc["year"] == selected_year]
     year_subset = wsc.filter(pl.col("year") == selected_year)
+    #st.dataframe(year_subset)
 
     #available = list(year_subset.index.unique())
-    available = list(year_subset.sort(by=["Unofficial_rank"], descending=False).get_column("user_pseudo_id").unique(maintain_order=True))
+    available = list(
+        year_subset
+            .sort(by=["Unofficial_rank"], descending=False)
+            .get_column("user_pseudo_id")
+            .unique(maintain_order=True))
     num_default = 3
-    st.write(available[:10])
 
     chosen_solvers = shared.utils.extract_query_param_list(
         "solvers", available, default=available[:num_default])
@@ -116,8 +111,6 @@ def present_wsc():
             st.pyplot(trend_chart, use_container_width=True)
 
     # Generate a clean dataset of the selected users
-    #year_data_mapped = wsc[wsc["year"] == selected_year]
-    #year_data_mapped = wsc.filter(pl.col("year") == selected_year)
     year_data_mapped = year_subset
     kept_columns = ["Name", "Official", "Official_rank", "WSC_total", "user_pseudo_id"]
     for wsc_round in range(1, shared.constants.MAXIMUM_ROUND + 1):
@@ -126,32 +119,22 @@ def present_wsc():
             # Some rounds don't exist in all years, but they still have columns because
             # all years are represented in one large table that contains a column for
             # every possible round.
-            #if sum(year_data_mapped[colname].isna()) != len(year_data_mapped):
             if year_data_mapped.get_column(colname).is_null().sum() != len(year_data_mapped):
                 kept_columns.append(colname)
 
-    #year_data_mapped = year_data_mapped[kept_columns]
     year_data_mapped = year_data_mapped.select(kept_columns)
-    #matching_user_rows = year_data_mapped.index.isin(selected_solvers)
-    #matching_users = year_data_mapped[matching_user_rows].copy()
     matching_users = year_data_mapped.filter(pl.col("user_pseudo_id").is_in(selected_solvers))
-    #matching_users.drop(columns=["user_pseudo_id"], inplace=True)
     matching_users = matching_users.drop("user_pseudo_id")
-    #st.dataframe(matching_users.sort_values(by="Official_rank"), hide_index=True)
     st.dataframe(matching_users.sort("Official_rank"))
 
     st.subheader("All competitors")
 
-    #year_data = wsc_unmapped[wsc_unmapped["year"] == selected_year].drop(
-    #    columns=["year", "WSC_entry"])
     year_data = wsc_unmapped.filter(pl.col("year") == selected_year).drop(["year", "WSC_entry"])
 
     for wsc_round in range(1, shared.constants.MAXIMUM_ROUND + 1):
         colname = f"WSC_t{wsc_round} points"
         if colname in year_data:
             if year_data.get_column(colname).is_null().sum() == len(year_data):
-            #if sum(year_data[colname].isna()) == len(year_data):
-                #year_data.drop(columns=[colname], inplace=True)
                 year_data = year_data.drop(colname)
 
     st.dataframe(year_data, hide_index=True)

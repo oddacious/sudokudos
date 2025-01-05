@@ -21,9 +21,6 @@ def present_solver():
     gp = shared.data.loaders.gp.load_gp()
     wsc = shared.data.attemped_mapping(wsc_unmapped, gp)
 
-    #gp_polars = shared.data.loaders.gp.polarize_gp(gp)
-    #wsc_polars = shared.data.loaders.wsc.polarize_wsc(wsc)
-
     combined_with_wsc = shared.data.merge_unflat_datasets(gp, wsc)
 
     # List solvers by total points in all competitions

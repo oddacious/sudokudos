@@ -6,6 +6,7 @@ MAXIMUM_ROUND = 16
 # function using difflib.
 WSC_NAME_TO_GP_ID_OVERRIDE = {
     "Zvěřina Jan": "Jan Zverina (Nickless) - Czech Rep.",
+    "Jan Zvěřina": "Jan Zverina (Nickless) - Czech Rep.",
     "Demiger Matúš": "Matus Demiger (Nickless) - Slovakia",
     "De Laat Bram": "Bram de Laat (Para) - Netherlands",
     "Bram De Laat": "Bram de Laat (Para) - Netherlands",

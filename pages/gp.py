@@ -12,13 +12,7 @@ def present_gp():
     """Create the GP page."""
     shared.presentation.global_setup_and_display()
 
-    #old = shared.data.loaders.gp.load_gp_pandas()
-    #st.dataframe(old.sort_values(by=["year", "#"], ascending=True))
-
     combined_df = shared.data.loaders.gp.load_gp()
-    #st.dataframe(combined_df.sort(["year", "#"], descending=False))
-    #st.dataframe(combined_df.filter(pl.col("Rank") <= 10).sort(["year", "#"], descending=False))
-    #combined_df = shared.data.loaders.gp.polarize_gp(combined_df)
 
     years = list(reversed(shared.utils.all_available_years(combined_df)))
 
@@ -52,7 +46,6 @@ def present_gp():
         args=("year", "year_selector"),
         key="year_selector")
 
-    #year_subset = combined_df[combined_df["year"] == selected_year]
     year_subset = combined_df.filter(pl.col("year") == selected_year)
 
     st.subheader("Summary")
@@ -64,7 +57,6 @@ def present_gp():
         medal_symbols = ["\U0001F947", "\U0001F948", "\U0001F949"]
         for column in range(3):
             with cols[column]:
-                #winners = year_subset[year_subset["Rank"] == column + 1]
                 winners = year_subset.filter(pl.col("Rank") == column + 1)
                 for row in winners.iter_rows(named=True):
                     st.metric(row["Name"], medal_symbols[column])
@@ -88,8 +80,11 @@ def present_gp():
 
     st.subheader("Solver tracker")
 
-    #available = list(year_subset.sort_values(by="Rank").index.unique())
-    available = list(year_subset.sort(by=["Rank"], descending=False).get_column("user_pseudo_id").unique(maintain_order=True))
+    available = list(
+        year_subset
+            .sort(by=["Rank"], descending=False)
+            .get_column("user_pseudo_id")
+            .unique(maintain_order=True))
     num_default = 3
 
     chosen_solvers = shared.utils.extract_query_param_list(
@@ -114,17 +109,14 @@ def present_gp():
                 combined_df, selected_solvers, year=selected_year)
             st.pyplot(trend_chart, use_container_width=True)
 
-    #subset = combined_df[combined_df["year"] == selected_year].drop(
-    #    columns=["year", "source_file"])
-    subset = combined_df.filter(pl.col("year") == selected_year).drop(["year", "source_file"]).sort("Rank")
+    criteria = pl.col("year") == selected_year
+    subset = combined_df.filter(criteria).drop(["year", "source_file"]).sort("Rank")
 
-    #subset_selected = subset[subset.index.isin(selected_solvers)]
     subset_selected = subset.filter(pl.col("user_pseudo_id").is_in(selected_solvers))
 
     unshown_columns = ["#", "user_pseudo_id"]
 
     if len(subset_selected) > 0:
-        #st.dataframe(subset_selected.drop(columns=unshown_columns), hide_index=True)
         st.dataframe(subset_selected.drop(unshown_columns), hide_index=True)
 
     st.subheader("All competitors")
@@ -133,7 +125,6 @@ def present_gp():
              For playoff competitors (when known) I create a total ordering by completed round and
              then completion time of last solved puzzle.""")
 
-    #st.dataframe(subset.drop(columns=unshown_columns), hide_index=True)
     st.dataframe(subset.drop(unshown_columns), hide_index=True)
 
     st.divider()

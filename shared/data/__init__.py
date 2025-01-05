@@ -242,7 +242,7 @@ def merge_flat_datasets(datasets, suffixes=("_gp", "_wsc")):
     #merged.set_index("user_pseudo_id", inplace=True)
 
     return merged
-
+import streamlit as st
 def attemped_mapping(wsc_df, gp_df):
     """Update a WSC dataset with identifiers from a GP dataset."""
     #wsc_mapped = wsc_df.copy()
@@ -256,10 +256,12 @@ def attemped_mapping(wsc_df, gp_df):
     # wsc_mapped["Name"] = wsc_mapped["Name"].str.title()
     # wsc_mapped["name_lc"] = wsc_mapped["Name"].str.lower()
     wsc_mapped = wsc_df.with_columns(
-        pl.col("Name").str.to_titlecase().replace(",", "").alias("Name"),
-        pl.col("Name").str.to_lowercase().alias("name_lc")
+        pl.col("Name").str.to_titlecase().str.replace(",", "").alias("Name"),
+        pl.col("Name").str.to_lowercase().str.replace(",", "").alias("name_lc")
     )
-
+    #wsc_mapped = wsc_mapped.with_columns(
+    #    pl.col("name_lc").str.to_lowercase().replace(",", "").alias("name_lc")
+    #)
     
     #parts = wsc_mapped["Name"].str.split()
     #parts = wsc_mapped.get_column("Name").str.split()
@@ -267,6 +269,7 @@ def attemped_mapping(wsc_df, gp_df):
     #    lambda x: " ".join(reversed(x)) if isinstance(x, list) else "")
     wsc_mapped = wsc_mapped.with_columns(
         pl.col("Name")
+        .str.replace_all(",", "")
         .str.split(" ")
         .list.reverse()
         .list.join(" ")
@@ -309,9 +312,9 @@ def attemped_mapping(wsc_df, gp_df):
     #    wsc_and_gp["user_pseudo_id_name_lc"]).combine_first(wsc_and_gp["user_pseudo_id"])
     
     wsc_and_gp = wsc_and_gp.with_columns(
-        pl.col("user_pseudo_id_name_lc")
+        pl.col("user_pseudo_id")
         .fill_null(pl.col("user_pseudo_id_flipped_name"))
-        .fill_null(pl.col("user_pseudo_id"))
+        .fill_null(pl.col("user_pseudo_id_name_lc"))
         .alias("matched_id")
     )
 
@@ -330,9 +333,8 @@ def attemped_mapping(wsc_df, gp_df):
             expr = pl.when(pl.col("Name") == key).then(pl.lit(manual_map[key]))
         else:
             expr = expr.when(pl.col("Name") == key).then(pl.lit(manual_map[key]))
-            expr = expr.when(pl.col("flipped_name") == key).then(pl.lit(manual_map[key]))
+        expr = expr.when(pl.col("flipped_name") == key).then(pl.lit(manual_map[key]))
     expr = expr.otherwise(pl.col("matched_id")).alias("matched_id")
-
     wsc_and_gp = wsc_and_gp.with_columns(expr).drop("user_pseudo_id").rename({"matched_id": "user_pseudo_id"})
 
     #wsc_and_gp["user_pseudo_id"] = wsc_and_gp["matched_id"]
@@ -342,6 +344,7 @@ def attemped_mapping(wsc_df, gp_df):
     wsc_and_gp = wsc_and_gp.with_columns(
         pl.col("user_pseudo_id").fill_null(pl.col("Name"))
     )
+    #st.dataframe(wsc_and_gp)
     #wsc_and_gp.set_index("user_pseudo_id", inplace=True)
 
     return wsc_and_gp
