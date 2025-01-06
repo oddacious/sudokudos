@@ -1,6 +1,5 @@
 import itertools
 import numpy as np
-import pandas as pd
 import polars as pl
 import matplotlib
 import matplotlib.lines
@@ -20,10 +19,8 @@ def create_participant_volume_chart(
 
     Currently only supports the GP.
     """
-    #ids_prior_years = full_df[full_df["year"] < year].index.unique()
     ids_prior_years = full_df.filter(pl.col("year") < year).get_column("user_pseudo_id").unique()
 
-    #this_year = full_df[full_df["year"] == year]
     this_year = full_df.filter(pl.col("year") == year)
 
     labels = []
@@ -35,7 +32,6 @@ def create_participant_volume_chart(
 
     previously_seen_this_year = None
     for gp_round in range(1, num_rounds + 1):
-        #played = this_year[this_year[f"GP_t{gp_round} position"].notna()]
         played = this_year.filter(pl.col(f"GP_t{gp_round} position").is_not_null())
         played_ids = played.get_column("user_pseudo_id")
 
@@ -47,14 +43,12 @@ def create_participant_volume_chart(
             sum_seen_earlier_this_year = 0
         else:
             non_veteran_ids = played_ids.filter(non_veterans)
-            #seen_this_year = non_veteran_ids.isin(previously_seen_this_year)
             seen_this_year = non_veteran_ids.is_in(previously_seen_this_year)
             sum_seen_earlier_this_year = sum(seen_this_year)
 
         if previously_seen_this_year is None:
             previously_seen_this_year = list(played_ids)
         else:
-            #previously_seen_this_year.append(list(played_ids))
             previously_seen_this_year.extend(list(played_ids))
 
         num_veterans = sum(veterans)
@@ -89,14 +83,11 @@ def create_participant_volume_chart(
 def create_leaderboard_chart(full_df, year=2024, top_n=10,
                              colors=[matplotlib.cm.Set2(i) for i in range(8)]):
     """This creates a horizontal bar chart of the top scores for a GP year."""
-    #year_df = full_df[full_df["year"] == year].copy()
     year_df = full_df.filter(pl.col("year") == year)
-    #year_df["Points"] = pd.to_numeric(year_df["Points"], errors="coerce")
     year_df = year_df.with_columns(
         pl.col("Points").cast(pl.Float32).alias("Points")
     )
 
-    #subset = year_df.nlargest(top_n, "Points")
     subset = year_df.sort("Points", descending=True).head(top_n)
 
     num_rounds = shared.utils.get_max_round(year)
@@ -105,23 +96,18 @@ def create_leaderboard_chart(full_df, year=2024, top_n=10,
     for gp_round in range(1, num_rounds + 1):
         col_name = f"GP_t{gp_round} points"
         round_point_columns.append(col_name)
-        #subset[col_name] = pd.to_numeric(subset[col_name], errors="coerce")
         subset = subset.with_columns(
             pl.col(col_name).cast(pl.Float32).alias(col_name)
         )
 
     # "Points" is counted points
     # Can sum others for total
-    #subset["all_points"] = subset[round_point_columns].sum(axis=1)
     subset = subset.with_columns(
         all_points=pl.sum_horizontal(round_point_columns)
     )
 
-    #labels = subset["Name"]
     labels = subset.get_column("Name")
-    #points = subset["Points"]
     points = subset.get_column("Points")
-    #extra_points = subset["all_points"] - subset["Points"]
     extra_points = subset.get_column("all_points") - subset.get_column("Points")
 
     fig, ax = plt.subplots(figsize=(6.4, 10))
@@ -142,20 +128,14 @@ def create_leaderboard_chart(full_df, year=2024, top_n=10,
 def create_wsc_leaderboard_chart(full_df, year=2024, top_n=10,
                                  colors=[matplotlib.cm.Set2(i) for i in range(8)]):
     """This creates a horizontal bar chart of the top scores for a WSC year."""
-    #year_df = full_df[full_df["year"] == year].copy()
     year_df = full_df.filter(pl.col("year") == year)
-    #year_df["WSC_total"] = pd.to_numeric(year_df["WSC_total"], errors="coerce")
     year_df = year_df.with_columns(
         pl.col("WSC_total").cast(pl.Float32).alias("WSC_total")
     )
 
-    # Reseting the index is important because we will use iterrows() later.
-    #subset = year_df.reset_index().nlargest(top_n, "WSC_total").reset_index()
     subset = year_df.sort("WSC_total", descending=True).head(top_n)
 
-    #labels = subset["Name"]
     labels = subset.get_column("Name")
-    #points = subset["WSC_total"]
     points = subset.get_column("WSC_total")
 
     fig, ax = plt.subplots(figsize=(6.4, 10))
@@ -188,8 +168,7 @@ def create_violin_chart(full_df, selected_solvers, year_subset=(2024,),
                         competition="GP",
                         colors=[matplotlib.cm.Set2(i) for i in range(8)]):
     """This shows point distributions and select solver positions by round."""
-    #flattened = shared.data.create_flat_dataset(full_df, metric="points", competition=competition)
-    flattened = shared.data.create_flat_dataset_polars(
+    flattened = shared.data.create_flat_dataset(
         full_df, metric="points", competition=competition)
 
     names = shared.utils.ids_to_names(flattened, selected_solvers)
@@ -207,7 +186,6 @@ def create_violin_chart(full_df, selected_solvers, year_subset=(2024,),
     fig, ax = plt.subplots(nrows=1, ncols=len(rounds), sharey=True)
 
     for idx, column in enumerate(rounds):
-        #data = pd.to_numeric(flattened[column], errors='coerce').dropna()
         data = flattened.select(pl.col(column).cast(pl.Float32).drop_nulls())
 
         if len(data) == 0:
@@ -223,14 +201,12 @@ def create_violin_chart(full_df, selected_solvers, year_subset=(2024,),
 
         color_cycle = itertools.cycle(plt.cycler('color', colors).by_key()['color'])
         for solver in selected_solvers:
-            #solver_row = flattened[flattened.index == solver][column]
             solver_row = flattened.filter(pl.col("user_pseudo_id") == solver)
             #num_rows = len(solver_row)
             if solver_row.height < 1:
-                raise ValueError(f"Expected 1 row for solver \"{solver}\", found {solver_row.height}")
-            #score = pd.to_numeric(solver_row.iloc[0], errors="coerce")
+                raise ValueError(
+                    f"Expected 1 row for solver \"{solver}\", found {solver_row.height}")
             score = solver_row.get_column(column).cast(pl.Float64).fill_null(0).item()
-            # Only want the labels added to the legend once, so do it in the first round
             if idx == 0:
                 label = names[solver]
             else:
@@ -254,15 +230,12 @@ def create_violin_chart(full_df, selected_solvers, year_subset=(2024,),
 def create_point_trend_chart(full_df, selected_solvers, year=2024, competition="GP",
                              colors=[matplotlib.cm.Set2(i) for i in range(8)]):
     """This creates a step chart with cumulative points for solvers."""
-    #year_df = full_df[full_df["year"] == year]
     year_df = full_df.filter(pl.col("year") == year)
-    #subset = year_df[year_df.index.isin(selected_solvers)].copy()
     subset = year_df.filter(pl.col("user_pseudo_id").is_in(selected_solvers))
     num_rounds = shared.utils.get_max_round(year, competition=competition)
 
     wsc_rounds = shared.data.wsc_rounds_by_year()
 
-    #labels = subset["Name"]
     labels = subset.get_column("Name")
     cumulative = [[] for _ in labels]
     round_columns = []
@@ -284,13 +257,11 @@ def create_point_trend_chart(full_df, selected_solvers, year=2024, competition="
             round_limit = counter
         top_k_sums = shared.utils.sum_top_k_of_n_rounds(
             subset, counter, round_limit, round_columns, competition)
-        #for index, row in enumerate(top_k_sums):
         for index, row in enumerate(top_k_sums.iter_rows()):
             cumulative[index].append(row[0])
 
     fig, ax = plt.subplots()
     for i in range(len(labels)):
-        #ax.step(round_labels, cumulative[i], where='post', label=labels.iloc[i], color=colors[i])
         ax.step(round_labels, cumulative[i], where='post', label=labels[i], color=colors[i])
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
