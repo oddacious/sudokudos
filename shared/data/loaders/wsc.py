@@ -379,7 +379,9 @@ def numberize_round_columns(_df):
         # Change string values (particularly with comma separators) to float (see: 2016)
         if round_name in df.columns:
             if df.get_column(round_name).dtype == 'object':
-                df = df.with_columns(pl.col(round_name).str.replace(',', '').cast(pl.Float64).alias(round_name))
+                df = df.with_columns(
+                    pl.col(round_name).str.replace(',', '').cast(pl.Float64).alias(round_name)
+                )
             else:
                 df = df.with_columns(pl.col(round_name).cast(pl.Float64).alias(round_name))
 

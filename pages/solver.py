@@ -6,13 +6,6 @@ import shared.data.loaders.wsc
 import shared.plots.solveroriented
 import shared.presentation
 
-import time
-import psutil
-import os
-import sys
-
-import polars as pl
-
 def present_solver():
     """Create the solver page."""
     shared.presentation.global_setup_and_display()
@@ -129,28 +122,5 @@ def present_solver():
 
     st.write(f"Results shown for: {selected_solver}")
 
-    process = psutil.Process(os.getpid())
-    memory_info = process.memory_info()
-
-    st.write(f"RSS: {memory_info.rss / 1024 ** 2:.2f} MB")  # Resident Set Size
-    st.write(f"VMS: {memory_info.vms / 1024 ** 2:.2f} MB")  # Virtual Memory Size
-
-    st.write(f"Filesize for wsc_unammped: {sys.getsizeof(wsc_unmapped) / 1024 / 1024:.2f} mb")
-    st.write(f"Filesize for combined_with_wsc: {sys.getsizeof(combined_with_wsc) / 1024 / 1024:.2f} mb")
-    st.write(f"Filesize for gp: {sys.getsizeof(gp) / 1024 / 1024:.2f} mb")
-    st.write(f"Filesize for wsc: {sys.getsizeof(wsc) / 1024 / 1024:.2f} mb")
-
-    #st.write(f"Filesize for wsc_unammped: {wsc_unmapped.estimated_size() / 1024 / 1024:.2f} mb")
-    st.write(f"Filesize for combined_with_wsc: {combined_with_wsc.estimated_size() / 1024 / 1024:.2f} mb")
-    #st.write(f"Filesize for gp: {gp.estimated_size() / 1024 / 1024:.2f} mb")
-    #st.write(f"Filesize for wsc: {wsc.estimated_size() / 1024 / 1024:.2f} mb")
-
-#if __name__ == "__main__":
-#    present_solver()
-
 if __name__ == "__main__":
-    start_time = time.perf_counter()
-    present_solver()
-    end_time = time.perf_counter()
-    st.write(f"Execution time: {end_time - start_time:.6f} seconds")
-
+   present_solver()

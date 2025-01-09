@@ -127,10 +127,11 @@ def manual_adjustements(df):
             expr_country = expr_country.when(pl.col("Name") == key).then(pl.lit(name_to_country[key]))
     expr_country = expr_country.otherwise(pl.col("Country")).alias("Country")
 
-    df = df.with_columns(pl.col("Name").replace(name_to_name).alias("Name"))
-    df = df.with_columns(pl.col("Nick").replace(nick_to_nick).alias("Nick"))
-    df = df.with_columns(expr_nick)
-    df = df.with_columns(expr_country)
+    df = df.with_columns(
+        pl.col("Name").replace(name_to_name).alias("Name"), 
+        pl.col("Nick").replace(nick_to_nick).alias("Nick")
+    )
+    df = df.with_columns(expr_nick, expr_country)
 
     return df
 

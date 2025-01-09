@@ -202,7 +202,6 @@ def create_violin_chart(full_df, selected_solvers, year_subset=(2024,),
         color_cycle = itertools.cycle(plt.cycler('color', colors).by_key()['color'])
         for solver in selected_solvers:
             solver_row = flattened.filter(pl.col("user_pseudo_id") == solver)
-            #num_rows = len(solver_row)
             if solver_row.height < 1:
                 raise ValueError(
                     f"Expected 1 row for solver \"{solver}\", found {solver_row.height}")
