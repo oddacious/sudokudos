@@ -123,4 +123,4 @@ def present_solver():
     st.write(f"Results shown for: {selected_solver}")
 
 if __name__ == "__main__":
-   present_solver()
+    present_solver()

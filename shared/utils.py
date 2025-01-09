@@ -1,6 +1,5 @@
 import re
 import streamlit as st
-import numpy as np
 import polars as pl
 
 import shared.constants
@@ -33,6 +32,7 @@ def update_query_param(param, selector, multiitem=False):
     st.query_params[param] = new_value
 
 def extract_query_param_list(param, allowed_items, default=None):
+    """Fetch a list of items from a query param"""
     selected = []
     if param in st.query_params:
         for identifier in st.query_params[param].split(QUERY_PARAM_SEPARATOR):
@@ -43,6 +43,15 @@ def extract_query_param_list(param, allowed_items, default=None):
         return default
 
     return selected
+
+def retrieve_query_value_with_default(query_param, allowed, default):
+    """Fetch a single value from a query value"""
+    if query_param in st.query_params and int(st.query_params[query_param]) in allowed:
+        chosen_index = allowed.index(int(st.query_params[query_param]))
+    else:
+        chosen_index = default
+
+    return chosen_index
 
 def all_available_years(full_df):
     """Return all years that are represented in a dataframe."""

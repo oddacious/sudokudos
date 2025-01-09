@@ -63,7 +63,7 @@ def create_flat_dataset(full_df, metric="points", competition="GP"):
         else:
             single_year = single_year.drop(columns_to_drop)
             flattened = flattened.join(single_year, on="user_pseudo_id",
-                                how="outer", suffix=("_right"))
+                                how="outer", suffix="_right")
 
             for column in ("Name", "Nick", "Country", "Official", "Official_rank",
                            "Unofficial_rank", "WSC_total", "user_pseudo_id"):
@@ -157,7 +157,6 @@ def attemped_mapping(wsc_df, gp_df):
 
     joined = wsc_mapped.join(gp_index, on="Name", how="left").drop("name_lc_right")
 
- 
     joined_flipped = (
         joined
             .join(gp_index, left_on="flipped_name", right_on="Name", how="left")
@@ -171,7 +170,7 @@ def attemped_mapping(wsc_df, gp_df):
             .rename(({"user_pseudo_id_right": "user_pseudo_id_name_lc"}))
     )
 
-    # Use our attempted identifiers in a hierarchy by name, then flipped name, then lowercase name    
+    # Use our attempted identifiers in a hierarchy by name, then flipped name, then lowercase name
     wsc_and_gp = wsc_and_gp.with_columns(
         pl.col("user_pseudo_id")
         .fill_null(pl.col("user_pseudo_id_flipped_name"))
@@ -182,12 +181,12 @@ def attemped_mapping(wsc_df, gp_df):
     manual_map = shared.constants.WSC_NAME_TO_GP_ID_OVERRIDE
 
     expr = None
-    for key in manual_map:
+    for key, value in manual_map.items():
         if expr is None:
-            expr = pl.when(pl.col("Name") == key).then(pl.lit(manual_map[key]))
+            expr = pl.when(pl.col("Name") == key).then(pl.lit(value))
         else:
-            expr = expr.when(pl.col("Name") == key).then(pl.lit(manual_map[key]))
-        expr = expr.when(pl.col("flipped_name") == key).then(pl.lit(manual_map[key]))
+            expr = expr.when(pl.col("Name") == key).then(pl.lit(value))
+        expr = expr.when(pl.col("flipped_name") == key).then(pl.lit(value))
     expr = expr.otherwise(pl.col("matched_id")).alias("matched_id")
     wsc_and_gp = (
         wsc_and_gp

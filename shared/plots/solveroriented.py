@@ -189,13 +189,14 @@ class PerformanceCollector():
     def wsc_performance_by_solver_year(self, subset, year):
         """Calculate the outcomes in the WSC for the solver in `year`."""
         if year not in self.wsc_years or "wsc" not in self.included_events:
-            return
+            return None
 
         solver_record = subset.filter(pl.col("user_pseudo_id") == self.solver)
 
         # The row won't exist if they didn't do any event. But if they did any
         # event, the row would exist even if the solver did not participate in the WSC.
-        participated = len(solver_record) > 0 and solver_record.get_column("WSC_entry").first() is True
+        wsc_entry = solver_record.get_column("WSC_entry").first()
+        participated = len(solver_record) > 0 and wsc_entry is True
 
         if len(solver_record) > 0:
             is_official = solver_record.get_column("Official").first() is True
@@ -322,7 +323,7 @@ def create_rank_chart(
     event_results = performances.solver_results.all_event_results()
     outcome_labels = performances.solver_results.all_event_outcome_descriptions()
 
-    fig = rank_chart_figure(competition_labels, event_results, outcome_labels, years, colors, 
+    fig = rank_chart_figure(competition_labels, event_results, outcome_labels, years, colors,
                             shared.utils.ids_to_names(full_df, [solver])[solver])
 
     return fig

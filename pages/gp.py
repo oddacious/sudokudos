@@ -16,11 +16,8 @@ def present_gp():
 
     years = list(reversed(shared.utils.all_available_years(combined_df)))
 
-    if "year" in st.query_params and int(st.query_params["year"]) in years:
-        chosen_index = years.index(int(st.query_params["year"]))
-    else:
-        # 0 will be the most recent year
-        chosen_index = 0
+    # For years, 0 will be the most recent year
+    chosen_index = shared.utils.retrieve_query_value_with_default("year", years, 0)
 
     with st.expander("Background", expanded=True):
         st.markdown("""

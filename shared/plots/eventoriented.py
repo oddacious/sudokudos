@@ -260,8 +260,8 @@ def create_point_trend_chart(full_df, selected_solvers, year=2024, competition="
             cumulative[index].append(row[0])
 
     fig, ax = plt.subplots()
-    for i in range(len(labels)):
-        ax.step(round_labels, cumulative[i], where='post', label=labels[i], color=colors[i])
+    for index, items in enumerate(labels):
+        ax.step(round_labels, cumulative[index], where='post', label=items, color=colors[index])
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     ax. set_ylim(bottom=0)
