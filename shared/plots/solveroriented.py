@@ -1,6 +1,5 @@
 import math
 import itertools
-import pandas as pd
 import polars as pl
 import matplotlib
 import matplotlib.lines
@@ -65,7 +64,7 @@ def create_trend_chart(full_df, selected_solvers, metric="points", window_size=8
         outcomes = record.select(rounds).row(0)
         name = record.get_column("Name").first()
         data[name] = outcomes
-        rolling[name] = pd.Series(outcomes).rolling(window=window_size, min_periods=1).mean()
+        rolling[name] = pl.Series(outcomes).rolling_mean(window_size, min_periods=1)
 
     xticks = year_starts
     xlabels = years_with_data

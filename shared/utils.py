@@ -170,8 +170,9 @@ def convert_columns_to_max_pct(df, pattern=r"^\d{4}_\d+"):
     """Convert all columns to a percentage of the column max."""
     for column in df.columns:
         if re.match(pattern, column):
-            df = df.with_columns(pl.col(column).cast(pl.Float32))
-            as_pct = df[column] / df[column].max()
+            #print(f"Looking at column {column} with max {df[column].max()}")
+            df = df.with_columns(pl.col(column).cast(pl.Float32).alias(column))
+            as_pct = df.get_column(column) / df.get_column(column).max()
             df = df.with_columns(
                 pl.lit(as_pct).alias(column)
             )

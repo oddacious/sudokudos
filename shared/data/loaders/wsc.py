@@ -454,8 +454,3 @@ def load_wsc(csv_directory="data/raw/wsc/"):
     multiyear = multiyear.select(all_columns)
 
     return multiyear
-
-def polarize_wsc(wsc):
-    wsc_polars = pl.from_pandas(wsc.reset_index())
-
-    return wsc_polars

@@ -184,11 +184,6 @@ def apply_types(gp):
             pl.col(key).cast(column_types[key]).alias(key)
         )
 
-    #gp_simple_type = gp_as_pandas.astype(column_types)
-    #for col in ['#', 'Name', 'Country', 'Nick', 'source_file']:
-    #    gp_simple_type[col] = gp_simple_type[col].astype(str)
-    #gp_polars = pl.from_pandas(gp_simple_type.reset_index())
-
     return gp
 
 @st.cache_data
@@ -249,7 +244,6 @@ def load_gp(csv_directory="data/processed/gp", verbose=False, output_csv=None):
     # I believe the `Nick` is permanent, but users can decide (and change their decision) on
     # whether to show it or not. The other values they can change any time, but it looks like
     # historical scores for prior years do not update. For now I will use all three fields.
-    
     combined_df = combined_df.with_columns(
         (
             combined_df["Name"].fill_null("Nameless") + 

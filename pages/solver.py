@@ -11,6 +11,8 @@ import psutil
 import os
 import sys
 
+import polars as pl
+
 def present_solver():
     """Create the solver page."""
     shared.presentation.global_setup_and_display()

@@ -87,8 +87,8 @@ def merge_unflat_datasets(gp_dataset, wsc_dataset):
             # Also calculate the round position at this time
             position_name = f"WSC_t{competition_round} position"
             wsc_dataset = wsc_dataset.with_columns(
-                        pl.col(round_name).cast(pl.Float64).fill_null(0.0).alias(round_name)
-                    )
+                pl.col(round_name).cast(pl.Float64).alias(round_name)
+            )
             wsc_dataset = wsc_dataset.with_columns(
                 pl.col(round_name)
                 .rank(descending=True, method="min")
