@@ -358,9 +358,7 @@ def process_wsc_2010(_df):
 
     return df
 
-def filter_wsc_fields(_df):
-    df = _df
-
+def filter_wsc_fields(df):
     """Keep the fields that we use later on and discard others."""
     kept_columns = ["year", "Name", "Official", "Official_rank", "Unofficial_rank", "WSC_total",
                     "WSC_entry"]
@@ -371,9 +369,8 @@ def filter_wsc_fields(_df):
 
     return df.select(kept_columns)
 
-def numberize_round_columns(_df):
+def numberize_round_columns(df):
     """Convert every column to numeric, including stripping commas if necessary."""
-    df = _df
     for wsc_round in range(1, shared.constants.MAXIMUM_ROUND + 1):
         round_name = f"WSC_t{wsc_round} points"
         # Change string values (particularly with comma separators) to float (see: 2016)
