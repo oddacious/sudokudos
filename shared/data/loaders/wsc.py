@@ -1,3 +1,5 @@
+"""Provides a function to load WSC data from CSV files."""
+
 import polars as pl
 
 import streamlit as st

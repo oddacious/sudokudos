@@ -1,3 +1,5 @@
+"""Holds all constants and lookup values."""
+
 # This is the maximum round number from any WSC or GP. It needs to be updated
 # if any subsequently-added competition has a higher round number.
 MAXIMUM_ROUND = 16

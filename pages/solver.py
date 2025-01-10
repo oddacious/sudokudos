@@ -1,3 +1,5 @@
+"""This generates the solver page."""
+
 import streamlit as st
 
 import shared.data

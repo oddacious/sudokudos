@@ -1,3 +1,5 @@
+"""Contains functions that encode domain knowledge about Sudoku competitions."""
+
 def get_max_round(year, competition="GP"):
     """Return the maximum round for a given competition and year.
     

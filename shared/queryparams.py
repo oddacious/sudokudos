@@ -1,3 +1,5 @@
+"""Contains functions related to HTTP query parameters."""
+
 import streamlit as st
 
 QUERY_PARAM_SEPARATOR = "|"

@@ -1,3 +1,5 @@
+"""This generates the about page."""
+
 import streamlit as st
 
 import shared.presentation

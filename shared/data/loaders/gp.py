@@ -1,3 +1,5 @@
+"""Provides a function to load GP data from CSV files."""
+
 import os
 import polars as pl
 

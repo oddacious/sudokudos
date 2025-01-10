@@ -1,3 +1,5 @@
+"""Contains functions to generate plots about sudoku solvers."""
+
 import math
 import itertools
 import polars as pl

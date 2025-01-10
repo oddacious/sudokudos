@@ -1,3 +1,5 @@
+"""Contains functions for manipulating and combining competition data."""
+
 import re
 
 import polars as pl

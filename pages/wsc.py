@@ -1,3 +1,5 @@
+"""This generates the WSC page."""
+
 import polars as pl
 
 import streamlit as st
@@ -83,7 +85,7 @@ def present_wsc():
 
     num_default = 3
 
-    chosen_solvers = shared.utils.extract_query_param_list(
+    chosen_solvers = shared.queryparams.extract_query_param_list(
         "solvers", available, default=available[:num_default])
 
     selected_solvers = st.multiselect(

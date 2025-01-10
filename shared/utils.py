@@ -1,5 +1,6 @@
+"""Contains general utility functions."""
+
 import re
-import streamlit as st
 import polars as pl
 
 import shared.constants

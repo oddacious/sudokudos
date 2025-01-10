@@ -1,3 +1,5 @@
+"""Contains functions to generate plots for sudoku competitions."""
+
 import itertools
 import numpy as np
 import polars as pl

@@ -1,3 +1,5 @@
+"""This generates the GP page."""
+
 import polars as pl
 
 import streamlit as st
