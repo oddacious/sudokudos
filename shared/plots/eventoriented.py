@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches
 import matplotlib.ticker
 
+import shared.competitions
 import shared.data
 import shared.utils
 
@@ -28,7 +29,7 @@ def create_participant_volume_chart(
     first_round_counts = []
     earlier_this_year_counts = []
 
-    num_rounds = shared.utils.get_max_round(year)
+    num_rounds = shared.competitions.get_max_round(year)
 
     previously_seen_this_year = None
     for gp_round in range(1, num_rounds + 1):
@@ -90,7 +91,7 @@ def create_leaderboard_chart(full_df, year=2024, top_n=10,
 
     subset = year_df.sort("Points", descending=True).head(top_n)
 
-    num_rounds = shared.utils.get_max_round(year)
+    num_rounds = shared.competitions.get_max_round(year)
 
     round_point_columns = []
     for gp_round in range(1, num_rounds + 1):
@@ -177,7 +178,7 @@ def create_violin_chart(full_df, selected_solvers, year_subset=(2024,),
     year_starts = []
     for year in year_subset:
         year_starts.append(f"{year}_1")
-        num_rounds = shared.utils.get_max_round(year, competition=competition)
+        num_rounds = shared.competitions.get_max_round(year, competition=competition)
         for competition_round in range(1, num_rounds + 1):
             column = f"{year}_{competition_round}"
             if column in flattened:
@@ -231,9 +232,9 @@ def create_point_trend_chart(full_df, selected_solvers, year=2024, competition="
     """This creates a step chart with cumulative points for solvers."""
     year_df = full_df.filter(pl.col("year") == year)
     subset = year_df.filter(pl.col("user_pseudo_id").is_in(selected_solvers))
-    num_rounds = shared.utils.get_max_round(year, competition=competition)
+    num_rounds = shared.competitions.get_max_round(year, competition=competition)
 
-    wsc_rounds = shared.data.wsc_rounds_by_year()
+    wsc_rounds = shared.competitions.wsc_rounds_by_year()
 
     labels = subset.get_column("Name")
     cumulative = [[] for _ in labels]

@@ -5,8 +5,9 @@ import streamlit as st
 import shared.data
 import shared.data.loaders.gp
 import shared.plots.eventoriented
-import shared.utils
 import shared.presentation
+import shared.queryparams
+import shared.utils
 
 def present_gp():
     """Create the GP page."""
@@ -17,7 +18,7 @@ def present_gp():
     years = list(reversed(shared.utils.all_available_years(combined_df)))
 
     # For years, 0 will be the most recent year
-    chosen_index = shared.utils.retrieve_query_value_with_default("year", years, 0)
+    chosen_index = shared.queryparams.retrieve_query_value_with_default("year", years, 0)
 
     with st.expander("Background", expanded=True):
         st.markdown("""
@@ -39,7 +40,7 @@ def present_gp():
         "Year",
         years,
         index=chosen_index,
-        on_change=shared.utils.update_query_param,
+        on_change=shared.queryparams.update_query_param,
         args=("year", "year_selector"),
         key="year_selector")
 
@@ -82,15 +83,16 @@ def present_gp():
             .sort(by=["Rank"], descending=False)
             .get_column("user_pseudo_id")
             .unique(maintain_order=True))
+
     num_default = 3
 
-    chosen_solvers = shared.utils.extract_query_param_list(
+    chosen_solvers = shared.queryparams.extract_query_param_list(
         "solvers", available, default=available[:num_default])
 
     selected_solvers = st.multiselect("Select solvers to compare",
                                     available,
                                     default=chosen_solvers,
-                                    on_change=shared.utils.update_query_param,
+                                    on_change=shared.queryparams.update_query_param,
                                     args=("solvers", "solvers_selector", True),
                                     key="solvers_selector")
 

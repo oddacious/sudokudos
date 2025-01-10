@@ -4,8 +4,6 @@ import polars as pl
 
 import shared.constants
 
-QUERY_PARAM_SEPARATOR = "|"
-
 def supported_events():
     """Return the list of events that this code supports."""
     return ("gp", "wsc")
@@ -16,78 +14,9 @@ def validate_events(event_list):
     if not all(event in supported for event in event_list):
         raise ValueError(f"Supported events are {supported}; received {event_list}")
 
-def update_query_param(param, selector, multiitem=False):
-    """Assign the value in `selector` to the `param` query parameter.
-    
-    For lists, will concatenate items together.
-    """
-    if selector not in st.session_state:
-        raise ValueError(f"Selector \"{selector}\" not found")
-
-    if multiitem:
-        new_value = QUERY_PARAM_SEPARATOR.join(st.session_state[selector])
-    else:
-        new_value = st.session_state[selector]
-
-    st.query_params[param] = new_value
-
-def extract_query_param_list(param, allowed_items, default=None):
-    """Fetch a list of items from a query param"""
-    selected = []
-    if param in st.query_params:
-        for identifier in st.query_params[param].split(QUERY_PARAM_SEPARATOR):
-            if identifier in allowed_items:
-                selected.append(identifier)
-
-    if default is not None and len(selected) == 0:
-        return default
-
-    return selected
-
-def retrieve_query_value_with_default(query_param, allowed, default):
-    """Fetch a single value from a query value"""
-    if query_param in st.query_params and int(st.query_params[query_param]) in allowed:
-        chosen_index = allowed.index(int(st.query_params[query_param]))
-    else:
-        chosen_index = default
-
-    return chosen_index
-
 def all_available_years(full_df):
     """Return all years that are represented in a dataframe."""
     return full_df.select(pl.col("year")).unique().sort(by="year").get_column("year").to_list()
-
-def get_max_round(year, competition="GP"):
-    """Return the maximum round for a given competition and year.
-    
-    This is maintained by hand and needs to be updated for new years.
-    """
-    wsc_map = {
-        2010: 10,
-        2011: 10,
-        2012: 7,
-        2014: 10,
-        2015: 10,
-        2016: 12,
-        2017: 16,
-        2018: 10,
-        2019: 13,
-        2022: 12,
-        2023: 10,
-        2024: 11,
-    }
-    if competition == "GP":
-        if int(year) == 2014:
-            return 7
-        if int(year) > 2014:
-            return 8
-    elif competition == "WSC":
-        if year in wsc_map:
-            return wsc_map[year]
-    else:
-        raise ValueError(f"Unsupported competition \"{competition}\" provided")
-
-    return None
 
 def applicable_years(full_df, selected_solvers):
     """Return the year span that any of the solvers participated in.
@@ -118,16 +47,6 @@ def ids_to_names(df_with_names, selected_solvers, name_column="Name"):
         names[solver_id] = matching_rows.first()
 
     return names
-
-def known_playoff_results(year):
-    """Return whether we know the playoff results for the given year."""
-    if year in (2024, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014):
-        return True
-
-    if year in (2023, 2022, 2021):
-        return False
-
-    raise ValueError(f"Unknown GP year \"{year}\"")
 
 def sum_top_k_of_n_rounds(full_df, n, k, round_columns, competition="GP"):
     """Calculate the sum of the best `k` of `n` rounds."""
@@ -179,7 +98,6 @@ def convert_columns_to_max_pct(df, pattern=r"^\d{4}_\d+"):
     """Convert all columns to a percentage of the column max."""
     for column in df.columns:
         if re.match(pattern, column):
-            #print(f"Looking at column {column} with max {df[column].max()}")
             df = df.with_columns(pl.col(column).cast(pl.Float32).alias(column))
             as_pct = df.get_column(column) / df.get_column(column).max()
             df = df.with_columns(

@@ -7,6 +7,7 @@ import shared.data.loaders.gp
 import shared.data.loaders.wsc
 import shared.plots.eventoriented
 import shared.presentation
+import shared.queryparams
 import shared.utils
 
 def present_wsc():
@@ -20,7 +21,7 @@ def present_wsc():
     years = list(reversed(shared.utils.all_available_years(wsc)))
 
     # For years, 0 will be the most recent year
-    chosen_index = shared.utils.retrieve_query_value_with_default("year", years, 0)
+    chosen_index = shared.queryparams.retrieve_query_value_with_default("year", years, 0)
 
     with st.expander("Background", expanded=True):
         st.markdown("""
@@ -42,7 +43,7 @@ def present_wsc():
         "Year",
         years,
         index=chosen_index,
-        on_change=shared.utils.update_query_param,
+        on_change=shared.queryparams.update_query_param,
         args=("year", "year_selector"),
         key="year_selector")
 
@@ -72,16 +73,14 @@ def present_wsc():
         st.pyplot(fig_leaderboard, use_container_width=True)
 
     st.subheader("Solver tracker")
-    #year_subset = wsc[wsc["year"] == selected_year]
     year_subset = wsc.filter(pl.col("year") == selected_year)
-    #st.dataframe(year_subset)
 
-    #available = list(year_subset.index.unique())
     available = list(
         year_subset
             .sort(by=["Unofficial_rank"], descending=False)
             .get_column("user_pseudo_id")
             .unique(maintain_order=True))
+
     num_default = 3
 
     chosen_solvers = shared.utils.extract_query_param_list(
@@ -91,7 +90,7 @@ def present_wsc():
         "Select solvers to compare",
         available,
         default=chosen_solvers,
-        on_change=shared.utils.update_query_param,
+        on_change=shared.queryparams.update_query_param,
         args=("solvers", "solvers_selector", True),
         key="solvers_selector")
 
