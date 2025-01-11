@@ -230,9 +230,6 @@ def load_gp(csv_directory="data/processed/gp", verbose=False, output_csv=None):
         combined_df.to_csv(output_csv)
 
     # Filter out the extra heading rows
-    # combined_df = combined_df[~((combined_df["Name"] == "Name") &
-    #                             (combined_df["Country"] == "Country") &
-    #                             (combined_df["Nick"] == "Nick"))]
     combined_df = combined_df.filter(~((combined_df["Name"] == "Name") &
                                  (combined_df["Country"] == "Country") &
                                  (combined_df["Nick"] == "Nick")))
