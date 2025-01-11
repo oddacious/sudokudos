@@ -5,15 +5,15 @@ import polars as pl
 
 import shared.competitions
 
-def supported_events():
-    """Return the list of events that this code supports."""
+def supported_competitions():
+    """Return the list of competitions that this code supports."""
     return ("gp", "wsc")
 
-def validate_events(event_list):
-    """Raise an exception if the events are supported."""
-    supported = supported_events()
-    if not all(event in supported for event in event_list):
-        raise ValueError(f"Supported events are {supported}; received {event_list}")
+def validate_competitions(competition_list):
+    """Raise an exception if the competitions are supported."""
+    supported = supported_competitions()
+    if not all(competition in supported for competition in competition_list):
+        raise ValueError(f"Supported competitions are {supported}; received {competition_list}")
 
 def all_available_years(full_df):
     """Return all years that are represented in a dataframe."""

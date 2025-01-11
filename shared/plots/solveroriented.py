@@ -22,7 +22,7 @@ def create_trend_chart(full_df, selected_solvers, metric="points", window_size=8
     Each dot is a round.
     Lines are averages over `window_size` rounds.
     """
-    shared.utils.validate_events(included_events)
+    shared.utils.validate_competitions(included_events)
     if len(included_events) == 0:
         return None
 
@@ -160,7 +160,7 @@ def create_rank_chart(
         - Position for the WSC includes playoff results
         - Position for the GP does not include playoffs, which I could not find
     """
-    shared.utils.validate_events(included_events)
+    shared.utils.validate_competitions(included_events)
     if len(included_events) == 0:
         return None
 
@@ -179,11 +179,12 @@ def create_rank_chart(
         performances.gp_performance_by_solver_year(subset, year, use_playoffs=use_gp_playoffs)
         performances.wsc_performance_by_solver_year(subset, year)
 
-    competition_labels = performances.solver_results.all_event_names()
-    event_results = performances.solver_results.all_event_results()
-    outcome_labels = performances.solver_results.all_event_outcome_descriptions()
+    competition_labels = performances.solver_results.all_competition_names()
+    competition_results = performances.solver_results.all_competition_results()
+    outcome_labels = performances.solver_results.all_competition_outcome_descriptions()
 
-    fig = rank_chart_figure(competition_labels, event_results, outcome_labels, years, colors,
-                            shared.utils.ids_to_names(full_df, [solver])[solver])
+    fig = rank_chart_figure(
+        competition_labels, competition_results, outcome_labels, years, colors,
+        shared.utils.ids_to_names(full_df, [solver])[solver])
 
     return fig

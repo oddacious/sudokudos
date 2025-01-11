@@ -2,39 +2,39 @@
 
 class CompetitionResults():
     """
-    A class to represent the result for a specific event and solver.
+    A class to represent the result for a specific competition and solver.
     """
-    def __init__(self, event_name=None, event_result=None, outcome_description=None):
+    def __init__(self, competition_name=None, competition_result=None, outcome_description=None):
         """Create the object and optionally initalize its members."""
-        self.event_name = event_name
-        self.event_result = event_result
+        self.competition_name = competition_name
+        self.competition_result = competition_result
         self.outcome_description = outcome_description
 
 class CompetitionResultsCollector():
     """
-    A class to represent all event results for a solver.
+    A class to represent all competition results for a solver.
     """
     def __init__(self):
         """Initiative the object."""
-        self.event_results = []
+        self.competition_results = []
 
-    def add_event(self, event_name, event_result, outcome_description):
-        """Add a single event to the event list."""
-        self.event_results.append(
-            CompetitionResults(event_name, event_result, outcome_description))
+    def add_competition(self, competition_name, competition_result, outcome_description):
+        """Add a single event to the competition list."""
+        self.competition_results.append(
+            CompetitionResults(competition_name, competition_result, outcome_description))
 
-    def retrieve_events(self):
-        """Retrieve all events."""
-        return self.event_results
+    def retrieve_competitions(self):
+        """Retrieve all competition."""
+        return self.competition_results
 
-    def all_event_names(self):
-        """Retrieve a generator of all event names."""
-        return [item.event_name for item in self.event_results]
+    def all_competition_names(self):
+        """Retrieve a generator of all competition names."""
+        return [item.competition_name for item in self.competition_results]
 
-    def all_event_results(self):
-        """Retrieve a generator of all event results."""
-        return [item.event_result for item in self.event_results]
+    def all_competition_results(self):
+        """Retrieve a generator of all competition results."""
+        return [item.competition_result for item in self.competition_results]
 
-    def all_event_outcome_descriptions(self):
-        """Retrieve a generator of all event outcome descriptions."""
-        return [item.outcome_description for item in self.event_results]
+    def all_competition_outcome_descriptions(self):
+        """Retrieve a generator of all competition outcome descriptions."""
+        return [item.outcome_description for item in self.competition_results]

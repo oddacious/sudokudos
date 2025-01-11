@@ -8,20 +8,20 @@ from .. import competitions, utils
 
 class PerformanceCollector():
     """
-    A class to calculate a solver's relative performance in different events.
+    A class to calculate a solver's relative performance in different competitions.
     """
     LABEL_NO_RECORD = "    N/A (No record found)"
 
-    def __init__(self, solver, included_events, wsc_years):
+    def __init__(self, solver, included_competitions, wsc_years):
         """Initiative the object and its internal results list."""
         self.solver = solver
-        self.included_events = included_events
+        self.included_competitions = included_competitions
         self.wsc_years = wsc_years
         self._solver_results = competitions.CompetitionResultsCollector()
 
     def gp_performance_by_solver_year(self, subset, year, use_playoffs=True):
         """Calculate the outcomes in the GP for the solver in `year`."""
-        if "gp" in self.included_events and year >= 2014:
+        if "gp" in self.included_competitions and year >= 2014:
             if use_playoffs:
                 subset = subset.with_columns(
                     (pl.col("Rank")
@@ -52,19 +52,20 @@ class PerformanceCollector():
                 outcome_label = (f"{label_prefix} {ordinal_pctile} "
                                  f"pctile ({ordinal_rank} of {total})")
 
-            self.solver_results.add_event(f"{year} GP", pctile, outcome_label)
+            self.solver_results.add_competition(f"{year} GP", pctile, outcome_label)
 
         return self.solver_results
 
     def wsc_performance_by_solver_year(self, subset, year):
         """Calculate the outcomes in the WSC for the solver in `year`."""
-        if year not in self.wsc_years or "wsc" not in self.included_events:
+        if year not in self.wsc_years or "wsc" not in self.included_competitions:
             return None
 
         solver_record = subset.filter(pl.col("user_pseudo_id") == self.solver)
 
-        # The row won't exist if they didn't do any event. But if they did any
-        # event, the row would exist even if the solver did not participate in the WSC.
+        # The row won't exist if they didn't do any competition. But if they did any
+        # competition, the row would exist even if the solver did not participate in
+        # the WSC.
         wsc_entry = solver_record.get_column("WSC_entry").first()
         participated = len(solver_record) > 0 and wsc_entry is True
 
@@ -103,7 +104,7 @@ class PerformanceCollector():
             if not is_official:
                 outcome_label += "*"
 
-        self.solver_results.add_event(f"{year} WSC", pctile, outcome_label)
+        self.solver_results.add_competition(f"{year} WSC", pctile, outcome_label)
 
         return self.solver_results
 

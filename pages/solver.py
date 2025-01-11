@@ -7,6 +7,7 @@ import shared.data.loaders
 import shared.plots.solveroriented
 import shared.presentation
 import shared.queryparams
+import shared.utils
 
 def present_solver():
     """Create the solver page."""
@@ -40,7 +41,7 @@ def present_solver():
     chosen_additional = shared.queryparams.extract_query_param_list("additional", available)
 
     # Show the events in upper case even though we represent them in lowercase internally.
-    supported_events = [event.upper() for event in shared.utils.supported_events()]
+    supported_events = [event.upper() for event in shared.utils.supported_competitions()]
 
     chosen_events = shared.queryparams.extract_query_param_list(
         "events", supported_events, default=("GP", "WSC"))

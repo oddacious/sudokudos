@@ -130,7 +130,7 @@ def manual_adjustements(df):
     expr_country = expr_country.otherwise(pl.col("Country")).alias("Country")
 
     df = df.with_columns(
-        pl.col("Name").replace(name_to_name).alias("Name"), 
+        pl.col("Name").replace(name_to_name).alias("Name"),
         pl.col("Nick").replace(nick_to_nick).alias("Nick")
     )
     df = df.with_columns(expr_nick, expr_country)
@@ -249,9 +249,9 @@ def load_gp(csv_directory="data/processed/gp", verbose=False, output_csv=None):
     # historical scores for prior years do not update. For now I will use all three fields.
     combined_df = combined_df.with_columns(
         (
-            combined_df["Name"].fill_null("Nameless") + 
+            combined_df["Name"].fill_null("Nameless") +
             " (" + 
-            combined_df["Nick"].fill_null("Nickless") + 
+            combined_df["Nick"].fill_null("Nickless") +
             ") - " + 
             combined_df["Country"].fill_null("Nationless")
         ).alias("user_pseudo_id")
@@ -278,7 +278,7 @@ def load_gp(csv_directory="data/processed/gp", verbose=False, output_csv=None):
 
     with_playoff_rank = combined_df.join(
         flat_playoff_results, on=["year", "user_pseudo_id"], how="left")
- 
+
     with_playoff_rank = with_playoff_rank.sort(
         by=["year", "Playoff_rank", "Points"], descending=[True, True, False])
 
