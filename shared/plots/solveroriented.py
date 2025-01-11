@@ -34,7 +34,7 @@ def create_trend_chart(full_df, selected_solvers, metric="points", window_size=8
 
     subset = together.filter(pl.col("user_pseudo_id").is_in(selected_solvers))
 
-    year_subset = shared.competitions.applicable_years(full_df, selected_solvers)
+    year_subset = shared.utils.applicable_years(full_df, selected_solvers)
     years_with_data = []
 
     rounds = []

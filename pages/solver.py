@@ -7,6 +7,7 @@ import shared.data.loaders.gp
 import shared.data.loaders.wsc
 import shared.plots.solveroriented
 import shared.presentation
+import shared.queryparams
 
 def present_solver():
     """Create the solver page."""
@@ -31,25 +32,25 @@ def present_solver():
         "Select solver",
         available,
         index=chosen_index,
-        on_change=shared.utils.update_query_param,
+        on_change=shared.queryparams.update_query_param,
         args=("solver", "user_selector"),
         key="user_selector")
 
     st.divider()
 
-    chosen_additional = shared.utils.extract_query_param_list("additional", available)
+    chosen_additional = shared.queryparams.extract_query_param_list("additional", available)
 
     # Show the events in upper case even though we represent them in lowercase internally.
     supported_events = [event.upper() for event in shared.utils.supported_events()]
 
-    chosen_events = shared.utils.extract_query_param_list(
+    chosen_events = shared.queryparams.extract_query_param_list(
         "events", supported_events, default=("GP", "WSC"))
 
     included_events = st.multiselect(
         "Select events to include", 
         ["GP", "WSC"],
         chosen_events,
-        on_change=shared.utils.update_query_param,
+        on_change=shared.queryparams.update_query_param,
         args=("events", "event_selector", True),
         key="event_selector")
     events_lower = [event.lower() for event in included_events]
@@ -61,7 +62,7 @@ def present_solver():
             "Select additional solvers to compare",
             available,
             default=chosen_additional,
-            on_change=shared.utils.update_query_param,
+            on_change=shared.queryparams.update_query_param,
             args=("additional", "additional_selector", True),
             key="additional_selector")
 
@@ -77,7 +78,7 @@ def present_solver():
             "Periods for smoothing",
             options=(range(1, 21)),
             value=smoothing_level,
-            on_change=shared.utils.update_query_param,
+            on_change=shared.queryparams.update_query_param,
             args=("smoothing", "smoothing_selector"),
             key="smoothing_selector")
 

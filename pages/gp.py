@@ -50,7 +50,7 @@ def present_gp():
 
     st.subheader("Summary")
 
-    if shared.utils.known_playoff_results(selected_year):
+    if shared.competitions.known_playoff_results(selected_year):
         cols = st.columns([0.1, 0.1, 0.1, 0.7])
 
         # Gold, silver, bronze.
