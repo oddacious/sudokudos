@@ -4,7 +4,6 @@ import re
 
 import polars as pl
 
-import shared.constants
 import shared.competitions
 
 def create_flat_dataset(full_df, metric="points", competition="GP"):
@@ -23,7 +22,9 @@ def create_flat_dataset(full_df, metric="points", competition="GP"):
     else:
         raise ValueError(f"Observed unexpected competition \"{competition}\"")
 
-    for competition_round in range(1, shared.constants.MAXIMUM_ROUND + 1):
+    max_round_plus_one = shared.competitions.MAXIMUM_ROUND + 1
+
+    for competition_round in range(1, max_round_plus_one):
         colname = f"{competition}_t{competition_round} {metric}"
         if colname in full_df.columns:
             kept_columns.append(colname)
@@ -47,7 +48,7 @@ def create_flat_dataset(full_df, metric="points", competition="GP"):
         # Need to do this for the largest rounds available, because the columns
         # will exist for each and otherwise we'll have column name problems in
         # the join
-        for competition_round in range(1, shared.constants.MAXIMUM_ROUND + 1):
+        for competition_round in range(1, max_round_plus_one):
             colname = f"{competition}_t{competition_round} {metric}"
             if colname in single_year:
                 # Some rounds don't exist in all years, but they still have columns because
@@ -83,7 +84,7 @@ def merge_unflat_datasets(gp_dataset, wsc_dataset):
     """Combine solver-year level datasets from the GP and WSC."""
     kept_columns = ["WSC_entry", "year", "Official", "Official_rank",
                     "Unofficial_rank", "WSC_total", "Name", "user_pseudo_id"]
-    for competition_round in range(1, shared.constants.MAXIMUM_ROUND + 1):
+    for competition_round in range(1, shared.competitions.MAXIMUM_ROUND + 1):
         round_name = f"WSC_t{competition_round} points"
         if round_name in wsc_dataset.columns:
             # Also calculate the round position at this time
@@ -180,7 +181,7 @@ def attemped_mapping(wsc_df, gp_df):
         .alias("matched_id")
     )
 
-    manual_map = shared.constants.WSC_NAME_TO_GP_ID_OVERRIDE
+    manual_map = shared.competitions.WSC_NAME_TO_GP_ID_OVERRIDE
 
     expr = None
     for key, value in manual_map.items():

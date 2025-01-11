@@ -3,7 +3,7 @@
 import re
 import polars as pl
 
-import shared.constants
+import shared.competitions
 
 def supported_events():
     """Return the list of events that this code supports."""
@@ -53,7 +53,7 @@ def sum_top_k_of_n_rounds(full_df, n, k, round_columns, competition="GP"):
     """Calculate the sum of the best `k` of `n` rounds."""
     round_point_columns = []
     found_rounds = 0
-    for competition_round in range(1, shared.constants.MAXIMUM_ROUND + 1):
+    for competition_round in range(1, shared.competitions.MAXIMUM_ROUND + 1):
         col_name = f"{competition}_t{competition_round} points"
         if col_name not in full_df or col_name not in round_columns:
             continue

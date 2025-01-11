@@ -5,7 +5,7 @@ import polars as pl
 
 import streamlit as st
 
-import shared.constants
+import shared.competitions
 
 def manual_adjustements(df):
     """Update names, nicks, and countries in GP files.
@@ -271,7 +271,7 @@ def load_gp(csv_directory="data/processed/gp", verbose=False, output_csv=None):
     flat_playoff_results = pl.DataFrame(
         [
             {"year": year, "Playoff_rank": rank, "user_pseudo_id": solver}
-            for year, results in shared.constants.GP_PLAYOFF_RESULTS.items()
+            for year, results in shared.competitions.GP_PLAYOFF_RESULTS.items()
             for rank, solver in results.items()
         ]
     )

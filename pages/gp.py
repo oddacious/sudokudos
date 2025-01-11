@@ -4,8 +4,9 @@ import polars as pl
 
 import streamlit as st
 
+import shared.competitions
 import shared.data
-import shared.data.loaders.gp
+import shared.data.loaders
 import shared.plots.eventoriented
 import shared.presentation
 import shared.queryparams
@@ -15,7 +16,7 @@ def present_gp():
     """Create the GP page."""
     shared.presentation.global_setup_and_display()
 
-    combined_df = shared.data.loaders.gp.load_gp()
+    combined_df = shared.data.loaders.load_gp()
 
     years = list(reversed(shared.utils.all_available_years(combined_df)))
 

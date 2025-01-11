@@ -4,7 +4,7 @@ import polars as pl
 
 import streamlit as st
 
-import shared.constants
+import shared.competitions
 
 @st.cache_data
 def process_wsc_2024(_df):
@@ -364,7 +364,7 @@ def filter_wsc_fields(df):
     """Keep the fields that we use later on and discard others."""
     kept_columns = ["year", "Name", "Official", "Official_rank", "Unofficial_rank", "WSC_total",
                     "WSC_entry"]
-    for wsc_round in range(1, shared.constants.MAXIMUM_ROUND + 1):
+    for wsc_round in range(1, shared.competitions.MAXIMUM_ROUND + 1):
         round_name = f"WSC_t{wsc_round} points"
         if round_name in df.columns:
             kept_columns.append(round_name)
@@ -373,7 +373,7 @@ def filter_wsc_fields(df):
 
 def numberize_round_columns(df):
     """Convert every column to numeric, including stripping commas if necessary."""
-    for wsc_round in range(1, shared.constants.MAXIMUM_ROUND + 1):
+    for wsc_round in range(1, shared.competitions.MAXIMUM_ROUND + 1):
         round_name = f"WSC_t{wsc_round} points"
         # Change string values (particularly with comma separators) to float (see: 2016)
         if round_name in df.columns:
@@ -447,7 +447,7 @@ def load_wsc(csv_directory="data/raw/wsc/"):
 
     # Ensure a consistent ordering of the round columns
     round_columns = []
-    for wsc_round in range(1, shared.constants.MAXIMUM_ROUND + 1):
+    for wsc_round in range(1, shared.competitions.MAXIMUM_ROUND + 1):
         colname = f"WSC_t{wsc_round} points"
         if colname in multiyear:
             round_columns.append(colname)

@@ -4,9 +4,9 @@ import polars as pl
 
 import streamlit as st
 
+import shared.competitions
 import shared.data
-import shared.data.loaders.gp
-import shared.data.loaders.wsc
+import shared.data.loaders
 import shared.plots.eventoriented
 import shared.presentation
 import shared.queryparams
@@ -16,8 +16,8 @@ def present_wsc():
     """Create the WSC page."""
     shared.presentation.global_setup_and_display()
 
-    gp = shared.data.loaders.gp.load_gp()
-    wsc_unmapped = shared.data.loaders.wsc.load_wsc()
+    gp = shared.data.loaders.load_gp()
+    wsc_unmapped = shared.data.loaders.load_wsc()
     wsc = shared.data.attemped_mapping(wsc_unmapped, gp)
 
     years = list(reversed(shared.utils.all_available_years(wsc)))
@@ -108,10 +108,12 @@ def present_wsc():
                 wsc, selected_solvers, year=selected_year, competition="WSC")
             st.pyplot(trend_chart, use_container_width=True)
 
+    max_round_plus_one = shared.competitions.MAXIMUM_ROUND + 1
+
     # Generate a clean dataset of the selected users
     year_data_mapped = year_subset
     kept_columns = ["Name", "Official", "Official_rank", "WSC_total", "user_pseudo_id"]
-    for wsc_round in range(1, shared.constants.MAXIMUM_ROUND + 1):
+    for wsc_round in range(1, max_round_plus_one):
         colname = f"WSC_t{wsc_round} points"
         if colname in year_data_mapped:
             # Some rounds don't exist in all years, but they still have columns because
@@ -129,7 +131,7 @@ def present_wsc():
 
     year_data = wsc_unmapped.filter(pl.col("year") == selected_year).drop(["year", "WSC_entry"])
 
-    for wsc_round in range(1, shared.constants.MAXIMUM_ROUND + 1):
+    for wsc_round in range(1, max_round_plus_one):
         colname = f"WSC_t{wsc_round} points"
         if colname in year_data:
             if year_data.get_column(colname).is_null().sum() == len(year_data):
