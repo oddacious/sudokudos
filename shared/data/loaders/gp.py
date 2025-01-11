@@ -114,19 +114,19 @@ def manual_adjustements(df):
     }
 
     expr_nick = None
-    for key in name_to_nick:
+    for key, value in name_to_nick.items():
         if expr_nick is None:
-            expr_nick = pl.when(pl.col("Name") == key).then(pl.lit(name_to_nick[key]))
+            expr_nick = pl.when(pl.col("Name") == key).then(pl.lit(value))
         else:
-            expr_nick = expr_nick.when(pl.col("Name") == key).then(pl.lit(name_to_nick[key]))
+            expr_nick = expr_nick.when(pl.col("Name") == key).then(pl.lit(value))
     expr_nick = expr_nick.otherwise(pl.col("Nick")).alias("Nick")
 
     expr_country = None
-    for key in name_to_country:
+    for key, value in name_to_country.items():
         if expr_country is None:
-            expr_country = pl.when(pl.col("Name") == key).then(pl.lit(name_to_country[key]))
+            expr_country = pl.when(pl.col("Name") == key).then(pl.lit(value))
         else:
-            expr_country = expr_country.when(pl.col("Name") == key).then(pl.lit(name_to_country[key]))
+            expr_country = expr_country.when(pl.col("Name") == key).then(pl.lit(value))
     expr_country = expr_country.otherwise(pl.col("Country")).alias("Country")
 
     df = df.with_columns(
@@ -138,6 +138,7 @@ def manual_adjustements(df):
     return df
 
 def apply_types(gp):
+    """Change the types for many columns."""
     column_types = {
         # Integer columns
         'GP_t1 position': pl.Float64,
@@ -182,9 +183,9 @@ def apply_types(gp):
         'source_file': pl.String
     }
 
-    for key in column_types:
+    for key, value in column_types.items():
         gp = gp.with_columns(
-            pl.col(key).cast(column_types[key]).alias(key)
+            pl.col(key).cast(value).alias(key)
         )
 
     return gp
