@@ -28,11 +28,11 @@ def present_gp():
             The [Sudoku Grand Prix (GP)](https://gp.worldpuzzle.org/) is the largest annual sudoku
             competition by number of participants. The eight rounds are held online, each four
             weeks apart covering more than half of the year. Each round is crafted by a different
-            nation and consists of classic sudoku, popular sudoku variants (see, for example, the
-            options at [Sudoku Mania](https://sudokumaniacs.com/puzzlesearch.php)), and rare or
-            novel variants. Rounds have a 90 minute time limit and points are awarded for correct
-            puzzles based on the difficulty of each puzzle, with bonus points for saved time for
-            the exclusive subset of solvers who complete all puzzles in time.
+            nation and consists of classic sudoku, popular sudoku
+            [variants](https://www.logic-puzzles.ropeko.ch/php/db/search.php?searchValue=sudoku), 
+            and rare or novel variants. Rounds have a 90 minute time limit and points are awarded
+            for correct puzzles based on the difficulty of each puzzle, with bonus points for saved
+            time for the exclusive subset of solvers who complete all puzzles in time.
 
             Solvers are ranked by the sum of their top 6 rounds, and typically the top finishers
             are invited to compete in an in-person playoff for final ranking held during the World
