@@ -200,7 +200,8 @@ def load_gp(csv_directory="data/processed/gp", verbose=False, output_csv=None):
     """
     dataframes = []
 
-    all_columns = set()
+    # Dict of columns to their types
+    all_columns = {}
 
     for filename in os.listdir(csv_directory):
         if filename.endswith(".csv"):
@@ -213,16 +214,21 @@ def load_gp(csv_directory="data/processed/gp", verbose=False, output_csv=None):
                 pl.lit(filename).alias("source_file")
             )
             dataframes.append(df)
-            all_columns.update(df.columns)
+            for column, type in df.schema.items():
+                if column not in all_columns:
+                    all_columns[column] = type
+                else:
+                    if all_columns[column] != type:
+                        print(f"Warning: For column {column}, had type {all_columns[column]}" +
+                              f"but now have {type}")
 
     aligned_dfs = []
     for df in dataframes:
-        missing_columns = all_columns - set(df.columns)
-        for col in missing_columns:
-            # Casting to String because the types need to be the same even if values
-            # are set to None. An improvement would be to store types instead of
-            # handling the one type that created an error.
-            df = df.with_columns([pl.lit(None).cast(pl.String).alias(col)])
+        for column in all_columns:
+            if column not in df.columns:
+                # Casting is necessary because concat will fail if the types differ, even
+                # for null values.
+                df = df.with_columns([pl.lit(None).cast(all_columns[column]).alias(column)])
         aligned_dfs.append(df.select(sorted(all_columns)))
     combined_df = pl.concat(aligned_dfs, how="vertical")
 
