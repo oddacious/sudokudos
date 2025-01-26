@@ -1,0 +1,860 @@
+#,Name,Country,Nick,Points,GP_t1 points,GP_t1 rank. points,GP_t1 position,year,round
+1.,Letian Ming,China,Mike,1100,1100,1100,1.,2025,1
+2.,Tantan Dai,China,SERENE,1087.8,1087.8,1087.8,2.,2025,1
+3.,Hu Yuxuan Hu,China,huyuxuan,993.8,993.8,993.8,3.,2025,1
+4.,Kota Morinishi,Japan,Kota,983,983,983,4.,2025,1
+5.,Jan Vondruška,Czech Rep.,WTM,962,962,962,5.,2025,1
+6.,Yu Tianxiang,China,Yutx_GCS,936,936,936,6.,2025,1
+7.,Le Duo Yang,China,Sky Yang,934,934,934,7.,2025,1
+8.,Ken Endo,Japan,EKBM,932.5,932.5,932.5,8.,2025,1
+9.,Cheran Sun,China,青清晴情,920.2,920.2,920.2,9.,2025,1
+10.,Jakub Ondroušek,Czech Rep.,,917.7,917.7,917.7,10.,2025,1
+11.,Seungjae Kwak,"Korea, South",Kwaka,903.5,903.5,903.5,11.,2025,1
+12.,Tiit Vunk,Estonia,TiiT,860,860,860,12.,2025,1
+13.,Suzhe QIU,China,ysbg123,858.7,858.7,858.7,13.,2025,1
+14.,Sinchai Rungsangrattanakul,Thailand,sinchai4547,830.3,830.3,830.3,14.,2025,1
+15.,Siyuan Luo,China,GGDumplings,823.2,823.2,823.2,15.,2025,1
+16.,Bastien Vial-Jaime,France,,817.8,817.8,817.8,16.,2025,1
+17.,Hideaki Jo,Japan,,800.2,800.2,800.2,17.,2025,1
+18.,YiFan Xie,China,evan_xie,792,792,792,18.,2025,1
+19.,Can Erturan,Turkey,Cane_Puzzles,785,785,785,19.,2025,1
+20.,Dominik Bezkosty,Poland,,784.3,784.3,784.3,20.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+21.,Timothy Doyle,France,Timothy,781.5,781.5,781.5,21.,2025,1
+22.,Jordyn Hyde,USA,,761.8,761.8,761.8,22.,2025,1
+23.,Weifan Wang,China,qw014052,761.2,761.2,761.2,23.,2025,1
+24.,Rintaro Matsumoto,Japan,limt,746.5,746.5,746.5,24.,2025,1
+25.,Kishore Sridharan,India,kishy72,744.8,744.8,744.8,25.,2025,1
+26.,Đức Chiến Nguyễn,Vietnam,NDChien2000,723,723,723,26.,2025,1
+27.,Tawan Sunathvanichkul,Thailand,,713,713,713,27.,2025,1
+28.,Takuya Sugimoto,Japan,sugitakukun,712.8,712.8,712.8,28.,2025,1
+29.,Chiel Beenhakker Beenhakker,Netherlands,bakpao,709.5,709.5,709.5,29.,2025,1
+30.,Nicholas Ling,Australia,DrNick,707.7,707.7,707.7,30.,2025,1
+31.,Bram de Laat,Netherlands,Para,701.7,701.7,701.7,31.,2025,1
+32.,Akio Tanabe,Japan,akio,698.3,698.3,698.3,32.,2025,1
+33.,Jan Mrozowski,Poland,janoslaw,691.5,691.5,691.5,33.,2025,1
+34.,Tyler Chen,USA,tchenn,678,678,678,34.,2025,1
+35.,心 木,China,木心,677.2,677.2,677.2,35.,2025,1
+36.,Luka Bušić,Croatia,Buske,676.5,676.5,676.5,36.,2025,1
+37.,Vincent Bertrand,Belgium,,672.7,672.7,672.7,37.,2025,1
+38.,Pavel Jaselský,Slovakia,pali7,668.5,668.5,668.5,38.,2025,1
+39.,yx c,China,ugly2333,665.7,665.7,665.7,39.,2025,1
+40.,David Jones,Canada,WMathie,640.5,640.5,640.5,40.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+41.,Harrison Beer,Australia,Harryjbeer,640,640,640,41.,2025,1
+42.,Nityant Agarwal,India,Nityant05,635,635,635,42.,2025,1
+43.,Penka Koleva,Bulgaria,,630,630,630,43.,2025,1
+44.,Eva Schuckert,Austria,,630,630,630,44.,2025,1
+45.,Ce Jin,China,jcvb,630,630,630,45.,2025,1
+46.,CJ Tan,Philippines,hetan,630,630,630,46.,2025,1
+47.,Khả Lê Minh,Vietnam,Lê Minh Khả,613,613,613,47.,2025,1
+48.,Mark Goodliffe,UK,magoo,610,610,610,48.,2025,1
+49.,Salih Alan,Turkey,bskbri,606,606,606,49.,2025,1
+50.,Xingjian Cui,China,,603,603,603,50.,2025,1
+51.,Walker Anderson,USA,WA1729,603,603,603,51.,2025,1
+52.,Aubin Danzo,France,,603,603,603,52.,2025,1
+53.,Sam Cappleman-Lynes,UK,Feadoor,597.2,597.2,597.2,53.,2025,1
+54.,Tina Bratim,Croatia,Tinica,586,586,586,54.,2025,1
+55.,Анхбаяр Сүхээ,Mongolia,ankhbayar,586,586,586,55.,2025,1
+56.,Patrick Kanz,Germany,Alfred Noobel,586,586,586,56.,2025,1
+57.,Se Joon Jang,"Korea, South",jonahjang,586,586,586,57.,2025,1
+58.,Calum Mailer,UK,,584,584,584,58.,2025,1
+59.,Byron Calver,Canada,ByronosaurusRex,583,583,583,59.,2025,1
+60.,Anne Limoges,France,,583,583,583,60.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+61.,徐晨皓 samuelxu,China,嘉和逆天,580,580,580,61.,2025,1
+62.,Adem Jaziri,Tunisia,Adem Jaziri,578,578,578,62.,2025,1
+63.,Yoseph Mak,USA,symbolic23,578,578,578,63.,2025,1
+64.,Naoki Sekiya,Japan,,577,577,577,64.,2025,1
+65.,Jérôme LACOSTE,France,geronimo92,572,572,572,65.,2025,1
+66.,Thomas Luo,USA,tluo5458,570,570,570,66.,2025,1
+67.,Jiacheng Song,China,youyuqingwa,568,568,568,67.,2025,1
+68.,Hwangrae Lee,"Korea, South",Spica,568,568,568,68.,2025,1
+69.,Ryusuke Nishiyama,Japan,,568,568,568,69.,2025,1
+70.,Hannes Sidorov,Estonia,HannesB0Y,568,568,568,70.,2025,1
+71.,Tingyan Qian,China,Leo Qian,568,568,568,71.,2025,1
+72.,Candice Solidarios,Philippines,,566,566,566,72.,2025,1
+73.,Harsh Poddar,India,,566,566,566,73.,2025,1
+74.,Tomasz Stróżak,Poland,strozo,561,561,561,74.,2025,1
+75.,Judyta Izabela Bujnowska,Poland,JuIza,555,555,555,75.,2025,1
+76.,Freddie Hand,UK,Puzzle_Maestro,548,548,548,76.,2025,1
+77.,Lennart Muijres,Netherlands,Leonardo024,547,547,547,77.,2025,1
+78.,Serhii Tyshchenko,Ukraine,tsergiiv,546,546,546,78.,2025,1
+79.,Jan Novotný,Czech Rep.,KrtekHonza,546,546,546,79.,2025,1
+80.,Gyimesi Zoltán,Hungary,Hunsudoku,546,546,546,80.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+81.,Kevin Sun,Canada,ksun48,544,544,544,81.,2025,1
+82.,Jan Zverina,Czech Rep.,,544,544,544,82.,2025,1
+83.,hyuk sun Kwon,"Korea, South",dolgore63,526,526,526,83.,2025,1
+84.,Sed Holaysan,Philippines,,526,526,526,84.,2025,1
+85.,Alexander Tsegenko,Russia,Tsegen,526,526,526,85.,2025,1
+86.,Robert Vollmert,Germany,rob,525,525,525,86.,2025,1
+87.,Valentin Miakinen,France,Barbitos,513,513,513,87.,2025,1
+88.,Kazuya Yamamoto,Japan,Hazakura,512,512,512,88.,2025,1
+89.,Andrej Plaštiak,Slovakia,Andrej,512,512,512,89.,2025,1
+90.,Jelena Balanova,Latvia,,511,511,511,90.,2025,1
+91.,Sylvain Caudmont,France,sisi59,510,510,510,91.,2025,1
+92.,Édouard Lebeau,France,mandourin,510,510,510,92.,2025,1
+93.,Christian König,Germany,CJK,504,504,504,93.,2025,1
+94.,Takuma Kitamura,Japan,SP1,501,501,501,94.,2025,1
+95.,Zimi Li,China,daipa,501,501,501,95.,2025,1
+96.,Enyang Li,China,Leee,498,498,498,96.,2025,1
+97.,Jack Lawrence,UK,,496,496,496,97.,2025,1
+98.,Don Wu,Taiwan,,494,494,494,98.,2025,1
+99.,Lucy Epstein,USA,,494,494,494,99.,2025,1
+100.,Jana Novotná,Czech Rep.,tojejedno,494,494,494,100.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+101.,Orhun Yüksel,Turkey,Niverio,492,492,492,101.,2025,1
+102.,Matthew Hambacher,USA,Cozy,489,489,489,102.,2025,1
+103.,Qianzi Li,China,Wise Cat,488,488,488,103.,2025,1
+104.,Tom Collyer,UK,,486,486,486,104.,2025,1
+105.,Rebecca Chang,USA,Bec,481,481,481,105.,2025,1
+106.,Hikaru Muraoka,Japan,k_night,480,480,480,106.,2025,1
+107.,Gabriela Jaselska,Slovakia,,480,480,480,107.,2025,1
+108.,Hawel Manuela,Austria,,480,480,480,108.,2025,1
+109.,Satoshi Ando,Japan,aldentea,478,478,478,109.,2025,1
+110.,Matteo Fedeli,Italy,Yoshi Baroshi,476,476,476,110.,2025,1
+111.,Zhenxin Gao,China,GreatZX,476,476,476,111.,2025,1
+112.,Pavel Kadlečík,Czech Rep.,kousek-nebe,476,476,476,112.,2025,1
+113.,Tsukiko Kitagawa,Japan,Tsuuu,473,473,473,113.,2025,1
+114.,Adam Bissett,UK,,472,472,472,114.,2025,1
+115.,XiaoWei Huang,China,xiao01wei,467,467,467,115.,2025,1
+116.,Annick Weyzig,Netherlands,sojaboon,467,467,467,116.,2025,1
+117.,Taigo Ando,Japan,Tigereye,466,466,466,117.,2025,1
+118.,Denis Auroux,France,auroux,466,466,466,118.,2025,1
+119.,Clover Moon,USA,clover,461,461,461,119.,2025,1
+120.,Frederick Gutierrez Jr.,Philippines,Fredo,460,460,460,120.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+121.,Pitchaya Apichetyota,Thailand,ryuryuryu,459,459,459,121.,2025,1
+122.,Xuân Dương Lê,Vietnam,leduongk65cbuet,458,458,458,122.,2025,1
+123.,Larissa Rudolph,Germany,Lali,454,454,454,123.,2025,1
+124.,Krystian Świderski,Poland,karzym,452,452,452,124.,2025,1
+125.,akash doulani,India,akashdoulani78,452,452,452,125.,2025,1
+126.,Maciej Ignaciuk,Poland,,451,451,451,126.,2025,1
+127.,Svetlozar Stefanov,Bulgaria,zorko,451,451,451,127.,2025,1
+128.,Matt Leonard,USA,ML,450,450,450,128.,2025,1
+129.,Natália Chanová,Slovakia,natalka,448,448,448,129.,2025,1
+130.,Yuki Kajihara,Japan,Shiraoka,447,447,447,130.,2025,1
+131.,Verena Möhler,Germany,moeve,446,446,446,131.,2025,1
+132.,Tomasz Skalski,Poland,,443,443,443,132.,2025,1
+133.,Mariëlle Hoexum,Netherlands,malelle12,442,442,442,133.,2025,1
+134.,Kevin Filmawan,Indonesia,kevinfil,441,441,441,134.,2025,1
+135.,Timothy Tan,USA,arceus23,438,438,438,135.,2025,1
+136.,Pattrachai Lueangdechanurak,Thailand,Pattrachai,438,438,438,136.,2025,1
+137.,Janelle Aleisonne Navarro,Philippines,aliii,438,438,438,137.,2025,1
+138.,思怡 林,China,linlatiao,438,438,438,138.,2025,1
+139.,Jhonny Cruz Mestanza,Peru,ElXouny,438,438,438,139.,2025,1
+140.,anil khosla,India,,438,438,438,140.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+141.,Anna Wąsowska,Poland,ancyna,438,438,438,141.,2025,1
+142.,Jan Češka,Czech Rep.,janceska,438,438,438,142.,2025,1
+143.,Martin Bråten,Norway,Piatato,438,438,438,143.,2025,1
+144.,Zoe Ashford,UK,Zo_Ashford,437,437,437,144.,2025,1
+145.,Heather Golding,UK,,436,436,436,145.,2025,1
+146.,自 然,China,zrlyg,432,432,432,146.,2025,1
+147.,SeongHwa Hong,"Korea, South",,430,430,430,147.,2025,1
+148.,Qingyu Shi,China,Qingyu,430,430,430,148.,2025,1
+149.,Philippe Meyer,France,FifiR,427,427,427,149.,2025,1
+150.,Ondřej Motlíček,Czech Rep.,,423,423,423,150.,2025,1
+151.,Nicole Schumann,Germany,Mira,422,422,422,151.,2025,1
+152.,ali kılıç,Turkey,ali-kilic,419,419,419,152.,2025,1
+153.,Jeremy Kong,UK,jkong,418,418,418,153.,2025,1
+154.,Wei-Hwa Huang,USA,onigame,417,417,417,154.,2025,1
+155.,Jotaro Miyamoto,Japan,,417,417,417,155.,2025,1
+156.,Jakub Hrazdira,Czech Rep.,Gotroch,417,417,417,156.,2025,1
+157.,Dan Katz,USA,Spelvin,415,415,415,157.,2025,1
+158.,Torsten Rogoll,Germany,,414,414,414,158.,2025,1
+159.,Jiaqi Qin,China,Noame Qin,414,414,414,159.,2025,1
+160.,Kristi Lehto,Estonia,,414,414,414,160.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+161.,Ran Liao,China,snakeeyes,414,414,414,161.,2025,1
+162.,Florian Meschenmoser,Germany,,413,413,413,162.,2025,1
+163.,Jackie Anderson,USA,jackie,413,413,413,163.,2025,1
+164.,Michael Kreiger,USA,Michael_K3,412,412,412,164.,2025,1
+165.,Sumate Juariyamark,Thailand,MrLiang,412,412,412,165.,2025,1
+166.,Dennis Keetman,Netherlands,DennisK,412,412,412,166.,2025,1
+167.,Jeffrey Huang,USA,jeff10,412,412,412,167.,2025,1
+168.,Yuta Nagata,Japan,nyuta,410,410,410,168.,2025,1
+169.,Soji Kubota,Japan,fff1015,407,407,407,169.,2025,1
+170.,Aashay Patil,India,aashay,406,406,406,170.,2025,1
+171.,Agnieszka Buczma,Poland,agabum,404,404,404,171.,2025,1
+172.,Klára Vytisková,Czech Rep.,QKV,404,404,404,172.,2025,1
+173.,DHRUVARAJSINH PUWAR,India,Dhruvarajsinh,404,404,404,173.,2025,1
+174.,Ravi chandran,India,ravilp,404,404,404,174.,2025,1
+175.,Leonidas Giannouzakos,Greece,bookie,404,404,404,175.,2025,1
+176.,Fabjan Markovinović,Croatia,fabjanm,404,404,404,176.,2025,1
+177.,Quốc Hoàng Đình Anh,Vietnam,,400,400,400,177.,2025,1
+178.,Kerry Xing,USA,kxing,399,399,399,178.,2025,1
+179.,Roger Kohler,Switzerland,ropeko,398,398,398,179.,2025,1
+180.,Sara Terveer,Germany,,397,397,397,180.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+181.,danya mos,Netherlands,danya,396,396,396,181.,2025,1
+182.,Yuji Yamamoto,Japan,utime,393,393,393,182.,2025,1
+183.,Veronika Macků,Czech Rep.,Pherenike,393,393,393,183.,2025,1
+184.,Elise Harivel,France,EliseH,393,393,393,184.,2025,1
+185.,Man He,China,dodomos,389,389,389,185.,2025,1
+186.,Riley Guerin,Australia,Bluey,387,387,387,186.,2025,1
+187.,Jan Farkas,Slovakia,slovak,386,386,386,187.,2025,1
+188.,Nathalie Catinot,France,,384,384,384,188.,2025,1
+189.,Lisa Loheide-Niesmann,Germany,,384,384,384,189.,2025,1
+190.,Stefan Gaspar,Slovakia,pista,382,382,382,190.,2025,1
+191.,Ned Walker,UK,nedwalker,382,382,382,191.,2025,1
+192.,Michal Matyska,Czech Rep.,mtronic,381,381,381,192.,2025,1
+193.,Veronika Hrubjáková,Slovakia,,380,380,380,193.,2025,1
+194.,Martijn Goorden,Netherlands,Qwerty,380,380,380,194.,2025,1
+195.,Mark Sweep,Netherlands,Frostini,378,378,378,195.,2025,1
+196.,Solomon Granor,USA,SSG,378,378,378,196.,2025,1
+197.,Gennady Korotkevich,Belarus,tourist,378,378,378,197.,2025,1
+198.,Tom Krejčí,Czech Rep.,tierra,378,378,378,198.,2025,1
+199.,Иван Георгиев,Bulgaria,Vanko1914,378,378,378,199.,2025,1
+200.,Charles Steinhardt,Denmark,CSteinhardt,378,378,378,200.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+201.,Joshua Fernandes,USA,,378,378,378,201.,2025,1
+202.,Magdalena Bernacik,Poland,,377,377,377,202.,2025,1
+203.,Elena Aivazopoulou,Greece,,376,376,376,203.,2025,1
+204.,Shinichi Aoki,Japan,,374,374,374,204.,2025,1
+205.,Asterios Varsamis-Kyratlidis,Greece,avarsamis,374,374,374,205.,2025,1
+206.,Jonathan Bode,USA,bodemeister,372,372,372,206.,2025,1
+207.,Dolev Sacher,Israel,DolevS,369,369,369,207.,2025,1
+208.,Kartik Reddy,India,,368,368,368,208.,2025,1
+209.,Victor Larsen,USA,shraeye,365,365,365,209.,2025,1
+210.,Frédéric PREVOT,France,Ours Blanc,364,364,364,210.,2025,1
+211.,Roberto Lee,Taiwan,robertolee,360,360,360,211.,2025,1
+212.,Manuel Poliszuk,Argentina,Qhaces,360,360,360,212.,2025,1
+213.,Nora Borst,USA,,360,360,360,213.,2025,1
+214.,Wan Pei Jun,Malaysia,PeiJun,358,358,358,214.,2025,1
+215.,Gino Hsu,Taiwan,Gino,358,358,358,215.,2025,1
+216.,Kahraman Gunduz,Turkey,piiz,358,358,358,216.,2025,1
+217.,Pavlos Zacharopoulos,Greece,t12345678,358,358,358,217.,2025,1
+218.,Matteo Testa,Italy,,358,358,358,218.,2025,1
+219.,Hermelin Geoffroy,France,wikmouic,358,358,358,219.,2025,1
+220.,Tim Miller,USA,timjamiller,357,357,357,220.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+221.,haizhi zhang,China,岁月刀,356,356,356,221.,2025,1
+222.,Erik Amor,Estonia,,354,354,354,222.,2025,1
+223.,Zhen Fan,China,FierceHAuCl4,352,352,352,223.,2025,1
+224.,Karolina Olszewska,Poland,arolinao,350,350,350,224.,2025,1
+225.,esra aydemir,Turkey,aras,350,350,350,225.,2025,1
+226.,Justyna Wójcik,Poland,Hitori69,350,350,350,226.,2025,1
+227.,Hemant Kr Malani,India,,350,350,350,227.,2025,1
+228.,Matthias Schmitt,Germany,Schma,349,349,349,228.,2025,1
+229.,Margit Scheler,Estonia,pargitool,348,348,348,229.,2025,1
+230.,Matthew White,UK,,342,342,342,230.,2025,1
+231.,梓睿 王,China,Wang Zirui,340,340,340,231.,2025,1
+232.,Kuan Yu Lin,Taiwan,xupej04m3,340,340,340,232.,2025,1
+233.,Scott Williams,USA,Mr. W the Math Teacher,339,339,339,233.,2025,1
+234.,Diana Skrhova,Slovakia,Anaid,339,339,339,234.,2025,1
+235.,yong seok Choi,"Korea, South",EoHeongMat,338,338,338,235.,2025,1
+236.,Ruben Gafencu,Romania,rubbeng,338,338,338,236.,2025,1
+237.,Kartal Nagy,Hungary,kartal,336,336,336,237.,2025,1
+238.,Jonathan Prine,USA,,336,336,336,238.,2025,1
+239.,Deren Çağlayan,Turkey,,336,336,336,239.,2025,1
+240.,Gabriele Carelli,Italy,GaS,332,332,332,240.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+241.,Pavel Kocka,Czech Rep.,hawranomut,331,331,331,241.,2025,1
+242.,Seyeon Lo,Hong Kong,Seyeonnie,329,329,329,242.,2025,1
+243.,Chris Reintal,Estonia,,329,329,329,243.,2025,1
+244.,Mathilde Prouvost,France,ThithildeProuv,328,328,328,244.,2025,1
+245.,Reinier Schmiermann,Netherlands,Reinier,328,328,328,245.,2025,1
+246.,Arvis Brizga,Latvia,,328,328,328,246.,2025,1
+247.,Elizabeth Izaks,Netherlands,,327,327,327,247.,2025,1
+248.,Jiri Hrdina,Czech Rep.,jhrdina,326,326,326,248.,2025,1
+249.,Krzysztof Dwużnik,Poland,,325,325,325,249.,2025,1
+250.,Erin Sosnoski,USA,ESos,324,324,324,250.,2025,1
+251.,Vasso Kalaitzidou,Greece,vasso,324,324,324,251.,2025,1
+252.,Keheng Hou,China,漩涡小饼干,324,324,324,252.,2025,1
+253.,Mikhail Shishkin,Russia,NinetySeven,324,324,324,253.,2025,1
+254.,Henning Kalsgaard Poulsen,Denmark,Kalsgaard,324,324,324,254.,2025,1
+255.,Lenka Chaloupková,Czech Rep.,,324,324,324,255.,2025,1
+256.,Deyan Razsadov,Bulgaria,Deyan,324,324,324,256.,2025,1
+257.,Tomoya Kimura,Japan,panista,323,323,323,257.,2025,1
+258.,Łukasz Skrzypczyński,Poland,skrzypl1,322,322,322,258.,2025,1
+259.,Takeshi Kawasaki,Japan,,322,322,322,259.,2025,1
+260.,Patrick Schaffter,Switzerland,,322,322,322,260.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+261.,Rianda Jenema,Netherlands,Rianda,322,322,322,261.,2025,1
+262.,Karel Doskocil,Czech Rep.,carlos5,321,321,321,262.,2025,1
+263.,Félix Meyer,France,,321,321,321,263.,2025,1
+264.,Tim Tom,UK,timimimimim,320,320,320,264.,2025,1
+265.,Michael Tang,USA,mstang,319,319,319,265.,2025,1
+266.,Zhichao Li,China,Goldsand,319,319,319,266.,2025,1
+267.,Tomasz Stachurski,Poland,,318,318,318,267.,2025,1
+268.,(Rainy) Chiến Lê Minh,Vietnam,muaroivt1998,318,318,318,268.,2025,1
+269.,Claudine Thiry,Luxembourg,dodine,317,317,317,269.,2025,1
+270.,Tianyu Qi,China,shedarshian,316,316,316,270.,2025,1
+271.,Luca Marenchino,Italy,MrWutki,315,315,315,271.,2025,1
+272.,Nicholas Allendorf,USA,Shogia,314,314,314,272.,2025,1
+273.,Sung-Won Jin,"Korea, South",swj219,314,314,314,273.,2025,1
+274.,Michał Wójcik,Poland,mwojcik96,313,313,313,274.,2025,1
+275.,陈昱 chenyu,China,,313,313,313,275.,2025,1
+276.,Yunus Emre Büyükkale,Turkey,ynus,311,311,311,276.,2025,1
+277.,Taylor Bu,China,,308,308,308,277.,2025,1
+278.,Martin Fundarek,Slovakia,,305,305,305,278.,2025,1
+279.,Iva Rabar,Croatia,,304,304,304,279.,2025,1
+280.,爽 覃,China,Shuang Qin,304,304,304,280.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+281.,Torashige Maki,Japan,,303,303,303,281.,2025,1
+282.,Valeria Losasso,Italy,hopethisoneworks,303,303,303,282.,2025,1
+283.,桃 刘,China,桃菜菜,301,301,301,283.,2025,1
+284.,jun seo ha,"Korea, South",mathjuny,301,301,301,284.,2025,1
+285.,Alex Koek,Netherlands,,301,301,301,285.,2025,1
+286.,Jaan Laks,Estonia,salmo,299,299,299,286.,2025,1
+287.,Alexander Karpan,Ukraine,AlexKarpan,299,299,299,287.,2025,1
+288.,Tu Nguyen,Vietnam,thanhtu26,299,299,299,288.,2025,1
+289.,Pika Založnik,Slovenia,pzalozni,299,299,299,289.,2025,1
+290.,Anna Szymańska,Poland,annasz,298,298,298,290.,2025,1
+291.,Giulia Cossutti,Italy,elc,296,296,296,291.,2025,1
+292.,Věra Šramková,Czech Rep.,jolly,295,295,295,292.,2025,1
+293.,Cara Dowell,USA,,294,294,294,293.,2025,1
+294.,Wanru Hong,China,,293,293,293,294.,2025,1
+295.,Peter Hornak,Slovakia,petho,293,293,293,295.,2025,1
+296.,Ibon Arregui,Spain,ibon,293,293,293,296.,2025,1
+297.,Yosuke Imai,Japan,101 Yosuke,293,293,293,297.,2025,1
+298.,jean-Baptiste RIDOUARD,France,Roxis,293,293,293,298.,2025,1
+299.,Svilen Dyakovski,Bulgaria,sdyakovski,293,293,293,299.,2025,1
+300.,michele bongiorno,Italy,wiseman89,292,292,292,300.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+301.,Veronika Kolvekova,Slovakia,,291,291,291,301.,2025,1
+302.,Karel Sterba,Czech Rep.,chlien,291,291,291,302.,2025,1
+303.,Andri Purnama Ramadan,Indonesia,Nusi,291,291,291,303.,2025,1
+304.,achille massimo capecce,Italy,achille,290,290,290,304.,2025,1
+305.,Imke Herold,Germany,,290,290,290,305.,2025,1
+306.,Veronika Lengauer,Germany,garganegra,290,290,290,306.,2025,1
+307.,Frank Wang,USA,,285,285,285,307.,2025,1
+308.,Shuohang Chen,China,shuohang,284,284,284,308.,2025,1
+309.,zhiyang Tong,China,泡芙,284,284,284,309.,2025,1
+310.,Pawel Kepczynski,Poland,pafcio,284,284,284,310.,2025,1
+311.,Jason Lee,USA,,283,283,283,311.,2025,1
+312.,Jonathan Yu,Philippines,sudokutrash,282,282,282,312.,2025,1
+313.,zhengyi xie,China,zhengyi717,282,282,282,313.,2025,1
+314.,Vladlen Karpov,Russia,,282,282,282,314.,2025,1
+315.,PERRIDY FRANCK,France,PELIKAN03,282,282,282,315.,2025,1
+316.,Yusuke Hara,Japan,Hikaru,282,282,282,316.,2025,1
+317.,Marek Oja,Estonia,,282,282,282,317.,2025,1
+318.,Jiachen Tang,China,SuikaPredator,282,282,282,318.,2025,1
+319.,Marco Pellegrini,Italy,m19700530,282,282,282,319.,2025,1
+320.,Kai Long Yip,Hong Kong,,282,282,282,320.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+321.,David Braun,Hungary,Braunka625,282,282,282,321.,2025,1
+322.,Noriyuki Machimura,Japan,,282,282,282,322.,2025,1
+323.,Julien Bonneville,France,goodcity,281,281,281,323.,2025,1
+324.,Nickolai Whitlow,USA,,281,281,281,324.,2025,1
+325.,XXX XXX,China,Sloth,281,281,281,325.,2025,1
+326.,Ivan Laptiev,Russia,Yason,281,281,281,326.,2025,1
+327.,Yu Huang,China,hy1988,281,281,281,327.,2025,1
+328.,Sébastien Tainon,France,Arkandias,280,280,280,328.,2025,1
+329.,Jaroslav Grajciar ml.,Slovakia,Jarck,279,279,279,329.,2025,1
+330.,Eugenia Khaikhina,Canada,gigi_kh,279,279,279,330.,2025,1
+331.,Benedek Kovács,Hungary,,279,279,279,331.,2025,1
+332.,Aleksei Daniliuk,UK,Um_nik,278,278,278,332.,2025,1
+333.,Ulla Elsilä,Finland,UllaE,277,277,277,333.,2025,1
+334.,Zoé Weiblé,France,,274,274,274,334.,2025,1
+335.,Volker Plassmann,Germany,,273,273,273,335.,2025,1
+336.,Connor Sell,USA,,271,271,271,336.,2025,1
+337.,Ümit Volkan ÖZTÜRK,Turkey,volkirik,270,270,270,337.,2025,1
+338.,Anuradha Ganesh,India,AnuGanesh,270,270,270,338.,2025,1
+339.,Andrzej Dalach,Poland,Gladmax,270,270,270,339.,2025,1
+340.,Jakub Dobrzański,Poland,,270,270,270,340.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+341.,Szilvia Nagy,Hungary,,270,270,270,341.,2025,1
+342.,Václav Jasanský,Czech Rep.,Nikro,270,270,270,342.,2025,1
+343.,Armando III Dela Cruz,Philippines,,270,270,270,343.,2025,1
+344.,Anecha Aunbun,Thailand,Fiw,270,270,270,344.,2025,1
+345.,György Herke,Hungary,Gyuszi13,269,269,269,345.,2025,1
+346.,Miroslav Salaga,Slovakia,macko,269,269,269,346.,2025,1
+347.,Alexander Kirlitsa,Russia,Hitrez,269,269,269,347.,2025,1
+348.,Seiu Tei,Japan,pleiades,267,267,267,348.,2025,1
+349.,Kanz Jacqueline,Germany,LaChica,264,264,264,349.,2025,1
+350.,Julia Hayward,UK,JuliaH,262,262,262,350.,2025,1
+351.,Sakulbuth Ekvittayaniphon,Thailand,lemononmars,261,261,261,351.,2025,1
+352.,Benji Martin,UK,Benjango,261,261,261,352.,2025,1
+353.,Chen-Xiu Lin,Taiwan,NaMgAl,259,259,259,353.,2025,1
+354.,Olga Shut,Belarus,OlgaShut,259,259,259,354.,2025,1
+355.,Jerry Weir,Canada,,258,258,258,355.,2025,1
+356.,Thananchai Aroonsaengroj,Thailand,minthananchai,257,257,257,356.,2025,1
+357.,Jouni Harjumäki,Finland,,256,256,256,357.,2025,1
+358.,Renfei Gong,China,OnionSalad,256,256,256,358.,2025,1
+359.,Anna Marzec,Poland,Fertilianum,255,255,255,359.,2025,1
+360.,Yuka Jo,Japan,melvy,254,254,254,360.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+361.,Zdenka Pácalová,Czech Rep.,zdenkap,254,254,254,361.,2025,1
+362.,Katarzyna Rumiancew,Poland,rumianek,252,252,252,362.,2025,1
+363.,S S,Canada,,251,251,251,363.,2025,1
+364.,Grzegorz Bajor,Poland,,251,251,251,364.,2025,1
+365.,Jordan John Lee,USA,AirJordanLee24,251,251,251,365.,2025,1
+366.,Jiapei Zou,China,likeat2best,251,251,251,366.,2025,1
+367.,yichen BU,China,,251,251,251,367.,2025,1
+368.,Thananon Boonkrong,Thailand,B. Thananon,250,250,250,368.,2025,1
+369.,Vassili Paput,France,,250,250,250,369.,2025,1
+370.,Jean Robert,France,khazimir,250,250,250,370.,2025,1
+371.,ZRINKA KARAČIĆ,Croatia,,249,249,249,371.,2025,1
+372.,Krutika Puwar,India,Puwar Krutika,249,249,249,372.,2025,1
+373.,Tobias Kraft,Germany,Toseflo,249,249,249,373.,2025,1
+374.,Martina Prinerová,Slovakia,eifel_mp,249,249,249,374.,2025,1
+375.,Nelly Pelc Vostrá,Czech Rep.,nelly,248,248,248,375.,2025,1
+376.,sumi sumi,Germany,,248,248,248,376.,2025,1
+377.,CHING-SHOU LIN,Taiwan,eleven0502,248,248,248,377.,2025,1
+378.,Filip Jabłoński,Poland,BigKokonat,248,248,248,378.,2025,1
+379.,Elena Mazzini,Italy,shopaholic,248,248,248,379.,2025,1
+380.,Rado Bo4ev,Bulgaria,tres4o,247,247,247,380.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+381.,Rachel Kagan,USA,Rachel,247,247,247,381.,2025,1
+382.,Timothy Leong,Australia,,247,247,247,382.,2025,1
+383.,Dylan Gibbs,UK,dylanamite,247,247,247,383.,2025,1
+384.,Jana Podroužková,Slovakia,jjjanka.s,246,246,246,384.,2025,1
+385.,Weerawit Jindaram,Thailand,,243,243,243,385.,2025,1
+386.,Richard Luhtaru,Estonia,,240,240,240,386.,2025,1
+387.,Raweewat Wutichaiya,Thailand,raweewat23,239,239,239,387.,2025,1
+388.,Olivier Lignon,France,Olivier Lignon,237,237,237,388.,2025,1
+389.,Nadine BRIOUAL,France,,236,236,236,389.,2025,1
+390.,Fernando Almazán Gil,Spain,-.ferchx.-,235,235,235,390.,2025,1
+391.,Anders Olsen,USA,whatshisbucket,235,235,235,391.,2025,1
+392.,Josh Pusateri,USA,WeBeatOkimo,229,229,229,392.,2025,1
+393.,Kei Ota,Japan,ten986,229,229,229,393.,2025,1
+394.,xxuurruuii xxuurruuii,China,xxuurruuii,229,229,229,394.,2025,1
+395.,Poonam Gandhi,India,poonamgandhi,228,228,228,395.,2025,1
+396.,Tauri Purk,Estonia,LaFleur,228,228,228,396.,2025,1
+397.,Jason Todd,USA,,228,228,228,397.,2025,1
+398.,KAVITA JAGANNATHAN,India,upsetcorrection,228,228,228,398.,2025,1
+399.,Olga Diaz,Spain,,228,228,228,399.,2025,1
+400.,yun gao,USA,,228,228,228,400.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+401.,Fritz Anja,Germany,afritz,228,228,228,401.,2025,1
+402.,Daniel Zeng,USA,cheep,228,228,228,402.,2025,1
+403.,Henry Turner,USA,Twiggy,228,228,228,403.,2025,1
+404.,Olga Doroszko,Poland,,228,228,228,404.,2025,1
+405.,Mio Tsutsui,Japan,mio,228,228,228,405.,2025,1
+406.,Yeongtae Shin,"Korea, South",sythi2,228,228,228,406.,2025,1
+407.,Aaron Queens,Philippines,AaronQns,228,228,228,407.,2025,1
+408.,Prezensky Istvan,Romania,logiprez,228,228,228,408.,2025,1
+409.,Victoria I. Pérez,Cuba,,228,228,228,409.,2025,1
+410.,Pallav Goyal,India,pallav123goyal,228,228,228,410.,2025,1
+411.,Sitanshu Sah,India,,228,228,228,411.,2025,1
+412.,Sandra van Wijk,Netherlands,Sandra v W,227,227,227,412.,2025,1
+413.,Arnaud Dumont,France,L00ping,227,227,227,413.,2025,1
+414.,Eva Myers,UK,Ekaterin,227,227,227,414.,2025,1
+415.,Cheryl Gaul,USA,cgaul,227,227,227,415.,2025,1
+416.,Bernard Kroes,Netherlands,BAK,226,226,226,416.,2025,1
+417.,Amalia Panagiotopoulou,Greece,,226,226,226,417.,2025,1
+418.,Diana Huang,USA,,225,225,225,418.,2025,1
+419.,Akash Madiraju,USA,,225,225,225,419.,2025,1
+420.,jingzhi xie,China,mengxue,225,225,225,420.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+421.,Theo Jurrius,Netherlands,Noppel,224,224,224,421.,2025,1
+422.,Mathilde Chanavat,France,CHANAVAT,223,223,223,422.,2025,1
+423.,Dmytro Furayev,Ukraine,,222,222,222,423.,2025,1
+424.,Ewelina Wiśniewska,Poland,Evellinium,221,221,221,424.,2025,1
+425.,John Rickert,USA,Rickert,220,220,220,425.,2025,1
+426.,Marek Peszt,Poland,xtras,217,217,217,426.,2025,1
+427.,Tatiana Padysakova,Slovakia,tanatko,217,217,217,427.,2025,1
+428.,吴昊臻 吴,China,wuhaozhen,217,217,217,428.,2025,1
+429.,Clément Bossut,France,,215,215,215,429.,2025,1
+430.,Jeff Felling,USA,Jeff8,215,215,215,430.,2025,1
+431.,Tùng Phạm Đường Minh,Vietnam,,213,213,213,431.,2025,1
+432.,Lubos Hyzak,Slovakia,,213,213,213,432.,2025,1
+433.,Beata Lach,Poland,Blach,213,213,213,433.,2025,1
+434.,Jouni Särkijärvi,Finland,peluri,213,213,213,434.,2025,1
+435.,Servet Hakan Altay,Turkey,shaltay,213,213,213,435.,2025,1
+436.,吕铠毅 lvkaiyi,China,lvkaiyi0811,212,212,212,436.,2025,1
+437.,Tom van der Velden,Netherlands,Ridder Tommy,212,212,212,437.,2025,1
+438.,Benedikt Hahn,Germany,Kideneb,212,212,212,438.,2025,1
+439.,Phasit Chantachote,Thailand,SonicBlaze,211,211,211,439.,2025,1
+440.,Kanae Aoki,Japan,kiyowa,211,211,211,440.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+441.,Andrew Werner,USA,,210,210,210,441.,2025,1
+442.,Kadri Kuusik,Estonia,Kadri,210,210,210,442.,2025,1
+443.,Marina Kamohara,Japan,,210,210,210,443.,2025,1
+444.,Andrew Grigolunovich,Latvia,AGCFA,210,210,210,444.,2025,1
+445.,Isabel Herget,Germany,,210,210,210,445.,2025,1
+446.,Julien DAL ZOTTO,France,Dalzinho74,209,209,209,446.,2025,1
+447.,Dương Bùi Xuân Khánh,Vietnam,DannyBui,208,208,208,447.,2025,1
+448.,BLECON Francois,France,francwe,208,208,208,448.,2025,1
+449.,Arlene Navo,USA,Arlene,208,208,208,449.,2025,1
+450.,Thanos Darkadakis,Greece,sakito,207,207,207,450.,2025,1
+451.,Gunasundhari D,India,,207,207,207,451.,2025,1
+452.,Emma McCaughan,UK,Emma,207,207,207,452.,2025,1
+453.,Mateusz Przybyła,Poland,,205,205,205,453.,2025,1
+454.,Lese Wesen,Germany,Lesewesen,204,204,204,454.,2025,1
+455.,Madeleine Mott,USA,atroposhears,204,204,204,455.,2025,1
+456.,Dusan Sobot,Serbia,dsobot,204,204,204,456.,2025,1
+457.,Florian Mauer,Germany,FlorianM79,203,203,203,457.,2025,1
+458.,Daniela Lukáčová,Slovakia,,203,203,203,458.,2025,1
+459.,Howard Wilkinson,UK,HWHW,203,203,203,459.,2025,1
+460.,Michael Walker,UK,Atimelord852,203,203,203,460.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+461.,João Paulo Velozo Oliveira Arantes,Brazil,musgley,203,203,203,461.,2025,1
+462.,Muhammad Mulki Abdul Azis,Indonesia,mulki554,201,201,201,462.,2025,1
+463.,Madeleine Dertwinkel,Germany,,201,201,201,463.,2025,1
+464.,Kristin Stearns,USA,DreamRose311,199,199,199,464.,2025,1
+465.,Crystal L,USA,,198,198,198,465.,2025,1
+466.,jerome BOULLEE,France,,198,198,198,466.,2025,1
+467.,Thamarai Valli Venkatachalam,UK,,197,197,197,467.,2025,1
+468.,Nicholas McHaffie,Canada,N McH,197,197,197,468.,2025,1
+469.,Daisy Mallion,UK,,195,195,195,469.,2025,1
+470.,Huiyun Noh,"Korea, South",NHY,195,195,195,470.,2025,1
+471.,Carolyn Duke,Canada,Canuck,195,195,195,471.,2025,1
+472.,Dimitrios-Ioannis Christomanos,Greece,dcchrist,195,195,195,472.,2025,1
+473.,Cong Gao,China,,194,194,194,473.,2025,1
+474.,Linards Krūklis,Latvia,,194,194,194,474.,2025,1
+475.,Sai Karthik Burra,India,carburra,194,194,194,475.,2025,1
+476.,Taavi Piller,Estonia,,194,194,194,476.,2025,1
+477.,Külli Laks Vahemäe,Estonia,Volvo,194,194,194,477.,2025,1
+478.,Penny Cheong,Malaysia,pennycheong917,194,194,194,478.,2025,1
+479.,Shifu Nakazawa,Japan,SHI,194,194,194,479.,2025,1
+480.,paolo tivano,Italy,flin68,194,194,194,480.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+481.,Deepak Kumar,India,dipkmr,194,194,194,481.,2025,1
+482.,Karin Luiv,Estonia,Inglitrompet,194,194,194,482.,2025,1
+483.,Jörg Schröder,Germany,zeilenspalter,194,194,194,483.,2025,1
+484.,Shan Yuan Hung,Taiwan,,194,194,194,484.,2025,1
+485.,Mladen Mestrovic,Croatia,mestar,194,194,194,485.,2025,1
+486.,Juhee Ko,"Korea, South",budludl,194,194,194,486.,2025,1
+487.,Bruno Rivara,Switzerland,Bruno61,194,194,194,487.,2025,1
+488.,Katarina Kovacova,Switzerland,KatkaK,194,194,194,488.,2025,1
+489.,Terka K.,Czech Rep.,krytterka,194,194,194,489.,2025,1
+490.,甘 甘,China,阿呆,194,194,194,490.,2025,1
+491.,Hana Havelková,Czech Rep.,Hafka,194,194,194,491.,2025,1
+492.,Aikaterini Tsakanika,Greece,tatia,194,194,194,492.,2025,1
+493.,Ewa Gawrońska,Poland,,194,194,194,493.,2025,1
+494.,Matej Vyparina,Slovakia,,194,194,194,494.,2025,1
+495.,Sai Praneetha Reddy,India,,194,194,194,495.,2025,1
+496.,Michelle Yu,USA,meowmixx,194,194,194,496.,2025,1
+497.,Dusan Privoznik,Slovakia,riki69,194,194,194,497.,2025,1
+498.,HOARAU Tony,France,totohoa,194,194,194,498.,2025,1
+499.,Michał Wachowiak,Poland,MichalW,193,193,193,499.,2025,1
+500.,呈丰 葉,Taiwan,,193,193,193,500.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+501.,Takemasa Aoki,Japan,gori.sh,193,193,193,501.,2025,1
+502.,Sylwia Całka,Poland,sywiacalka,193,193,193,502.,2025,1
+503.,Christopher Vu,USA,gimmick,193,193,193,503.,2025,1
+504.,Dimitris Kalafatis,Greece,,193,193,193,504.,2025,1
+505.,Maria Angeloudi,Greece,minion,193,193,193,505.,2025,1
+506.,Ema Bosnić,Croatia,,193,193,193,506.,2025,1
+507.,Phawin Prongpaophan,Thailand,,192,192,192,507.,2025,1
+508.,Hermelin Isabelle,France,elendill,192,192,192,508.,2025,1
+509.,Sara Andrasik,USA,Sara A,191,191,191,509.,2025,1
+510.,Magdalena Szczesna,Poland,visznia,191,191,191,510.,2025,1
+511.,Elena Ceccon,Italy,Ellen00,191,191,191,511.,2025,1
+512.,Evgeniy Bekishev,Russia,Eugene,190,190,190,512.,2025,1
+513.,Anne Sorensen,Denmark,Chevy4,188,188,188,513.,2025,1
+514.,Jaroslav Grajciar,Slovakia,Neky,185,185,185,514.,2025,1
+515.,Demoed Marleen,Netherlands,marleen78,183,183,183,515.,2025,1
+516.,Radek Lopusnik,USA,radekivv,183,183,183,516.,2025,1
+517.,Ethan Lau,Hong Kong,Ethanlau1214,183,183,183,517.,2025,1
+518.,Randy Rogers,USA,Randiman,180,180,180,518.,2025,1
+519.,Jacob Bowdler,New Zealand,jacobpwb,179,179,179,519.,2025,1
+520.,TSUI LAN Chang,Taiwan,Len,174,174,174,520.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+521.,Michał Wachnicki,Poland,kangur07,174,174,174,521.,2025,1
+522.,jiyeun lim,"Korea, South",,174,174,174,522.,2025,1
+523.,Simone Schneider,Germany,,173,173,173,523.,2025,1
+524.,Yakov Zaidelman,Russia,,172,172,172,524.,2025,1
+525.,江琼 毛,China,JQmao,171,171,171,525.,2025,1
+526.,Dominick Joo,USA,fishissushi,171,171,171,526.,2025,1
+527.,Joan Llobera Querol,Spain,,171,171,171,527.,2025,1
+528.,Yoichi Enta,Japan,enta,171,171,171,528.,2025,1
+529.,Patrick Ethoin,France,paatttoou,171,171,171,529.,2025,1
+530.,Baris Boz,Turkey,BarisBoz,171,171,171,530.,2025,1
+531.,Alexandra Nolte,USA,,171,171,171,531.,2025,1
+532.,Ned Kelly,Australia,NedKelly,171,171,171,532.,2025,1
+533.,Bupphachat Pongbunchan,Thailand,Fasai,171,171,171,533.,2025,1
+534.,Miroslav Beinhauer,Czech Rep.,felini,170,170,170,534.,2025,1
+535.,Neeraj Mehrotra,India,neerajmehrotra,170,170,170,535.,2025,1
+536.,David Collison,UK,DavidCollison,169,169,169,536.,2025,1
+537.,Schlapfer Reto,Switzerland,,169,169,169,537.,2025,1
+538.,Titika Mylopoulou,Greece,,169,169,169,538.,2025,1
+539.,Dominik Bojko,Poland,Amoeba,169,169,169,539.,2025,1
+540.,Jaehyun Koo,"Korea, South",koosaga,169,169,169,540.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+541.,Cassidy Gardner,USA,mrgardnerscience,168,168,168,541.,2025,1
+542.,Danica Wald,Germany,,168,168,168,542.,2025,1
+543.,Katia D-C,Poland,katia,168,168,168,543.,2025,1
+544.,Allar Padari,Estonia,allar,167,167,167,544.,2025,1
+545.,Dennis Chen,USA,reychen,166,166,166,545.,2025,1
+546.,Emi Takahashi,Japan,Emi,166,166,166,546.,2025,1
+547.,Kristel Arnik,Estonia,,165,165,165,547.,2025,1
+548.,Jeanine van Driel,Netherlands,Jargagpu,164,164,164,548.,2025,1
+549.,Stefanie König,Germany,Iffets44,162,162,162,549.,2025,1
+550.,Zuzana Tomkova,Slovakia,modrydrak,159,159,159,550.,2025,1
+551.,Minh Tiến Phan,Vietnam,,159,159,159,551.,2025,1
+552.,Borislav Ilevski Ilevski,Bulgaria,ilevski,159,159,159,552.,2025,1
+553.,Emilia Fiedosiuk,Poland,eminia,159,159,159,553.,2025,1
+554.,Jana Zachova,Czech Rep.,jana70,159,159,159,554.,2025,1
+555.,Takahiro Yamada,Japan,Felicatus,159,159,159,555.,2025,1
+556.,Michiel Voges,South Africa,Drake,159,159,159,556.,2025,1
+557.,Marjo de Krijger,Netherlands,Roos,159,159,159,557.,2025,1
+558.,Hanna Larsson,Sweden,5310Kasper,159,159,159,558.,2025,1
+559.,Angelika Schobesberger,Austria,,159,159,159,559.,2025,1
+560.,Nancy Cook,USA,nlcook,159,159,159,560.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+561.,Louise Vanderstappen,Belgium,Louise Vanderstappen,159,159,159,561.,2025,1
+562.,Jackie! Zhou,USA,midnightflyer76,159,159,159,562.,2025,1
+563.,Tracey Gore,USA,DocPi,159,159,159,563.,2025,1
+564.,Witold Rosinski,Poland,,159,159,159,564.,2025,1
+565.,Toni Borozan,Croatia,borotoni736,159,159,159,565.,2025,1
+566.,Brian Hils,USA,,158,158,158,566.,2025,1
+567.,Christian Romon,France,Christian,156,156,156,567.,2025,1
+568.,Anna Churchill,Australia,,156,156,156,568.,2025,1
+569.,Richter Gerhard,Germany,Senior41,153,153,153,569.,2025,1
+570.,Sinan Gencer,Turkey,Sinan Gencer,152,152,152,570.,2025,1
+571.,Ahmet Tarık Pıçak,Turkey,Plade,151,151,151,571.,2025,1
+572.,Aoi Nakano,Japan,,149,149,149,572.,2025,1
+573.,Anna Fundárková,Slovakia,,149,149,149,573.,2025,1
+574.,QUILHOT Stéphanie,France,Stéphanie the best,147,147,147,574.,2025,1
+575.,Scott Vissers,USA,Squeak363,146,146,146,575.,2025,1
+576.,Atanas Georgiev,Bulgaria,Nasko,146,146,146,576.,2025,1
+577.,Łukasz Konecki,Poland,BibleStudent,146,146,146,577.,2025,1
+578.,Ekaterina Nuzdina,Russia,,146,146,146,578.,2025,1
+579.,Jill Ho Tai,USA,Jill H,144,144,144,579.,2025,1
+580.,Petr Kuncar,Czech Rep.,goodevil,144,144,144,580.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+581.,David Moulton,USA,Badir,144,144,144,581.,2025,1
+582.,Yasuto Kitazono,Japan,,143,143,143,582.,2025,1
+583.,Christopher Brown,USA,,141,141,141,583.,2025,1
+584.,Md Mahbubul Hasan,Bangladesh,mahbub,141,141,141,584.,2025,1
+585.,Ehsan Karimi,Iran,sudophile,141,141,141,585.,2025,1
+586.,Tim McCaskey,USA,mightcould,141,141,141,586.,2025,1
+587.,Tigran Wadia,India,,141,141,141,587.,2025,1
+588.,Diana Grigoreva,Russia,,140,140,140,588.,2025,1
+589.,Annamalai Lakshman,India,Annalaksh,139,139,139,589.,2025,1
+590.,Milena Liwarska,Poland,,139,139,139,590.,2025,1
+591.,Ioanna Zerva,Greece,IoannaZ,139,139,139,591.,2025,1
+592.,Izabella Jaworska,Poland,,139,139,139,592.,2025,1
+593.,Mannul Chopra,India,Mac,139,139,139,593.,2025,1
+594.,shigetoshi okumura,Japan,okushige,138,138,138,594.,2025,1
+595.,stefano forcolin,Italy,sf2l,137,137,137,595.,2025,1
+596.,Wei Luo,China,,137,137,137,596.,2025,1
+597.,Vijaya Govindarajan,India,Vijaya,137,137,137,597.,2025,1
+598.,Carlos Joa,Dominican Republic,cjoa,137,137,137,598.,2025,1
+599.,Minoru Uyanagi,Japan,EEL733,137,137,137,599.,2025,1
+600.,Emily Carty,Canada,Emily,137,137,137,600.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+601.,Joyce Rapaport,USA,,137,137,137,601.,2025,1
+602.,kaoru shibata,Japan,pet,137,137,137,602.,2025,1
+603.,Gene Rendino,USA,GeneR,137,137,137,603.,2025,1
+604.,Lau Cheng Kai,Malaysia,,137,137,137,604.,2025,1
+605.,Friedhelm Fricke,Germany,badfried,137,137,137,605.,2025,1
+606.,Angelina Baldus,Germany,Icebreak,137,137,137,606.,2025,1
+607.,Emily Williams,USA,Emily Williams,137,137,137,607.,2025,1
+608.,Hannah Ceisler,USA,Scissors218,136,136,136,608.,2025,1
+609.,Juha Korvenaho,Finland,,136,136,136,609.,2025,1
+610.,Dan Stronger,USA,danstronger,136,136,136,610.,2025,1
+611.,Yongjun Kim,"Korea, South",Redfox,136,136,136,611.,2025,1
+612.,Morena Pacifico,Italy,mopacifico,136,136,136,612.,2025,1
+613.,dimitris tsatsaronis,Greece,mullich,136,136,136,613.,2025,1
+614.,Gaëlle Perdrix,France,Thalia,135,135,135,614.,2025,1
+615.,Abhisek Mallick,India,Abhisek Mallick 7,134,134,134,615.,2025,1
+616.,Lokesh Upreti,India,LOKESH,134,134,134,616.,2025,1
+617.,Shami Rajesh,India,,134,134,134,617.,2025,1
+618.,Akshaya Bhatia,India,,134,134,134,618.,2025,1
+619.,Claudia Sala,Italy,evilove,134,134,134,619.,2025,1
+620.,Jhyrus Nicolas,Philippines,Kyou,134,134,134,620.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+621.,Paolo Pranzo,Italy,Pillopo,134,134,134,621.,2025,1
+622.,Sharath R,India,sharath,134,134,134,622.,2025,1
+623.,Robert Le Duc,UK,Cudeltrebor,134,134,134,623.,2025,1
+624.,Ekaterina Krotkova,Russia,katerina,134,134,134,624.,2025,1
+625.,Nur Alia Syafiqah Alia,Malaysia,aliaillya24,134,134,134,625.,2025,1
+626.,James Atwell,USA,j.atwell,134,134,134,626.,2025,1
+627.,Ewelina Antkowicz,Poland,Evi91,134,134,134,627.,2025,1
+628.,Lex Kottmeyer,USA,kottm20a,134,134,134,628.,2025,1
+629.,Dana Crites,USA,,132,132,132,629.,2025,1
+630.,Finola Dwyer,Germany,Finola,131,131,131,630.,2025,1
+631.,Seonje Cha,"Korea, South",,131,131,131,631.,2025,1
+632.,Corrado Palumbo,Italy,DOIC,131,131,131,632.,2025,1
+633.,Iliana Gounalaki,Greece,gounil,129,129,129,633.,2025,1
+634.,Vita Gamber,Germany,,128,128,128,634.,2025,1
+635.,Pat Stanford,UK,Kaysman,127,127,127,635.,2025,1
+636.,Makoto Hayashi,Japan,,126,126,126,636.,2025,1
+637.,Andrew Lim,USA,,124,124,124,637.,2025,1
+638.,Lyca Reyes,Philippines,,122,122,122,638.,2025,1
+639.,"Lee Kit Pan,Jacky jacky",Hong Kong,Jacky Lee,121,121,121,639.,2025,1
+640.,qp woeirut,USA,qpwoeirut,121,121,121,640.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+641.,Zora Bělušová,Czech Rep.,striga,121,121,121,641.,2025,1
+642.,Janet Zaina,Italy,jane54,121,121,121,642.,2025,1
+643.,Raul Kacirek,Czech Rep.,Caca,118,118,118,643.,2025,1
+644.,Marta Mozara,Croatia,,118,118,118,644.,2025,1
+645.,Damian Sparky,Poland,Sparky,117,117,117,645.,2025,1
+646.,Helen Arnold,Australia,pyrrha,116,116,116,646.,2025,1
+647.,Phawit Putprasert,Thailand,phawit,114,114,114,647.,2025,1
+648.,Tereza Sujová,Slovakia,TeS,113,113,113,648.,2025,1
+649.,Jaehyun Kim,"Korea, South",,112,112,112,649.,2025,1
+650.,Bob Crites,USA,,112,112,112,650.,2025,1
+651.,Priyanka Jayakumar,India,jaya_priya,112,112,112,651.,2025,1
+652.,Vojtěch Šícha,Czech Rep.,,112,112,112,652.,2025,1
+653.,Jacinta Guerin,Australia,,112,112,112,653.,2025,1
+654.,LIONEL MAUROUARD,France,,112,112,112,654.,2025,1
+655.,Ryszard Jabłoński,Poland,RochJ,112,112,112,655.,2025,1
+656.,Marian Lukac,Slovakia,lucky137,112,112,112,656.,2025,1
+657.,Brian Friedrich,USA,LetsGoCaps,112,112,112,657.,2025,1
+658.,Kamil Pozniak,Poland,,112,112,112,658.,2025,1
+659.,Fanni Dorottya Nagy,Hungary,nfanni97,112,112,112,659.,2025,1
+660.,Tamara Anderson,USA,Tamara,111,111,111,660.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+661.,park sungbeen,"Korea, South",mcp,111,111,111,661.,2025,1
+662.,Garance Pontier,France,,110,110,110,662.,2025,1
+663.,Martina Matějková,Czech Rep.,mamatka,110,110,110,663.,2025,1
+664.,Harsukhpreet Kaur,India,Harsukh,107,107,107,664.,2025,1
+665.,daniele cassani,Italy,dany_thor,107,107,107,665.,2025,1
+666.,Maria Miró,Spain,,107,107,107,666.,2025,1
+667.,Denis Bisaro,Canada,Denis B,107,107,107,667.,2025,1
+668.,Huseyin Sevinc,Turkey,Huseyin,107,107,107,668.,2025,1
+669.,Sevgi Cevik,Turkey,sentenced,107,107,107,669.,2025,1
+670.,George Marcus,Romania,PlayLikeNeverB4,107,107,107,670.,2025,1
+671.,Eerik Lumiste,Estonia,Eerik33,106,106,106,671.,2025,1
+672.,Ales Zaloznik,Slovenia,Aleš,106,106,106,672.,2025,1
+673.,Anežka Medveďová,Czech Rep.,Anezk,106,106,106,673.,2025,1
+674.,Jeffrey Schwartz,USA,,105,105,105,674.,2025,1
+675.,Nariman Fataliyev,Azerbaijan,Nariman1961,104,104,104,675.,2025,1
+676.,George Tachtsidis,Greece,GeoTah,104,104,104,676.,2025,1
+677.,Zanda Ro,Latvia,DeeDee,104,104,104,677.,2025,1
+678.,Darina Maratova,Kazakhstan,DarinaM,102,102,102,678.,2025,1
+679.,aydin keskin,Turkey,amedayke,102,102,102,679.,2025,1
+680.,Daniel Victor,India,DanAvi,102,102,102,680.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+681.,Veronika Lukáčová,Slovakia,veronka07,102,102,102,681.,2025,1
+682.,Tom Couperthwaite,UK,Bobbottom,102,102,102,682.,2025,1
+683.,alberto filippini,Italy,albfilip,102,102,102,683.,2025,1
+684.,Alex Wallace,UK,alexwallace,102,102,102,684.,2025,1
+685.,Iris Yu,USA,irisotto,102,102,102,685.,2025,1
+686.,DUC JOFFREY,France,,101,101,101,686.,2025,1
+687.,Parisis Ovelidis,Greece,povelidi,101,101,101,687.,2025,1
+688.,Kristjan Hansen,Estonia,,101,101,101,688.,2025,1
+689.,Liane Robinson,UK,puzzlemad,101,101,101,689.,2025,1
+690.,Kseniya Bernat,Belarus,,100,100,100,690.,2025,1
+691.,Pei Lu,Taiwan,Joky,99,99,99,691.,2025,1
+692.,Leigh Juggins,UK,,96,96,96,692.,2025,1
+693.,Phurin Puangaup,Thailand,Phurin,96,96,96,693.,2025,1
+694.,xiaoye huang,China,,96,96,96,694.,2025,1
+695.,Sam Boden,UK,Sam Boden,94,94,94,695.,2025,1
+696.,Marián Kráľ,Slovakia,Maronko,94,94,94,696.,2025,1
+697.,Amy McKaveney,USA,mckaveney,92,92,92,697.,2025,1
+698.,Laura Biro,Hungary,biroloradora,90,90,90,698.,2025,1
+699.,Dror Perk,USA,RushBee93,90,90,90,699.,2025,1
+700.,Uldis Kleinbergs,Latvia,,90,90,90,700.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+701.,Marcia Klingensmith,USA,marcekmba,89,89,89,701.,2025,1
+702.,Beau La Mont,USA,ajarnbeau,89,89,89,702.,2025,1
+703.,Yuki Honda,Japan,ut,89,89,89,703.,2025,1
+704.,Esther Naef,Switzerland,esther59,87,87,87,704.,2025,1
+705.,Bart Geraci,USA,BJGeraci,87,87,87,705.,2025,1
+706.,Aet Valge,Estonia,,87,87,87,706.,2025,1
+707.,Bruna Denić,Croatia,bruna_d,87,87,87,707.,2025,1
+708.,Gordon Lessells,Ireland,GSL,86,86,86,708.,2025,1
+709.,Xiao Yuan,China,FFEE,86,86,86,709.,2025,1
+710.,Sameer Rau,USA,dmvpiranha,82,82,82,710.,2025,1
+711.,Harry Buerer,USA,,82,82,82,711.,2025,1
+712.,Buffet Philippe,France,philos,82,82,82,712.,2025,1
+713.,Krzysztof Borzym,Poland,myzrob,82,82,82,713.,2025,1
+714.,Jaroslav Koldinský,Czech Rep.,Koldinsky,82,82,82,714.,2025,1
+715.,yusuke nakamura yupon,Japan,yuponex,82,82,82,715.,2025,1
+716.,Magda Kurzawa,Poland,,81,81,81,716.,2025,1
+717.,Kamal Lohia,India,,80,80,80,717.,2025,1
+718.,Julie Gaddy,USA,WeatherGal,80,80,80,718.,2025,1
+719.,Sirawit Chinchalongporn,Thailand,teenoiz,80,80,80,719.,2025,1
+720.,Yumi Wada,Japan,,80,80,80,720.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+721.,Wojciech Gryciuk,Poland,wgryciuk,80,80,80,721.,2025,1
+722.,Balázs Ababi,Romania,Bebe,80,80,80,722.,2025,1
+723.,Karol Sitkowski,Poland,karops,80,80,80,723.,2025,1
+724.,Marek Gaspar,Slovakia,Marek G,80,80,80,724.,2025,1
+725.,Andrew Hore,Australia,,79,79,79,725.,2025,1
+726.,Takuto Kikuchi,Japan,KKT89,79,79,79,726.,2025,1
+727.,Beat Amstutz,Switzerland,Beat Amstutz,77,77,77,727.,2025,1
+728.,Oyun-erdene Adiyajav,Mongolia,Yuka206,77,77,77,728.,2025,1
+729.,Lionel HUBER,France,,77,77,77,729.,2025,1
+730.,KLAUDIA ZWOLINSKA ZWOLINSKA,Poland,klaudynella,77,77,77,730.,2025,1
+731.,Wieke Bergers,Netherlands,,77,77,77,731.,2025,1
+732.,Rattanawan Khattiyakul,Thailand,Rattanawan Khattiyakul,77,77,77,732.,2025,1
+733.,parameswaran rajan,India,,77,77,77,733.,2025,1
+734.,Katarzyna Zakrzewska,Poland,Kasia_126,77,77,77,734.,2025,1
+735.,Archit Mokashi,India,kasparov124,77,77,77,735.,2025,1
+736.,Sergey Odintsov,Poland,Sergey Odintsov,77,77,77,736.,2025,1
+737.,Huaiyu Wu,USA,,77,77,77,737.,2025,1
+738.,Johann Müller,South Africa,Pietie,77,77,77,738.,2025,1
+739.,Roman Mureika,Canada,romanm44,77,77,77,739.,2025,1
+740.,Sana Cimerman,Croatia,sanacimerman,77,77,77,740.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+741.,Rainer Biegler,Germany,HuDu,77,77,77,741.,2025,1
+742.,Markku Lahti,Finland,Markku,76,76,76,742.,2025,1
+743.,Jorge Robledo,Argentina,jaroble,75,75,75,743.,2025,1
+744.,Irene Oubrier,France,Ireneo,74,74,74,744.,2025,1
+745.,Prayoga Ramadhani Yoga,Indonesia,YogaRamadhan,72,72,72,745.,2025,1
+746.,Jan Fiala,Czech Rep.,,72,72,72,746.,2025,1
+747.,Agnieszka Mazurkiewicz,Poland,Aga_Mum,72,72,72,747.,2025,1
+748.,Peter Glink,Australia,Peter Profundo,72,72,72,748.,2025,1
+749.,John McKewen,USA,antsaresocrazy,72,72,72,749.,2025,1
+750.,Giuseppe De Camillis,Italy,giuseppe decamillis,72,72,72,750.,2025,1
+751.,Beatrice Pige,France,,69,69,69,751.,2025,1
+752.,Sofia Silva,Portugal,,62,62,62,752.,2025,1
+753.,Brenda Troisi,USA,btroisi,60,60,60,753.,2025,1
+754.,Pavla Varmužková,Czech Rep.,kincka,60,60,60,754.,2025,1
+755.,Aniko Madarassy,Hungary,Aniko,60,60,60,755.,2025,1
+756.,Małgorzata Konarska,Poland,GosiaK,60,60,60,756.,2025,1
+757.,Sylvain Galland,Switzerland,,59,59,59,757.,2025,1
+758.,Αντώνης Λαλάτσας,Greece,term,59,59,59,758.,2025,1
+759.,Hideto Katori,Japan,SSayaka,59,59,59,759.,2025,1
+760.,nurul aisyah zakari,Malaysia,aisyah,57,57,57,760.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+761.,Stipe Bratim,Croatia,,57,57,57,761.,2025,1
+762.,Ditthapol Songngam,Thailand,dinonatx,57,57,57,762.,2025,1
+763.,李鸿向 李,China,,57,57,57,763.,2025,1
+764.,Mladen Bosnić,Croatia,,57,57,57,764.,2025,1
+765.,Charles Martin Parulan,Philippines,Darkside,57,57,57,765.,2025,1
+766.,Tereza Matějková,Czech Rep.,tematka,55,55,55,766.,2025,1
+767.,Ian Fleschler,Argentina,fleschler.ian,55,55,55,767.,2025,1
+768.,Ayelen Galarza Rial,Argentina,ayegari89,55,55,55,768.,2025,1
+769.,Gertrud Schied,Germany,PuzzleEumel,55,55,55,769.,2025,1
+770.,Taavet Kalda,Estonia,,54,54,54,770.,2025,1
+771.,YUNG-WEI CHENG,Taiwan,webber,54,54,54,771.,2025,1
+772.,jin ok Lee,"Korea, South",,50,50,50,772.,2025,1
+773.,Jhon Cris Cruz,Philippines,daugh,47,47,47,773.,2025,1
+774.,Lisette Mähar,Estonia,Lisette,47,47,47,774.,2025,1
+775.,Muqian Zhong,China,Brown,47,47,47,775.,2025,1
+776.,Robert Kunst,Netherlands,,47,47,47,776.,2025,1
+777.,Connie Zeng,USA,,47,47,47,777.,2025,1
+778.,Nick Edwards,UK,cwej,47,47,47,778.,2025,1
+779.,Ralph Melian,USA,Ralph,47,47,47,779.,2025,1
+780.,Zhang Jiashen,China,oldpigeon,47,47,47,780.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+781.,Lars Kolkanen,Estonia,,47,47,47,781.,2025,1
+782.,Xiaohui Li,China,,47,47,47,782.,2025,1
+783.,Yavuz Çetinkaya,Turkey,MYC,47,47,47,783.,2025,1
+784.,MARYUS PASCALAU,Romania,Mark01,45,45,45,784.,2025,1
+785.,Iurii Pustovalov,Russia,talant,45,45,45,785.,2025,1
+786.,DJ Leslie,USA,DreamLibrarian,45,45,45,786.,2025,1
+787.,Lidia Perovskaya,USA,Lperovskaya,45,45,45,787.,2025,1
+788.,Rita Agócs,Hungary,liortom,35,35,35,788.,2025,1
+789.,Fabien Douté,France,fabich,35,35,35,789.,2025,1
+790.,Laure Prinzbach,France,,35,35,35,790.,2025,1
+791.,Carter Silvey,USA,,35,35,35,791.,2025,1
+792.,Franco Assenza,Argentina,hacelecasoatused,34,34,34,792.,2025,1
+793.,MACHIMURA TERUMI,Japan,,34,34,34,793.,2025,1
+794.,elena pertusi,Italy,elena pertusi,30,30,30,794.,2025,1
+795.,Peter Plaštiak,Slovakia,,30,30,30,795.,2025,1
+796.,Aslınur AKPINAR,Turkey,Sailormoon,30,30,30,796.,2025,1
+797.,Lenka Schindlerová,Czech Rep.,,27,27,27,797.,2025,1
+798.,SPANG Cédric,France,,27,27,27,798.,2025,1
+799.,Lucia De Rosa,Italy,,27,27,27,799.,2025,1
+800.,khishigjargal sevjid,Mongolia,khishigjargal sevjid,27,27,27,800.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1
+801.,karla grgic,Croatia,,27,27,27,801.,2025,1
+802.,Paul Pope-Mitchell,UK,,27,27,27,802.,2025,1
+803.,Akash G.,USA,AkashG23,27,27,27,803.,2025,1
+804.,Mariola Kowalska,Poland,,27,27,27,804.,2025,1
+805.,Tatjana Zemljić,Croatia,TatjanaZ,25,25,25,805.,2025,1
+806.,Amy Milner Gould,USA,AMGChicago,25,25,25,806.,2025,1
+807.,Márton Boros,Hungary,,20,20,20,807.,2025,1
+808.,Ashley Graham-Brown,UK,,20,20,20,808.,2025,1
+809.,zuzuzu tototo,Slovakia,,20,20,20,809.,2025,1
+810.,Ravot Sylvain,France,,20,20,20,810.,2025,1
+811.,Zbigniew Zarzycki,Poland,antyp,20,20,20,811.,2025,1
+812.,Johanna Higa,Argentina,johanna,20,20,20,812.,2025,1
+813.,Charitardha Jayanti,India,Charitardha,20,20,20,813.,2025,1
+814.,Mary Jordanides,Greece,,20,20,20,814.,2025,1
+815.,Celerina Del Rio,Philippines,Celery,20,20,20,815.,2025,1
+816.,Jeongbin Hwang,"Korea, South",goldgarnet,20,20,20,816.,2025,1
+817.,Muhammad Imanuddin,Indonesia,Imanuddin78,20,20,20,817.,2025,1
+818.,Anis Narvin,United Arab Emirates,,20,20,20,818.,2025,1
+#,Name,Country,Nick,Points,Points,Points,#,2025,1

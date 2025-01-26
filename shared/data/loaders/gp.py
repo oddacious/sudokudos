@@ -194,8 +194,8 @@ def apply_types(gp):
 def load_gp(csv_directory="data/processed/gp", verbose=False, output_csv=None):
     """Import GP CSV files and return a single dataset.
     
-    This creates a dataset covering all years with one row per
-    solver-year combination. This also creates an identifier out of
+    This creates a dataset covering all years with one row per solver-year combination,
+    under the assumption of one file per year. This also creates an identifier out of
     the Name, Country, and Nick fields.
     """
     dataframes = []
@@ -219,7 +219,10 @@ def load_gp(csv_directory="data/processed/gp", verbose=False, output_csv=None):
     for df in dataframes:
         missing_columns = all_columns - set(df.columns)
         for col in missing_columns:
-            df = df.with_columns([pl.lit(None).alias(col)])
+            # Casting to String because the types need to be the same even if values
+            # are set to None. An improvement would be to store types instead of
+            # handling the one type that created an error.
+            df = df.with_columns([pl.lit(None).cast(pl.String).alias(col)])
         aligned_dfs.append(df.select(sorted(all_columns)))
     combined_df = pl.concat(aligned_dfs, how="vertical")
 

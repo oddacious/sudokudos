@@ -62,7 +62,7 @@ def known_playoff_results(year):
     if year in (2024, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014):
         return True
 
-    if year in (2023, 2022, 2021):
+    if year in (2025, 2023, 2022, 2021):
         return False
 
     raise ValueError(f"Unknown GP year \"{year}\"")

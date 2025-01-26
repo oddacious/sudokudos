@@ -188,6 +188,11 @@ def create_violin_chart(full_df, selected_solvers, year_subset=(2024,),
 
     fig, ax = plt.subplots(nrows=1, ncols=len(rounds), sharey=True)
 
+    # Handle the special case after the first round of a year, where subplots will
+    # return a single axis instead of an array of them.
+    if len(rounds) == 1:
+        ax = [ax]
+
     for idx, column in enumerate(rounds):
         data = flattened.select(pl.col(column).cast(pl.Float32).drop_nulls())
 
