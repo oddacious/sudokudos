@@ -190,6 +190,120 @@ def apply_types(gp):
 
     return gp
 
+def remove_false_headers(df):
+    """Filter out header rows, which may be interlaced throughout a file."""
+    condition = ~((df["Name"] == "Name") &
+                (df["Country"] == "Country") &
+                (df["Nick"] == "Nick"))
+
+    return df.filter(condition)
+
+def merge_dfs_by_year(all_dataframes):
+    """Construct an array of per-year dataframes.
+
+    Inputs may have multiple rounds per year, typically in the case of in-progress years.
+    """
+    # One dataframe per year, ordered by year.
+    dataframes = []
+
+    # "year" isn't needed for joining, but it should be unique here and we need it in
+    # the resulting dataframe.
+    join_cols = ["Name", "Country", "Nick", "year"]
+    for mapping in all_dataframes.values():
+        if len(mapping) == 1:
+            value = next(iter(mapping.values()))
+            dataframes.append(value)
+        else:
+            # Sort by year
+            dfs = [value for _, value in sorted(mapping.items())]
+            merged_df = dfs[0]
+            merged_df = remove_false_headers(merged_df)
+            for df in dfs[1:]:
+                df = remove_false_headers(df)
+                relevant_columns = [
+                    col for col in df.columns if col not in merged_df.columns or col in join_cols]
+                merged_df = merged_df.join(df.select(relevant_columns), on=join_cols, how="outer")
+                # The merge creates columns with the suffix "_right".
+                merged_df = merged_df.with_columns(
+                    [pl.coalesce([col, f"{col}_right"]).alias(col) for col in join_cols]
+                ).drop([f"{col}_right" for col in join_cols])
+
+            merged_df = merged_df.drop(["source_file", "round"])
+
+            # Need to calculate point totals. Here using the "rank. " columns to not overcount.
+            points_cols = [col for col in merged_df.columns if "rank. points" in col]
+
+            point_inputs = [pl.col(col).cast(pl.Float64).fill_null(0) for col in points_cols]
+            merged_df = merged_df.with_columns(
+                # Casting back to string because the single-year dataframes will have strings.
+                pl.sum_horizontal(point_inputs).cast(pl.String).alias("Points")
+            )
+
+            dataframes.append(merged_df)
+
+    return dataframes
+
+def collect_dataframes(csv_directory, verbose=False):
+    """From a directory with CSVs, gather all the input dataframes.
+
+    The directory may have single aggregate CSVs per year, but may also have disaggregated
+    round-by-round CSVs.
+    """
+    # Dict of columns to their types
+    all_columns = {}
+
+    all_dataframes = {}
+
+    for filename in os.listdir(csv_directory):
+        if not filename.endswith(".csv"):
+            continue
+
+        if verbose:
+            print(f"Parsing file {filename}")
+        file_path = os.path.join(csv_directory, filename)
+
+        df = pl.read_csv(file_path)
+        df = df.with_columns(
+            pl.lit(filename).alias("source_file")
+        )
+
+        if "year" not in df.columns:
+            raise ValueError(f"We rely on a year column, which is missing in file \"{filename}\"")
+
+        unique_year = df["year"].n_unique() == 1
+        if not unique_year:
+            raise ValueError(f"Each source should have a single year. \"{filename}\" did not")
+
+        year = df["year"].first()
+
+        # Inconsequential placeholder value for years that only have one file and no "round" column.
+        round_marker = "[All]"
+
+        if "round" in df.columns:
+            unique_round = df["round"].n_unique() == 1
+            if not unique_round:
+                raise ValueError(
+                    f"With `round` column present, it should be unique. \"{filename}\" fails")
+            round_marker = df["round"].first()
+
+        if year not in all_dataframes:
+            all_dataframes[year] = {round_marker: df}
+        else:
+            if round_marker in all_dataframes[year]:
+                raise ValueError(f"Found duplicate round \"{round}\" from \"{filename}\"")
+            all_dataframes[year][round_marker] = df
+
+        # Column types will be necessary for appending these dataframes together consistently.
+        for column, data_type in df.schema.items():
+            if column not in all_columns:
+                all_columns[column] = data_type
+            else:
+                if all_columns[column] != data_type:
+                    print(f"Warning: For column {column}, had type {all_columns[column]}" +
+                            f"but now have {data_type}")
+
+    return all_dataframes, all_columns
+
 @st.cache_data
 def load_gp(csv_directory="data/processed/gp", verbose=False, output_csv=None):
     """Import GP CSV files and return a single dataset.
@@ -198,37 +312,21 @@ def load_gp(csv_directory="data/processed/gp", verbose=False, output_csv=None):
     under the assumption of one file per year. This also creates an identifier out of
     the Name, Country, and Nick fields.
     """
-    dataframes = []
-
     # Dict of columns to their types
     all_columns = {}
 
-    for filename in os.listdir(csv_directory):
-        if filename.endswith(".csv"):
-            if verbose:
-                print(f"Parsing file {filename}")
-            file_path = os.path.join(csv_directory, filename)
+    all_dataframes, all_columns = collect_dataframes(csv_directory, verbose)
 
-            df = pl.read_csv(file_path)
-            df = df.with_columns(
-                pl.lit(filename).alias("source_file")
-            )
-            dataframes.append(df)
-            for column, type in df.schema.items():
-                if column not in all_columns:
-                    all_columns[column] = type
-                else:
-                    if all_columns[column] != type:
-                        print(f"Warning: For column {column}, had type {all_columns[column]}" +
-                              f"but now have {type}")
+    # An in-progress year may be represented by round-specific data files
+    dataframes = merge_dfs_by_year(all_dataframes)
 
     aligned_dfs = []
     for df in dataframes:
-        for column in all_columns:
+        for column, data_type in all_columns.items():
             if column not in df.columns:
                 # Casting is necessary because concat will fail if the types differ, even
                 # for null values.
-                df = df.with_columns([pl.lit(None).cast(all_columns[column]).alias(column)])
+                df = df.with_columns([pl.lit(None).cast(data_type).alias(column)])
         aligned_dfs.append(df.select(sorted(all_columns)))
     combined_df = pl.concat(aligned_dfs, how="vertical")
 
