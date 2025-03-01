@@ -222,7 +222,8 @@ def merge_dfs_by_year(all_dataframes):
                 df = remove_false_headers(df)
                 relevant_columns = [
                     col for col in df.columns if col not in merged_df.columns or col in join_cols]
-                merged_df = merged_df.join(df.select(relevant_columns), on=join_cols, how="outer")
+                merged_df = merged_df.join(
+                    df.select(relevant_columns), on=join_cols, how="outer", join_nulls=True)
                 # The merge creates columns with the suffix "_right".
                 merged_df = merged_df.with_columns(
                     [pl.coalesce([col, f"{col}_right"]).alias(col) for col in join_cols]
