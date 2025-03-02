@@ -15,7 +15,7 @@ def present_solver():
 
     wsc_unmapped = shared.data.loaders.load_wsc()
     gp = shared.data.loaders.load_gp()
-    wsc = shared.data.attemped_mapping(wsc_unmapped, gp)
+    wsc = shared.data.attempted_mapping(wsc_unmapped, gp)
 
     combined_with_wsc = shared.data.merge_unflat_datasets(gp, wsc)
 

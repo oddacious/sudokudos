@@ -139,7 +139,7 @@ def merge_flat_datasets(datasets, suffixes=("_gp", "_wsc")):
 
     return merged
 
-def attemped_mapping(wsc_df, gp_df):
+def attempted_mapping(wsc_df, gp_df):
     """Update a WSC dataset with identifiers from a GP dataset."""
     gp_index = gp_df.select(["Name", "Country", "Nick", "user_pseudo_id"]).unique()
     gp_index = gp_index.with_columns(pl.col("Name").str.to_lowercase().alias("name_lc"))

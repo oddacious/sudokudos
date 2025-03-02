@@ -18,7 +18,7 @@ def present_wsc():
 
     gp = shared.data.loaders.load_gp()
     wsc_unmapped = shared.data.loaders.load_wsc()
-    wsc = shared.data.attemped_mapping(wsc_unmapped, gp)
+    wsc = shared.data.attempted_mapping(wsc_unmapped, gp)
 
     years = list(reversed(shared.utils.all_available_years(wsc)))
 

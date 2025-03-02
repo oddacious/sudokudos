@@ -4,6 +4,6 @@ from .manipulation import (
     create_flat_dataset,
     merge_unflat_datasets,
     merge_flat_datasets,
-    attemped_mapping,
+    attempted_mapping,
     ids_by_total_points
 )
