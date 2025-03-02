@@ -63,7 +63,7 @@ def process_wsc_2022(_df):
     """Process a CSV in the format used for the 2022 WSC."""
     df = _df.rename({
         "Points": "WSC_total",
-        "Place": "Unofficial_rank",
+        "Rank": "Unofficial_rank",
         "Round 1": "WSC_t1 points",
         "Round 2": "WSC_t2 points",
         "Round 3": "WSC_t3 points",
@@ -77,10 +77,23 @@ def process_wsc_2022(_df):
     })
 
     df = df.with_columns(
-        (pl.col("First name") + pl.lit(" ") + pl.col("Last name")).alias("Name"),
-        (pl.col("Official") == 1).alias("Official"),
-        pl.col("Unofficial_rank").cast(pl.Int32).rank().cast(pl.Int64).alias("Official_rank")
+        (pl.col("First Name") + pl.lit(" ") + pl.col("Last Name")).alias("Name"),
+        # This will miss out on some people on UN teams who are unoffical because their countries
+        # had teams, unfortunately.
+        (~pl.col("Team").str.ends_with("-B")).alias("Official")
     )
+
+    # Calculate official rank among the official set, ordered by unofficial rank.
+    official_ranks = (
+        df.filter(pl.col("Official"))
+        .select(["Unofficial_rank"])
+        .sort("Unofficial_rank")
+        .with_columns(
+            pl.arange(1, pl.count() + 1).alias("Official_rank")
+        )
+    )
+
+    df = df.join(official_ranks, on="Unofficial_rank", how="left")
 
     return df
 

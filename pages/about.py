@@ -20,7 +20,7 @@ def present_about():
         #### Data completeness
         * WSC:
             * Missing years: 2013, 2009, 2008, 2007, and 2006.
-            * Partial years: 2022 (I only have data for the top 45 competitors).
+            * Incomplete "Official" labelling: 2022.
         * GP:
             * Missing playoff outcomes: 2023, 2022, and 2021.
         #### Data accuracy  
@@ -66,6 +66,11 @@ def present_about():
     st.markdown("""
         First and foremost, to all the people who organize sudoku events, design puzzles, contribute to the
         events in any way, and participate as solvers. The sudoku community is wonderful.
+
+        Special kudos to:
+
+        * *yyao* for sharing full WSC 2022 results.
+        * *limt* for noticing missing data for the current GP year for solvers without nicks.
 
         Data for the Sudoku Grand Prix comes from the GP website at
         [https://gp.worldpuzzle.org](https://gp.worldpuzzle.org/). World Sudoku Championship data comes
