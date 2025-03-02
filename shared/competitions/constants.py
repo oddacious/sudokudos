@@ -194,6 +194,22 @@ WSC_NAME_TO_GP_ID_OVERRIDE = {
     "Tomasz Stanezak": "Tomasz Stańczak (stan) - Poland",
     "Claudio Toffon": "claudio toffon (claudio62) - Italy",
     "Evgenii Bekishev": "Evgeniy Bekishev (Eugene) - Russia",
+    "Pranav Kamesh S": "Pranav Kamesh (pranavmanu) - India",
+    "Adam Šuráň": "Adam Suran (hjkl18) - Czech Rep.",
+    "Sunghwa Hong": "SeongHwa Hong (Nickless) - Korea, South",
+    "Jaipal Reddy M": "Jaipal Reddy (mjaipal) - India",
+    "Edouard Lebeau": "Édouard Lebeau (mandourin) - France",
+    "Rick Uppelschoten": "Kaari Helstein (pisipaha) - Estonia",
+    "Tiit-Hendrik Piibeleht": "Tiit Hendrik Piibeleht (Tiiduke) - Estonia",
+    "Martina Prinerova": "Martina Prinerová (eifel_mp) - Slovakia",
+    "Radoslav Bochev": "Rado Bo4ev (tres4o) - Bulgaria",
+    "Dávid Braun": "David Braun (Braunka625) - Hungary",
+    "Michaele Bongiorno": "michele bongiorno (wiseman89) - Italy",
+    "Christof Brutsch": "Christof Bruetsch (chrishy) - Switzerland",
+    "Külli Laks-Vahemäe": "Külli Laks Vahemäe (Volvo) - Estonia",
+    "Iliana - Eleftheria Gounalaki": "Iliana Gounalaki (gounil) - Greece",
+    "Zdeňka Pácalová": "Zdenka Pácalová (zdenkap) - Czech Rep.",
+    "Kaja Sõstra": "Kaja Sostra (Nickless) - Estonia",
 }
 
 GP_PLAYOFF_RESULTS = {

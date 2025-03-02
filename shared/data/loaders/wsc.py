@@ -49,12 +49,29 @@ def process_wsc_2023(_df):
         "Rd. 10": "WSC_t10 points",
     })
 
+    # Ultimately we want the name as a single string, first name followed by a space followed
+    # by the last name.
+
+    # Split the name into two parts, using the comma
     df = df.with_columns(
+        pl.col("Name")
+        .str.split_exact(", ", 1)
+        .alias("split")
+        .struct
+        .rename_fields(["Last name", "First name"])
+    )
+
+    # Titlecase each
+    df = df.with_columns(
+        pl.col("split").struct.field("First name").str.to_titlecase().alias("First name"),
+        pl.col("split").struct.field("Last name").str.to_titlecase().alias("Last name")
+    )
+
+    df = df.with_columns(
+        pl.concat_str([pl.col("First name"), pl.col("Last name")], separator=" ").alias("Name"),
         (pl.col("Official Comp.") == "Y").alias("Official"),
-    )
-    df = df.with_columns(
         pl.col("WSC_total").rank(descending=True).cast(pl.Int64).alias("Unofficial_rank")
-    )
+    ).drop("split")
 
     return df
 
@@ -86,14 +103,16 @@ def process_wsc_2022(_df):
     # Calculate official rank among the official set, ordered by unofficial rank.
     official_ranks = (
         df.filter(pl.col("Official"))
-        .select(["Unofficial_rank"])
+        .select(["Name", "Unofficial_rank"])
         .sort("Unofficial_rank")
         .with_columns(
-            pl.arange(1, pl.count() + 1).alias("Official_rank")
+            # "min" method to ensure ties get the same (minimum) rank/
+            pl.col("Unofficial_rank").rank(method="min").cast(pl.Int64).alias("Official_rank")
         )
+        .select(["Name", "Official_rank"])
     )
 
-    df = df.join(official_ranks, on="Unofficial_rank", how="left")
+    df = df.join(official_ranks, on="Name", how="left")
 
     return df
 
@@ -150,6 +169,20 @@ def process_wsc_2018(_df):
     })
 
     df = df.with_columns(
+        pl.col("Name")
+        .str.split_exact(" ", 1)
+        .alias("split")
+        .struct
+        .rename_fields(["Last name", "First name"])
+    )
+
+    df = df.with_columns(
+        pl.col("split").struct.field("First name").alias("First name"),
+        pl.col("split").struct.field("Last name").alias("Last name")
+    )
+
+    df = df.with_columns(
+        pl.concat_str([pl.col("First name"), pl.col("Last name")], separator=" ").alias("Name"),
         pl.col("Official_rank").is_not_null().alias("Official"),
         pl.col("Unofficial_rank").cast(pl.Int64).alias("Unofficial_rank")
     )
@@ -419,6 +452,20 @@ def append_new_dataframe(base, addition):
 
     return base
 
+def manual_adjustements(df):
+    """Update names in WSC files."""
+
+    name_to_name = {
+        "Pal Madarassy": "Pál Madarassy",
+        "Pal MADARASSY": "Pál Madarassy",
+    }
+
+    df = df.with_columns(
+        pl.col("Name").replace(name_to_name).alias("Name")
+    )
+
+    return df
+
 @st.cache_data
 def load_wsc(csv_directory="data/raw/wsc/"):
     """Load all WSC CSV files"""
@@ -466,5 +513,7 @@ def load_wsc(csv_directory="data/raw/wsc/"):
             round_columns.append(colname)
     all_columns = [col for col in multiyear.columns if col not in round_columns] + round_columns
     multiyear = multiyear.select(all_columns)
+
+    multiyear = manual_adjustements(multiyear)
 
     return multiyear
