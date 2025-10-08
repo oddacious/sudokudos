@@ -18,6 +18,7 @@ def get_max_round(year, competition="GP"):
         2022: 12,
         2023: 10,
         2024: 11,
+        2025: 12,
     }
     if competition == "GP":
         if int(year) == 2014:
@@ -27,6 +28,8 @@ def get_max_round(year, competition="GP"):
     elif competition == "WSC":
         if year in wsc_map:
             return wsc_map[year]
+        else:
+            raise ValueError(f"Year \"{year}\" not found: update `get_max_round`")
     else:
         raise ValueError(f"Unsupported competition \"{competition}\" provided")
 
@@ -39,6 +42,7 @@ def wsc_rounds_by_year():
     then another set from 10 or 11 onwards.
     """
     return {
+        2025: [1, 2, 3, 4, 5, 6, 7, 10, 11, 12],
         2024: [1, 2, 3, 4, 5, 6, 7, 10, 11],
         2023: range(1, 11),
         2022: [1, 2, 3, 4, 5, 6, 7, 10, 11, 12],

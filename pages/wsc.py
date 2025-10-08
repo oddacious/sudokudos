@@ -125,7 +125,7 @@ def present_wsc():
     year_data_mapped = year_data_mapped.select(kept_columns)
     matching_users = year_data_mapped.filter(pl.col("user_pseudo_id").is_in(selected_solvers))
     matching_users = matching_users.drop("user_pseudo_id")
-    st.dataframe(matching_users.sort("Official_rank"))
+    st.dataframe(matching_users.sort("Official_rank", nulls_last=True))
 
     st.subheader("All competitors")
 

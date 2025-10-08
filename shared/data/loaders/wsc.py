@@ -7,6 +7,31 @@ import streamlit as st
 import shared.competitions
 
 @st.cache_data
+def process_wsc_2025(_df):
+    """Process a CSV in the format used for the 2025 WSC."""
+    df = _df.rename({
+        "Official Rank": "Official_rank",
+        "Rank": "Unofficial_rank",
+        "Total": "WSC_total",
+        "R1": "WSC_t1 points",
+        "R2": "WSC_t2 points",
+        "R3": "WSC_t3 points",
+        "R4": "WSC_t4 points",
+        "R5": "WSC_t5 points",
+        "R6": "WSC_t6 points",
+        "R7": "WSC_t7 points",
+        "R10": "WSC_t10 points", # I don't know why they did this. To distinguish playoff rounds?
+        "R11": "WSC_t11 points",
+        "R12": "WSC_t12 points",
+    })
+
+    df = df.with_columns(
+        pl.col("Official_rank").is_not_null().alias("Official")
+    )
+
+    return df
+
+@st.cache_data
 def process_wsc_2024(_df):
     """Process a CSV in the format used for the 2024 WSC."""
     df = _df.rename({
@@ -488,7 +513,8 @@ def load_wsc(csv_directory="data/raw/wsc/"):
         # 2021 no event, although there was a WS "Competition"
         2022: process_wsc_2022, # But I only have the top 45 competitors.
         2023: process_wsc_2023,
-        2024: process_wsc_2024
+        2024: process_wsc_2024,
+        2025: process_wsc_2025
     }
 
     multiyear = None
