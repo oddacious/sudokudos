@@ -3,6 +3,8 @@
 def get_max_round(year, competition="GP"):
     """Return the maximum round for a given competition and year.
     
+    Returns None if the year isn't supported or did not have a competition.
+
     This is maintained by hand and needs to be updated for new years.
     """
     wsc_map = {
@@ -28,8 +30,6 @@ def get_max_round(year, competition="GP"):
     elif competition == "WSC":
         if year in wsc_map:
             return wsc_map[year]
-        else:
-            raise ValueError(f"Year \"{year}\" not found: update `get_max_round`")
     else:
         raise ValueError(f"Unsupported competition \"{competition}\" provided")
 

@@ -181,6 +181,8 @@ def create_violin_chart(full_df, selected_solvers, year_subset=(2024,),
     for year in year_subset:
         year_starts.append(f"{year}_1")
         num_rounds = shared.competitions.get_max_round(year, competition=competition)
+        if num_rounds is None:
+            raise ValueError(f"Year \"{year}\" not found: update `get_max_round`")
         for competition_round in range(1, num_rounds + 1):
             column = f"{year}_{competition_round}"
             if column in flattened:
@@ -240,6 +242,8 @@ def create_point_trend_chart(full_df, selected_solvers, year=2024, competition="
     year_df = full_df.filter(pl.col("year") == year)
     subset = year_df.filter(pl.col("user_pseudo_id").is_in(selected_solvers))
     num_rounds = shared.competitions.get_max_round(year, competition=competition)
+    if num_rounds is None:
+        raise ValueError(f"Year \"{year}\" not found: update `get_max_round`")
 
     wsc_rounds = shared.competitions.wsc_rounds_by_year()
 
