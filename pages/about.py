@@ -22,7 +22,7 @@ def present_about():
             * Missing years: 2013, 2009, 2008, 2007, and 2006.
             * Incomplete "Official" labelling: 2022.
         * GP:
-            * Missing playoff outcomes: 2023, 2022, and 2021.
+            * Missing playoff outcomes: 2025, 2023, 2022, and 2021.
         #### Data accuracy  
         * Inexact matching between GP and WSC. And, for that matter, within GP and within WSC.
             * Each WSC was an independent event where competitors entered their names given the
