@@ -23,6 +23,9 @@ def manual_adjustements(df):
         "Dai Tantan": "Tantan Dai",
         "Seongwon Jin": "Sung-Won Jin",
         "Timothy DOYLE": "Timothy Doyle",
+        "sara martin": "Sara Martin",
+        "minfang lin": "Minfang Lin",
+        "pitchaya apichetyota": "Pitchaya Apichetyota",
     }
 
     nick_to_nick = {
@@ -89,6 +92,27 @@ def manual_adjustements(df):
         "Bhuvaneshwari S": "Bhuvi",
         "Bret Kugler": "SOTC",
         "Rohan Rao": "Rohan Rao",
+        "Rintaro Matsumoto": "limt",
+        "Akio Tanabe": "akio",
+        "Andrej Plaštiak": "Andrej",                                                                                                                                                      
+        "Corinna Kiekenbeck": "Phoebe",                                                                                                                                                   
+        "Don Wu": "don3232",                                                                                                                                                              
+        "Elena Aivazopoulou": "elena",                                                                                                                                                    
+        "Jotaro Miyamoto": "moyami",                                                                                                                                                      
+        "Kazuki Sugiura": "kochonazo",                                                                                                                                                    
+        "Mikołaj Piotrowski": "Kynodesme",                                                                                                                                                
+        "Niranjan Vakil": "nirvak",                                                                                                                                                       
+        "Samuel Spaulding": "Peeko6817",                                                                                                                                                  
+        "Seonje Cha": "Karakoon",                                                                                          
+        "Shambo Debnath": "guddu",                                                                                                                                                        
+        "Theo Jurrius": "Noppel",                                                                                                                                    
+        "Yi Xuan Tan": "haidilao",                                                                                                                                           
+        "Yoseph Mak": "symbolic23",                                                                                                                                                 
+        "zuzuzu tototo": "zuto", 
+        "Ben Stoneman": "bxnjyyy",
+        "Kunal Verma": "BeautyOfConfigurations",
+        "Sara Martin": "SaraLodo",
+
     }
 
     name_to_country = {
