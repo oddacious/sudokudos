@@ -88,7 +88,6 @@ WSC_NAME_TO_GP_ID_OVERRIDE = {
     "Sunseong Kwon": "sunseong kwon (bomulsum) - Korea, South",
     "Saejoon Jang": "Sae Joon Jang (Nickless) - Korea, South",
     "Park Heungchul": "Heungchul John Park (puzzlerepublic) - Korea, South",
-    "Mestrovic Davor": "Mladen Mestrovic (mestar) - Croatia",
     "Jan Novotny": "Jan Novotný (KrtekHonza) - Czech Rep.",
     "Klara Vytiskova": "Klára Vytisková (QKV) - Czech Rep.",
     "Hatice Esra Aydemir": "esra aydemir (aras) - Turkey",
