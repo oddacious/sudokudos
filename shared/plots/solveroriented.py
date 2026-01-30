@@ -11,6 +11,7 @@ import matplotlib.ticker
 import shared.competitions
 import shared.data
 import shared.solvers
+import shared.solvers.utils
 import shared.utils
 
 def create_trend_chart(full_df, selected_solvers, metric="points", window_size=8,
@@ -145,3 +146,39 @@ def create_rank_chart(
         shared.utils.ids_to_names(full_df, [solver])[solver])
 
     return fig
+
+def gp_table_for_display(results, joint_solvers):
+    """Construct a visually-appealing table that includes GP results for selected solvers."""
+    cols = ["year", "Name", "Nick", "Country", "Rank", "Rank_before_playoffs", "Played GPs",
+            "Points"]
+    subset = shared.solvers.utils.dataframe_by_solvers(results, joint_solvers)
+    subset = subset.with_columns(
+        pl.col("year").cast(pl.Utf8)
+    )
+    selection = subset.select([
+        *cols,
+        pl.col("^GP_t.*$").exclude(cols)
+    ])
+    sorted = selection.sort(
+        by=["year", "Name"],
+        descending=[False, False]
+    )
+    return sorted
+
+def wsc_table_for_display(results, joint_solvers):
+    """Construct a visually-appealing table that includes WSC results for selected solvers."""
+    cols = ["year", "Name", "Nick", "Country", "Official", "Official_rank", "Unofficial_rank",
+            "WSC_total"]
+    subset = shared.solvers.utils.dataframe_by_solvers(results, joint_solvers)
+    subset = subset.with_columns(
+        pl.col("year").cast(pl.Utf8)
+    )
+    selection = subset.select([
+        *cols,
+        pl.col("^WSC_t.*$").exclude(cols)
+    ])
+    sorted = selection.sort(
+        by=["year", "Name"],
+        descending=[False, False]
+    )
+    return sorted

@@ -14,7 +14,7 @@ def create_data_for_trend_chart(
     if as_percent_of_max:
         together = utils.convert_columns_to_max_pct(together)
 
-    subset = together.filter(pl.col("user_pseudo_id").is_in(selected_solvers))
+    subset = dataframe_by_solvers(together, selected_solvers)
 
     year_subset = utils.applicable_years(full_df, selected_solvers)
     years_with_data = []
@@ -52,3 +52,7 @@ def create_data_for_trend_chart(
         rolling[name] = pl.Series(outcomes).rolling_mean(window_size, min_periods=1)
 
     return data, rolling, year_starts, years_with_data
+
+def dataframe_by_solvers(results, joint_solvers):
+    """Return the subset of `results` where user_pseudo_id is one of `joint_solvers`"""
+    return results.filter(pl.col("user_pseudo_id").is_in(joint_solvers))

@@ -125,5 +125,18 @@ def present_solver():
 
     st.write(f"Results shown for: {selected_solver}")
 
+    st.divider()
+
+    if "GP" in included_events:
+        st.subheader("GP")
+        subset = shared.plots.solveroriented.gp_table_for_display(gp, joint_solvers)
+        st.dataframe(subset)
+
+    if "WSC" in included_events:
+        st.subheader("WSC")
+        subset = shared.plots.solveroriented.wsc_table_for_display(wsc, joint_solvers)
+        st.dataframe(subset)
+
+
 if __name__ == "__main__":
     present_solver()
