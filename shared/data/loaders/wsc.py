@@ -483,6 +483,8 @@ def manual_adjustements(df):
     name_to_name = {
         "Pal Madarassy": "Pál Madarassy",
         "Pal MADARASSY": "Pál Madarassy",
+        "Kuo An Li": "Kuo-An Li",
+        "Li Kuo An": "Kuo-An Li",
     }
 
     df = df.with_columns(
