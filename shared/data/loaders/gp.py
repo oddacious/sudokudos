@@ -3,8 +3,6 @@
 import os
 import polars as pl
 
-import streamlit as st
-
 import shared.competitions
 
 def manual_adjustements(df):
@@ -331,7 +329,6 @@ def collect_dataframes(csv_directory, verbose=False):
 
     return all_dataframes, all_columns
 
-@st.cache_data
 def load_gp(csv_directory="data/processed/gp", verbose=False, output_csv=None):
     """Import GP CSV files and return a single dataset.
     

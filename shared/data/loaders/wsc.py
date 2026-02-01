@@ -2,11 +2,8 @@
 
 import polars as pl
 
-import streamlit as st
-
 import shared.competitions
 
-@st.cache_data
 def process_wsc_2025(_df):
     """Process a CSV in the format used for the 2025 WSC."""
     df = _df.rename({
@@ -31,7 +28,6 @@ def process_wsc_2025(_df):
 
     return df
 
-@st.cache_data
 def process_wsc_2024(_df):
     """Process a CSV in the format used for the 2024 WSC."""
     df = _df.rename({
@@ -55,7 +51,6 @@ def process_wsc_2024(_df):
 
     return df
 
-@st.cache_data
 def process_wsc_2023(_df):
     """Process a CSV in the format used for the 2023 WSC."""
     df = _df.rename({
@@ -100,7 +95,6 @@ def process_wsc_2023(_df):
 
     return df
 
-@st.cache_data
 def process_wsc_2022(_df):
     """Process a CSV in the format used for the 2022 WSC."""
     df = _df.rename({
@@ -141,7 +135,6 @@ def process_wsc_2022(_df):
 
     return df
 
-@st.cache_data
 def process_wsc_2019(_df):
     """Process a CSV in the format used for the 2019 WSC."""
     df = _df.rename({
@@ -166,7 +159,6 @@ def process_wsc_2019(_df):
 
     return df
 
-@st.cache_data
 def process_wsc_2018(_df):
     """Process a CSV in the format used for the 2018 WSC.
     
@@ -214,7 +206,6 @@ def process_wsc_2018(_df):
 
     return df
 
-@st.cache_data
 def process_wsc_2017(_df):
     """Process a CSV in the format used for the 2017 WSC."""
     df = _df.rename({
@@ -242,7 +233,6 @@ def process_wsc_2017(_df):
 
     return df
 
-@st.cache_data
 def process_wsc_2016(_df):
     """Process a CSV in the format used for the 2016 WSC."""
     df = _df.rename({
@@ -274,7 +264,6 @@ def process_wsc_2016(_df):
 
     return df
 
-@st.cache_data
 def process_wsc_2015(_df):
     """Process a CSV in the format used for the 2015 WSC."""
     df = _df.rename({
@@ -301,7 +290,6 @@ def process_wsc_2015(_df):
 
     return df
 
-@st.cache_data
 def process_wsc_2014(_df):
     """Process a CSV in the format used for the 2014 WSC."""
     df = _df.rename({
@@ -337,7 +325,6 @@ def process_wsc_2014(_df):
 
     return df
 
-@st.cache_data
 def process_wsc_2012(_df):
     """Process a CSV in the format used for the 2012 WSC."""
     df = _df.rename({
@@ -368,7 +355,6 @@ def process_wsc_2012(_df):
 
     return df
 
-@st.cache_data
 def process_wsc_2011(_df):
     """Process a CSV in the format used for the 2011 WSC."""
     df = _df.rename({
@@ -402,7 +388,6 @@ def process_wsc_2011(_df):
 
     return df
 
-@st.cache_data
 def process_wsc_2010(_df):
     """Process a CSV in the format used for the 2010 WSC."""
     df = _df.rename({
@@ -493,7 +478,6 @@ def manual_adjustements(df):
 
     return df
 
-@st.cache_data
 def load_wsc(csv_directory="data/raw/wsc/"):
     """Load all WSC CSV files"""
     year_to_function = {

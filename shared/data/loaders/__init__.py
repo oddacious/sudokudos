@@ -1,4 +1,3 @@
 """Load data from historical GP and WSC competitions."""
 
-from .gp import load_gp
-from .wsc import load_wsc
+from .cached import load_gp, load_wsc
