@@ -6,7 +6,7 @@ import streamlit as st
 
 import shared.competitions
 import shared.data
-import shared.data.loaders
+import shared.data.loaders.cached
 import shared.plots.eventoriented
 import shared.presentation
 import shared.queryparams
@@ -16,7 +16,7 @@ def present_gp():
     """Create the GP page."""
     shared.presentation.global_setup_and_display()
 
-    combined_df = shared.data.loaders.load_gp()
+    combined_df = shared.data.loaders.cached.load_gp()
 
     years = list(reversed(shared.utils.all_available_years(combined_df)))
 

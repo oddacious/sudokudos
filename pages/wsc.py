@@ -6,7 +6,7 @@ import streamlit as st
 
 import shared.competitions
 import shared.data
-import shared.data.loaders
+import shared.data.loaders.cached
 import shared.plots.eventoriented
 import shared.presentation
 import shared.queryparams
@@ -16,8 +16,8 @@ def present_wsc():
     """Create the WSC page."""
     shared.presentation.global_setup_and_display()
 
-    gp = shared.data.loaders.load_gp()
-    wsc_unmapped = shared.data.loaders.load_wsc()
+    gp = shared.data.loaders.cached.load_gp()
+    wsc_unmapped = shared.data.loaders.cached.load_wsc()
     wsc = shared.data.attempted_mapping(wsc_unmapped, gp)
 
     years = list(reversed(shared.utils.all_available_years(wsc)))

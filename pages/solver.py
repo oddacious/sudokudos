@@ -3,7 +3,7 @@
 import streamlit as st
 
 import shared.data
-import shared.data.loaders
+import shared.data.loaders.cached
 import shared.plots.solveroriented
 import shared.presentation
 import shared.queryparams
@@ -13,8 +13,8 @@ def present_solver():
     """Create the solver page."""
     shared.presentation.global_setup_and_display()
 
-    wsc_unmapped = shared.data.loaders.load_wsc()
-    gp = shared.data.loaders.load_gp()
+    wsc_unmapped = shared.data.loaders.cached.load_wsc()
+    gp = shared.data.loaders.cached.load_gp()
     wsc = shared.data.attempted_mapping(wsc_unmapped, gp)
 
     combined_with_wsc = shared.data.merge_unflat_datasets(gp, wsc)
