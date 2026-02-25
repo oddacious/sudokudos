@@ -24,11 +24,20 @@ def _build_solver_series(timeseries_df, selected_solvers):
 def _compute_rating_ranks(full_timeseries_df, selected_solvers, target_comp_idxs):
     """Compute rating rank for selected solvers at specified comp_idx values.
 
-    For each (solver, comp_idx) pair, counts how many solvers had a strictly
-    higher rating as of that comp_idx (using each solver's most recent entry).
+    Rank is computed among solvers who were active at each target point, matching
+    the leaderboard definition: a solver is active if their most recent entry
+    has a year within 1 of the target year (i.e. no full calendar year of inactivity).
 
     Uses a single sorted sweep for efficiency rather than per-point queries.
     """
+    # Build comp_idx -> year mapping
+    comp_year = dict(
+        full_timeseries_df
+        .select(["comp_idx", "year"])
+        .unique()
+        .rows()
+    )
+
     # Pre-index selected solvers' ratings by comp_idx
     solver_ratings = {}  # {(solver, comp_idx): rating}
     for solver in selected_solvers:
@@ -40,30 +49,36 @@ def _compute_rating_ranks(full_timeseries_df, selected_solvers, target_comp_idxs
         ):
             solver_ratings[(solver, comp_idx)] = rating
 
-    # Sweep full timeseries in comp_idx order, maintaining each solver's latest rating
+    # Sweep full timeseries in comp_idx order, tracking each solver's latest (rating, year)
     all_rows = (
         full_timeseries_df
-        .select(["user_pseudo_id", "comp_idx", "rating"])
+        .select(["user_pseudo_id", "comp_idx", "rating", "year"])
         .sort("comp_idx")
         .rows()
     )
 
-    current_ratings = {}
+    current_state = {}  # {uid: (rating, year)}
     ts_pos = 0
     results = {}
 
     for target in sorted(target_comp_idxs):
         while ts_pos < len(all_rows) and all_rows[ts_pos][1] <= target:
-            uid, _, rating = all_rows[ts_pos]
-            current_ratings[uid] = rating
+            uid, _, rating, year = all_rows[ts_pos]
+            current_state[uid] = (rating, year)
             ts_pos += 1
+
+        target_year = comp_year[target]
+        active_ratings = [
+            rating for rating, year in current_state.values()
+            if year >= target_year - 1
+        ]
 
         for solver in selected_solvers:
             if (solver, target) not in solver_ratings:
                 continue
             s_rating = solver_ratings[(solver, target)]
             results[(solver, target)] = (
-                sum(1 for r in current_ratings.values() if r > s_rating) + 1
+                sum(1 for r in active_ratings if r > s_rating) + 1
             )
 
     return results

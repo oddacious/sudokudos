@@ -7,12 +7,22 @@ from shared.plots.ratingoriented import _compute_rating_ranks
 
 
 def make_ts(*rows):
-    """Build a minimal timeseries DataFrame from (user_pseudo_id, comp_idx, rating) tuples."""
-    uids, idxs, ratings = zip(*rows)
+    """Build a minimal timeseries DataFrame from tuples.
+
+    Accepts (user_pseudo_id, comp_idx, rating) or (user_pseudo_id, comp_idx, rating, year).
+    Year defaults to 1 for all rows when omitted, keeping all solvers active in every test.
+    """
+    uids, idxs, ratings, years = [], [], [], []
+    for row in rows:
+        uids.append(row[0])
+        idxs.append(row[1])
+        ratings.append(float(row[2]))
+        years.append(row[3] if len(row) > 3 else 1)
     return pl.DataFrame({
-        "user_pseudo_id": list(uids),
-        "comp_idx": list(idxs),
-        "rating": [float(r) for r in ratings],
+        "user_pseudo_id": uids,
+        "comp_idx": idxs,
+        "rating": ratings,
+        "year": years,
     })
 
 
@@ -150,3 +160,57 @@ def test_multiple_targets():
     result = _compute_rating_ranks(ts, ["A"], {1, 2})
     assert result[("A", 1)] == 2   # B(900) > A(800) at comp_idx 1
     assert result[("A", 2)] == 1   # A(1000) > B(900) at comp_idx 2
+
+
+# ---------------------------------------------------------------------------
+# Active-leaderboard filtering: solvers inactive for > 1 year excluded
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# Leaderboard consistency: at the most recent point, rank must match the
+# leaderboard ordering (active solvers sorted by rating descending).
+# Note: historical rank consistency is not tested here.
+# ---------------------------------------------------------------------------
+
+def test_final_point_rank_matches_leaderboard_ordering():
+    """At the most recent comp_idx, ranks should equal position in rating-descending
+    order among active solvers — consistent with leaderboard calculation.
+
+    This would have caught the bug where inactive solvers inflated chart ranks
+    beyond their leaderboard ranks.
+    """
+    ts = make_ts(
+        ("A", 3, 1000, 2024),  # active, rank 1
+        ("B", 3,  800, 2024),  # active, rank 2
+        ("C", 3,  600, 2024),  # active, rank 3
+        ("D", 1,  900, 2022),  # inactive: last year 2022 < 2024-1=2023
+    )
+    # D is excluded; ranks are among A, B, C only
+    result = _compute_rating_ranks(ts, ["A", "B", "C"], {3})
+    assert result[("A", 3)] == 1
+    assert result[("B", 3)] == 2
+    assert result[("C", 3)] == 3
+
+
+def test_inactive_solver_excluded_from_rank():
+    """A solver last active 2+ years ago should not count in the ranking."""
+    ts = make_ts(
+        ("A", 1, 1000, 2020),  # A last competed in 2020
+        ("B", 2, 900,  2022),  # B competing in 2022
+    )
+    # At comp_idx 2 (year 2022): A's last year 2020 < 2022-1=2021, so inactive.
+    # Only B is active → B is rank 1.
+    result = _compute_rating_ranks(ts, ["B"], {2})
+    assert result[("B", 2)] == 1
+
+
+def test_solver_active_within_one_year_still_counts():
+    """A solver last active exactly 1 year ago should still count."""
+    ts = make_ts(
+        ("A", 1, 1000, 2021),  # A last competed in 2021
+        ("B", 2, 900,  2022),  # B competing in 2022
+    )
+    # At comp_idx 2 (year 2022): A's last year 2021 >= 2022-1=2021, so active.
+    # A(1000) > B(900) → B is rank 2.
+    result = _compute_rating_ranks(ts, ["B"], {2})
+    assert result[("B", 2)] == 2
