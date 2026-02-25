@@ -73,6 +73,8 @@ def present_ratings():
     # --- Top 5 standings snapshot ---
     all_years = sorted(timeseries["year"].unique().to_list())
     current_year = all_years[-1]
+    year_min_default = all_years[0]
+    year_max_default = all_years[-1]
     top5_solvers = current_lb.head(5)["user_pseudo_id"].to_list()
     snapshot_cols = st.columns(2)
     with snapshot_cols[0]:
@@ -165,9 +167,6 @@ def present_ratings():
     chosen_solvers = shared.queryparams.extract_query_param_list(
         "solvers", available, default=available[:3]
     )
-    all_years = sorted(timeseries["year"].unique().to_list())
-    year_min_default = all_years[0]
-    year_max_default = all_years[-1]
     try:
         if "year_min" in st.query_params:
             v = int(st.query_params["year_min"])
@@ -235,16 +234,20 @@ def present_ratings():
         _leader_lines.append(
             f'🥇 **{_label}**: <span style="color: #DAA520">{_name}</span> ({_val})'
         )
-    st.write("  \n".join(_leader_lines), unsafe_allow_html=True)
+    st.markdown("  \n".join(_leader_lines), unsafe_allow_html=True)
 
     st.caption("Solvers in the top 20 by any metric, sorted by #1 count then best streak.")
 
-    _top_adj_uids = records.sort("total_adj_points", descending=True).head(20)["user_pseudo_id"].to_list()
-    _top_wins_uids = records.sort("wins_count", descending=True).head(20)["user_pseudo_id"].to_list()
-    _top_rounds_uids = records.sort("total_rounds", descending=True).head(20)["user_pseudo_id"].to_list()
+    _top_adj_uids = (records.sort("total_adj_points", descending=True)
+                     .head(20)["user_pseudo_id"].to_list())
+    _top_wins_uids = (records.sort("wins_count", descending=True)
+                      .head(20)["user_pseudo_id"].to_list())
+    _top_rounds_uids = (records.sort("total_rounds", descending=True)
+                        .head(20)["user_pseudo_id"].to_list())
     _top_rating_uids = alltime_lb.head(20)["user_pseudo_id"].to_list()
     _ones_uids = records.filter(pl.col("ones_count") > 0)["user_pseudo_id"].to_list()
-    _included_uids = set(_top_adj_uids) | set(_top_wins_uids) | set(_top_rounds_uids) | set(_top_rating_uids) | set(_ones_uids)
+    _included_uids = (set(_top_adj_uids) | set(_top_wins_uids)
+                      | set(_top_rounds_uids) | set(_top_rating_uids) | set(_ones_uids))
     records_display = (
         _extract_name_parts(
             records
@@ -269,7 +272,7 @@ def present_ratings():
     )
     st.dataframe(records_display, hide_index=True,
                  column_config={"Peak rating": st.column_config.NumberColumn(format="%d")})
-    
+
     st.divider()
 
     st.subheader("The rating algorithm")

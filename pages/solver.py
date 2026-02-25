@@ -129,7 +129,7 @@ def present_solver():
                 * Each point is one round in one competition, with the GP shown earlier than the WSC.
                 * Playoff rounds in the GP are not included
                 * Years are not uniformly spaced, but rather are weighed by number of rounds.
-                * See the [ratings](ratings) page for information on rating calculations.
+                * See the [Ratings](ratings) page for information on rating calculations.
             ''')
     with rating_cols[1]:
         fig_rating_rank = shared.plots.ratingoriented.create_rank_trend_chart(

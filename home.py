@@ -14,6 +14,8 @@ def present_homepage():
     Use the menu headings or the buttons below to navigate to pages for the World
     Sudoku Championship, Sudoku Grand Prix, or for statistics and comparisons of
     individual solvers.
+
+    **NEW** — Solver rating system over on the [Ratings](ratings) page.
         """)
 
     st.subheader("Competitions")
@@ -25,8 +27,8 @@ def present_homepage():
     st.subheader("Solvers")
     if st.button("Solver deep-dive"):
         st.switch_page("pages/solver.py")
-    #if st.button("Leaders"):
-    #    st.switch_page("pages/leaders.py")
+    if st.button("Ratings"):
+        st.switch_page("pages/ratings.py")
 
 if __name__ == "__main__":
     present_homepage()
