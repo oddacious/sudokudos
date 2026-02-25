@@ -132,7 +132,7 @@ def create_rating_trend_chart(timeseries_df, selected_solvers, year_min=None, ye
                 color=color, linewidth=1, label=solver.split(" - ")[0])
         _label_endpoints(ax, xs, ys, color)
 
-    ax.set_title("Rating over time")
+    ax.set_title("Rating progression")
     _apply_common_style(ax, xticks, xlabels)
     return fig
 
@@ -184,6 +184,6 @@ def create_rank_trend_chart(timeseries_df, selected_solvers, year_min=None, year
     ax.yaxis.set_major_formatter(matplotlib.ticker.ScalarFormatter())
     ax.yaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
 
-    ax.set_title("Standing over time")
+    ax.set_title("Race for the throne")
     _apply_common_style(ax, xticks, xlabels)
     return fig
