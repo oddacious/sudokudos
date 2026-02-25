@@ -5,6 +5,7 @@ import matplotlib.cm
 import matplotlib.pyplot as plt
 import matplotlib.ticker
 import polars as pl
+import streamlit as st
 
 
 def _build_solver_series(timeseries_df, selected_solvers):
@@ -21,22 +22,57 @@ def _build_solver_series(timeseries_df, selected_solvers):
     return result
 
 
-def _compute_rating_ranks(full_timeseries_df, selected_solvers, target_comp_idxs):
-    """Compute rating rank for selected solvers at specified comp_idx values.
+@st.cache_data(hash_funcs={pl.DataFrame: lambda df: df.hash_rows().sum()})
+def _precompute_active_ratings(full_timeseries_df):
+    """For each comp_idx in the dataset, return the list of active solver ratings.
 
-    Rank is computed among solvers who were active at each target point, matching
-    the leaderboard definition: a solver is active if their most recent entry
-    has a year within 1 of the target year (i.e. no full calendar year of inactivity).
+    A solver is active at a given point if their most recent entry has a year
+    within 1 of the target year (i.e. no full calendar year of inactivity).
 
-    Uses a single sorted sweep for efficiency rather than per-point queries.
+    Result is cached since full_timeseries_df only changes ~monthly.
     """
-    # Build comp_idx -> year mapping
     comp_year = dict(
         full_timeseries_df
         .select(["comp_idx", "year"])
         .unique()
         .rows()
     )
+
+    all_rows = (
+        full_timeseries_df
+        .select(["user_pseudo_id", "comp_idx", "rating", "year"])
+        .sort("comp_idx")
+        .rows()
+    )
+
+    current_state = {}  # {uid: (rating, year)}
+    active_ratings_by_comp_idx = {}
+
+    i = 0
+    while i < len(all_rows):
+        comp_idx = all_rows[i][1]
+        # Process all rows sharing this comp_idx before computing active ratings
+        while i < len(all_rows) and all_rows[i][1] == comp_idx:
+            uid, _, rating, year = all_rows[i]
+            current_state[uid] = (rating, year)
+            i += 1
+        target_year = comp_year[comp_idx]
+        active_ratings_by_comp_idx[comp_idx] = [
+            r for r, y in current_state.values()
+            if y >= target_year - 1
+        ]
+
+    return active_ratings_by_comp_idx
+
+
+def _compute_rating_ranks(full_timeseries_df, selected_solvers, target_comp_idxs):
+    """Compute rating rank for selected solvers at specified comp_idx values.
+
+    Rank is computed among solvers who were active at each target point, matching
+    the leaderboard definition: a solver is active if their most recent entry
+    has a year within 1 of the target year (i.e. no full calendar year of inactivity).
+    """
+    active_ratings_by_comp_idx = _precompute_active_ratings(full_timeseries_df)
 
     # Pre-index selected solvers' ratings by comp_idx
     solver_ratings = {}  # {(solver, comp_idx): rating}
@@ -49,30 +85,9 @@ def _compute_rating_ranks(full_timeseries_df, selected_solvers, target_comp_idxs
         ):
             solver_ratings[(solver, comp_idx)] = rating
 
-    # Sweep full timeseries in comp_idx order, tracking each solver's latest (rating, year)
-    all_rows = (
-        full_timeseries_df
-        .select(["user_pseudo_id", "comp_idx", "rating", "year"])
-        .sort("comp_idx")
-        .rows()
-    )
-
-    current_state = {}  # {uid: (rating, year)}
-    ts_pos = 0
     results = {}
-
-    for target in sorted(target_comp_idxs):
-        while ts_pos < len(all_rows) and all_rows[ts_pos][1] <= target:
-            uid, _, rating, year = all_rows[ts_pos]
-            current_state[uid] = (rating, year)
-            ts_pos += 1
-
-        target_year = comp_year[target]
-        active_ratings = [
-            rating for rating, year in current_state.values()
-            if year >= target_year - 1
-        ]
-
+    for target in target_comp_idxs:
+        active_ratings = active_ratings_by_comp_idx.get(target, [])
         for solver in selected_solvers:
             if (solver, target) not in solver_ratings:
                 continue
