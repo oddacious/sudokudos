@@ -17,7 +17,7 @@ def global_header():
     """Create the links in the site's global header."""
     st.title("Sudokudos", anchor=False)
     st.markdown("#### Solvers, scores, and snazzy charts")
-    cols = st.columns(6)
+    cols = st.columns(7)
     with cols[0]:
         st.page_link("home.py", label="Home")
     with cols[1]:
@@ -26,9 +26,9 @@ def global_header():
         st.page_link("pages/gp.py", label="Grand Prix")
     with cols[3]:
         st.page_link("pages/solver.py", label="Solvers")
-    #with cols[4]:
-    #    st.page_link("pages/solver.py", label="Leaders")
     with cols[4]:
+        st.page_link("pages/ratings.py", label="Ratings")
+    with cols[5]:
         st.page_link("pages/about.py", label="About")
     st.divider()
 

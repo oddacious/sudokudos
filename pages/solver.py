@@ -4,6 +4,7 @@ import streamlit as st
 
 import shared.data
 import shared.data.loaders.cached
+import shared.plots.ratingoriented
 import shared.plots.solveroriented
 import shared.presentation
 import shared.queryparams
@@ -16,6 +17,7 @@ def present_solver():
     wsc_unmapped = shared.data.loaders.cached.load_wsc()
     gp = shared.data.loaders.cached.load_gp()
     wsc = shared.data.attempted_mapping(wsc_unmapped, gp)
+    timeseries = shared.data.loaders.cached.load_ratings_timeseries()
 
     combined_with_wsc = shared.data.merge_unflat_datasets(gp, wsc)
 
@@ -101,13 +103,6 @@ def present_solver():
         if fig_position is not None:
             st.pyplot(fig_position, use_container_width=True)
 
-        with st.expander("See explanation"):
-            st.write('''
-                * Each point is one round in one competition, with the GP shown earlier than the WSC.
-                * Playoff rounds in the GP are not included
-                * Years are not uniformly spaced, but rather are weighed by number of rounds.
-            ''')
-
     with cols[1]:
         fig_rank = shared.plots.solveroriented.create_rank_chart(
             combined_with_wsc, selected_solver, included_events=events_lower)
@@ -122,6 +117,24 @@ def present_solver():
                 * For official WSC participants, rank, percentile, and denominator are of official participants only.
                 * For unofficial WSC participants, rank, percentile, and denominator are of all participants.
             ''')
+
+    rating_cols = st.columns(2)
+    with rating_cols[0]:
+        fig_rating = shared.plots.ratingoriented.create_rating_trend_chart(
+            timeseries, joint_solvers)
+        st.pyplot(fig_rating, use_container_width=True)
+
+        with st.expander("See explanation"):
+            st.write('''
+                * Each point is one round in one competition, with the GP shown earlier than the WSC.
+                * Playoff rounds in the GP are not included
+                * Years are not uniformly spaced, but rather are weighed by number of rounds.
+                * See the [ratings](ratings) page for information on rating calculations.
+            ''')
+    with rating_cols[1]:
+        fig_rating_rank = shared.plots.ratingoriented.create_rank_trend_chart(
+            timeseries, joint_solvers)
+        st.pyplot(fig_rating_rank, use_container_width=True)
 
     st.write(f"Results shown for: {selected_solver}")
 

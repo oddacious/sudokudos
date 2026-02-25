@@ -32,6 +32,14 @@ def extract_query_param_list(param, allowed_items, default=None):
 
     return selected
 
+def update_range_query_params(min_param, max_param, selector):
+    """Store a range slider (tuple) as two separate query params."""
+    if selector not in st.session_state:
+        raise ValueError(f"Selector \"{selector}\" not found")
+    min_val, max_val = st.session_state[selector]
+    st.query_params[min_param] = str(min_val)
+    st.query_params[max_param] = str(max_val)
+
 def retrieve_query_value_with_default(query_param, allowed, default):
     """Fetch a single value from a query value"""
     if query_param in st.query_params and int(st.query_params[query_param]) in allowed:
