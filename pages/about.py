@@ -74,10 +74,11 @@ def present_about():
 
         For the ratings system I am indebted to many precursors, notably:
         * The WPF for testing a pilot official system in 2023 and planning future iterations.
-        * Oliver Lignon in particular for being the WPF's point person on rating initiatives, and
+        * Olivier Lignon in particular for being the WPF's point person on rating initiatives, and
             for sharing information and ideas with the community.
-        * Tom Collyer for sharing his own
-            [rating system development](https://forum.ukpuzzles.org/viewtopic.php?t=2730).
+        * Tom Collyer, *Psyho*, *IHNN*, and others for their debates on rating system properties
+            (and Tom for sharing his own
+            [rating system development](https://forum.ukpuzzles.org/viewtopic.php?t=2730)).
                 
         Data for the Sudoku Grand Prix comes from the GP website at
         [https://gp.worldpuzzle.org](https://gp.worldpuzzle.org/). World Sudoku Championship data comes

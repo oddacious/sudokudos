@@ -293,20 +293,21 @@ def present_ratings():
             us an empirical and testable criteria for ratings.
         
         However, I do impose a few constraints on purely empirical ratings:
-        * Ratings never use future-looking information
+        * Ratings never use forward-looking information
         * Ratings only depend on individual event performance and not on other predictive measures
         * Rating changes should have some smoothness
         * Newly rated players should take multiple events before gaining a high rating
-        * Missed rounds do not affect ratings (unless missing enough to disquality from the
-            rankings)
+        * Missed a round should not affect ratings (unless missing enough rounds to disqualify from
+            the rankings)
 
         #### Overview of the algorithm
-        1. Every round has a difficulty level, calculated from the point distribution of
+        1. Each individual round in the WSC or GP is treated equally.
+        1. Each round has a difficulty level, calculated from the point distribution of
             participating solvers compared to their performance in prior rounds.
-        2. Solvers have a historical vector of difficulty-adjusted points, including a *prior* of
-            three rounds of average performance (from all solvers before that solver entered the
-            pool). As such, when solvers first get rated their rating is pulled towards average
-            performance.
+        2. Solvers have a historical vector of difficulty-adjusted points from those rounds,
+            including a *prior* of three rounds of average performance (from all solvers before
+            that solver entered the pool). As such, when solvers first get rated their rating is
+            pulled towards average performance.
         3. A solver's rating is the exponentially weighted mean of that difficulty-adjusted points
             vector, with a decay rate 0.9 (most recent rounds weighted highest).
 
