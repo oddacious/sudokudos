@@ -309,7 +309,7 @@ def present_ratings():
             that solver entered the pool). As such, when solvers first get rated their rating is
             pulled towards average performance.
         3. A solver's rating is the exponentially weighted mean of that difficulty-adjusted points
-            vector, with a decay rate 0.9 (most recent rounds weighted highest).
+            vector, with a decay rate of 0.9 (most recent rounds weighted highest).
 
         I evaluated a handful of simple and complex algorithms. This one had strong predictive
             performance while being relatively simple and returning a rating in units of
