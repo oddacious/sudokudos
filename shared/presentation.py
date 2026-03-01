@@ -35,13 +35,13 @@ def global_header():
 
 def global_setup_and_display(page_name: Optional[str] = None):
     """Set the title, configure matplotlib, and create the global header."""
-    title = f"Sudokudos \u2013 {page_name}" if page_name else "Sudokudos \u2013 WSC & GP Analysis"
+    title = f"Sudokudos - {page_name}" if page_name else "Sudokudos - Solvers, scores, and snazzy charts"
     st.set_page_config(
         page_title=title, page_icon="images/sudoku-icon-pastime.png", layout="wide")
     st.markdown("""
 <script>
 (function() {
-    document.title = "Sudokudos \u2013 WSC & GP Analysis";
+    document.title = "Sudokudos - Solvers, scores, and snazzy charts";
     var desc = document.querySelector('meta[name="description"]');
     if (!desc) {
         desc = document.createElement('meta');
