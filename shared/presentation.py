@@ -1,6 +1,7 @@
 """Contains functions related to the presentation of the streamlit site."""
 
 import matplotlib.pyplot as plt
+from typing import Optional
 
 import streamlit as st
 import streamlit_theme
@@ -32,9 +33,24 @@ def global_header():
         st.page_link("pages/about.py", label="About")
     st.divider()
 
-def global_setup_and_display():
+def global_setup_and_display(page_name: Optional[str] = None):
     """Set the title, configure matplotlib, and create the global header."""
+    title = f"Sudokudos \u2013 {page_name}" if page_name else "Sudokudos \u2013 WSC & GP Analysis"
     st.set_page_config(
-        page_title="Sudokudos", page_icon="images/sudoku-icon-pastime.png", layout="wide")
+        page_title=title, page_icon="images/sudoku-icon-pastime.png", layout="wide")
+    st.markdown("""
+<script>
+(function() {
+    document.title = "Sudokudos \u2013 WSC & GP Analysis";
+    var desc = document.querySelector('meta[name="description"]');
+    if (!desc) {
+        desc = document.createElement('meta');
+        desc.name = 'description';
+        document.head.appendChild(desc);
+    }
+    desc.content = "Explore results, rankings, and solver performance from the World Sudoku Championship and Sudoku Grand Prix.";
+})();
+</script>
+""", unsafe_allow_html=True)
     configure_matplotlib()
     global_header()

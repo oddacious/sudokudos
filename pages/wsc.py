@@ -14,7 +14,7 @@ import shared.utils
 
 def present_wsc():
     """Create the WSC page."""
-    shared.presentation.global_setup_and_display()
+    shared.presentation.global_setup_and_display("World Sudoku Championship")
 
     gp = shared.data.loaders.cached.load_gp()
     wsc_unmapped = shared.data.loaders.cached.load_wsc()

@@ -14,7 +14,7 @@ import shared.utils
 
 def present_gp():
     """Create the GP page."""
-    shared.presentation.global_setup_and_display()
+    shared.presentation.global_setup_and_display("Sudoku Grand Prix")
 
     combined_df = shared.data.loaders.cached.load_gp()
 

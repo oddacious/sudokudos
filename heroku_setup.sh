@@ -7,3 +7,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 else
     sed -i 's/port=.*/port='$PORT'/' ~/.streamlit/config.toml
 fi
+
+# Patch Streamlit's index.html for better Google search appearance
+STREAMLIT_INDEX=$(python -c "import streamlit; import os; print(os.path.join(os.path.dirname(streamlit.__file__), 'static', 'index.html'))")
+sed -i "s|<title>Streamlit</title>|<title>Sudokudos \&amp; World Sudoku Championship \&amp; Grand Prix Analysis</title>|g" "$STREAMLIT_INDEX"
+sed -i "s|</title>|</title><meta name=\"description\" content=\"Explore results, rankings, and solver performance from the World Sudoku Championship (WSC) and Sudoku Grand Prix (GP).\">|g" "$STREAMLIT_INDEX"

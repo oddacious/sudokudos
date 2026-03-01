@@ -12,7 +12,7 @@ import shared.utils
 
 def present_solver():
     """Create the solver page."""
-    shared.presentation.global_setup_and_display()
+    shared.presentation.global_setup_and_display("Solver Analysis")
 
     wsc_unmapped = shared.data.loaders.cached.load_wsc()
     gp = shared.data.loaders.cached.load_gp()

@@ -38,7 +38,7 @@ def _extract_name_parts(df: pl.DataFrame) -> pl.DataFrame:
 
 def present_ratings():
     """Create the ratings page."""
-    shared.presentation.global_setup_and_display()
+    shared.presentation.global_setup_and_display("Ratings")
 
     current_lb = shared.data.loaders.cached.load_current_leaderboard()
     alltime_lb = shared.data.loaders.cached.load_alltime_leaderboard()
