@@ -4,13 +4,15 @@ import matplotlib.pyplot as plt
 from typing import Optional
 
 import streamlit as st
+import streamlit.components.v1 as components
 import streamlit_theme
 
 GA_MEASUREMENT_ID = "G-QQC8GHVLBD"
 
 def inject_analytics():
-    """Inject Google Analytics, firing at most one pageview per page per session."""
-    st.markdown(f"""
+    """Inject Google Analytics and meta description via an invisible iframe (the only
+    way to execute scripts in Streamlit). Pageviews fire at most once per page per session."""
+    components.html(f"""
 <script async src="https://www.googletagmanager.com/gtag/js?id={GA_MEASUREMENT_ID}"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
@@ -18,30 +20,30 @@ function gtag(){{dataLayer.push(arguments);}}
 gtag('js', new Date());
 gtag('config', '{GA_MEASUREMENT_ID}', {{'send_page_view': false}});
 (function() {{
-    var key = 'ga_pv_' + window.location.pathname;
+    var key = 'ga_pv_' + window.parent.location.pathname;
     if (!sessionStorage.getItem(key)) {{
         sessionStorage.setItem(key, '1');
-        gtag('event', 'page_view', {{'page_path': window.location.pathname}});
+        gtag('event', 'page_view', {{'page_path': window.parent.location.pathname}});
     }}
+    var desc = window.parent.document.querySelector('meta[name="description"]');
+    if (!desc) {{
+        desc = window.parent.document.createElement('meta');
+        desc.name = 'description';
+        window.parent.document.head.appendChild(desc);
+    }}
+    desc.content = "Explore results, rankings, and solver performance from the World Sudoku Championship and Sudoku Grand Prix.";
 }})();
 </script>
-""", unsafe_allow_html=True)
+""", height=0)
 
-def inject_meta():
-    """Inject page title and description meta tag."""
+def inject_css():
+    """Inject CSS tweaks: hide the Streamlit header and reduce top padding."""
     st.markdown("""
-<script>
-(function() {
-    document.title = "Sudokudos - Solvers, scores, and snazzy charts";
-    var desc = document.querySelector('meta[name="description"]');
-    if (!desc) {
-        desc = document.createElement('meta');
-        desc.name = 'description';
-        document.head.appendChild(desc);
-    }
-    desc.content = "Explore results, rankings, and solver performance from the World Sudoku Championship and Sudoku Grand Prix.";
-})();
-</script>
+<style>
+[data-testid="stHeader"] { display: none; }
+[data-testid="stCustomComponentV1"] { display: none; }
+.block-container { padding-top: 1rem; }
+</style>
 """, unsafe_allow_html=True)
 
 def configure_matplotlib():
@@ -77,6 +79,6 @@ def global_setup_and_display(page_name: Optional[str] = None):
     st.set_page_config(
         page_title=title, page_icon="images/sudoku-icon-pastime.png", layout="wide")
     inject_analytics()
-    inject_meta()
+    inject_css()
     configure_matplotlib()
     global_header()
