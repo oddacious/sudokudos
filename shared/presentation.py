@@ -32,6 +32,13 @@ gtag('config', '{GA_MEASUREMENT_ID}', {{'send_page_view': false}});
         window.parent.document.head.appendChild(desc);
     }}
     desc.content = "Explore results, rankings, and solver performance from the World Sudoku Championship and Sudoku Grand Prix.";
+    var canonical = window.parent.document.querySelector('link[rel="canonical"]');
+    if (!canonical) {{
+        canonical = window.parent.document.createElement('link');
+        canonical.rel = 'canonical';
+        window.parent.document.head.appendChild(canonical);
+    }}
+    canonical.href = window.parent.location.origin + window.parent.location.pathname;
 }})();
 </script>
 """, height=0)
