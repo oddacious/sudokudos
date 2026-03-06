@@ -38,7 +38,7 @@ gtag('config', '{GA_MEASUREMENT_ID}', {{'send_page_view': false}});
         canonical.rel = 'canonical';
         window.parent.document.head.appendChild(canonical);
     }}
-    canonical.href = window.parent.location.origin + window.parent.location.pathname;
+    canonical.href = 'https://sudokudos.com' + window.parent.location.pathname;
 }})();
 </script>
 """, height=0)
