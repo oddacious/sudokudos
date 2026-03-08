@@ -23,7 +23,11 @@ gtag('config', '{GA_MEASUREMENT_ID}', {{'send_page_view': false}});
     var key = 'ga_pv_' + window.parent.location.pathname;
     if (!sessionStorage.getItem(key)) {{
         sessionStorage.setItem(key, '1');
-        gtag('event', 'page_view', {{'page_path': window.parent.location.pathname}});
+        gtag('event', 'page_view', {{
+            'page_location': window.parent.location.href,
+            'page_path': window.parent.location.pathname,
+            'page_title': window.parent.document.title
+        }});
     }}
     var desc = window.parent.document.querySelector('meta[name="description"]');
     if (!desc) {{
