@@ -7,7 +7,7 @@ import shared.competitions
 
 def supported_competitions():
     """Return the list of competitions that this code supports."""
-    return ("gp", "wsc")
+    return ("gp", "wsc", "esc")
 
 def validate_competitions(competition_list):
     """Raise an exception if the competitions are supported."""

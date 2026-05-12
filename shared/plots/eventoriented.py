@@ -167,6 +167,39 @@ def create_wsc_leaderboard_chart(full_df, year=2024, top_n=10,
 
     return fig
 
+def create_esc_leaderboard_chart(full_df, year=2026, top_n=10,
+                                 colors=[matplotlib.cm.Set2(i) for i in range(8)]):
+    """This creates a horizontal bar chart of the top scores for an ESC year."""
+    year_df = full_df.filter(pl.col("year") == year)
+    year_df = year_df.with_columns(pl.col("ESC_total").cast(pl.Float32).alias("ESC_total"))
+
+    subset = year_df.sort("ESC_total", descending=True).head(top_n)
+
+    labels = subset.get_column("Name")
+    points = subset.get_column("ESC_total")
+
+    fig, ax = plt.subplots(figsize=(6.4, 10))
+
+    bar_colors = [
+        colors[0] if row["ESC_rank"] is not None else colors[1]
+        for row in subset.iter_rows(named=True)
+    ]
+    ax.barh(labels, points, color=bar_colors)
+    ax.spines["bottom"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.invert_yaxis()
+
+    official_line = matplotlib.lines.Line2D([], [], linewidth=10, color=colors[0], label="Official")
+    unofficial_line = matplotlib.lines.Line2D([], [], linewidth=10, color=colors[1], label="Unofficial")
+    ax.legend(handles=[official_line, unofficial_line], loc="lower right", frameon=False)
+
+    ax.set_title(f"European Sudoku Championship point leaders ({year})", pad=50)
+    ax.xaxis.set_ticks_position("top")
+    ax.xaxis.set_label_position("top")
+
+    return fig
+
+
 def create_violin_chart(full_df, selected_solvers, year_subset=(2024,),
                         competition="GP",
                         colors=[matplotlib.cm.Set2(i) for i in range(8)]):

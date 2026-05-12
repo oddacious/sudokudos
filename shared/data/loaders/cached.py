@@ -4,6 +4,7 @@ from typing import Optional
 
 import streamlit as st
 
+from .eurosudoku import load_eurosudoku as _load_eurosudoku
 from .gp import load_gp as _load_gp
 from .wsc import load_wsc as _load_wsc
 from .ratings import (
@@ -26,6 +27,12 @@ def load_gp(csv_directory="data/processed/gp", verbose=False, output_csv=None):
 def load_wsc(csv_directory="data/raw/wsc/"):
     """Load WSC data with Streamlit caching."""
     return _load_wsc(csv_directory)
+
+
+@st.cache_data
+def load_eurosudoku(csv_directory="data/raw/eurosudoku"):
+    """Load ESC data with Streamlit caching."""
+    return _load_eurosudoku(csv_directory)
 
 
 @st.cache_data

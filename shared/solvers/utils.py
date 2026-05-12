@@ -9,7 +9,13 @@ def create_data_for_trend_chart(
     """Claculate the data needed for the solver trend chart."""
     flattened_gp = shared_data.create_flat_dataset(full_df, metric=metric)
     flattened_wsc = shared_data.create_flat_dataset(full_df, metric=metric, competition="WSC")
-    together = shared_data.merge_flat_datasets([flattened_gp, flattened_wsc])
+    datasets = [flattened_gp, flattened_wsc]
+    suffixes = ["_gp", "_wsc"]
+    if any(c.startswith("ESC_t") for c in full_df.columns):
+        flattened_esc = shared_data.create_flat_dataset(full_df, metric=metric, competition="ESC")
+        datasets.append(flattened_esc)
+        suffixes.append("_esc")
+    together = shared_data.merge_flat_datasets(datasets, tuple(suffixes))
 
     if as_percent_of_max:
         together = utils.convert_columns_to_max_pct(together)
@@ -22,16 +28,18 @@ def create_data_for_trend_chart(
     rounds = []
     year_starts = []
     for year in year_subset:
-        if "gp" in included_events and f"{year}_1_gp" in subset:
-            year_starts.append(f"{year}_1_gp")
-        elif "wsc" in included_events and f"{year}_1_wsc" in subset:
-            year_starts.append(f"{year}_1_wsc")
-        else:
-            # Example case: Only including WSC but have non-existent years
+        first_round_col = None
+        for comp in ["gp", "wsc", "esc"]:
+            if comp in included_events and f"{year}_1_{comp}" in subset.columns:
+                first_round_col = f"{year}_1_{comp}"
+                break
+        if first_round_col is None:
+            # No included competition has data for this year
             continue
+        year_starts.append(first_round_col)
         years_with_data.append(year)
         for competition_round in range(1, competitions.MAXIMUM_ROUND + 1):
-            for competition in ["gp", "wsc"]:
+            for competition in ["gp", "wsc", "esc"]:
                 if competition in included_events:
                     column = f"{year}_{competition_round}_{competition}"
                     if column in subset:

@@ -23,6 +23,8 @@ def present_homepage():
         st.switch_page("pages/wsc.py")
     if st.button("Sudoku Grand Prix"):
         st.switch_page("pages/gp.py")
+    if st.button("Other Events"):
+        st.switch_page("pages/other_events.py")
 
     st.subheader("Solvers")
     if st.button("Solver deep-dive"):

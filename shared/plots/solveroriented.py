@@ -129,13 +129,20 @@ def create_rank_chart(
 
     wsc_years = (sorted(full_df.filter((pl.col("WSC_entry") == 1) & pl.col("year").is_not_null())
                         .get_column("year").unique().to_list()))
-    performances = shared.solvers.PerformanceCollector(solver, included_events, wsc_years)
+    esc_years = []
+    if "ESC_total" in full_df.columns:
+        esc_years = sorted(full_df.filter(
+            pl.col("ESC_total").is_not_null() & pl.col("year").is_not_null())
+            .get_column("year").unique().to_list())
+    performances = shared.solvers.PerformanceCollector(solver, included_events, wsc_years,
+                                                       esc_years=esc_years)
 
     for year in years:
         subset = df.filter(pl.col("year") == year)
 
         performances.gp_performance_by_solver_year(subset, year, use_playoffs=use_gp_playoffs)
         performances.wsc_performance_by_solver_year(subset, year)
+        performances.esc_performance_by_solver_year(subset, year)
 
     competition_labels = performances.solver_results.all_competition_names()
     competition_results = performances.solver_results.all_competition_results()
@@ -164,6 +171,15 @@ def gp_table_for_display(results, joint_solvers):
         descending=[False, False]
     )
     return sorted
+
+def esc_table_for_display(results, joint_solvers):
+    """Construct a visually-appealing table that includes ESC results for selected solvers."""
+    cols = ["year", "Name", "Country", "ESC_rank", "ESC_unofficial_rank", "ESC_total"]
+    subset = shared.solvers.utils.dataframe_by_solvers(results, joint_solvers)
+    subset = subset.with_columns(pl.col("year").cast(pl.Utf8))
+    selection = subset.select([*cols, pl.col("^ESC_t.*$").exclude(cols)])
+    return selection.sort(by=["year", "Name"], descending=[False, False])
+
 
 def wsc_table_for_display(results, joint_solvers):
     """Construct a visually-appealing table that includes WSC results for selected solvers."""

@@ -2,6 +2,7 @@
 
 import streamlit as st
 
+import shared.competitions
 import shared.data
 import shared.data.loaders.cached
 import shared.plots.ratingoriented
@@ -16,10 +17,14 @@ def present_solver():
 
     wsc_unmapped = shared.data.loaders.cached.load_wsc()
     gp = shared.data.loaders.cached.load_gp()
+    esc_unmapped = shared.data.loaders.cached.load_eurosudoku()
     wsc = shared.data.attempted_mapping(wsc_unmapped, gp)
+    esc = shared.data.attempted_mapping(
+        esc_unmapped, gp,
+        manual_override=shared.competitions.ESC_NAME_TO_GP_ID_OVERRIDE)
     timeseries = shared.data.loaders.cached.load_ratings_timeseries()
 
-    combined_with_wsc = shared.data.merge_unflat_datasets(gp, wsc)
+    combined_with_wsc = shared.data.merge_unflat_datasets(gp, wsc, extra_datasets=[esc])
 
     # List solvers by total points in all competitions
     available = shared.data.ids_by_total_points(combined_with_wsc)
@@ -46,11 +51,11 @@ def present_solver():
     supported_events = [event.upper() for event in shared.utils.supported_competitions()]
 
     chosen_events = shared.queryparams.extract_query_param_list(
-        "events", supported_events, default=("GP", "WSC"))
+        "events", supported_events, default=("GP", "WSC", "ESC"))
 
     included_events = st.multiselect(
-        "Select events to include", 
-        ["GP", "WSC"],
+        "Select events to include",
+        ["GP", "WSC", "ESC"],
         chosen_events,
         on_change=shared.queryparams.update_query_param,
         args=("events", "event_selector", True),
@@ -148,6 +153,11 @@ def present_solver():
     if "WSC" in included_events:
         st.subheader("WSC")
         subset = shared.plots.solveroriented.wsc_table_for_display(wsc, joint_solvers)
+        st.dataframe(subset)
+
+    if "ESC" in included_events:
+        st.subheader("ESC")
+        subset = shared.plots.solveroriented.esc_table_for_display(esc, joint_solvers)
         st.dataframe(subset)
 
 

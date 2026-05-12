@@ -211,6 +211,43 @@ WSC_NAME_TO_GP_ID_OVERRIDE = {
     "Kaja Sõstra": "Kaja Sostra (Nickless) - Estonia",
 }
 
+# ESC names that don't auto-match to GP identifiers due to missing diacritics.
+# These were identified by running attempted_mapping against the GP dataset.
+ESC_NAME_TO_GP_ID_OVERRIDE = {
+    "Jan Vondruska": "Jan Vondruška (WTM) - Czech Rep.",
+    "Christian Konig": "Christian König (CJK) - Germany",
+    "Gyorgy Herke": "György Herke (Gyuszi13) - Hungary",
+    "Marielle Hoexum": "Mariëlle Hoexum (malelle12) - Netherlands",
+    "Anna Szymanska": "Anna Szymańska (annasz) - Poland",
+    "Fabjan Markovinovic": "Fabjan Markovinović (fabjanm) - Croatia",
+    "Yunus Emre Buyukkale": "Yunus Emre Büyükkale (ynus) - Turkey",
+    "Filip Jablonski": "Filip Jabłoński (BigKokonat) - Poland",
+    "David Ian Lucic": "David Ian Lučić (Nickless) - Croatia",
+    "Lovro Derek": "Lovro Đerek (Nickless) - Croatia",
+    "Ema Bosnic": "Ema Bosnić (Nickless) - Croatia",
+    "Mladen Bosnic": "Mladen Bosnić (Nickless) - Croatia",
+    "Levente Szemeredi": "Levente Szemerédi (szelev) - Hungary",
+    "Linards Kruklis": "Linards Krūklis (Nickless) - Latvia",
+    "Hela Vyparinova": "Hela Vyparinová (Hell) - Slovakia",
+    "Deren Caglayan": "Deren Çağlayan (Nickless) - Turkey",
+    "Orhun Yuksel": "Orhun Yüksel (Niverio) - Turkey",
+    "Michaela Novakova": "Michaela Nováková (tobiska) - Czech Rep.",
+    "Zdenka Pacalova": "Zdenka Pácalová (zdenkap) - Czech Rep.",
+    "Jan Spalek": "Jan Špalek (Jan Špalek) - Czech Rep.",
+    "Lucie Klimesova": "Lucie Klimešová (Nickless) - Czech Rep.",
+    "Vaclav Jasansky": "Václav Jasanský (Nikro) - Czech Rep.",
+    "Michaela Bernatova": "Michaela Bernátová (Michaela Bernátová) - Slovakia",
+    "Jakub Ondrousek": "Jakub Ondroušek (Nickless) - Czech Rep.",
+    "Jan Novotny": "Jan Novotný (KrtekHonza) - Czech Rep.",
+    "Jana Novotna": "Jana Novotná (tojejedno) - Czech Rep.",
+    "Maarit Ryynanen": "Maarit Ryynänen (Nickless) - Finland",
+    "Ulla Elsila": "Ulla Elsilä (UllaE) - Finland",
+    "Pavel Jaselsky": "Pavel Jaselský (pali7) - Slovakia",
+    "Andrej Plastiak": "Andrej Plaštiak (Andrej) - Slovakia",
+    "Natalia Chanova": "Natália Chanová (natalka) - Slovakia",
+    "Zoltan Gyimesi": "Gyimesi Zoltán (Hunsudoku) - Hungary",
+}
+
 GP_PLAYOFF_RESULTS = {
     2014: {
         1: "Tiit Vunk (TiiT) - Estonia",

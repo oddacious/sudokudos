@@ -12,11 +12,12 @@ class PerformanceCollector():
     """
     LABEL_NO_RECORD = "    N/A (No record found)"
 
-    def __init__(self, solver, included_competitions, wsc_years):
+    def __init__(self, solver, included_competitions, wsc_years, esc_years=None):
         """Initiative the object and its internal results list."""
         self.solver = solver
         self.included_competitions = included_competitions
         self.wsc_years = wsc_years
+        self.esc_years = esc_years or []
         self._solver_results = competitions.CompetitionResultsCollector()
 
     def gp_performance_by_solver_year(self, subset, year, use_playoffs=True):
@@ -106,6 +107,49 @@ class PerformanceCollector():
 
         self.solver_results.add_competition(f"{year} WSC", pctile, outcome_label)
 
+        return self.solver_results
+
+    def esc_performance_by_solver_year(self, subset, year):
+        """Calculate the outcomes in the ESC for the solver in `year`."""
+        if year not in self.esc_years or "esc" not in self.included_competitions:
+            return None
+
+        solver_record = subset.filter(pl.col("user_pseudo_id") == self.solver)
+        participated = (len(solver_record) > 0 and
+                        not solver_record.get_column("ESC_total").is_null().all())
+
+        if participated and solver_record.get_column("ESC_rank").first() is not None:
+            rank_column = "ESC_rank"
+            applicable_subset = subset.filter(pl.col("ESC_rank").is_not_null())
+        else:
+            rank_column = "ESC_unofficial_rank"
+            applicable_subset = subset.filter(pl.col("ESC_unofficial_rank").is_not_null())
+
+        applicable_subset = applicable_subset.with_columns(
+            (pl.col(rank_column).rank(descending=True) / pl.len()).alias("percentile")
+        )
+
+        total = len(applicable_subset)
+
+        if not participated or total == 0:
+            pctile = 0
+            outcome_label = self.LABEL_NO_RECORD
+        else:
+            row = applicable_subset.filter(pl.col("user_pseudo_id") == self.solver)
+            if len(row) == 0:
+                pctile = 0
+                outcome_label = self.LABEL_NO_RECORD
+            else:
+                pctile = row.get_column("percentile").first()
+                rank = row.get_column(rank_column).first()
+                ordinal_pctile = utils.ordinal_suffix(math.floor(pctile * 100))
+                ordinal_rank = utils.ordinal_suffix(int(rank))
+                label_prefix = "\U00002606" if rank <= 3 else "   "
+                suffix = "" if rank_column == "ESC_rank" else "*"
+                outcome_label = (f"{label_prefix} {ordinal_pctile} "
+                                 f"pctile ({ordinal_rank} of {total}){suffix}")
+
+        self.solver_results.add_competition(f"{year} ESC", pctile, outcome_label)
         return self.solver_results
 
     @property

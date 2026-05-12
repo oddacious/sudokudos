@@ -7,6 +7,12 @@ def get_max_round(year, competition="GP"):
 
     This is maintained by hand and needs to be updated for new years.
     """
+    esc_map = {
+        2026: 7,
+    }
+    if competition == "ESC":
+        return esc_map.get(int(year))
+
     wsc_map = {
         2010: 10,
         2011: 10,
@@ -34,6 +40,13 @@ def get_max_round(year, competition="GP"):
         raise ValueError(f"Unsupported competition \"{competition}\" provided")
 
     return None
+
+
+def esc_rounds_by_year():
+    """Return the list of rounds (as integers) for each ESC year."""
+    return {
+        2026: range(1, 8),
+    }
 
 def wsc_rounds_by_year():
     """Return the list of rounds (as integers) for each WSC year.

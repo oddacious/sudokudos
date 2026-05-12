@@ -19,6 +19,10 @@ def create_flat_dataset(full_df, metric="points", competition="GP"):
         kept_columns = ["user_pseudo_id", "year", "Name", "Official", "Official_rank",
                         "Unofficial_rank", "WSC_total"]
         columns_to_drop = ["year"]
+    elif competition == "ESC":
+        kept_columns = ["user_pseudo_id", "year", "Name", "Country",
+                        "ESC_rank", "ESC_unofficial_rank", "ESC_total"]
+        columns_to_drop = ["year"]
     else:
         raise ValueError(f"Observed unexpected competition \"{competition}\"")
 
@@ -69,7 +73,8 @@ def create_flat_dataset(full_df, metric="points", competition="GP"):
                                 how="outer", suffix="_right")
 
             for column in ("Name", "Nick", "Country", "Official", "Official_rank",
-                           "Unofficial_rank", "WSC_total", "user_pseudo_id"):
+                           "Unofficial_rank", "WSC_total", "ESC_rank",
+                           "ESC_unofficial_rank", "ESC_total", "user_pseudo_id"):
                 right_col = f"{column}_right"
                 if right_col in flattened.columns:
                     flattened = flattened.with_columns(
@@ -80,7 +85,7 @@ def create_flat_dataset(full_df, metric="points", competition="GP"):
 
     return flattened
 
-def merge_unflat_datasets(gp_dataset, wsc_dataset):
+def merge_unflat_datasets(gp_dataset, wsc_dataset, extra_datasets=None):
     """Combine solver-year level datasets from the GP and WSC."""
     kept_columns = ["WSC_entry", "year", "Official", "Official_rank",
                     "Unofficial_rank", "WSC_total", "Name", "user_pseudo_id"]
@@ -119,6 +124,31 @@ def merge_unflat_datasets(gp_dataset, wsc_dataset):
 
     merged = merged.drop(["Name_right", "user_pseudo_id_right", "year_right"])
 
+    if extra_datasets:
+        for extra in extra_datasets:
+            extra = extra.clone()
+            # Compute per-round positions for any round point columns present
+            for col in extra.columns:
+                if col.endswith(" points"):
+                    pos_col = col.replace(" points", " position")
+                    extra = extra.with_columns(
+                        pl.col(col).cast(pl.Float64).alias(col)
+                    )
+                    extra = extra.with_columns(
+                        pl.col(col).rank(descending=True, method="min").over("year").alias(pos_col)
+                    )
+
+            extra_cols = [c for c in extra.columns if c not in ("Name", "year", "user_pseudo_id")]
+            extra_minimal = extra.select(["Name", "user_pseudo_id", "year"] + extra_cols)
+
+            merged = merged.join(extra_minimal, on=["user_pseudo_id", "year"], how="left",
+                                 suffix="_extra")
+            # Coalesce Name if the join produced a duplicate
+            if "Name_extra" in merged.columns:
+                merged = merged.with_columns(
+                    pl.coalesce([pl.col("Name"), pl.col("Name_extra")]).alias("Name")
+                ).drop("Name_extra")
+
     return merged
 
 def merge_flat_datasets(datasets, suffixes=("_gp", "_wsc")):
@@ -135,13 +165,26 @@ def merge_flat_datasets(datasets, suffixes=("_gp", "_wsc")):
                 rename[column] = column + suffixes[index]
         datasets[index] = datasets[index].rename(rename)
 
-    merged = datasets[0].join(datasets[1], on="user_pseudo_id", how="outer").drop("Name_right")
+    merged = datasets[0]
+    for additional in datasets[1:]:
+        merged = merged.join(additional, on="user_pseudo_id", how="full")
+        for col in ("Name", "user_pseudo_id"):
+            right_col = f"{col}_right"
+            if right_col in merged.columns:
+                merged = merged.with_columns(
+                    pl.coalesce([pl.col(col), pl.col(right_col)]).alias(col)
+                ).drop(right_col)
 
     return merged
 
-def attempted_mapping(wsc_df, gp_df):
+def attempted_mapping(wsc_df, gp_df, manual_override=None):
     """Update a WSC dataset with identifiers from a GP dataset."""
-    gp_index = gp_df.select(["Name", "Country", "Nick", "user_pseudo_id"]).unique()
+    # Deduplicate by Name, preferring entries that have a nick over nickless ones.
+    # Multiple rows with the same Name can otherwise fan out join results.
+    gp_index = (gp_df.select(["Name", "Country", "Nick", "user_pseudo_id"])
+                .unique()
+                .sort("Nick", nulls_last=True)
+                .unique(subset=["Name"], keep="first"))
     gp_index = gp_index.with_columns(pl.col("Name").str.to_lowercase().alias("name_lc"))
 
     wsc_mapped = wsc_df.with_columns(
@@ -158,7 +201,11 @@ def attempted_mapping(wsc_df, gp_df):
         .alias("flipped_name")
     )
 
-    joined = wsc_mapped.join(gp_index, on="Name", how="left").drop("name_lc_right")
+    # Drop Country_right and Nick_right from the first join immediately — they are
+    # unused and would conflict when the second join also produces them.
+    _first_join = wsc_mapped.join(gp_index, on="Name", how="left")
+    _drop = ["name_lc_right"] + [c for c in ["Country_right", "Nick_right"] if c in _first_join.columns]
+    joined = _first_join.drop(_drop)
 
     joined_flipped = (
         joined
@@ -181,7 +228,9 @@ def attempted_mapping(wsc_df, gp_df):
         .alias("matched_id")
     )
 
-    manual_map = shared.competitions.WSC_NAME_TO_GP_ID_OVERRIDE
+    if manual_override is None:
+        manual_override = shared.competitions.WSC_NAME_TO_GP_ID_OVERRIDE
+    manual_map = manual_override
 
     expr = None
     for key, value in manual_map.items():
@@ -190,7 +239,12 @@ def attempted_mapping(wsc_df, gp_df):
         else:
             expr = expr.when(pl.col("Name") == key).then(pl.lit(value))
         expr = expr.when(pl.col("flipped_name") == key).then(pl.lit(value))
-    expr = expr.otherwise(pl.col("matched_id")).alias("matched_id")
+
+    if expr is not None:
+        expr = expr.otherwise(pl.col("matched_id")).alias("matched_id")
+    else:
+        expr = pl.col("matched_id")
+
     wsc_and_gp = (
         wsc_and_gp
             .with_columns(expr)
@@ -209,9 +263,15 @@ def ids_by_total_points(combined):
     """Return identifiers ordered by total points across all competitions."""
     df = combined.filter(pl.col("user_pseudo_id").is_not_null())
 
+    esc_total = (
+        pl.col("ESC_total").cast(pl.Float32).fill_null(0)
+        if "ESC_total" in df.columns
+        else pl.lit(0).cast(pl.Float32)
+    )
     df = df.with_columns(
         (pl.col("Points").cast(pl.Float32).fill_null(0) +
-        pl.col("WSC_total").cast(pl.Float32).fill_null(0)).alias("total points"),
+        pl.col("WSC_total").cast(pl.Float32).fill_null(0) +
+        esc_total).alias("total points"),
     )
 
     aggregate = (
