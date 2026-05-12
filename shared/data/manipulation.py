@@ -141,13 +141,16 @@ def merge_unflat_datasets(gp_dataset, wsc_dataset, extra_datasets=None):
             extra_cols = [c for c in extra.columns if c not in ("Name", "year", "user_pseudo_id")]
             extra_minimal = extra.select(["Name", "user_pseudo_id", "year"] + extra_cols)
 
-            merged = merged.join(extra_minimal, on=["user_pseudo_id", "year"], how="left",
+            # Full join so solvers with only extra-competition data (no GP/WSC that year)
+            # still appear in the combined dataset.
+            merged = merged.join(extra_minimal, on=["user_pseudo_id", "year"], how="full",
                                  suffix="_extra")
-            # Coalesce Name if the join produced a duplicate
-            if "Name_extra" in merged.columns:
-                merged = merged.with_columns(
-                    pl.coalesce([pl.col("Name"), pl.col("Name_extra")]).alias("Name")
-                ).drop("Name_extra")
+            for col in ("Name", "user_pseudo_id", "year"):
+                right_col = f"{col}_extra"
+                if right_col in merged.columns:
+                    merged = merged.with_columns(
+                        pl.coalesce([pl.col(col), pl.col(right_col)]).alias(col)
+                    ).drop(right_col)
 
     return merged
 

@@ -319,5 +319,7 @@ def create_point_trend_chart(full_df, selected_solvers, year=2024, competition="
         ax.set_title(f"Accumulated points (top 6) in the Sudoku Grand Prix ({year})")
     elif competition == "WSC":
         ax.set_title(f"Accumulated points in the World Sudoku Championship ({year})")
+    elif competition == "ESC":
+        ax.set_title(f"Accumulated points in the European Sudoku Championship ({year})")
 
     return fig

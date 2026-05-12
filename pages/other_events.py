@@ -8,6 +8,7 @@ import shared.data
 import shared.data.loaders.cached
 import shared.plots.eventoriented
 import shared.presentation
+import shared.queryparams
 
 # Maps display name → (competition_key, year)
 AVAILABLE_EVENTS = {
@@ -53,6 +54,37 @@ def _present_esc(esc, year):
         fig = shared.plots.eventoriented.create_esc_leaderboard_chart(
             year_df, year=year, top_n=selected_top_n)
         st.pyplot(fig, use_container_width=True)
+
+    st.subheader("Solver tracker")
+
+    available = list(
+        year_df
+            .sort("ESC_unofficial_rank")
+            .get_column("user_pseudo_id")
+            .unique(maintain_order=True))
+
+    chosen_solvers = shared.queryparams.extract_query_param_list(
+        "solvers", available, default=available[:3])
+
+    selected_solvers = st.multiselect(
+        "Select solvers to compare",
+        available,
+        default=chosen_solvers,
+        on_change=shared.queryparams.update_query_param,
+        args=("solvers", "solvers_selector", True),
+        key="solvers_selector")
+
+    cols = st.columns(2)
+    with cols[0]:
+        fig_violin = shared.plots.eventoriented.create_violin_chart(
+            esc, selected_solvers, year_subset=[year], competition="ESC")
+        st.pyplot(fig_violin, use_container_width=True)
+
+    with cols[1]:
+        if len(selected_solvers) >= 1:
+            fig_trend = shared.plots.eventoriented.create_point_trend_chart(
+                esc, selected_solvers, year=year, competition="ESC")
+            st.pyplot(fig_trend, use_container_width=True)
 
     st.subheader("Full results")
 

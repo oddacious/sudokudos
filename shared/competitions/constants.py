@@ -209,6 +209,7 @@ WSC_NAME_TO_GP_ID_OVERRIDE = {
     "Iliana - Eleftheria Gounalaki": "Iliana Gounalaki (gounil) - Greece",
     "Zdeňka Pácalová": "Zdenka Pácalová (zdenkap) - Czech Rep.",
     "Kaja Sõstra": "Kaja Sostra (Nickless) - Estonia",
+    "Sanda Tomas": "Sanda Reic Tomas",
 }
 
 # ESC names that don't auto-match to GP identifiers due to missing diacritics.
@@ -246,6 +247,12 @@ ESC_NAME_TO_GP_ID_OVERRIDE = {
     "Andrej Plastiak": "Andrej Plaštiak (Andrej) - Slovakia",
     "Natalia Chanova": "Natália Chanová (natalka) - Slovakia",
     "Zoltan Gyimesi": "Gyimesi Zoltán (Hunsudoku) - Hungary",
+    "Ana Markoljevic": "Ana Markoljević",
+    "Iva Vrduka": "Iva Vrđuka",
+    "Damir Vratkovic": "Damir Vratković",
+    "Radoslav Bochev": "Rado Bo4ev (tres4o) - Bulgaria",
+    "Peter Szentkuti": "Péter Szentkúti (Nickless) - Hungary",
+    "Matus Pokorny": "Matúš Pokorný (Poky) - Slovakia",
 }
 
 GP_PLAYOFF_RESULTS = {
