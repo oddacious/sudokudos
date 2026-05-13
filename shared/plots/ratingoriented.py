@@ -22,6 +22,13 @@ def _build_solver_series(timeseries_df, selected_solvers):
     return result
 
 
+def _extend_series_to_latest(xs, ys, max_comp_idx):
+    """Extend xs/ys with a flat segment to max_comp_idx if the series ends before it."""
+    if xs and xs[-1] < max_comp_idx:
+        return xs + [max_comp_idx], ys + [ys[-1]]
+    return xs, ys
+
+
 @st.cache_data(hash_funcs={pl.DataFrame: lambda df: df.hash_rows().sum()})
 def _precompute_active_ratings(full_timeseries_df):
     """For each comp_idx in the dataset, return the list of active solver ratings.
@@ -137,12 +144,14 @@ def create_rating_trend_chart(timeseries_df, selected_solvers, year_min=None, ye
     xticks, xlabels = _year_ticks(timeseries_df)
     solver_data = _build_solver_series(timeseries_df, selected_solvers)
 
+    max_comp_idx = timeseries_df["comp_idx"].max()
     fig, ax = plt.subplots(figsize=(8, 5))
 
     for i, (solver, df) in enumerate(solver_data.items()):
         color = matplotlib.colors.to_hex(colors[i % len(colors)])
         xs = df["comp_idx"].to_list()
         ys = df["rating"].to_list()
+        xs, ys = _extend_series_to_latest(xs, ys, max_comp_idx)
         ax.plot(xs, ys, marker="o", markerfacecolor="white", markersize=4,
                 color=color, linewidth=1, label=solver.split(" - ")[0])
         _label_endpoints(ax, xs, ys, color)
@@ -175,6 +184,24 @@ def create_rank_trend_chart(timeseries_df, selected_solvers, year_min=None, year
     }
     rank_map = _compute_rating_ranks(timeseries_df, selected_solvers, all_target_idxs)
 
+    # For each solver, fill in rank at every competition they skipped (after their
+    # first entry) using their last known rating. Rank is recomputed against active
+    # solvers at that point, so others moving past them is reflected correctly.
+    all_display_comp_idxs = sorted(display_df["comp_idx"].unique().to_list())
+    active_ratings_by_comp_idx = _precompute_active_ratings(timeseries_df)
+    for solver, df in solver_display.items():
+        solver_ratings_map = dict(zip(df["comp_idx"].to_list(), df["rating"].to_list()))
+        first_comp_idx = df["comp_idx"].min()
+        last_rating = None
+        for comp_idx in all_display_comp_idxs:
+            if comp_idx < first_comp_idx:
+                continue
+            if comp_idx in solver_ratings_map:
+                last_rating = solver_ratings_map[comp_idx]
+            elif last_rating is not None:
+                active = active_ratings_by_comp_idx.get(comp_idx, [])
+                rank_map[(solver, comp_idx)] = sum(1 for r in active if r > last_rating) + 1
+
     all_ranks = list(rank_map.values())
     max_rank = max(all_ranks) if all_ranks else 1000
 
@@ -182,9 +209,10 @@ def create_rank_trend_chart(timeseries_df, selected_solvers, year_min=None, year
 
     for i, (solver, df) in enumerate(solver_display.items()):
         color = matplotlib.colors.to_hex(colors[i % len(colors)])
-        xs = df["comp_idx"].to_list()
-        ys = [rank_map[(solver, x)] for x in xs if (solver, x) in rank_map]
-        xs = [x for x in xs if (solver, x) in rank_map]
+        first_comp_idx = df["comp_idx"].min()
+        candidate_xs = [x for x in all_display_comp_idxs if x >= first_comp_idx]
+        ys = [rank_map[(solver, x)] for x in candidate_xs if (solver, x) in rank_map]
+        xs = [x for x in candidate_xs if (solver, x) in rank_map]
         if not xs:
             continue
         ax.plot(xs, ys, marker="o", markerfacecolor="white", markersize=4,
