@@ -37,6 +37,7 @@ def present_about():
             connected together but which represent different people with similar names) and
             many false negatives (results where I either didn't notice the name equivalence or
             I was not confident in connecting them together).
+        * Inexact matching between ESC and WSC, although this looks fairly complete.
         * Imprecise transcription. Data has come through spreadsheets, websites, and PDF files,
             requiring various parsing methods. In particular, OCR on PDF files was imprecise at
             reading in characters in names.
@@ -49,7 +50,7 @@ def present_about():
             there may be ways that individual WSC's chose to represent outcomes that my
             normalization discards.
         #### Scope 
-        * Only includes WSC and GP for now.
+        * Only includes WSC, GP, and ESC for now.
         * No coverage of team results.
         * No coverage of country results.
             * I postponed including countries because of their varying representations. One
@@ -71,6 +72,7 @@ def present_about():
 
         * *yyao* for sharing full WSC 2022 results.
         * *limt* for noticing missing data for the current GP year for solvers without nicks.
+        * *TheScrasse* for suggesting adding the European Sudoku Championships.
 
         For the ratings system I am indebted to many precursors, notably:
         * The WPF for testing a pilot official system in 2023 and planning future iterations.

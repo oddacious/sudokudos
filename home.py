@@ -16,6 +16,8 @@ def present_homepage():
     individual solvers.
 
     **NEW** — Solver rating system over on the [Ratings](ratings) page.
+
+    **NEW** — European Sudoku Championship added with an [Other Events](other_events) page.
         """)
 
     st.subheader("Competitions")

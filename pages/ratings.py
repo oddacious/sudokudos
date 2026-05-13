@@ -280,18 +280,18 @@ def present_ratings():
         #### Caveats
         * The algorithm is in **beta** and is subject to change
         * These ratings are **unofficial**, and separate from attempts by the WPF to define an official rating system
-        
+
         #### Rating policies
         * New solvers need 3 rounds before appearing in rankings
-        * Solvers drop from the leaderboard after 1 full calendar year of inactivity       
-        
+        * Solvers drop from the leaderboard after 1 full calendar year of inactivity
+
         #### Rating philosophy
         These ratings are about *strength*, as opposed to a point system to *reward* event
             performance or participation behavior. A good algorithm is one that has predictive
             power on upcoming performance, such that if solver A is likely to perform better at
             their next event than solver B, then solver A should have a better rating. This gives
             us an empirical and testable criteria for ratings.
-        
+
         However, I do impose a few constraints on purely empirical ratings:
         * Ratings never use forward-looking information
         * Ratings only depend on individual event performance and not on other predictive measures
@@ -314,6 +314,75 @@ def present_ratings():
         I evaluated a handful of simple and complex algorithms. This one had strong predictive
             performance while being relatively simple and returning a rating in units of
             difficulty-adjusted points.
+    """)
+
+    with st.expander("Much more detail"):
+        st.write("""
+        1. How are points difficulty adjusted?
+
+            Empirically, based on how many points the solvers had compared to previous rounds. In a simplified example,
+            suppose the same solvers participate in every round, they all always score 100, and then in a new round they all
+            scored 200. That new round has a difficulty rating of 2, meaning it was twice as easy (or half as difficult) as
+            usual.
+
+            That example hides all the complexity. A few issues:
+            * The solving population varies over time
+            * Not all solvers have the same duration history
+            * While the GP scale is relatively steady, the WSC scale is not and has some rounds with more bimodal outcomes
+
+
+            So with a bit more detail:
+            1. Start with the population of solvers from the current round where we want to calculate a difficulty rating
+            2. Use all prior GP rounds as "anchors" for the difficulty calculation (and don't use any WSC rounds)
+            3. Discard any solvers who participated in 0 of those anchor rounds
+            4. Calculate the average score in the current round for those solvers with anchor rounds
+            5. Calculate the average score of all those participants in all their anchor rounds (note: This intentionally
+             puts more weight on solvers with more rounds)
+            6. Divide those two to get the difficulty adjustment
+            7. Floor the difficulty adjustment at 0.1 (to address some extreme rounds that otherwise had high influence)
+
+        2. Why a prior of 3 rounds? This might be ok in the GP but feels inadequate for the WSC. Why not 5 or 10 for example?
+
+            It does feel inadequate for the WSC, but I chose a single prior for simplicity. Too long of a prior led to missing
+             out on predicting performance, while too short led to poor performance from overreacting to variable (positive or
+             negative) results. In other words, three rounds was a threshold that gave good signal and balanced those two
+             trade-offs. I'm a bit fuzzy on this, but the performance-optimizing point might have been even shorter and I extended
+             it to 3 to prevent people from taking the top rating position too quickly.
+
+        3. Why would you decay rounds at the WSC that happen literally the same morning?
+             Is that independent to the order of the rounds?
+
+            The WSC poses a conundrum. How should I represent the round progression, both algorithmically and visually?
+             If I treat it as a single event with no ordering to the rounds, then I'm not sure how to present the
+             outcomes of different results along the timeseries views that naturally fit for the GP. That could also
+             mean that rating only updates at once at the end of the WSC, which does make sense but again I'm not
+             sure how to visually represent how the inevitably large rating changes were due to a more important competition
+             (compared to any single GP round) rather than a strong or weak performance. Instead I chose an approach that is
+             simpler across the board: a round is a round, they're all chronological and equal.
+
+        4. Similarly why decay using 0.9, rather than any other value?
+
+            An empirical choice. I evaluated other decay rates and that gave me the best performance on my metrics. Speaking
+             of which:
+
+        5. How exactly have you evaluated the performance?
+
+            Quantitatively: My primary metric was pairwise ranking accuracy on the next (out-of-time) evaluation.
+             In other words: a set of ratings is strong if the relative order between any two solvers corresponds to
+             their relative order in the next event. With some caveats mentioned earlier, like not using any non-score
+             information even if it adds to predictive accuracy. I considered metrics that optimized for different parts
+             of the distribution, such as only for the strongest N solvers, but ultimately decided to look across
+             the whole distribution equally.
+            Qualitatively: Looking out for bad cases like new solvers jumping in the ranks quickly and unsustainably,
+             high variability in scores for established and strong solvers round-by-round, rankings not updating
+             enough across (winning) multiple events, people becoming top rated without winning a GP or WSC, etc.
+
+        6. What alternatives were tested?
+
+            - Different decay rates, difficulty adjustments, and other parameters
+            - Percentile-based methods instead of score-based
+            - Glicko-1
+            - A regression model using different aggregations of prior scores
     """)
 
 
