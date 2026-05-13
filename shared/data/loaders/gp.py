@@ -26,6 +26,7 @@ def manual_adjustements(df):
         "pitchaya apichetyota": "Pitchaya Apichetyota",
         "MEYAPIN Yannick": "Meyapin Yannick",
         "KUAN YU LIN": "Kuan Yu Lin",
+        "Sinchai Rungsangrattanakul": "Sinchai Jaturangkhajit",
     }
 
     nick_to_nick = {

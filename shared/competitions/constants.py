@@ -210,6 +210,8 @@ WSC_NAME_TO_GP_ID_OVERRIDE = {
     "Zdeňka Pácalová": "Zdenka Pácalová (zdenkap) - Czech Rep.",
     "Kaja Sõstra": "Kaja Sostra (Nickless) - Estonia",
     "Sanda Tomas": "Sanda Reic Tomas",
+    "Jan Vondruska": "Jan Vondruška (WTM) - Czech Rep.",
+    "Sinchai Rungsangrattanakul": "Sinchai Jaturangkhajit (sinchai4547) - Thailand",
 }
 
 # ESC names that don't auto-match to GP identifiers due to missing diacritics.
@@ -296,7 +298,7 @@ GP_PLAYOFF_RESULTS = {
         1: "Seungjae Kwak (Kwaka) - Korea, South",
         2: "Tantan Dai (SERENE) - China",
         3: "Tiit Vunk (TiiT) - Estonia",
-        4: "Sinchai Rungsangrattanakul (sinchai4547) - Thailand",
+        4: "Sinchai Jaturangkhajit (sinchai4547) - Thailand",
         5: "Hideaki Jo (Nickless) - Japan",
         6: "Kota Morinishi (Kota) - Japan",
         7: "Takuya Sugimoto (sugitakukun) - Japan",
@@ -313,7 +315,7 @@ GP_PLAYOFF_RESULTS = {
         6: "Michael Ley (misko) - Germany",
         7: "Jan Mrozowski (janoslaw) - Poland",
         8: "Takuya Sugimoto (sugitakukun) - Japan",
-        9: "Sinchai Rungsangrattanakul (sinchai4547) - Thailand",
+        9: "Sinchai Jaturangkhajit (sinchai4547) - Thailand",
         10: "Cheran Sun (青清晴情) - China",
     },
     2019: {
@@ -352,7 +354,7 @@ GP_PLAYOFF_RESULTS = {
         9: "Le Duo Yang (Sky Yang) - China",
         10: "Kota Morinishi (Kota) - Japan",
         11: "David Jones (WMathie) - Canada",
-        12: "Sinchai Rungsangrattanakul (sinchai4547) - Thailand",
+        12: "Sinchai Jaturangkhajit (sinchai4547) - Thailand",
         13: "Takuya Sugimoto (sugitakukun) - Japan",
         14: "Martin Merker (MaM) - Germany",
         15: "Kishore Sridharan (kishy72) - India",
