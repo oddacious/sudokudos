@@ -113,7 +113,7 @@ def manual_adjustements(df):
         "Ben Stoneman": "bxnjyyy",
         "Kunal Verma": "BeautyOfConfigurations",
         "Sara Martin": "SaraLodo",
-
+        "Juha Korvenaho": "jumak",
     }
 
     name_to_country = {
