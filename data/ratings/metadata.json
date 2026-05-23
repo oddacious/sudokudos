@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-17T17:32:55.160035Z",
+  "generated_at": "2026-05-23T01:26:20.298171Z",
   "method": "prior",
-  "data_through": "2026 ESC R7",
-  "total_solvers": 2731
+  "data_through": "2026 GP R5",
+  "total_solvers": 2754
 }

@@ -27,6 +27,7 @@ def manual_adjustements(df):
         "MEYAPIN Yannick": "Meyapin Yannick",
         "KUAN YU LIN": "Kuan Yu Lin",
         "Sinchai Rungsangrattanakul": "Sinchai Jaturangkhajit",
+        "Seonghwa Hong": "SeongHwa Hong",
     }
 
     nick_to_nick = {
@@ -114,6 +115,7 @@ def manual_adjustements(df):
         "Kunal Verma": "BeautyOfConfigurations",
         "Sara Martin": "SaraLodo",
         "Juha Korvenaho": "jumak",
+        "SeongHwa Hong": "Pfaff",
     }
 
     name_to_country = {
@@ -241,10 +243,12 @@ def merge_dfs_by_year(all_dataframes):
         else:
             # Sort by year
             dfs = [value for _, value in sorted(mapping.items())]
+            # Apply name/nick normalisations before joining so that solvers who appear
+            # without their nickname in some rounds (e.g. empty Nick column) still merge
+            # correctly with rounds where the nickname is present.
+            dfs = [manual_adjustements(remove_false_headers(df)) for df in dfs]
             merged_df = dfs[0]
-            merged_df = remove_false_headers(merged_df)
             for df in dfs[1:]:
-                df = remove_false_headers(df)
                 relevant_columns = [
                     col for col in df.columns if col not in merged_df.columns or col in join_cols]
                 merged_df = merged_df.join(
