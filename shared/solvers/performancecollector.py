@@ -32,9 +32,10 @@ class PerformanceCollector():
                 subset = subset.with_columns(pl.col("Rank").rank().alias("rank"))
             else:
                 subset = subset.with_columns(
-                    (pl.col("Points").rank() / pl.count()).alias("percentile")
+                    (pl.col("PointsTop6").rank() / pl.count()).alias("percentile")
                 )
-                subset = subset.with_columns(pl.col("Points").rank(ascending=False).alias("rank"))
+                subset = subset.with_columns(
+                    pl.col("PointsTop6").rank(ascending=False).alias("rank"))
             total = sum(subset.get_column("Total GPs").is_not_null())
 
             solver_rows = subset.filter(pl.col("user_pseudo_id") == self.solver)

@@ -125,7 +125,10 @@ def create_rank_chart(
 
     years = shared.utils.applicable_years(full_df, [solver])
 
-    df = full_df.with_columns(pl.col("Points").cast(pl.Float32).alias("Points"))
+    df = full_df.with_columns(
+        pl.col("Points").cast(pl.Float32).alias("Points"),
+        pl.col("PointsTop6").cast(pl.Float32).alias("PointsTop6"),
+    )
 
     wsc_years = (sorted(full_df.filter((pl.col("WSC_entry") == 1) & pl.col("year").is_not_null())
                         .get_column("year").unique().to_list()))
@@ -157,7 +160,7 @@ def create_rank_chart(
 def gp_table_for_display(results, joint_solvers):
     """Construct a visually-appealing table that includes GP results for selected solvers."""
     cols = ["year", "Name", "Nick", "Country", "Rank", "Rank_before_playoffs", "Played GPs",
-            "Points"]
+            "Points", "PointsTop6"]
     subset = shared.solvers.utils.dataframe_by_solvers(results, joint_solvers)
     subset = subset.with_columns(
         pl.col("year").cast(pl.Utf8)

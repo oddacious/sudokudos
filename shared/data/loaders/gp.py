@@ -201,6 +201,7 @@ def apply_types(gp):
         'GP_t8 points': pl.Float64,
         'GP_t8 rank. points': pl.Float64,
         'Points': pl.Float64,
+        'PointsTop6': pl.Float64,
 
         # Other types (default as-is or left unspecified)
         '#': pl.String,  # Identifier, keep as object
@@ -240,6 +241,8 @@ def merge_dfs_by_year(all_dataframes):
     for mapping in all_dataframes.values():
         if len(mapping) == 1:
             value = next(iter(mapping.values()))
+            # Single-file years already have their official best-6 total in "Points".
+            value = value.with_columns(pl.col("Points").alias("PointsTop6"))
             dataframes.append(value)
         else:
             # Sort by year
@@ -265,9 +268,19 @@ def merge_dfs_by_year(all_dataframes):
             points_cols = [col for col in merged_df.columns if "rank. points" in col]
 
             point_inputs = [pl.col(col).cast(pl.Float64).fill_null(0) for col in points_cols]
+            # GP solvers are officially ranked by their best 6 rounds, so "Points" (the raw
+            # total across all played rounds) and "PointsTop6" (the ranking value) diverge
+            # once more than 6 rounds have been played in a year.
+            best_k = min(len(points_cols), 6)
             merged_df = merged_df.with_columns(
                 # Casting back to string because the single-year dataframes will have strings.
-                pl.sum_horizontal(point_inputs).cast(pl.String).alias("Points")
+                pl.sum_horizontal(point_inputs).cast(pl.String).alias("Points"),
+                pl.concat_list(point_inputs)
+                    .list.sort(descending=True)
+                    .list.head(best_k)
+                    .list.sum()
+                    .cast(pl.String)
+                    .alias("PointsTop6"),
             )
 
             dataframes.append(merged_df)
@@ -350,6 +363,10 @@ def load_gp(csv_directory="data/processed/gp", verbose=False, output_csv=None):
     # An in-progress year may be represented by round-specific data files
     dataframes = merge_dfs_by_year(all_dataframes)
 
+    # "PointsTop6" is computed during the merge above and isn't present in any raw CSV,
+    # so it must be registered explicitly for cross-year column alignment below.
+    all_columns["PointsTop6"] = pl.Float64
+
     aligned_dfs = []
     for df in dataframes:
         for column, data_type in all_columns.items():
@@ -393,11 +410,12 @@ def load_gp(csv_directory="data/processed/gp", verbose=False, output_csv=None):
     )
 
     combined_df = combined_df.with_columns(
-        pl.col("Points").cast(pl.Float64).alias("Points")
+        pl.col("Points").cast(pl.Float64).alias("Points"),
+        pl.col("PointsTop6").cast(pl.Float64).alias("PointsTop6"),
     )
 
     combined_df = combined_df.with_columns(
-            pl.col("Points")
+            pl.col("PointsTop6")
             .rank(descending=True)
             .over("year")
             .alias("Rank_before_playoffs")
@@ -415,7 +433,7 @@ def load_gp(csv_directory="data/processed/gp", verbose=False, output_csv=None):
         flat_playoff_results, on=["year", "user_pseudo_id"], how="left")
 
     with_playoff_rank = with_playoff_rank.sort(
-        by=["year", "Playoff_rank", "Points"], descending=[True, True, False])
+        by=["year", "Playoff_rank", "PointsTop6"], descending=[True, True, False])
 
     with_playoff_rank = with_playoff_rank.with_columns(
         (pl.col("user_pseudo_id").cum_count(reverse=True).over("year")).alias("Rank")

@@ -88,30 +88,15 @@ def create_leaderboard_chart(full_df, year=2024, top_n=10,
     """This creates a horizontal bar chart of the top scores for a GP year."""
     year_df = full_df.filter(pl.col("year") == year)
     year_df = year_df.with_columns(
-        pl.col("Points").cast(pl.Float32).alias("Points")
+        pl.col("Points").cast(pl.Float32).alias("Points"),
+        pl.col("PointsTop6").cast(pl.Float32).alias("PointsTop6"),
     )
 
-    subset = year_df.sort("Points", descending=True).head(top_n)
-
-    num_rounds = shared.competitions.get_max_round(year)
-
-    round_point_columns = []
-    for gp_round in range(1, num_rounds + 1):
-        col_name = f"GP_t{gp_round} points"
-        round_point_columns.append(col_name)
-        subset = subset.with_columns(
-            pl.col(col_name).cast(pl.Float32).alias(col_name)
-        )
-
-    # "Points" is counted points
-    # Can sum others for total
-    subset = subset.with_columns(
-        all_points=pl.sum_horizontal(round_point_columns)
-    )
+    subset = year_df.sort("PointsTop6", descending=True).head(top_n)
 
     labels = subset.get_column("Name")
-    points = subset.get_column("Points")
-    extra_points = subset.get_column("all_points") - subset.get_column("Points")
+    points = subset.get_column("PointsTop6")
+    extra_points = subset.get_column("Points") - subset.get_column("PointsTop6")
 
     fig, ax = plt.subplots(figsize=(6.4, 10))
     ax.barh(labels, points, label='Top 6 rounds', color=colors[0])

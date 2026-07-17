@@ -168,3 +168,36 @@ class TestMergeDfsByYear:
 
         # merge_dfs_by_year casts Points back to String to match single-round files.
         assert merged[0]["Points"].to_list() == ["1700.0"]
+
+    def test_points_top6_matches_points_when_six_or_fewer_rounds(self):
+        """With <=6 rounds played, PointsTop6 should equal the full Points total."""
+        r1 = _round_df([("Alice Smith", "USA", "alice", 800)], round_num=1)
+        r2 = _round_df([("Alice Smith", "USA", "alice", 900)], round_num=2)
+
+        all_dataframes = {2026: {1: r1, 2: r2}}
+        merged = merge_dfs_by_year(all_dataframes)
+
+        assert merged[0]["PointsTop6"].to_list() == ["1700.0"]
+
+    def test_points_top6_drops_worst_round_beyond_six(self):
+        """With 7 rounds played, Points sums all 7 but PointsTop6 drops the worst one."""
+        round_scores = [800, 900, 700, 600, 500, 400, 100]
+        rounds = {
+            round_num: _round_df(
+                [("Alice Smith", "USA", "alice", score)], round_num=round_num)
+            for round_num, score in enumerate(round_scores, start=1)
+        }
+
+        all_dataframes = {2026: rounds}
+        merged = merge_dfs_by_year(all_dataframes)
+
+        assert merged[0]["Points"].to_list() == [str(float(sum(round_scores)))]
+        assert merged[0]["PointsTop6"].to_list() == [str(float(sum(round_scores) - 100))]
+
+    def test_points_top6_passthrough_for_single_file_year(self):
+        """Single-file (aggregate-format) years should get PointsTop6 == Points."""
+        r1 = _round_df([("Alice Smith", "USA", "alice", 800)], round_num=1)
+        all_dataframes = {2025: {"[All]": r1}}
+        merged = merge_dfs_by_year(all_dataframes)
+
+        assert merged[0]["PointsTop6"].to_list() == merged[0]["Points"].to_list()
