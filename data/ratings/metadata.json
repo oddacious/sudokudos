@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-23T01:20:06.355859Z",
+  "generated_at": "2026-07-17T01:53:12.517581Z",
   "method": "prior",
-  "data_through": "2026 GP R6",
-  "total_solvers": 2771
+  "data_through": "2026 GP R7",
+  "total_solvers": 2784
 }
