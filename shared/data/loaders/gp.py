@@ -29,6 +29,8 @@ def manual_adjustements(df):
         "Sinchai Rungsangrattanakul": "Sinchai Jaturangkhajit",
         "Seonghwa Hong": "SeongHwa Hong",
         "Masereka Eric Sikahwa Masereka": "Masereka Eric Sikahwa",
+        "kumaresan Rajarathinam": "kumaresan R Rajarathinam",
+        "Danielle Rosebrook": "Dani Cooper",
     }
 
     nick_to_nick = {
@@ -117,6 +119,9 @@ def manual_adjustements(df):
         "Sara Martin": "SaraLodo",
         "Juha Korvenaho": "jumak",
         "SeongHwa Hong": "Pfaff",
+        "Zanda Ro": "DeeDee",
+        "Calum Mailer": "Calump",
+        "Tatiana Padysakova": "tanatko",
     }
 
     name_to_country = {
@@ -139,6 +144,7 @@ def manual_adjustements(df):
         "Zalak Ghetia": "USA",
         "Sravani Sripada": "Canada",
         "CJ Tan": "Philippines",
+        "Tatiana Padysakova": "Slovakia",
     }
 
     expr_nick = None
