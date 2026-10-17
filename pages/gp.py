@@ -37,6 +37,11 @@ def present_gp():
             Solvers are ranked by the sum of their top 6 rounds, and typically the top finishers
             are invited to compete in an in-person playoff for final ranking held during the World
             Sudoku Championship (WSC).
+
+            The playoff is normally a top-10 field, backfilled down the written-round standings
+            until 10 competitors are found (so skipped invitations can pull from well outside the
+            top 10). When a solver who ranked in the written-round top 10 doesn't appear in the
+            playoff results, we assume they simply didn't attend.
         """)
 
     selected_year = st.selectbox(
@@ -113,6 +118,15 @@ def present_gp():
 
     criteria = pl.col("year") == selected_year
     subset = combined_df.filter(criteria).drop(["year", "source_file"]).sort("Rank")
+
+    if shared.competitions.known_playoff_results(selected_year):
+        subset = subset.with_columns(
+            pl.when(
+                (pl.col("Rank_before_playoffs") <= 10) & pl.col("Playoff_rank").is_null()
+            ).then(pl.lit("Qualified, did not play"))
+            .otherwise(pl.lit(""))
+            .alias("Playoff note")
+        )
 
     subset_selected = subset.filter(pl.col("user_pseudo_id").is_in(selected_solvers))
 

@@ -4,31 +4,31 @@
 3.,Suzhe QIU,China,ysbg123,1006.7,1006.7,1006.7,3.,2026,5
 4.,Tiit Vunk,Estonia,TiiT,994.5,994.5,994.5,4.,2026,5
 5.,Hu Yuxuan Hu,China,huyuxuan,989,989,989,5.,2026,5
-6.,Savita Shienhmar,Canada,Savi,964.3,964.3,964.3,6.,2026,5
-7.,James Peter Peter,India,MavericksJD,921.2,921.2,921.2,7.,2026,5
-8.,Kota Morinishi,Japan,Kota,900,900,900,8.,2026,5
-9.,Rintaro Matsumoto,Japan,,895.8,895.8,895.8,9.,2026,5
-10.,Ken Endo,Japan,EKBM,891.7,891.7,891.7,10.,2026,5
-11.,黄明睿 Huang,China,MingruiHuang,862.5,862.5,862.5,11.,2026,5
-12.,梓睿 王,China,Wang Zirui,844.2,844.2,844.2,12.,2026,5
-13.,Jakub Ondroušek,Czech Rep.,,843,843,843,13.,2026,5
-14.,Lucy Epstein,USA,,842.5,842.5,842.5,14.,2026,5
-15.,Đức Chiến Nguyễn,Vietnam,NDChien2000,836.3,836.3,836.3,15.,2026,5
-16.,Zbigniew Zarzycki,Poland,antyp,829.6,829.6,829.6,16.,2026,5
-17.,Sinchai Jaturangkhajit,Thailand,sinchai4547,811.7,811.7,811.7,17.,2026,5
-18.,Khả Lê Minh,Vietnam,Lê Minh Khả,798.7,798.7,798.7,18.,2026,5
-19.,Jordyn Hyde,USA,,782.5,782.5,782.5,19.,2026,5
-20.,Candice Solidarios,Philippines,,779,779,779,20.,2026,5
+6.,James Peter Peter,India,MavericksJD,921.2,921.2,921.2,6.,2026,5
+7.,Kota Morinishi,Japan,Kota,900,900,900,7.,2026,5
+8.,Rintaro Matsumoto,Japan,,895.8,895.8,895.8,8.,2026,5
+9.,Ken Endo,Japan,EKBM,891.7,891.7,891.7,9.,2026,5
+10.,黄明睿 Huang,China,MingruiHuang,862.5,862.5,862.5,10.,2026,5
+11.,梓睿 王,China,Wang Zirui,844.2,844.2,844.2,11.,2026,5
+12.,Jakub Ondroušek,Czech Rep.,,843,843,843,12.,2026,5
+13.,Lucy Epstein,USA,,842.5,842.5,842.5,13.,2026,5
+14.,Đức Chiến Nguyễn,Vietnam,NDChien2000,836.3,836.3,836.3,14.,2026,5
+15.,Sinchai Jaturangkhajit,Thailand,sinchai4547,811.7,811.7,811.7,15.,2026,5
+16.,Khả Lê Minh,Vietnam,Lê Minh Khả,798.7,798.7,798.7,16.,2026,5
+17.,Jordyn Hyde,USA,,782.5,782.5,782.5,17.,2026,5
+18.,Candice Solidarios,Philippines,,779,779,779,18.,2026,5
+19.,Salih Alan,Turkey,bskbri,742,742,742,19.,2026,5
+20.,Can Erturan,Turkey,Cane_Puzzles,724,724,724,20.,2026,5
 #,Name,Country,Nick,Points,Points,Points,#,2026,5
-21.,Freddie Hand,UK,Puzzle_Maestro,753.1,753.1,753.1,21.,2026,5
-22.,Salih Alan,Turkey,bskbri,742,742,742,22.,2026,5
-23.,Can Erturan,Turkey,Cane_Puzzles,724,724,724,23.,2026,5
-24.,Hideaki Jo,Japan,,712,712,712,24.,2026,5
-25.,hyuk sun Kwon,"Korea, South",dolgore63,709,709,709,25.,2026,5
-26.,Prasanna Seshadri,India,prasanna16391,706,706,706,26.,2026,5
-27.,Martin Merker,Germany,MaM,702,702,702,27.,2026,5
+21.,Hideaki Jo,Japan,,712,712,712,21.,2026,5
+22.,hyuk sun Kwon,"Korea, South",dolgore63,709,709,709,22.,2026,5
+23.,Savi Shienhmar,Canada,Savi,706,706,706,23.,2026,5
+24.,Prasanna Seshadri,India,prasanna16391,706,706,706,24.,2026,5
+25.,Zbigniew Zarzycki,Poland,antyp,702,702,702,25.,2026,5
+26.,Martin Merker,Germany,MaM,702,702,702,26.,2026,5
+27.,Freddie Hand,UK,Puzzle_Maestro,700,700,700,27.,2026,5
 28.,Sumate Juariyamark,Thailand,MrLiang,699,699,699,28.,2026,5
-29.,Calum Mailer,UK,,691,691,691,29.,2026,5
+29.,Calum Mailer,UK,Calump,691,691,691,29.,2026,5
 30.,Takuya Sugimoto,Japan,sugitakukun,687,687,687,30.,2026,5
 31.,CJ Tan,Philippines,hetan,684,684,684,31.,2026,5
 32.,Eva Schuckert,Austria,,674,674,674,32.,2026,5
@@ -340,7 +340,7 @@
 323.,Sam Boden,UK,Sam Boden,219,219,219,323.,2026,5
 324.,Matteo Testa,Italy,,218,218,218,324.,2026,5
 325.,Sergio M,Germany,,218,218,218,325.,2026,5
-326.,Momo Nekota,Japan,Tachibana,218,218,218,326.,2026,5
+326.,モモ ネコタ,Japan,Tachibana,218,218,218,326.,2026,5
 327.,Henning Kalsgaard Poulsen,Denmark,Kalsgaard,218,218,218,327.,2026,5
 328.,Amber Pease,UK,Amber7291,218,218,218,328.,2026,5
 329.,jerome BOULLEE,France,,218,218,218,329.,2026,5
@@ -435,7 +435,7 @@
 414.,Félix Meyer,France,,179,179,179,414.,2026,5
 415.,Petr Melichar,Czech Rep.,cezar,177,177,177,415.,2026,5
 416.,QUILHOT Stéphanie,France,Stéphanie the best,177,177,177,416.,2026,5
-417.,Alessandra Gasparini,Italy,gasp,177,177,177,417.,2026,5
+417.,Alessandra Gasparini,Italy,,177,177,177,417.,2026,5
 418.,Jozef Štuller,Slovakia,,177,177,177,418.,2026,5
 419.,Jana Zachova,Czech Rep.,jana70,177,177,177,419.,2026,5
 420.,Esmeralda Kleinreesink,Netherlands,EsmeraldaKlein,175,175,175,420.,2026,5
@@ -517,7 +517,7 @@
 492.,Roxana Diana Ilisei,Luxembourg,Roxana,147,147,147,492.,2026,5
 493.,MARYUS PASCALAU,Romania,Mark01,147,147,147,493.,2026,5
 494.,Teejuta Wongpanuskul,Thailand,,147,147,147,494.,2026,5
-495.,山本　晄広 山本,Japan,,147,147,147,495.,2026,5
+495.,akihiro yamamoto,Japan,,147,147,147,495.,2026,5
 496.,Dongping Qi,USA,QueueDP,147,147,147,496.,2026,5
 497.,jiyeun lim,"Korea, South",,144,144,144,497.,2026,5
 498.,La stone,China,,143,143,143,498.,2026,5
@@ -564,7 +564,7 @@
 537.,Michaela Nováková,Czech Rep.,tobiska,119,119,119,537.,2026,5
 538.,Kseniya Bernat,Belarus,,119,119,119,538.,2026,5
 539.,Jill Ho Tai,USA,Jill H,119,119,119,539.,2026,5
-540.,Tatiana Padysakova,Slovakia,tanatko,119,119,119,540.,2026,5
+540.,Tatiana Padysakova,USA,,119,119,119,540.,2026,5
 #,Name,Country,Nick,Points,Points,Points,#,2026,5
 541.,Emily Williams,USA,Emily Williams,119,119,119,541.,2026,5
 542.,Kristjan Hansen,Estonia,,118,118,118,542.,2026,5

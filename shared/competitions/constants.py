@@ -358,5 +358,20 @@ GP_PLAYOFF_RESULTS = {
         13: "Takuya Sugimoto (sugitakukun) - Japan",
         14: "Martin Merker (MaM) - Germany",
         15: "Kishore Sridharan (kishy72) - India",
-    }
+    },
+    # Ranks 5-7 and 8-10 were tied in reality (the real-world playoff order within each
+    # group is unknown); the order below is an arbitrary tiebreak (alphabetical by
+    # surname) used only so this dict can hold a single value per rank.
+    2026: {
+        1: "Letian Ming (Mike) - China",
+        2: "Kota Morinishi (Kota) - Japan",
+        3: "Hu Yuxuan Hu (huyuxuan) - China",
+        4: "Cheran Sun (青清晴情) - China",
+        5: "Ken Endo (EKBM) - Japan",
+        6: "Rintaro Matsumoto (limt) - Japan",
+        7: "Jan Vondruška (WTM) - Czech Rep.",
+        8: "Lucy Epstein (Nickless) - USA",
+        9: "Freddie Hand (Puzzle_Maestro) - UK",
+        10: "Martin Merker (MaM) - Germany",
+    },
 }

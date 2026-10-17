@@ -9,26 +9,26 @@
 8.,Zihang Liu,China,lelele,865.8,865.8,865.8,8.,2026,1
 9.,Kota Morinishi,Japan,Kota,863,863,863,9.,2026,1
 10.,Vincent Bertrand,Belgium,,837.8,837.8,837.8,10.,2026,1
-11.,Tiit Vunk,Estonia,TiiT,826.1,826.1,826.1,11.,2026,1
-12.,Jakub Ondroušek,Czech Rep.,,822.7,822.7,822.7,12.,2026,1
-13.,Jan Vondruška,Czech Rep.,WTM,812.8,812.8,812.8,13.,2026,1
-14.,Seungjae Kwak,"Korea, South",Kwaka,812.3,812.3,812.3,14.,2026,1
-15.,Yu Tianxiang,China,Yutx_GCS,780.7,780.7,780.7,15.,2026,1
-16.,心 木,China,木心,764.2,764.2,764.2,16.,2026,1
-17.,黄明睿 Huang,China,MingruiHuang,763.8,763.8,763.8,17.,2026,1
-18.,Sinchai Jaturangkhajit,Thailand,sinchai4547,743.9,743.9,743.9,18.,2026,1
-19.,Yanzhe Qiu,China,qyz,741.2,741.2,741.2,19.,2026,1
-20.,Don Wu,Taiwan,don3232,734.9,734.9,734.9,20.,2026,1
+11.,Jakub Ondroušek,Czech Rep.,,822.7,822.7,822.7,11.,2026,1
+12.,Jan Vondruška,Czech Rep.,WTM,812.8,812.8,812.8,12.,2026,1
+13.,Seungjae Kwak,"Korea, South",Kwaka,812.3,812.3,812.3,13.,2026,1
+14.,心 木,China,木心,764.2,764.2,764.2,14.,2026,1
+15.,黄明睿 Huang,China,MingruiHuang,763.8,763.8,763.8,15.,2026,1
+16.,Martin Merker,Germany,MaM,729.7,729.7,729.7,16.,2026,1
+17.,Đức Chiến Nguyễn,Vietnam,NDChien2000,720,720,720,17.,2026,1
+18.,Yu Tianxiang,China,Yutx_GCS,686,686,686,18.,2026,1
+19.,Yanzhe Qiu,China,qyz,670,670,670,19.,2026,1
+20.,Sinchai Jaturangkhajit,Thailand,sinchai4547,667,667,667,20.,2026,1
 #,Name,Country,Nick,Points,Points,Points,#,2026,1
-21.,Martin Merker,Germany,MaM,729.7,729.7,729.7,21.,2026,1
-22.,Lucy Epstein,USA,,726.3,726.3,726.3,22.,2026,1
-23.,Đức Chiến Nguyễn,Vietnam,NDChien2000,720,720,720,23.,2026,1
-24.,Takuya Sugimoto,Japan,sugitakukun,667.8,667.8,667.8,24.,2026,1
-25.,Jordyn Hyde,USA,,665,665,665,25.,2026,1
-26.,Khả Lê Minh,Vietnam,Lê Minh Khả,663,663,663,26.,2026,1
-27.,Patrick Kanz,Germany,Alfred Noobel,663,663,663,27.,2026,1
-28.,Dominik Bezkosty,Poland,,661,661,661,28.,2026,1
-29.,Zbigniew Zarzycki,Poland,antyp,629,629,629,29.,2026,1
+21.,Takuya Sugimoto,Japan,sugitakukun,667,667,667,21.,2026,1
+22.,Jordyn Hyde,USA,,665,665,665,22.,2026,1
+23.,Khả Lê Minh,Vietnam,Lê Minh Khả,663,663,663,23.,2026,1
+24.,Patrick Kanz,Germany,Alfred Noobel,663,663,663,24.,2026,1
+25.,Dominik Bezkosty,Poland,,661,661,661,25.,2026,1
+26.,Don Wu,Taiwan,don3232,659,659,659,26.,2026,1
+27.,Lucy Epstein,USA,,659,659,659,27.,2026,1
+28.,Zbigniew Zarzycki,Poland,antyp,629,629,629,28.,2026,1
+29.,Tiit Vunk,Estonia,TiiT,629,629,629,29.,2026,1
 30.,Candice Solidarios,Philippines,,629,629,629,30.,2026,1
 31.,Chiel Beenhakker,Netherlands,bakpao,629,629,629,31.,2026,1
 32.,Tina Bratim,Croatia,Tinica,629,629,629,32.,2026,1
@@ -38,7 +38,7 @@
 36.,徐晨皓 samuelxu,China,嘉和逆天,607,607,607,36.,2026,1
 37.,Timothy Doyle,France,Timothy,607,607,607,37.,2026,1
 38.,David Jones,Canada,WMathie,596,596,596,38.,2026,1
-39.,SeongHwa Hong,"Korea, South",,595,595,595,39.,2026,1
+39.,Seonghwa Hong,"Korea, South",Pfaff,595,595,595,39.,2026,1
 40.,Jakub Hrazdira,Czech Rep.,Gotroch,584,584,584,40.,2026,1
 #,Name,Country,Nick,Points,Points,Points,#,2026,1
 41.,雨 南宫,China,南宫雨,580,580,580,41.,2026,1
@@ -50,7 +50,7 @@
 47.,CJ Tan,Philippines,hetan,557,557,557,47.,2026,1
 48.,Hideaki Jo,Japan,,556,556,556,48.,2026,1
 49.,Tom Collyer,UK,,555,555,555,49.,2026,1
-50.,Calum Mailer,UK,,549,549,549,50.,2026,1
+50.,Calum Mailer,UK,Calump,549,549,549,50.,2026,1
 51.,Pavel Kadlečík,Czech Rep.,kousek-nebe,546,546,546,51.,2026,1
 52.,Xingjian Cui,China,,546,546,546,52.,2026,1
 53.,Freddie Hand,UK,Puzzle_Maestro,546,546,546,53.,2026,1
@@ -85,7 +85,7 @@
 #,Name,Country,Nick,Points,Points,Points,#,2026,1
 81.,Yuzheng Lian,China,blexxx,448,448,448,81.,2026,1
 82.,Klára Vytisková,Czech Rep.,QKV,447,447,447,82.,2026,1
-83.,MOMO MOMO,Albania,Spreamu,447,447,447,83.,2026,1
+83.,JOY BOY,Albania,,447,447,447,83.,2026,1
 84.,city isolated,China,isolatedcity,447,447,447,84.,2026,1
 85.,Hannes Sidorov,Estonia,HannesB0Y,447,447,447,85.,2026,1
 86.,Boyan Dong,China,,445,445,445,86.,2026,1
@@ -185,7 +185,7 @@
 176.,Julien DAL ZOTTO,France,Dalzinho74,325,325,325,176.,2026,1
 177.,Yifei Sun,China,Segment,322,322,322,177.,2026,1
 178.,Andri Purnama Ramadan,Indonesia,Nusi,321,321,321,178.,2026,1
-179.,Cheryl Gaul,USA,cgaul,318,318,318,179.,2026,1
+179.,Cheryl Gaul,USA,,318,318,318,179.,2026,1
 180.,Lenka Chaloupková,Czech Rep.,,318,318,318,180.,2026,1
 #,Name,Country,Nick,Points,Points,Points,#,2026,1
 181.,Anecha Aunbun,Thailand,Fiw,316,316,316,181.,2026,1
@@ -242,7 +242,7 @@
 230.,Robert Vollmert,Germany,rob,275,275,275,230.,2026,1
 231.,KG Lim,Malaysia,eegrak,275,275,275,231.,2026,1
 232.,Ema Bosnić,Croatia,,275,275,275,232.,2026,1
-233.,Momo Nekota,Japan,Tachibana,274,274,274,233.,2026,1
+233.,モモ ネコタ,Japan,Tachibana,274,274,274,233.,2026,1
 234.,Thananon Boonkrong,Thailand,B. Thananon,272,272,272,234.,2026,1
 235.,Giulia Cossutti,Italy,elc,272,272,272,235.,2026,1
 236.,Rin Saiki,Japan,rin204,271,271,271,236.,2026,1
@@ -287,7 +287,7 @@
 273.,Richard Jones,Canada,rdj,254,254,254,273.,2026,1
 274.,Anuradha Ganesh,India,AnuGanesh,254,254,254,274.,2026,1
 275.,Nehir Boz,Turkey,nehirboz,254,254,254,275.,2026,1
-276.,kumaresan R Rajarathinam,India,kumaresan R,254,254,254,276.,2026,1
+276.,kumaresan Rajarathinam,India,kumaresan R,254,254,254,276.,2026,1
 277.,Matthew Kreiger,USA,MattewIGuess,253,253,253,277.,2026,1
 278.,Alexander Kirlitsa,Russia,Hitrez,252,252,252,278.,2026,1
 279.,Michael Kreiger,USA,Michael_K3,249,249,249,279.,2026,1
@@ -379,7 +379,7 @@
 #,Name,Country,Nick,Points,Points,Points,#,2026,1
 361.,David Braun,Hungary,Braunka625,208,208,208,361.,2026,1
 362.,Petr Melichar,Czech Rep.,cezar,208,208,208,362.,2026,1
-363.,Lisa Riedel,Germany,fiore307,208,208,208,363.,2026,1
+363.,Lisa Riedel,Germany,,208,208,208,363.,2026,1
 364.,Joanna Krupa,Poland,foppa,208,208,208,364.,2026,1
 365.,Vladlen Karpov,Russia,,208,208,208,365.,2026,1
 366.,Qinwen Jiang,China,,208,208,208,366.,2026,1
@@ -406,7 +406,7 @@
 386.,Scott Williams,USA,Mr. W the Math Teacher,202,202,202,386.,2026,1
 387.,Silvia Sau,Italy,silviass,199,199,199,387.,2026,1
 388.,Eerik Lumiste,Estonia,Eerik33,198,198,198,388.,2026,1
-389.,Alessandra Gasparini,Italy,gasp,198,198,198,389.,2026,1
+389.,Alessandra Gasparini,Italy,,198,198,198,389.,2026,1
 390.,Kristin Stearns,USA,DreamRose311,197,197,197,390.,2026,1
 391.,Vasso Kalaitzidou,Greece,vasso,197,197,197,391.,2026,1
 392.,Sébastien Tainon,France,Arkandias,196,196,196,392.,2026,1
@@ -424,7 +424,7 @@
 403.,Brigitta Dengel,Hungary,Brigibrugi,192,192,192,403.,2026,1
 404.,Zhaoxv Li,China,Y1cat,187,187,187,404.,2026,1
 405.,Karel Doskocil,Czech Rep.,carlos5,187,187,187,405.,2026,1
-406.,Mr.sudoku Seeker,Thailand,sudoku seeker,185,185,185,406.,2026,1
+406.,Khemmanat Phakdeethai,Thailand,sudoku seeker,185,185,185,406.,2026,1
 407.,Teddy Tan,Philippines,teddyjrtan,184,184,184,407.,2026,1
 408.,Carter Silvey,USA,,184,184,184,408.,2026,1
 409.,Ladawan Ruengchimplee,Thailand,Ladawan,182,182,182,409.,2026,1
@@ -434,7 +434,7 @@
 413.,Marco Pellegrini,Italy,m19700530,182,182,182,413.,2026,1
 414.,Adam Roszewski,Poland,adamro314,182,182,182,414.,2026,1
 415.,Jakub Dobrzański,Poland,,182,182,182,415.,2026,1
-416.,Martin Jaehde,Germany,Smarti737,181,181,181,416.,2026,1
+416.,Martin Jaehde,Germany,,181,181,181,416.,2026,1
 417.,Tobias Kraft,Germany,Toseflo,181,181,181,417.,2026,1
 418.,Tereza Sujová,Slovakia,TeS,180,180,180,418.,2026,1
 419.,Phawin Prongpaophan,Thailand,,180,180,180,419.,2026,1
@@ -498,7 +498,7 @@
 474.,Tünde Tőri,Hungary,,161,161,161,474.,2026,1
 475.,David Moulton,USA,Badir,161,161,161,475.,2026,1
 476.,Olga Shut,Belarus,OlgaShut,160,160,160,476.,2026,1
-477.,Mig I,UK,,160,160,160,477.,2026,1
+477.,Raoul Duke,UK,,160,160,160,477.,2026,1
 478.,Michal Anderle,Slovakia,zaba,159,159,159,478.,2026,1
 479.,Sascha Schultz,Switzerland,säsch,159,159,159,479.,2026,1
 480.,Darren Yin,USA,,158,158,158,480.,2026,1
@@ -576,7 +576,7 @@
 548.,Zolbayar Batchuluun,Mongolia,,127,127,127,548.,2026,1
 549.,Marta Mozara,Croatia,,126,126,126,549.,2026,1
 550.,Erdem YAMAK,Turkey,,126,126,126,550.,2026,1
-551.,Tatiana Padysakova,Slovakia,tanatko,125,125,125,551.,2026,1
+551.,Tatiana Padysakova,USA,,125,125,125,551.,2026,1
 552.,Balázs Ababi,Romania,Bebe,125,125,125,552.,2026,1
 553.,Gaëlle Perdrix,France,Thalia,125,125,125,553.,2026,1
 554.,Zuzana Tomkova,Slovakia,modrydrak,124,124,124,554.,2026,1
@@ -620,7 +620,7 @@
 590.,Kei Ota,Japan,ten986,117,117,117,590.,2026,1
 591.,Yusuke Nakamura,Japan,yuponex,117,117,117,591.,2026,1
 592.,Katherine Norris,UK,,116,116,116,592.,2026,1
-593.,Zsombor Kovács,Hungary,,116,116,116,593.,2026,1
+593.,Zsombor Kovács,Hungary,zsomkovacs,116,116,116,593.,2026,1
 594.,Mathilde Chanavat,France,CHANAVAT,116,116,116,594.,2026,1
 595.,Eugenia Khaikhina,Canada,gigi_kh,115,115,115,595.,2026,1
 596.,Krzysztof Borzym,Poland,myzrob,115,115,115,596.,2026,1
@@ -743,10 +743,10 @@
 707.,Gorinas Marine,France,Marine Gorinas,72,72,72,707.,2026,1
 708.,Sven Hladnik,Croatia,,71,71,71,708.,2026,1
 709.,Adrian Królak,Poland,adrianPL,69,69,69,709.,2026,1
-710.,aydin keskin,Turkey,amedayke,69,69,69,710.,2026,1
+710.,aydin keskin,Turkey,,69,69,69,710.,2026,1
 711.,Ekaterina Krotkova,Russia,katerina,69,69,69,711.,2026,1
 712.,Shubham Rekhate,India,Shubham_5396,68,68,68,712.,2026,1
-713.,Dimitris Kapetis,Greece,,67,67,67,713.,2026,1
+713.,Dimitris Kapetis,Greece,GMI0724,67,67,67,713.,2026,1
 714.,Joan Llobera Querol,Spain,,66,66,66,714.,2026,1
 715.,Jaehyun Kim,"Korea, South",,66,66,66,715.,2026,1
 716.,Mary Jordanides,Greece,,66,66,66,716.,2026,1
@@ -760,7 +760,7 @@
 723.,Chacha Pau,France,Chachapau,61,61,61,723.,2026,1
 724.,Nicholas Yuan,USA,NicholasY,61,61,61,724.,2026,1
 725.,Irene Oubrier,France,Ireneo,61,61,61,725.,2026,1
-726.,Dancs Bálint Dancs,Hungary,Hibálintlan,61,61,61,726.,2026,1
+726.,Bálint Dancs,Hungary,Hibálintlan,61,61,61,726.,2026,1
 727.,Jeremy De Shetler,USA,jerbear29,61,61,61,727.,2026,1
 728.,Kota Hashimoto,Japan,fumi,61,61,61,728.,2026,1
 729.,yixuan huang,China,sunny_star,61,61,61,729.,2026,1
@@ -789,7 +789,7 @@
 751.,kaoru shibata,Japan,pet,52,52,52,751.,2026,1
 752.,Kaicheng Xie,China,,51,51,51,752.,2026,1
 753.,Sven Brodersen,Germany,Beedersen,51,51,51,753.,2026,1
-754.,Zanda Ro,Latvia,DeeDee,50,50,50,754.,2026,1
+754.,Zanda Ro,Latvia,,50,50,50,754.,2026,1
 755.,Minoru Uyanagi,Japan,EEL733,44,44,44,755.,2026,1
 756.,Bartol Sesar,Croatia,seki,44,44,44,756.,2026,1
 757.,吴元优 吴,China,wuyuanyou,44,44,44,757.,2026,1
