@@ -289,6 +289,18 @@ def merge_dfs_by_year(all_dataframes):
                     .alias("PointsTop6"),
             )
 
+            # Single-file years get "Played GPs"/"Total GPs" straight from the GP site's
+            # season-aggregate page. Round-by-round files carry no such columns, so they
+            # must be derived here: played = rounds with a recorded position, total =
+            # number of round files merged for this year.
+            merged_df = merged_df.with_columns(
+                # Casting back to string because the single-year dataframes will have strings.
+                pl.sum_horizontal(
+                    [pl.col(col).is_not_null().cast(pl.Int32) for col in points_cols]
+                ).cast(pl.String).alias("Played GPs"),
+                pl.lit(len(dfs)).cast(pl.String).alias("Total GPs"),
+            )
+
             dataframes.append(merged_df)
 
     return dataframes
