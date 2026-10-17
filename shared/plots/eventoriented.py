@@ -7,6 +7,7 @@ import matplotlib
 import matplotlib.lines
 import matplotlib.pyplot as plt
 import matplotlib.patches
+import matplotlib.path
 import matplotlib.ticker
 
 import shared.competitions
@@ -110,6 +111,85 @@ def create_leaderboard_chart(full_df, year=2024, top_n=10,
 
     ax.xaxis.set_ticks_position('top')
     ax.xaxis.set_label_position('top')
+
+    return fig
+
+def create_playoff_bump_chart(full_df, year=2024,
+                              colors=[matplotlib.cm.Set2(i) for i in range(8)]):
+    """This creates a bump chart comparing GP qualifying rank to final playoff rank."""
+    green = "#4caf50"
+    amber = "#f0ad4e"
+    grey = "#bdbdbd"
+
+    year_df = full_df.filter(pl.col("year") == year)
+
+    qualified = year_df.filter(
+        pl.col("Playoff_rank").is_not_null()
+        | ((pl.col("Rank_before_playoffs") <= 10) & pl.col("Playoff_rank").is_null())
+    ).sort("Rank_before_playoffs")
+
+    # Figure height scales with row count (so fewer rows stay compact) but is capped to
+    # match the height of the other charts on the page.
+    fig_height = min(10, 1.0 + 0.3 * max(len(qualified), 1))
+    fig, ax = plt.subplots(figsize=(6.4, fig_height))
+
+    if len(qualified) == 0:
+        ax.text(0.5, 0.5, "No playoff data available", ha='center', va='center')
+        ax.axis('off')
+        return fig
+
+    played = qualified.filter(pl.col("Playoff_rank").is_not_null()).sort("Playoff_rank")
+
+    def truncate(name):
+        return name if len(name) <= 25 else name[:24] + "…"
+
+    x_left, x_right = 0, 1
+    row_spacing = 1.0
+
+    left_y = {row["user_pseudo_id"]: index * row_spacing
+              for index, row in enumerate(qualified.iter_rows(named=True))}
+    right_y = {row["user_pseudo_id"]: index * row_spacing
+               for index, row in enumerate(played.iter_rows(named=True))}
+
+    for row in qualified.iter_rows(named=True):
+        solver = row["user_pseudo_id"]
+        y = left_y[solver]
+        did_not_play = row["Playoff_rank"] is None
+        label_color = grey if did_not_play else "black"
+        alpha = 0.5 if did_not_play else 1.0
+        ax.scatter(x_left, y, color=grey if did_not_play else "black", zorder=3, s=30,
+                   alpha=alpha)
+        ax.text(x_left - 0.05, y, f"{row['Rank_before_playoffs']}. {truncate(row['Name'])}",
+               ha='right', va='center', color=label_color, alpha=alpha, fontsize=9)
+
+    for row in played.iter_rows(named=True):
+        solver = row["user_pseudo_id"]
+        y = right_y[solver]
+        ax.scatter(x_right, y, color="black", zorder=3, s=30)
+        ax.text(x_right + 0.05, y, f"{int(row['Playoff_rank'])}. {truncate(row['Name'])}",
+               ha='left', va='center', fontsize=9)
+
+        x0, y0 = x_left, left_y[solver]
+        x1, y1 = x_right, y
+        xmid = (x0 + x1) / 2
+        verts = [(x0, y0), (xmid, y0), (xmid, y1), (x1, y1)]
+        codes = [matplotlib.path.Path.MOVETO] + [matplotlib.path.Path.CURVE4] * 3
+        color = green if row["Playoff_rank"] <= row["Rank_before_playoffs"] else amber
+        patch = matplotlib.patches.PathPatch(
+            matplotlib.path.Path(verts, codes), facecolor='none', edgecolor=color,
+            lw=1.8, alpha=0.85, zorder=1)
+        ax.add_patch(patch)
+
+    header_y = -row_spacing
+    ax.text(x_left, header_y, "Qualifying rank", ha='right', va='center', fontsize=10,
+           fontweight='bold')
+    ax.text(x_right, header_y, "Playoff rank", ha='left', va='center', fontsize=10,
+           fontweight='bold')
+
+    ax.set_xlim(-0.9, 1.9)
+    ax.set_ylim((len(qualified) - 1) * row_spacing + row_spacing / 2, header_y - row_spacing / 2)
+    ax.axis('off')
+    ax.set_title(f"Sudoku Grand Prix: qualifying vs. playoff rank ({year})", pad=8)
 
     return fig
 

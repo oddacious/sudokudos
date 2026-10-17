@@ -84,6 +84,14 @@ def present_gp():
             combined_df, year=selected_year)
         st.pyplot(fig_participants, use_container_width=True)
 
+    if shared.competitions.known_playoff_results(selected_year):
+        st.subheader("Playoff movement")
+        cols = st.columns(2)
+        with cols[0]:
+            fig_bump = shared.plots.eventoriented.create_playoff_bump_chart(
+                combined_df, year=selected_year)
+            st.pyplot(fig_bump, use_container_width=True)
+
     st.subheader("Solver tracker")
 
     available = list(
