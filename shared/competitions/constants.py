@@ -359,6 +359,16 @@ GP_PLAYOFF_RESULTS = {
         14: "Martin Merker (MaM) - Germany",
         15: "Kishore Sridharan (kishy72) - India",
     },
+    2022: {
+        1: "Kota Morinishi (Kota) - Japan",
+        2: "Tantan Dai (SERENE) - China",
+        3: "Timothy Doyle (Timothy) - France",
+    },
+    2023: {
+        1: "Tantan Dai (SERENE) - China",
+        2: "Ken Endo (EKBM) - Japan",
+        3: "Jakub Ondroušek (Nickless) - Czech Rep.",
+    },
     2025: {
         1: "Letian Ming (Mike) - China",
         2: "Kota Morinishi (Kota) - Japan",
