@@ -359,6 +359,12 @@ GP_PLAYOFF_RESULTS = {
         14: "Martin Merker (MaM) - Germany",
         15: "Kishore Sridharan (kishy72) - India",
     },
+    2025: {
+        1: "Letian Ming (Mike) - China",
+        2: "Kota Morinishi (Kota) - Japan",
+        3: "Tantan Dai (SERENE) - China",
+        4: "Hu Yuxuan Hu (huyuxuan) - China",
+    },
     # Ranks 5-7 and 8-10 were tied in reality (the real-world playoff order within each
     # group is unknown); the order below is an arbitrary tiebreak (alphabetical by
     # surname) used only so this dict can hold a single value per rank.
