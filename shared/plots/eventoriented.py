@@ -123,6 +123,12 @@ def create_playoff_bump_chart(full_df, year=2024,
 
     year_df = full_df.filter(pl.col("year") == year)
 
+    # Include the full qualifying field on the left side -- even solvers whose playoff
+    # result we don't know -- so the known results are spaced according to their real
+    # Rank_before_playoffs rather than being compressed into a tiny subset. Only rows with
+    # a known Playoff_rank get a connecting line to the right; the rest are shown dimmed
+    # as a placeholder, without claiming they skipped the playoff (see
+    # known_full_playoff_order for the distinction).
     qualified = year_df.filter(
         pl.col("Playoff_rank").is_not_null()
         | ((pl.col("Rank_before_playoffs") <= 10) & pl.col("Playoff_rank").is_null())

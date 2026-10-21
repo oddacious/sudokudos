@@ -49,6 +49,11 @@ def present_about():
             rounds from each WSC into one convention. That is a fairly innocuous example, but
             there may be ways that individual WSC's chose to represent outcomes that my
             normalization discards.
+        * GP 2020: WSC 2020 was cancelled due to COVID-19, so no in-person playoff was held that
+            year. The WPF's own GP site still published a "Final Results" page listing the
+            written-round order as the year's standing, so I treat that as endorsed and use it
+            for the year's trophies and `Rank` -- but I don't show a playoff-movement chart for
+            2020, since no actual playoff took place to show movement in.
         #### Scope 
         * Only includes WSC, GP, and ESC for now.
         * No coverage of team results.

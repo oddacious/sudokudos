@@ -391,3 +391,11 @@ GP_PLAYOFF_RESULTS = {
         10: "Martin Merker (MaM) - Germany",
     },
 }
+
+# Years where GP_PLAYOFF_RESULTS is known but no in-person playoff was actually held --
+# the WPF's own site endorses the written-round order as the year's final standing (see
+# About page for why), so we still use it for trophies/Rank, but must not present it as
+# an actual playoff outcome (e.g. no "Playoff movement" chart).
+GP_PLAYOFF_RESULTS_NOT_CONTESTED = {
+    2020,  # WSC 2020 was cancelled due to COVID-19; no in-person playoff could be held.
+}

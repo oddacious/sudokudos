@@ -1,5 +1,7 @@
 """Contains functions that encode domain knowledge about Sudoku competitions."""
 
+from .constants import GP_PLAYOFF_RESULTS, GP_PLAYOFF_RESULTS_NOT_CONTESTED
+
 def get_max_round(year, competition="GP"):
     """Return the maximum round for a given competition and year.
     
@@ -83,3 +85,27 @@ def known_playoff_results(year):
         return False
 
     raise ValueError(f"Unknown GP year \"{year}\"")
+
+def known_full_playoff_order(year):
+    """Return whether we know the complete (top-10-or-more) playoff order for this year.
+
+    Some years we only know the podium (e.g. a round winner was announced but ties below
+    it were never resolved into a total ordering). In those years, solvers who qualified
+    for the playoff but aren't in GP_PLAYOFF_RESULTS may simply have an unknown playoff
+    rank -- not have skipped the playoff -- so UI code must not infer "did not play" from
+    their absence.
+    """
+    if not known_playoff_results(year):
+        return False
+
+    return len(GP_PLAYOFF_RESULTS[year]) >= 10
+
+def playoff_was_contested(year):
+    """Return whether an in-person GP playoff actually took place for this year.
+
+    Some years (e.g. 2020, when WSC was cancelled due to COVID-19) we still have a known,
+    WPF-endorsed final order, but it was never actually contested in a playoff -- it's just
+    the written-round standings presented as final. UI code that implies movement or a
+    live contest (e.g. the playoff bump chart) should check this before rendering.
+    """
+    return known_playoff_results(year) and year not in GP_PLAYOFF_RESULTS_NOT_CONTESTED

@@ -16,5 +16,7 @@ from .utilities import (
     get_max_round,
     wsc_rounds_by_year,
     esc_rounds_by_year,
-    known_playoff_results
+    known_playoff_results,
+    known_full_playoff_order,
+    playoff_was_contested
 )

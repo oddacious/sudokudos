@@ -84,7 +84,7 @@ def present_gp():
             combined_df, year=selected_year)
         st.pyplot(fig_participants, use_container_width=True)
 
-    if shared.competitions.known_playoff_results(selected_year):
+    if shared.competitions.playoff_was_contested(selected_year):
         st.subheader("Playoff movement")
         cols = st.columns(2)
         with cols[0]:
@@ -127,7 +127,7 @@ def present_gp():
     criteria = pl.col("year") == selected_year
     subset = combined_df.filter(criteria).drop(["year", "source_file"]).sort("Rank")
 
-    if shared.competitions.known_playoff_results(selected_year):
+    if shared.competitions.known_full_playoff_order(selected_year):
         subset = subset.with_columns(
             pl.when(
                 (pl.col("Rank_before_playoffs") <= 10) & pl.col("Playoff_rank").is_null()
