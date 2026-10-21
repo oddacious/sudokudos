@@ -23,7 +23,7 @@ def present_about():
             * Incomplete "Official" labelling: 2022.
         * GP:
             * Missing playoff outcomes: 2021.
-        #### Data accuracy  
+        #### Data accuracy
         * Inexact matching between GP and WSC. And, for that matter, within GP and within WSC.
             * Each WSC was an independent event where competitors entered their names given the
             constraints at the time (e.g. varying support for non-ASCII characters) and where
@@ -83,7 +83,9 @@ def present_about():
             [rating system development](https://forum.ukpuzzles.org/viewtopic.php?t=2730)).
                 
         Data for the Sudoku Grand Prix comes from the GP website at
-        [https://gp.worldpuzzle.org](https://gp.worldpuzzle.org/). World Sudoku Championship data comes
+        [https://gp.worldpuzzle.org](https://gp.worldpuzzle.org/). The playoff winners come
+        from the GP website, or [https://jppuzzles.com](https://jppuzzles.com), or YouTube streams,
+        or Discord. World Sudoku Championship data comes
         from the various WSC host pages when available (see
         [https://wpc.puzzles.com/history](https://wpc.puzzles.com/history)), from the
         [Internet Archive](https://archive.org) of those pages, or from files that others have
